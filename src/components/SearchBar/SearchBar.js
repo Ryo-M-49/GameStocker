@@ -7,7 +7,8 @@ const searchBar = (props) => (
     <div className={classes.SearchBar}>
         <SearchField 
             placeholder="Search games you have played..."
-            // onChange={props.onClickedSearchBar} 
+            // onClick={props.onClickedSearchBar} 
+            // onEnter={props.onClickedSearchBar} 
         />
     </div>
 );

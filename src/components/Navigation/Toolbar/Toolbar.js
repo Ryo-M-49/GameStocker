@@ -2,6 +2,7 @@ import React from 'react';
 import classes from './Toolbar.module.css';
 
 import Logo from '../../Logo/Logo';
+import BurgerMenu from '../../BurgarMenu/BurgerMenu';
 import SearchBar from '../../SearchBar/SearchBar';
 
 const toolbar = (props) => (
@@ -10,9 +11,7 @@ const toolbar = (props) => (
         <div className={classes.Logo}>
             <Logo />
         </div>
-        <div>
-            Menu
-        </div>
+        <BurgerMenu />
         <div className={classes.SearchBar}>
             <SearchBar />
         </div>

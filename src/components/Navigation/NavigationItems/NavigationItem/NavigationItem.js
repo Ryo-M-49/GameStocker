@@ -3,7 +3,7 @@ import classes from './NavigationItem.module.css';
 
 const navigationItem = ( props ) => (
     <li className={classes.NavigationItem}>
-        <a>{props.children}</a>
+        <a href="https://www.google.com/">{props.children}</a>
     </li>
 );
 

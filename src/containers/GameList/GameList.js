@@ -14,7 +14,7 @@ class GameList extends Component {
 
     componentDidMount() {
         console.log(this.props);
-        axios.get('https://app.rakuten.co.jp/services/api/BooksGame/Search/20170404?format=json&hardware=PS&page=10&hits=30&booksGenreId=006&applicationId=1009084489441242376')
+        axios.get('https://app.rakuten.co.jp/services/api/BooksGame/Search/20170404?format=json&hardware=PS&page=1&hits=30&booksGenreId=006&applicationId=1009084489441242376')
             .then(response => {
                 this.setState({games: response.data});
                 console.log(this.state.games);
@@ -28,6 +28,8 @@ class GameList extends Component {
         let gamesArray = [];
         let gamesObject = {};
 
+
+        //After fetching JSON
         if (this.state.games) {
             gamesArray = [];
             gamesObject = {};

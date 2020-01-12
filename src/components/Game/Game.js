@@ -14,16 +14,12 @@ const game = (props) => {
             <Link to={
                 {
                     pathname: '/review' + props.game.jan,
+                    exact: props.exact,
                     aboutProps: {
-                        title: props.game.title,
-                        description: props.game.itemCaption
+                        game: props.game
                     }
                 }
             }>
-                {/* to={'/yourreview' + props.game.jan}
-                exact={props.exact}
-                title={props.game.title}
-                description={props.game.itemCaption} */}
                 <img className={classes.Thumbnail} src={props.game.largeImageUrl} alt="thumbnail" />
                 <h2 className={classes.Title}>{title}</h2>
             </Link>

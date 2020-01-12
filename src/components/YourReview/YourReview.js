@@ -1,6 +1,8 @@
 import React from 'react';
 import classes from './YourReview.module.css';
 
+import Review from '../Review/Review';
+
 const TITLE_MAX_LENGTH = 165;
 
 const yourReview = (props) => {
@@ -19,7 +21,7 @@ const yourReview = (props) => {
                     <h2 className={classes.Title}>{game.title}</h2>
                     <p className={classes.Description}>{description}</p>
                 </div>
-                <div>Review Component</div>
+                <Review />
             </div>
             <div className={classes.GameImage}>
                 <img className={classes.Img} src={game.largeImageUrl} alt="game-image"/>

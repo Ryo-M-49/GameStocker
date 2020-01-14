@@ -2,13 +2,13 @@ import React from 'react';
 import classes from './Bad.module.css';
 
 const bad = (props) => (
-    <div>
-        <div>
-            <div>fontawesome</div>
+    <div className={classes.Bad}>
+        <div className={classes.ThumbsDown}>
+            <i className="fa fa-thumbs-down"></i>
         </div>
-        <div>
+        <div className={classes.Content}>
             <h3>Bad</h3>
-            <p>Detail</p>
+            <textarea placeholder="your review here" />
         </div>
     </div>
 );

@@ -1,0 +1,16 @@
+.QuitButton {
+    font-size: 50px;
+    position: absolute;
+    top: 20px;
+    right: 30px;
+    cursor: pointer;
+    transition: all .2s;
+}
+
+.QuitButton:hover {
+    transform: scale(1.1);
+}
+
+.QuitButton:active {
+    transform: scale(1.0);
+}

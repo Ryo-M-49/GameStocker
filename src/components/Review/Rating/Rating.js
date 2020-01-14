@@ -8,7 +8,7 @@ const rating = (props) => (
         </div>
         <div className={classes.Content}>
             <h3>Rating</h3>
-            <p>Detail</p>
+            <textarea placeholder="your review here" />
         </div>
     </div>
 );

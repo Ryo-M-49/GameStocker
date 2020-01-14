@@ -1,6 +1,5 @@
 .YourReview {
-    margin: 60px 0 20px;
-    padding: 20px 0 10px;
+    padding: 20px;
     background-color: whitesmoke;
     display: flex;
     justify-content: space-around;
@@ -30,5 +29,5 @@
 }
 
 .Img {
-    transform: scale(1.5);
+    transform: scale(1.8);
 }

@@ -1,6 +1,8 @@
 .YourReview {
     padding: 20px;
     background-color: whitesmoke;
+    position: relative;
+
     display: flex;
     justify-content: space-around;
     align-items: center;

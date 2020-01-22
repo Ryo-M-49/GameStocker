@@ -4,6 +4,7 @@ import classes from './YourReview.module.css';
 import Aux from '../../hoc/Aux/Aux';
 import Review from '../Review/Review';
 import QuitButton from '../UI/QuitButton/QuitButton';
+import ShareButton from '../UI/ShareButton/ShareButton';
 
 const TITLE_MAX_LENGTH = 165;
 
@@ -27,8 +28,11 @@ const yourReview = (props) => {
                     </div>
                     <Review />
                 </div>
-                <div className={classes.GameImage}>
-                    <img className={classes.Img} src={game.largeImageUrl} alt="game-image"/>
+                <div className={classes.RightContent}>
+                    <div className={classes.GameImage}>
+                        <img className={classes.Img} src={game.largeImageUrl} alt="game-image"/>
+                    </div>
+                    <ShareButton />
                 </div>
             </div>
         </Aux>

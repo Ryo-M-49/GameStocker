@@ -24,12 +24,18 @@
     font-size: 12px;
 }
 
+.RigthContent {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
 .GameImage {
     display: flex;
     flex-direction: column;
     align-items: center;
 }
 
-.Img {
+/* .Img {
     transform: scale(1.8);
-}
+} */

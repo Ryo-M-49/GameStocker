@@ -44,7 +44,9 @@ class GameList extends Component {
             <div className={classes.GameList}>
                 <ul className={classes.GameListUl}>
                     {gamesArray.map((gameObject, index) => (
-                        <Game key={index} game={gameObject.game}/>
+                        <Game 
+                            key={index} 
+                            game={gameObject.game}/>
                     ))}
                 </ul>
             </div>

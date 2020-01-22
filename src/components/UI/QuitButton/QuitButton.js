@@ -7,7 +7,7 @@ const quitButton = (props) => (
         className={classes.QuitButton}
         onClick={() => props.history.goBack()}
         >
-        <i class="fa fa-times-circle"></i>
+        <i className="fa fa-times-circle"></i>
     </div>
 );
 

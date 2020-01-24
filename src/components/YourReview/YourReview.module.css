@@ -1,0 +1,42 @@
+.YourReview {
+    padding: 20px;
+    background-color: whitesmoke;
+    position: relative;
+
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+}
+
+.ReviewWrapper {
+    width: 50%;
+    padding: 10px;
+
+    display: flex;
+    flex-direction: column;
+}
+
+.Title {
+    font-size: 30px;
+}
+
+.Description {
+    font-size: 12px;
+}
+
+.RigthContent {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.GameImage {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.Img {
+    width: 350px;
+    height: auto;
+}

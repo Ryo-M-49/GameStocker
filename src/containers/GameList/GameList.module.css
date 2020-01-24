@@ -1,0 +1,17 @@
+.GameList {
+    padding: 20px;
+    background-color: whitesmoke;
+}
+
+.GameListUl {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: flex-start;
+    padding: 0;
+    margin: 60px 0;
+}
+
+h2 {
+    font-weight: normal;
+}

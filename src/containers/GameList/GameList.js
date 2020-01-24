@@ -5,6 +5,7 @@ import axios from 'axios';
 
 import Game from '../../components/Game/Game';
 import ReactPaginate from 'react-paginate';
+import { loadPartialConfig } from '@babel/core';
 
 class GameList extends Component {
 
@@ -37,12 +38,16 @@ class GameList extends Component {
     render() {
         let gamesArray = [];
         let gamesObject = {};
-        let pagination = null;
 
-        //After fetching JSON
+        let pagination = (
+            <div>
+                now loading a pagination...
+            </div>
+        );
+
+        //After fetching JSON data
         if (this.state.games) {
-            gamesArray = [];
-            gamesObject = {};
+
             for (let i = 0; i < this.state.games.Items.length; i++) {
                 let game = this.state.games.Items[i].Item;
                 gamesObject = {
@@ -59,12 +64,6 @@ class GameList extends Component {
                     onPageChange={this.pageChangedHandler}
 
                 />
-            );
-        } else {
-            pagination = (
-                <div>
-                    now loading
-                </div>
             );
         }
 

@@ -15,7 +15,6 @@ class GameList extends Component {
         axios.get('https://app.rakuten.co.jp/services/api/BooksGame/Search/20170404?format=json&hardware=PS&page=1&hits=30&booksGenreId=006&applicationId=1009084489441242376')
             .then(response => {
                 this.setState({games: response.data});
-                console.log(response.data);
                 console.log(this.state.games);
             })
             .catch(error => {

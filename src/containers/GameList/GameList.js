@@ -29,7 +29,7 @@ class GameList extends Component {
     /**
      * Handler to change a page of a game list to render.
      * @param {object} event - Event that holds the information of the clicked object.
-     * @returns  - change the state "currentPage" from the current page to the clicked page
+     * @returns {nothing} - change the state "currentPage" from the current page to the clicked page
     */
     pageChangedHandler(event) {
         this.setState({currentPage: Number(event.target.id)});
@@ -62,7 +62,20 @@ class GameList extends Component {
                     pageRangeDisplayed={5}
                     marginPagesDisplay={2}
                     onPageChange={this.pageChangedHandler}
-
+                    containerClassName='pagination'
+                    pageClassName='page-item'
+                    pageLinkClassName='page-link'
+                    activeClassName='active'
+                    previousLabel='previous'
+                    nextLabel='next'
+                    previousClassName='page-item'
+                    nextClassName='page-item'
+                    previousLinkClassName='page-link'
+                    nextLinkClassName='page-link'
+                    disabledClassName='disabled'
+                    breakLabel='...'
+                    breakClassName='page-item'
+                    breakLinkClassName='page-link'
                 />
             );
         }

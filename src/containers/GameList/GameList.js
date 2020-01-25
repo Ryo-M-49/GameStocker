@@ -4,15 +4,18 @@ import classes from './GameList.module.css';
 import axios from 'axios';
 
 import Game from '../../components/Game/Game';
-import ReactPaginate from 'react-paginate';
+import Pagination from '../../components/UI/Pagination/Pagination';
 import { loadPartialConfig } from '@babel/core';
 
 class GameList extends Component {
-
-    state = {
-        games: null,
-        currentPage: 1,
-        error: false
+    constructor(props){
+        super(props); 
+        this.state = {
+            games: null,
+            currentPage: 1,
+            error: false
+        }
+        this.pageChangedHandler = this.pageChangedHandler.bind(this);
     }
 
     componentDidMount() {
@@ -27,12 +30,29 @@ class GameList extends Component {
     }
 
     /**
-     * Handler to change a page of a game list to render.
-     * @param {object} event - Event that holds the information of the clicked object.
-     * @returns {nothing} - change the state "currentPage" from the current page to the clicked page
+     * Handler to render a page of the clicked number in the pagination.
+     * @returns {nothing} - fetches the JSON data of the clicked page and set a new value of state "games".
     */
-    pageChangedHandler(event) {
-        this.setState({currentPage: Number(event.target.id)});
+    renderClickedPageHandler() {
+        axios.get(`https://app.rakuten.co.jp/services/api/BooksGame/Search/20170404?format=json&hardware=PS&page=${this.state.currentPage}&hits=30&booksGenreId=006&applicationId=1009084489441242376`)
+            .then(response => {
+                this.setState({games: response.data});
+                console.log(this.state.games);
+            })
+            .catch(error => {
+                this.setState({error: true});
+            })
+    }
+
+    /**
+     * Handler to change a page of a game list to render.
+     * @param {object} data - holds the information of the clicked object.
+     * @returns {nothing} - changes the state "currentPage" from the current page to the clicked page
+    */
+    pageChangedHandler(data) {
+        let selectedPage = data.selected + 1; //Since data.selected starts from 0
+        this.setState({currentPage: selectedPage}, this.renderClickedPageHandler);
+        console.log('currentPage', this.state.currentPage);
     }
 
     render() {
@@ -57,25 +77,9 @@ class GameList extends Component {
             }
 
             pagination = (
-                <ReactPaginate 
+                <Pagination 
                     pageCount={this.state.games.pageCount}
-                    pageRangeDisplayed={5}
-                    marginPagesDisplay={2}
-                    onPageChange={this.pageChangedHandler}
-                    containerClassName='pagination'
-                    pageClassName='page-item'
-                    pageLinkClassName='page-link'
-                    activeClassName='active'
-                    previousLabel='previous'
-                    nextLabel='next'
-                    previousClassName='page-item'
-                    nextClassName='page-item'
-                    previousLinkClassName='page-link'
-                    nextLinkClassName='page-link'
-                    disabledClassName='disabled'
-                    breakLabel='...'
-                    breakClassName='page-item'
-                    breakLinkClassName='page-link'
+                    pageChangedHandler={this.pageChangedHandler}
                 />
             );
         }

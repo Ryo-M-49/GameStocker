@@ -3,12 +3,12 @@ import classes from './SearchBar.module.css';
 
 import SearchField from 'react-search-field';
 
-const searchBar = (props) => (
+const searchBar = props => (
     <div className={classes.SearchBar}>
-        <SearchField 
+        <SearchField
             placeholder="Search games you have played..."
-            // onClick={props.onClickedSearchBar} 
-            // onEnter={props.onClickedSearchBar} 
+            // onClick={props.onClickedSearchBar}
+            // onEnter={props.onClickedSearchBar}
         />
     </div>
 );

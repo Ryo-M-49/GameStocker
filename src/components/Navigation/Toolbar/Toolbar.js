@@ -6,7 +6,7 @@ import BurgerMenu from '../../BurgarMenu/BurgerMenu';
 import SearchBar from '../../SearchBar/SearchBar';
 import NavigationItems from '../NavigationItems/NavigationItems';
 
-const toolbar = (props) => (
+const toolbar = props => (
     <header className={classes.Toolbar}>
         {/* <div>DrowerToggle</div> */}
         <div className={classes.Logo}>
@@ -22,4 +22,4 @@ const toolbar = (props) => (
     </header>
 );
 
-export default toolbar
+export default toolbar;

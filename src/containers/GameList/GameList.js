@@ -5,7 +5,6 @@ import axios from 'axios';
 
 import Game from '../../components/Game/Game';
 import Pagination from '../../components/UI/Pagination/Pagination';
-import { loadPartialConfig } from '@babel/core';
 
 class GameList extends Component {
     constructor(props) {

@@ -1,6 +1,6 @@
 module.exports = {
 
-    extends: ['google', 'plugin:prettier/recommended'], // WordPressのコーディング規約をベースにする
+    extends: ['google', 'plugin:prettier/recommended'], // Googleのコーディング規約をベースにする
     plugins: ['react'], // React関係のルールを指定するのに必要
     parser: 'babel-eslint', // JSXとかでエラー出るのを回避。env の es6:true もこれにより不要になる
     parserOptions: {

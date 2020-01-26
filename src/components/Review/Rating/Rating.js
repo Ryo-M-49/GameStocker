@@ -1,7 +1,7 @@
 import React from 'react';
 import classes from './Rating.module.css';
 
-const rating = (props) => (
+const rating = props => (
     <div className={classes.Rating}>
         <div className={classes.Star}>
             <i className="fa fa-star"></i>

@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import {Route, Switch} from 'react-router-dom';
+import { Route, Switch } from 'react-router-dom';
 
 import Aux from '../Aux/Aux';
 import Toolbar from '../../components/Navigation/Toolbar/Toolbar';
@@ -8,22 +8,22 @@ import YourReview from '../../components/Review/YourReview/YourReview';
 
 class Layout extends Component {
     state = {
-        showSideDrawer: false
-    }
+        showSideDrawer: false,
+    };
 
-    render () {
+    render() {
         return (
             <Aux>
                 <Toolbar />
                 <div>SideDrawer</div>
                 <main>
                     <Switch>
-                        <Route path="/:id" exact component={YourReview}/>}
-                        <Route path="/" exact component={GameList}/>
+                        <Route path="/:id" exact component={YourReview} />}
+                        <Route path="/" exact component={GameList} />
                     </Switch>
                 </main>
             </Aux>
-        )
+        );
     }
 }
 

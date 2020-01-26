@@ -1,7 +1,7 @@
 import React from 'react';
 import classes from './Bad.module.css';
 
-const bad = (props) => (
+const bad = props => (
     <div className={classes.Bad}>
         <div className={classes.ThumbsDown}>
             <i className="fa fa-thumbs-down"></i>

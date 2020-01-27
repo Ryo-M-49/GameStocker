@@ -5,17 +5,34 @@ import Aux from '../Aux/Aux';
 import Toolbar from '../../components/Navigation/Toolbar/Toolbar';
 import GameList from '../../containers/GameList/GameList';
 import YourReview from '../../components/Review/YourReview/YourReview';
+import SideDrawer from '../../components/Navigation/SideDrawer/SideDrawer';
 
 class Layout extends Component {
     state = {
         showSideDrawer: false,
     };
 
+    sideDrawerClosedHandler = () => {
+        this.setState({ showSideDrawer: false });
+    };
+
+    sideDrawerToggleHandler = () => {
+        this.setState(prevState => {
+            return { showSideDrawer: !prevState.showSideDrawer };
+        });
+    };
+
     render() {
         return (
             <Aux>
-                <Toolbar />
-                <div>SideDrawer</div>
+                <Toolbar
+                    drawerToggleClicked={this.sideDrawerToggleHandler}
+                    open={this.state.showSideDrawer}
+                />
+                <SideDrawer
+                    open={this.state.showSideDrawer}
+                    closed={this.sideDrawerClosedHandler}
+                />
                 <main>
                     <Switch>
                         <Route path="/:id" exact component={YourReview} />}

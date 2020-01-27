@@ -12,7 +12,7 @@ const toolbar = props => (
         <div className={classes.Logo}>
             <Logo />
         </div>
-        <BurgerMenu />
+        <BurgerMenu clicked={props.drawerToggleClicked} />
         <div className={classes.SearchBar}>
             <SearchBar />
         </div>

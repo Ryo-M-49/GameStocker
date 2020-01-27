@@ -12,6 +12,7 @@ module.exports = {
     },
     rules: {
         'no-var': 'error', //varを許可しない
+        'no-invalid-this': 'off',
         'no-console': 'off', // console.logがあってもエラーにしない
         'require-jsdoc': 'off', // Docコメントなくてもエラーにしない
         'valid-jsdoc': 'off', // Docコメントの書き方についてとやかくいわせない

@@ -8,11 +8,10 @@ import NavigationItems from '../NavigationItems/NavigationItems';
 
 const toolbar = props => (
     <header className={classes.Toolbar}>
-        {/* <div>DrowerToggle</div> */}
         <div className={classes.Logo}>
             <Logo />
         </div>
-        <BurgerMenu clicked={props.drawerToggleClicked} />
+        <BurgerMenu clicked={props.drawerToggleClicked} isOpen={props.open} />
         <div className={classes.SearchBar}>
             <SearchBar />
         </div>

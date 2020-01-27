@@ -9,7 +9,7 @@ const burgerMenu = props => (
     <div className={classes.BurgerMenu}>
         <Burger
             {...props}
-            isOpen={true}
+            isOpen={props.isOpen}
             direction="down"
             Component="button"
             type="button"

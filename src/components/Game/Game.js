@@ -6,7 +6,7 @@ import PropTypes from 'prop-types';
 
 const game = props => {
     // console.log(props);
-    let title = props.game.title;
+    const title = props.game.title;
     // if (title.length > 13) {
     //     title = title.substr(0, 12) + '...';
     // }

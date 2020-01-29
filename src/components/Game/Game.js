@@ -7,9 +7,9 @@ import PropTypes from 'prop-types';
 const game = props => {
     // console.log(props);
     let title = props.game.title;
-    if (title.length > 13) {
-        title = title.substr(0, 12) + '...';
-    }
+    // if (title.length > 13) {
+    //     title = title.substr(0, 12) + '...';
+    // }
 
     return (
         <li className={classes.Game}>

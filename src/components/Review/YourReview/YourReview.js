@@ -10,12 +10,7 @@ const TITLE_MAX_LENGTH = 165;
 
 const yourReview = props => {
     const game = props.location.aboutProps.game;
-
-    // Modify the description with 166+ length
     let description = game.itemCaption;
-    if (description.length > TITLE_MAX_LENGTH) {
-        description = game.itemCaption.substr(0, TITLE_MAX_LENGTH) + '...';
-    }
 
     return (
         <Aux>

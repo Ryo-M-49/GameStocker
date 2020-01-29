@@ -31,7 +31,7 @@ const pagination = props => (
 
 pagination.propTypes = {
     pageCount: PropTypes.number.isRequired,
-    pageCountHandler: PropTypes.func.isRequired,
+    pageChangedHandler: PropTypes.func.isRequired,
 };
 
 export default pagination;

@@ -1,7 +1,7 @@
 import React from 'react';
 import classes from './MyPage.module.css';
 
-const myPage = prosp => (
+const myPage = props => (
     <div className={classes.MyPage}>
         <div>PictureComponent</div>
         <div>BioComponent</div>

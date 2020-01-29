@@ -1,17 +1,13 @@
 .Game {
     list-style: none;
     width: 230px;
-    height: 280px;
+    height: 330px;
     margin: 20px 15px;
     background-color: white;
     border-radius: 10px;
     box-shadow: 10px 10px 10px rgba(0,0,0,0.4); 
     transition: all .2s;
-
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    align-items: center;
+    text-align: center;
 }
 
 .Game:hover {
@@ -27,6 +23,8 @@
 
 .Title {
     font-size: 15px;
+    margin-right: 10px;
+    margin-left: 10px;
 }
 
 .Thumbnail {

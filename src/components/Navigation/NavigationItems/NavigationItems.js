@@ -5,10 +5,10 @@ import NavigationItem from './NavigationItem/NavigationItem';
 const navigationItems = props => (
     <ul className={classes.NavigationItems}>
         <NavigationItem link="/" exact>
-            Your Reviews
+            タイムライン
         </NavigationItem>
         <NavigationItem link="/" exact>
-            My Profile
+            マイページ
         </NavigationItem>
     </ul>
 );

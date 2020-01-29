@@ -4,8 +4,12 @@ import NavigationItem from './NavigationItem/NavigationItem';
 
 const navigationItems = props => (
     <ul className={classes.NavigationItems}>
-        <NavigationItem>Your Reviews</NavigationItem>
-        <NavigationItem>My Profile</NavigationItem>
+        <NavigationItem link="/" exact>
+            Your Reviews
+        </NavigationItem>
+        <NavigationItem link="/" exact>
+            My Profile
+        </NavigationItem>
     </ul>
 );
 

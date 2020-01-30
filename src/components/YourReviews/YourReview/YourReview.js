@@ -2,7 +2,7 @@ import React from 'react';
 import classes from './YourReview.module.css';
 
 import Aux from '../../../hoc/Aux/Aux';
-import Review from '../../Review/Review';
+import Review from '../Review/Review';
 import QuitButton from '../../UI/QuitButton/QuitButton';
 import ShareButton from '../../UI/ShareButton/ShareButton';
 

@@ -7,7 +7,7 @@ const navigationItems = props => (
         <NavigationItem link="/" exact>
             タイムライン
         </NavigationItem>
-        <NavigationItem link="/" exact>
+        <NavigationItem link="/mypage" exact>
             マイページ
         </NavigationItem>
     </ul>

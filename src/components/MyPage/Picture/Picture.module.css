@@ -1,0 +1,11 @@
+.Picture {
+    /* width: 20%; */
+    margin: 20px 50px;
+    text-align: center;
+}
+
+.ProfilePicture {
+    width: 200px;
+    height: auto;
+}
+

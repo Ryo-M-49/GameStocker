@@ -67,7 +67,7 @@ class GameList extends Component {
         const gamesArray = [];
         let gamesObject = {};
 
-        let pagination = <div>now loading a pagination...</div>;
+        let pagination = null;
 
         // After fetching JSON data
         if (this.state.games) {

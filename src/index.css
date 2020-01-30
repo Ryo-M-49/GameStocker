@@ -5,3 +5,9 @@ body {
   font-family: "Open Sans", sans-serif;
   background-color: whitesmoke;
 }
+
+/* Game.jsのTitleの下線が消えないので暫定対応 */
+a {
+  text-decoration: none;
+  color: black;
+}

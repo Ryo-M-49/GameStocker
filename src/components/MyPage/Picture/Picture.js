@@ -10,8 +10,8 @@ const picture = props => (
             alt="profile picture"
             className={classes.ProfilePicture}
         />
-        <h2>User Name</h2>
-        <div>FollowButtonComponent</div>
+        <h2>Your Name</h2>
+        <div>Edit Button Component</div>
     </div>
 );
 

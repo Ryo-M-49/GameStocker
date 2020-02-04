@@ -4,6 +4,7 @@ import classes from './MyPage.module.css';
 import Picture from './Picture/Picture';
 import Bio from './Bio/Bio';
 import PopularReview from './PopularReview/PopularReview';
+import RecentActivity from './RecentActivity/RecentActivity';
 
 const myPage = props => (
     <div className={classes.MyPage}>
@@ -14,7 +15,9 @@ const myPage = props => (
             </div>
             <PopularReview />
         </div>
-        <div>YourReviewsComponent</div>
+        <div className={classes.MyPageRight}>
+            <RecentActivity />
+        </div>
     </div>
 );
 

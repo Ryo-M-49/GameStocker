@@ -1,8 +1,6 @@
 import React from 'react';
 import classes from './RecentActivity.module.css';
 
-import Logo from '../../Logo/Logo'//Delete this once implementing image-display function
-
 const recentActivity = props => {
     // const reviewsArray = []; //Put reviews into this array and map them to each <li>
     // const thumbnail = null //This receives image from props
@@ -29,6 +27,6 @@ const recentActivity = props => {
             </ul>
         </div>
     );
-}
+};
 
 export default recentActivity;

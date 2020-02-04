@@ -1,10 +1,19 @@
 .MyPage {
-    
+    margin-top: 100px;
+    display: flex;
+    justify-content: space-around;
 }
 
 .MyPageLeft {
-    width: 55%;
-    margin: 100px 30px 30px;
+    width: 60%;
+    margin: 0 30px 30px;
+    padding: 30px;
+    background-color: white;
+}
+
+.MyPageRight {
+    width: 20%;
+    margin: 0 30px 30px;
     padding: 30px;
     background-color: white;
 }

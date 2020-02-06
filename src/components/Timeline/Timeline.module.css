@@ -1,4 +1,4 @@
-.MyPage {
+.Timeline {
     margin-top: 100px;
     display: flex;
     justify-content: space-around;
@@ -16,9 +16,4 @@
     margin: 0 30px;
     padding: 30px;
     background-color: white;
-}
-
-.BioWrapper {
-    display: flex;
-    align-items: center;
 }

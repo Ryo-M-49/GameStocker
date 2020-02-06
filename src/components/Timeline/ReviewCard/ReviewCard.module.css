@@ -1,0 +1,10 @@
+.ReviewCard {
+    width: 100%;
+    height: 150px;
+    background-color: white;
+    list-style: none;
+}
+
+.ReviewContent {
+    display: flex;
+}

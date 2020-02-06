@@ -7,6 +7,7 @@ import GameList from '../../containers/GameList/GameList';
 import YourReview from '../../components/YourReviews/YourReview/YourReview';
 import SideDrawer from '../../components/Navigation/SideDrawer/SideDrawer';
 import MyPage from '../../components/MyPage/MyPage';
+import Timeline from '../../components/Timeline/Timeline';
 
 class Layout extends Component {
     state = {
@@ -36,6 +37,7 @@ class Layout extends Component {
                 />
                 <main>
                     <Switch>
+                        <Route path="/timeline" exact component={Timeline} />
                         <Route path="/mypage" component={MyPage} />
                         <Route path="/:id" exact component={YourReview} />
                         <Route path="/" exact component={GameList} />

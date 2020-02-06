@@ -4,7 +4,7 @@ import NavigationItem from './NavigationItem/NavigationItem';
 
 const navigationItems = props => (
     <ul className={classes.NavigationItems}>
-        <NavigationItem link="/" exact>
+        <NavigationItem link="/timeline" exact>
             タイムライン
         </NavigationItem>
         <NavigationItem link="/mypage" exact>

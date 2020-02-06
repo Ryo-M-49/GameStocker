@@ -6,14 +6,14 @@
 
 .MyPageLeft {
     width: 60%;
-    margin: 0 30px 30px;
+    margin: 0 30px;
     padding: 30px;
     background-color: white;
 }
 
 .MyPageRight {
     width: 20%;
-    margin: 0 30px 30px;
+    margin: 0 30px;
     padding: 30px;
     background-color: white;
 }

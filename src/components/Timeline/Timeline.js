@@ -1,17 +1,18 @@
 import React from 'react';
 import classes from './Timeline.module.css';
 import RecentActivity from '../MyPage/RecentActivity/RecentActivity';
+import ReviewCard from '../Timeline/ReviewCard/ReviewCard';
 
 const timeline = props => (
     <div className={classes.Timeline}>
-        <div>
+        <div className={classes.MyPageLeft}>
             <ul>
-                <li>ReviewCardComponent</li>
-                <li>ReviewCardComponent</li>
-                <li>ReviewCardComponent</li>
+                <ReviewCard />
             </ul>
         </div>
-        <RecentActivity />
+        <div className={classes.MyPageRight}>
+            <RecentActivity />
+        </div>
     </div>
 );
 

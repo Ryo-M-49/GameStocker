@@ -5,6 +5,7 @@ import Aux from '../../../hoc/Aux/Aux';
 import Review from '../Review/Review';
 import QuitButton from '../../UI/QuitButton/QuitButton';
 import ShareButton from '../../UI/ShareButton/ShareButton';
+import SaveButton from '../../UI/SaveButton/SaveButton';
 
 const yourReview = props => {
     const game = props.location.aboutProps.game;
@@ -30,7 +31,10 @@ const yourReview = props => {
                             alt="game-image"
                         />
                     </div>
-                    <ShareButton />
+                    <div className={classes.ButtonWrapper}>
+                        <ShareButton />
+                        <SaveButton />
+                    </div>
                 </div>
             </div>
         </Aux>

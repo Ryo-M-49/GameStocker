@@ -1,16 +1,23 @@
 import React from 'react';
-import classes from './SearchBar.module.css';
 
-import SearchField from 'react-search-field';
+import { makeStyles } from '@material-ui/core/styles';
+import TextField from '@material-ui/core/TextField';
 
-const searchBar = props => (
-    <div className={classes.SearchBar}>
-        <SearchField
-            placeholder="Search games you have played..."
-            // onClick={props.onClickedSearchBar}
-            // onEnter={props.onClickedSearchBar}
-        />
-    </div>
-);
+const useStyles = makeStyles(theme => ({
+    root: {
+        '& > *': {
+            margin: theme.spacing(1),
+            width: 200,
+        },
+    },
+}));
 
-export default searchBar;
+export default function BasicTextFields() {
+    const classes = useStyles();
+
+    return (
+        <form className={classes.root} noValidate autoComplete="off">
+            <TextField id="standard-basic" label="Standard" />
+        </form>
+    );
+}

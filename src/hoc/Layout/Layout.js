@@ -5,7 +5,6 @@ import Aux from '../Aux/Aux';
 import Toolbar from '../../components/Navigation/Toolbar/Toolbar';
 import GameList from '../../containers/GameList/GameList';
 import YourReview from '../../components/YourReviews/YourReview/YourReview';
-import SideDrawer from '../../components/Navigation/SideDrawer/SideDrawer';
 import MyPage from '../../components/MyPage/MyPage';
 import Timeline from '../../components/Timeline/Timeline';
 
@@ -24,16 +23,19 @@ class Layout extends Component {
         });
     };
 
+    toggleDrawerHandler = isOpen => {
+        console.log('toggleDrawerHandler fired!');
+        this.setState({ showSideDrawer: isOpen });
+        console.log(this.state.showSideDrawer);
+    };
+
     render() {
         return (
             <Aux>
                 <Toolbar
-                    drawerToggleClicked={this.sideDrawerToggleHandler}
-                    open={this.state.showSideDrawer}
-                />
-                <SideDrawer
-                    open={this.state.showSideDrawer}
-                    closed={this.sideDrawerClosedHandler}
+                    drawerToggleClicked={() => this.toggleDrawerHandler(true)}
+                    drawerToggleClosed={() => this.toggleDrawerHandler(false)}
+                    isOpen={this.state.showSideDrawer}
                 />
                 <main>
                     <Switch>

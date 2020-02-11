@@ -1,14 +1,13 @@
 import React from 'react';
 import classes from './Good.module.css';
+import ThumbUpIcon from '@material-ui/icons/ThumbUp';
+import ReviewText from '../ReviewText/ReviewText';
 
 const good = props => (
     <div className={classes.Good}>
-        <div className={classes.ThumbsUp}>
-            <i className="fa fa-thumbs-up"></i>
-        </div>
+        <ThumbUpIcon fontSize="large" />
         <div className={classes.Content}>
-            <h3>Good</h3>
-            <textarea placeholder="your review here" />
+            <ReviewText title="Good Point" />
         </div>
     </div>
 );

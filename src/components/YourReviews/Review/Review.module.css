@@ -4,3 +4,11 @@
     display: flex;
     flex-direction: column;
 }
+
+.Title {
+    font-size: 30px;
+}
+
+.Description {
+    font-size: 12px;
+}

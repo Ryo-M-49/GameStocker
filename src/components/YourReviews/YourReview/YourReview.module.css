@@ -1,7 +1,12 @@
 .YourReview {
+    width: 80%;
+    height: 80%;
+    margin: 100px auto;
     padding: 20px;
-    background-color: whitesmoke;
     position: relative;
+    background-color: white;
+    border-radius: 10px;
+    box-shadow: 10px 10px 10px rgba(0,0,0,0.4); 
 
     display: flex;
     justify-content: space-around;
@@ -30,12 +35,12 @@
     justify-content: space-between;
 }
 
-.GameImage {
+.ImageWrapper {
     padding-top: 75px;
 }
 
 .Img {
-    width: 300px;
+    width: 250px;
     height: auto;
 }
 

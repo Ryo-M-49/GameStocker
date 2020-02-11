@@ -54,8 +54,8 @@ class GameList extends Component {
      * @param {object} data - holds the information of the clicked object.
      * @returns {nothing} - changes the state "currentPage" from the current page to the clicked page
      */
-    pageChangedHandler(data) {
-        const selectedPage = data.selected + 1; // Since data.selected starts from 0
+    pageChangedHandler(selectedPage) {
+        // const selectedPage = data.selected + 1; // Since data.selected starts from 0
         this.setState(
             { currentPage: selectedPage },
             this.renderClickedPageHandler
@@ -82,7 +82,9 @@ class GameList extends Component {
             pagination = (
                 <Pagination
                     pageCount={this.state.games.pageCount}
-                    pageChangedHandler={this.pageChangedHandler}
+                    pageChangedHandler={(event, page) =>
+                        this.pageChangedHandler(page)
+                    }
                 />
             );
         }
@@ -94,7 +96,7 @@ class GameList extends Component {
                         <Game key={index} game={gameObject.game} />
                     ))}
                 </ul>
-                {pagination}
+                <div className={classes.Pagination}>{pagination}</div>
             </div>
         );
     }

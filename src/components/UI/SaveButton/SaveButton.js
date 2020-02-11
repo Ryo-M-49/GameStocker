@@ -5,7 +5,7 @@ import Button from '@material-ui/core/Button';
 // prop that is used by the `Button` component.
 const StyledButton = withStyles({
     root: {
-        width: '200px',
+        width: '100px',
     },
     label: {
         textTransform: 'capitalize',
@@ -14,7 +14,7 @@ const StyledButton = withStyles({
 
 const saveButton = props => (
     <div>
-        <StyledButton variant="contained" color="primary">
+        <StyledButton variant="contained" color="secondary">
             Save
         </StyledButton>
     </div>

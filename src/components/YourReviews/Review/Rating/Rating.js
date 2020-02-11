@@ -4,12 +4,12 @@ import Rating from '@material-ui/lab/Rating';
 import Box from '@material-ui/core/Box';
 
 const labels = {
-    0.5: 'Useless',
-    1: 'Useless+',
+    0.5: 'Very Bad',
+    1: ' Bad',
     1.5: 'Poor',
     2: 'Poor+',
-    2.5: 'Ok',
-    3: 'Ok+',
+    2.5: 'OK',
+    3: 'OK+',
     3.5: 'Good',
     4: 'Good+',
     4.5: 'Excellent',
@@ -21,6 +21,10 @@ const useStyles = makeStyles({
         width: 200,
         display: 'flex',
         alignItems: 'center',
+        margin: '20px 0',
+    },
+    icon: {
+        fontSize: '30px',
     },
 });
 

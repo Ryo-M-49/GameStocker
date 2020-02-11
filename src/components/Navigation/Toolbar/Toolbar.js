@@ -2,7 +2,7 @@ import React from 'react';
 import classes from './Toolbar.module.css';
 
 import Logo from '../../Logo/Logo';
-import BurgerMenu from '../../BurgarMenu/BurgerMenu';
+import SideDrawer from '../SideDrawer/SideDrawer';
 import SearchBar from '../../SearchBar/SearchBar';
 import NavigationItems from '../NavigationItems/NavigationItems';
 
@@ -11,7 +11,11 @@ const toolbar = props => (
         <div className={classes.Logo}>
             <Logo />
         </div>
-        <BurgerMenu clicked={props.drawerToggleClicked} isOpen={props.open} />
+        <SideDrawer
+            onButtonClicked={props.drawerToggleClicked}
+            onDrawerClosed={props.drawerToggleClosed}
+            isOpen={props.isOpen}
+        />
         <div className={classes.SearchBar}>
             <SearchBar />
         </div>

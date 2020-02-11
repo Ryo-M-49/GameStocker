@@ -9,7 +9,12 @@
     justify-content: center;
     align-items: flex-start;
     padding: 0;
-    margin: 60px 0;
+    margin: 20px 0;
+}
+
+.Pagination {
+    width: 350px;
+    margin: 30px auto;
 }
 
 h2 {

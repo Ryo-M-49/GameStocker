@@ -35,10 +35,17 @@
 }
 
 .Img {
-    width: 350px;
+    width: 300px;
     height: auto;
 }
 
 .ButtonWrapper {
-    text-align: center;
+    margin: 20px;
+
+    display: flex;
+    justify-content: center;
+}
+
+.ShareButton {
+    margin: 0 10px;
 }

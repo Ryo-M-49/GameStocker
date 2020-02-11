@@ -32,7 +32,9 @@ const yourReview = props => {
                         />
                     </div>
                     <div className={classes.ButtonWrapper}>
-                        <ShareButton />
+                        <div className={classes.ShareButton} >
+                            <ShareButton />
+                        </div>
                         <SaveButton />
                     </div>
                 </div>

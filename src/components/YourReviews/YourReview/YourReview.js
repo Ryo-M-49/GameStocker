@@ -21,9 +21,7 @@ const yourReview = props => {
                 <div className={classes.ReviewWrapper}>
                     <div className={classes.Description}>
                         <h2 className={classes.Title}>{game.title}</h2>
-                        <p className={classes.Description}>
-                            {description}
-                        </p>
+                        <p className={classes.Description}>{description}</p>
                     </div>
                     <Review />
                 </div>
@@ -36,7 +34,7 @@ const yourReview = props => {
                         />
                     </div>
                     <div className={classes.ButtonWrapper}>
-                        <div className={classes.ShareButton} >
+                        <div className={classes.ShareButton}>
                             <ShareButton />
                         </div>
                         <SaveButton />

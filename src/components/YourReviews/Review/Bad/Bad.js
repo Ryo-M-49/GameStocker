@@ -7,7 +7,7 @@ const bad = props => (
     <div className={classes.Bad}>
         <ThumbDownIcon fontSize="large" />
         <div className={classes.Content}>
-            <ReviewText title="Bad Point"/>
+            <ReviewText title="Bad Point" />
         </div>
     </div>
 );

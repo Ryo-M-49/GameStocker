@@ -1,14 +1,13 @@
 import React from 'react';
 import classes from './Bad.module.css';
+import ThumbDownIcon from '@material-ui/icons/ThumbDown';
+import ReviewText from '../ReviewText/ReviewText';
 
 const bad = props => (
     <div className={classes.Bad}>
-        <div className={classes.ThumbsDown}>
-            <i className="fa fa-thumbs-down"></i>
-        </div>
+        <ThumbDownIcon fontSize="large" />
         <div className={classes.Content}>
-            <h3>Bad</h3>
-            <textarea placeholder="your review here" />
+            <ReviewText title="Bad Point"/>
         </div>
     </div>
 );

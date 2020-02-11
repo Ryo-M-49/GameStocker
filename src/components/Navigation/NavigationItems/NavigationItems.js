@@ -8,7 +8,9 @@ import Image from '../../../assets/images/sample-profile.png';
 const navigationItems = props => (
     <ul className={classes.NavigationItems}>
         <NavigationItem link="/timeline" exact>
-            <ViewListIcon style={{ color: "white", fontSize: "50", marginRight: "20px"}} />
+            <ViewListIcon
+                style={{ color: 'white', fontSize: '50', marginRight: '20px' }}
+            />
         </NavigationItem>
         <NavigationItem link="/mypage" exact>
             <Avatar alt="my-page" src={Image} />

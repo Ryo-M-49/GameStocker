@@ -1,30 +1,13 @@
 import React from 'react';
-import classes from './Pagination.module.css';
 import PropTypes from 'prop-types';
-
-import ReactPaginate from 'react-paginate';
+import Pagination from '@material-ui/lab/Pagination';
 
 const pagination = props => (
     <div>
-        <ReactPaginate
-            pageCount={props.pageCount}
-            pageRangeDisplayed={5}
-            marginPagesDisplay={2}
-            onPageChange={props.pageChangedHandler}
-            containerClassName={classes.Pagination}
-            pageClassName={classes.PageItem}
-            pageLinkClassName="page-link"
-            activeClassName="active"
-            previousLabel="previous"
-            nextLabel="next"
-            previousClassName={classes.PageItem}
-            nextClassName={classes.PageItem}
-            previousLinkClassName="page-link"
-            nextLinkClassName="page-link"
-            disabledClassName="disabled"
-            breakLabel="..."
-            breakClassName={classes.PageItem}
-            breakLinkClassName="page-link"
+        <Pagination
+            count={props.pageCount}
+            onChange={props.pageChangedHandler}
+            color="primary"
         />
     </div>
 );

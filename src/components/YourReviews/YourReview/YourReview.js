@@ -9,6 +9,10 @@ import SaveButton from '../../UI/SaveButton/SaveButton';
 
 const yourReview = props => {
     const game = props.location.aboutProps.game;
+    let description = game.itemCaption;
+    if (description.length > 400) {
+        description = description.substr(0, 400) + '...';
+    }
 
     return (
         <Aux>
@@ -18,7 +22,7 @@ const yourReview = props => {
                     <div className={classes.Description}>
                         <h2 className={classes.Title}>{game.title}</h2>
                         <p className={classes.Description}>
-                            {game.itemCaption}
+                            {description}
                         </p>
                     </div>
                     <Review />
@@ -32,7 +36,9 @@ const yourReview = props => {
                         />
                     </div>
                     <div className={classes.ButtonWrapper}>
-                        <ShareButton />
+                        <div className={classes.ShareButton} >
+                            <ShareButton />
+                        </div>
                         <SaveButton />
                     </div>
                 </div>

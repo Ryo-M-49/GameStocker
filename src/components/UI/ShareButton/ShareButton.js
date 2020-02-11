@@ -4,7 +4,7 @@ import Button from '@material-ui/core/Button';
 
 const StyledButton = withStyles({
     root: {
-        width: '200px',
+        width: '100px',
     },
     label: {
         textTransform: 'capitalize',

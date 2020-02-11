@@ -2,15 +2,14 @@ import React from 'react';
 import { withStyles } from '@material-ui/core/styles';
 import TextField from '@material-ui/core/TextField';
 
-
 const StyledTextField = withStyles({
     root: {
-      width: '500px',
+        width: '500px',
     },
-  })(TextField);
+})(TextField);
 
 const reviewText = props => {
-    let title = props.title;
+    const title = props.title;
 
     return (
         <form noValidate autoComplete="off">

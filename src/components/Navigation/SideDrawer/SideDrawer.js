@@ -1,7 +1,6 @@
 import React from 'react';
 import Drawer from '@material-ui/core/Drawer';
-import Button from '@material-ui/core/Button';
-// import MenuButton from '../../UI/MenuButton/MenuButton';
+import MenuButton from '../../UI/MenuButton/MenuButton';
 import List from '@material-ui/core/List';
 import ListItem from '@material-ui/core/ListItem';
 import ListItemIcon from '@material-ui/core/ListItemIcon';
@@ -13,13 +12,11 @@ const sideDrawer = props => {
     return (
         <div>
             {/* Delete the Button below later */}
-            <Button
-                onClick={props.onButtonClicked}
+            <MenuButton
+                clicked={props.onButtonClicked}
                 variant="outlined"
                 color="primary"
-            >
-                Menu
-            </Button>
+            />
             <Drawer open={props.isOpen} onClose={props.onDrawerClosed}>
                 <div
                     role="presentation"

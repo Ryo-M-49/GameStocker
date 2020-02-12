@@ -1,6 +1,7 @@
 import React from 'react';
 import classes from './RecentActivity.module.css';
 import SmallReviewCard from '../../Timeline/SmallReviewCard/SmallReviewCard';
+import Image from '../../../assets/images/sample-game-2.jpg';
 
 const recentActivity = props => {
     // const reviewsArray = []; //Put reviews into this array and map them to each <li>
@@ -11,7 +12,7 @@ const recentActivity = props => {
             <h2 className={classes.Header}>Recent Activity</h2>
             <ul className={classes.RecentReviews}>
                 <li>
-                    <SmallReviewCard />
+                    <SmallReviewCard image={Image} />
                 </li>
             </ul>
         </div>

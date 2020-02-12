@@ -10,38 +10,42 @@ import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
 
 const useStyles = makeStyles({
-  root: {
-    maxWidth: 345,
-  },
+    root: {
+        maxWidth: 345,
+    },
 });
 
 export default function ImgMediaCard() {
-  const classes = useStyles();
+    const classes = useStyles();
 
-  return (
-    <Card className={classes.root}>
-      <CardActionArea>
-        <CardMedia
-          component="img"
-          alt="Game Image"
-          height="100"
-          image={Image}
-          title="Game Title"
-        />
-        <CardContent>
-          <Typography gutterBottom variant="h5" component="h2">
-            GameTitle
-          </Typography>
-          <Typography variant="body2" color="textSecondary" component="p">
-            Good Point Here
-          </Typography>
-        </CardContent>
-      </CardActionArea>
-      <CardActions>
-        <Button size="small" color="primary">
-          Read More
-        </Button>
-      </CardActions>
-    </Card>
-  );
+    return (
+        <Card className={classes.root}>
+            <CardActionArea>
+                <CardMedia
+                    component="img"
+                    alt="Game Image"
+                    height="100"
+                    image={Image}
+                    title="Game Title"
+                />
+                <CardContent>
+                    <Typography gutterBottom variant="h5" component="h2">
+                        GameTitle
+                    </Typography>
+                    <Typography
+                        variant="body2"
+                        color="textSecondary"
+                        component="p"
+                    >
+                        Good Point Here
+                    </Typography>
+                </CardContent>
+            </CardActionArea>
+            <CardActions>
+                <Button size="small" color="primary">
+                    Read More
+                </Button>
+            </CardActions>
+        </Card>
+    );
 }

@@ -1,19 +1,19 @@
 import React from 'react';
 import Button from '@material-ui/core/Button';
-import MenuIcon from '@material-ui/icons/Menu';
+import EditIcon from '@material-ui/icons/Edit';
 
-const menuButton = props => {
+const editButton = prosp => {
     return (
         <div>
             <Button
                 variant="contained"
-                startIcon={<MenuIcon />}
-                onClick={props.clicked}
+                color="primary"
+                startIcon={<EditIcon />}
             >
-                Menu
+                Edit
             </Button>
         </div>
     );
 };
 
-export default menuButton;
+export default editButton;

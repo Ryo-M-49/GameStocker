@@ -1,6 +1,5 @@
 import React from 'react';
 import classes from './Timeline.module.css';
-import RecentActivity from '../MyPage/RecentActivity/RecentActivity';
 import ReviewCard from '../Timeline/ReviewCard/ReviewCard';
 
 const timeline = props => (

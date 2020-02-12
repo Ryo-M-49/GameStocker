@@ -1,6 +1,9 @@
 import React from 'react';
 import classes from './PopularReview.module.css';
 import SmallReviewCard from '../../Timeline/SmallReviewCard/SmallReviewCard';
+import Image1 from '../../../assets/images/sample-game-1.jpg';
+import Image2 from '../../../assets/images/sample-game-2.jpg';
+import Image3 from '../../../assets/images/sample-game-3.jpg';
 
 const popularReview = props => (
     <div className={classes.PopularReview}>
@@ -8,13 +11,13 @@ const popularReview = props => (
             <h2>Your Popular Review</h2>
             <ul className={classes.ReviewList}>
                 <li>
-                    <SmallReviewCard />
+                    <SmallReviewCard image={Image1} />
                 </li>
                 <li>
-                    <SmallReviewCard />
+                    <SmallReviewCard image={Image2} />
                 </li>
                 <li>
-                    <SmallReviewCard />
+                    <SmallReviewCard image={Image3} />
                 </li>
             </ul>
         </div>

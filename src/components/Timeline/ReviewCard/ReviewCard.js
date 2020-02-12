@@ -3,7 +3,6 @@ import reactClasses from './ReviewCard.module.css';
 import Image from '../../../assets/images/logo_transparent.png';
 
 import { makeStyles } from '@material-ui/core/styles';
-import clsx from 'clsx';
 import Card from '@material-ui/core/Card';
 import CardHeader from '@material-ui/core/CardHeader';
 import CardMedia from '@material-ui/core/CardMedia';
@@ -72,9 +71,7 @@ export default function RecipeReviewCard() {
                     <IconButton aria-label="share">
                         <ShareIcon />
                     </IconButton>
-                    <IconButton
-                        aria-label="show more"
-                    >
+                    <IconButton aria-label="show more">
                         <ExpandMoreIcon />
                     </IconButton>
                 </CardActions>

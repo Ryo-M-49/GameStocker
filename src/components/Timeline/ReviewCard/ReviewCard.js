@@ -1,17 +1,84 @@
 import React from 'react';
-import classes from './ReviewCard.module.css';
-import Rating from '../../YourReviews/Review/Rating/Rating';
+import reactClasses from './ReviewCard.module.css';
+import Image from '../../../assets/images/logo_transparent.png';
 
-const reviewCard = props => (
-    <li className={classes.ReviewCard}>
-        <img src="#" alt="your-image" />
-        <div className={classes.ReviewContent}>
-            <img src="#" alt="thumbnail" />
-            <div className={classes.ReviewDescription}>
-                <Rating />
-            </div>
-        </div>
-    </li>
-);
+import { makeStyles } from '@material-ui/core/styles';
+import clsx from 'clsx';
+import Card from '@material-ui/core/Card';
+import CardHeader from '@material-ui/core/CardHeader';
+import CardMedia from '@material-ui/core/CardMedia';
+import CardContent from '@material-ui/core/CardContent';
+import CardActions from '@material-ui/core/CardActions';
+import Avatar from '@material-ui/core/Avatar';
+import IconButton from '@material-ui/core/IconButton';
+import Typography from '@material-ui/core/Typography';
+import { red } from '@material-ui/core/colors';
+import FavoriteIcon from '@material-ui/icons/Favorite';
+import ShareIcon from '@material-ui/icons/Share';
+import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
+import MoreVertIcon from '@material-ui/icons/MoreVert';
 
-export default reviewCard;
+const useStyles = makeStyles(theme => ({
+    root: {
+        width: 600,
+        height: 'auto',
+    },
+    media: {
+        height: 0,
+        paddingTop: '56.25%', // 16:9
+    },
+    avatar: {
+        backgroundColor: red[500],
+    },
+}));
+
+export default function RecipeReviewCard() {
+    const classes = useStyles();
+    return (
+        <li className={reactClasses.ReviewCard}>
+            <Card className={classes.root}>
+                <CardHeader
+                    avatar={
+                        <Avatar aria-label="recipe" className={classes.avatar}>
+                            R
+                        </Avatar>
+                    }
+                    action={
+                        <IconButton aria-label="settings">
+                            <MoreVertIcon />
+                        </IconButton>
+                    }
+                    title="Game title here"
+                    subheader="September 14, 2016"
+                />
+                <CardMedia
+                    className={classes.media}
+                    image={Image}
+                    title="Game Image"
+                />
+                <CardContent>
+                    <Typography
+                        variant="body2"
+                        color="textSecondary"
+                        component="p"
+                    >
+                        Good point here
+                    </Typography>
+                </CardContent>
+                <CardActions disableSpacing>
+                    <IconButton aria-label="add to favorites">
+                        <FavoriteIcon />
+                    </IconButton>
+                    <IconButton aria-label="share">
+                        <ShareIcon />
+                    </IconButton>
+                    <IconButton
+                        aria-label="show more"
+                    >
+                        <ExpandMoreIcon />
+                    </IconButton>
+                </CardActions>
+            </Card>
+        </li>
+    );
+}

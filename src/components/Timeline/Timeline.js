@@ -5,14 +5,9 @@ import ReviewCard from '../Timeline/ReviewCard/ReviewCard';
 
 const timeline = props => (
     <div className={classes.Timeline}>
-        <div className={classes.MyPageLeft}>
-            <ul>
-                <ReviewCard />
-            </ul>
-        </div>
-        <div className={classes.MyPageRight}>
-            <RecentActivity />
-        </div>
+        <ul>
+            <ReviewCard />
+        </ul>
     </div>
 );
 

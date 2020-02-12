@@ -1,8 +1,10 @@
-.PopularReview {
-    margin-left: 20px;
-}
-
 .ReviewList {
     list-style: none;
     padding: 0;
+
+    display: flex;
+}
+
+.ReviewList li:not(:last-child) {
+    margin-right: 20px;
 }

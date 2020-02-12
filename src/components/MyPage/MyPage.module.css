@@ -5,10 +5,12 @@
 }
 
 .MyPageLeft {
-    width: 60%;
+    width: 70%;
     margin: 0 30px;
     padding: 30px;
     background-color: white;
+    border-radius: 10px;
+    box-shadow: 10px 10px 10px rgba(0,0,0,0.4); 
 }
 
 .MyPageRight {
@@ -16,6 +18,8 @@
     margin: 0 30px;
     padding: 30px;
     background-color: white;
+    border-radius: 10px;
+    box-shadow: 10px 10px 10px rgba(0,0,0,0.4); 
 }
 
 .BioWrapper {

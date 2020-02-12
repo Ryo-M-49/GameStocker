@@ -20,7 +20,7 @@ import MoreVertIcon from '@material-ui/icons/MoreVert';
 
 const useStyles = makeStyles(theme => ({
     root: {
-        width: 600,
+        width: '500px',
         height: 'auto',
     },
     media: {
@@ -32,7 +32,7 @@ const useStyles = makeStyles(theme => ({
     },
 }));
 
-export default function RecipeReviewCard() {
+const ReviewCard = props => {
     const classes = useStyles();
     return (
         <li className={reactClasses.ReviewCard}>
@@ -82,3 +82,6 @@ export default function RecipeReviewCard() {
         </li>
     );
 }
+
+export default ReviewCard;
+

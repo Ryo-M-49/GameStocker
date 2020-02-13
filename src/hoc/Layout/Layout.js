@@ -39,10 +39,10 @@ class Layout extends Component {
                 />
                 <main>
                     <Switch>
-                        <Route path="/timeline" exact component={Timeline} />
+                        <Route path="/gamelist" exact component={GameList} />
                         <Route path="/mypage" component={MyPage} />
                         <Route path="/:id" exact component={YourReview} />
-                        <Route path="/" exact component={GameList} />
+                        <Route path="/" exact component={Timeline} />
                     </Switch>
                 </main>
             </Aux>

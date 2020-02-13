@@ -31,49 +31,44 @@ const useStyles = makeStyles(theme => ({
 const ReviewCard = props => {
     const classes = useStyles();
     return (
-            <Card className={classes.root}>
-                <CardHeader
-                    avatar={
-                        <Avatar aria-label="recipe" className={classes.avatar}>
-                            R
-                        </Avatar>
-                    }
-                    action={
-                        <IconButton aria-label="settings">
-                            <MoreVertIcon />
-                        </IconButton>
-                    }
-                    title="Game title here"
-                    subheader="September 14, 2016"
-                />
-                <CardMedia
-                    className={classes.media}
-                    image={props.image}
-                    title="Game Image"
-                />
-                <CardContent>
-                    <Typography
-                        variant="body2"
-                        color="textSecondary"
-                        component="p"
-                    >
-                        Good point here
-                    </Typography>
-                </CardContent>
-                <CardActions disableSpacing>
-                    <IconButton aria-label="add to favorites">
-                        <FavoriteIcon />
+        <Card className={classes.root}>
+            <CardHeader
+                avatar={
+                    <Avatar aria-label="recipe" className={classes.avatar}>
+                        R
+                    </Avatar>
+                }
+                action={
+                    <IconButton aria-label="settings">
+                        <MoreVertIcon />
                     </IconButton>
-                    <IconButton aria-label="share">
-                        <ShareIcon />
-                    </IconButton>
-                    <IconButton aria-label="show more">
-                        <ExpandMoreIcon />
-                    </IconButton>
-                </CardActions>
-            </Card>
+                }
+                title="Game title here"
+                subheader="September 14, 2016"
+            />
+            <CardMedia
+                className={classes.media}
+                image={props.image}
+                title="Game Image"
+            />
+            <CardContent>
+                <Typography variant="body2" color="textSecondary" component="p">
+                    Good point here
+                </Typography>
+            </CardContent>
+            <CardActions disableSpacing>
+                <IconButton aria-label="add to favorites">
+                    <FavoriteIcon />
+                </IconButton>
+                <IconButton aria-label="share">
+                    <ShareIcon />
+                </IconButton>
+                <IconButton aria-label="show more">
+                    <ExpandMoreIcon />
+                </IconButton>
+            </CardActions>
+        </Card>
     );
-}
+};
 
 export default ReviewCard;
-

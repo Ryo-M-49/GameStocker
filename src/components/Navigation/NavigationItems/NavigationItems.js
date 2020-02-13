@@ -9,7 +9,7 @@ const navigationItems = props => (
     <ul className={classes.NavigationItems}>
         <NavigationItem link="/timeline" exact>
             <ViewListIcon
-                style={{ color: 'white', fontSize: '50', marginRight: '20px' }}
+                style={{ color: 'white', fontSize: '30', marginRight: '20px' }}
             />
         </NavigationItem>
         <NavigationItem link="/mypage" exact>

@@ -1,7 +1,4 @@
 import React from 'react';
-import reactClasses from './ReviewCard.module.css';
-import Image from '../../../assets/images/logo_transparent.png';
-
 import { makeStyles } from '@material-ui/core/styles';
 import Card from '@material-ui/core/Card';
 import CardHeader from '@material-ui/core/CardHeader';
@@ -19,7 +16,7 @@ import MoreVertIcon from '@material-ui/icons/MoreVert';
 
 const useStyles = makeStyles(theme => ({
     root: {
-        width: 600,
+        width: '500px',
         height: 'auto',
     },
     media: {
@@ -31,10 +28,9 @@ const useStyles = makeStyles(theme => ({
     },
 }));
 
-export default function RecipeReviewCard() {
+const ReviewCard = props => {
     const classes = useStyles();
     return (
-        <li className={reactClasses.ReviewCard}>
             <Card className={classes.root}>
                 <CardHeader
                     avatar={
@@ -52,7 +48,7 @@ export default function RecipeReviewCard() {
                 />
                 <CardMedia
                     className={classes.media}
-                    image={Image}
+                    image={props.image}
                     title="Game Image"
                 />
                 <CardContent>
@@ -76,6 +72,8 @@ export default function RecipeReviewCard() {
                     </IconButton>
                 </CardActions>
             </Card>
-        </li>
     );
 }
+
+export default ReviewCard;
+

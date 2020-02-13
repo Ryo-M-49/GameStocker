@@ -4,16 +4,10 @@
     justify-content: space-around;
 }
 
-.MyPageLeft {
-    width: 60%;
-    margin: 0 30px;
-    padding: 30px;
-    background-color: white;
+.List li {
+    list-style: none; 
 }
 
-.MyPageRight {
-    width: 20%;
-    margin: 0 30px;
-    padding: 30px;
-    background-color: white;
+.List li:not(:last-child) {
+    margin-bottom: 50px;
 }

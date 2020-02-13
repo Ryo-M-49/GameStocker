@@ -8,7 +8,7 @@ import Image from '../../../assets/images/sample-profile.png';
 
 const navigationItems = props => (
     <ul className={classes.NavigationItems}>
-        <NavigationItem link='/gamelist' exact>
+        <NavigationItem link="/gamelist" exact>
             <CreateIcon
                 style={{ color: 'white', fontSize: '30', marginRight: '20px' }}
             />

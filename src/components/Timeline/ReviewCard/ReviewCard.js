@@ -1,7 +1,4 @@
 import React from 'react';
-import reactClasses from './ReviewCard.module.css';
-import Image from '../../../assets/images/logo_transparent.png';
-
 import { makeStyles } from '@material-ui/core/styles';
 import Card from '@material-ui/core/Card';
 import CardHeader from '@material-ui/core/CardHeader';
@@ -34,7 +31,6 @@ const useStyles = makeStyles(theme => ({
 const ReviewCard = props => {
     const classes = useStyles();
     return (
-        <li className={reactClasses.ReviewCard}>
             <Card className={classes.root}>
                 <CardHeader
                     avatar={
@@ -52,7 +48,7 @@ const ReviewCard = props => {
                 />
                 <CardMedia
                     className={classes.media}
-                    image={Image}
+                    image={props.image}
                     title="Game Image"
                 />
                 <CardContent>
@@ -76,7 +72,6 @@ const ReviewCard = props => {
                     </IconButton>
                 </CardActions>
             </Card>
-        </li>
     );
 }
 

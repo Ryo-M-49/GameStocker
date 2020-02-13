@@ -1,3 +1,8 @@
-.Header {
-    text-align: center;
+.RecentActivity {
+    text-align-last: center;
+}
+
+.RecentReviews {
+    padding: 0;
+    list-style: none;
 }

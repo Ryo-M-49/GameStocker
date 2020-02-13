@@ -9,13 +9,13 @@ const timeline = props => (
     <div className={classes.Timeline}>
         <ul className={classes.List}>
             <li>
-                <ReviewCard image={GameImage1}/>
+                <ReviewCard image={GameImage1} />
             </li>
             <li>
-                <ReviewCard image={GameImage2}/>
+                <ReviewCard image={GameImage2} />
             </li>
             <li>
-                <ReviewCard image={GameImage3}/>
+                <ReviewCard image={GameImage3} />
             </li>
         </ul>
     </div>

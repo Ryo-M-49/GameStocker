@@ -1,17 +1,17 @@
 import React from 'react';
-import classes from './MyPage.module.css';
+import classes from './UserPage.module.css';
 // import { Link } from 'react-router-dom';
-import YourPicture from './YourPicture/YourPicture';
-import Bio from './Bio/Bio';
-import PopularReview from './PopularReview/PopularReview';
+import UserPicture from './UserPicture/UserPicture';
+import Bio from '../MyPage/Bio/Bio';
+import PopularReview from '../MyPage/PopularReview/PopularReview';
 // import ToAllReviewsButton from '../UI/ToAllReviewsButton/ToAllReviewsButton';
-import RecentActivity from './RecentActivity/RecentActivity';
+import RecentActivity from '../MyPage/RecentActivity/RecentActivity';
 
-const myPage = props => (
-    <div className={classes.MyPage}>
-        <div className={classes.MyPageLeft}>
+const userPage = props => (
+    <div className={classes.UserPage}>
+        <div className={classes.UserPageLeft}>
             <div className={classes.BioWrapper}>
-                <YourPicture />
+                <UserPicture />
                 <Bio />
             </div>
             <PopularReview />
@@ -21,10 +21,10 @@ const myPage = props => (
                 </Link> */}
             </div>
         </div>
-        <div className={classes.MyPageRight}>
+        <div className={classes.UserPageRight}>
             <RecentActivity />
         </div>
     </div>
 );
 
-export default myPage;
+export default userPage;

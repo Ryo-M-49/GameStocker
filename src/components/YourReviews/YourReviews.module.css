@@ -1,0 +1,13 @@
+.YourReviews {
+    margin-top: 100px;
+    display: flex;
+    justify-content: space-around;
+}
+
+.List li {
+    list-style: none; 
+}
+
+.List li:not(:last-child) {
+    margin-bottom: 50px;
+}

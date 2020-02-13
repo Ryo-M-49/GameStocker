@@ -3,6 +3,7 @@ import { Route, Switch } from 'react-router-dom';
 
 import Aux from '../Aux/Aux';
 import Toolbar from '../../components/Navigation/Toolbar/Toolbar';
+import YourReviews from '../../components/YourReviews/YourReviews';
 import GameList from '../../containers/GameList/GameList';
 import YourReview from '../../components/YourReviews/YourReview/YourReview';
 import MyPage from '../../components/MyPage/MyPage';
@@ -39,6 +40,7 @@ class Layout extends Component {
                 />
                 <main>
                     <Switch>
+                        <Route path="/yourreviews" exact component={YourReviews} />
                         <Route path="/gamelist" exact component={GameList} />
                         <Route path="/mypage" component={MyPage} />
                         <Route path="/:id" exact component={YourReview} />

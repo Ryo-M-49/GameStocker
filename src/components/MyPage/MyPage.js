@@ -16,7 +16,7 @@ const myPage = props => (
             </div>
             <PopularReview />
             <div className={classes.ToAllReviewsButtonWrapper}>
-                <Link to='/yourreviews'>
+                <Link to="/yourreviews">
                     <ToAllReviewsButton />
                 </Link>
             </div>

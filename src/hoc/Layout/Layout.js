@@ -40,7 +40,11 @@ class Layout extends Component {
                 />
                 <main>
                     <Switch>
-                        <Route path="/yourreviews" exact component={YourReviews} />
+                        <Route
+                            path="/yourreviews"
+                            exact
+                            component={YourReviews}
+                        />
                         <Route path="/gamelist" exact component={GameList} />
                         <Route path="/mypage" component={MyPage} />
                         <Route path="/:id" exact component={YourReview} />

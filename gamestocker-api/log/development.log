@@ -2878,3 +2878,27 @@ puma (4.3.1) lib/puma/server.rb:681:in `handle_request'
 puma (4.3.1) lib/puma/server.rb:472:in `process_client'
 puma (4.3.1) lib/puma/server.rb:328:in `block in run'
 puma (4.3.1) lib/puma/thread_pool.rb:134:in `block in spawn_thread'
+  [1m[35m (2.3ms)[0m  [1m[35mSET NAMES utf8mb4,  @@SESSION.sql_mode = CONCAT(CONCAT(@@sql_mode, ',STRICT_ALL_TABLES'), ',NO_AUTO_VALUE_ON_ZERO'),  @@SESSION.sql_auto_is_null = 0, @@SESSION.wait_timeout = 2147483[0m
+  [1m[35m (4.3ms)[0m  [1m[35mCREATE DATABASE `gamestocker_api_development` DEFAULT CHARACTER SET `utf8mb4`[0m
+  [1m[35m (0.3ms)[0m  [1m[35mSET NAMES utf8mb4,  @@SESSION.sql_mode = CONCAT(CONCAT(@@sql_mode, ',STRICT_ALL_TABLES'), ',NO_AUTO_VALUE_ON_ZERO'),  @@SESSION.sql_auto_is_null = 0, @@SESSION.wait_timeout = 2147483[0m
+  [1m[35m (3.5ms)[0m  [1m[35mCREATE DATABASE `gamestocker_api_test` DEFAULT CHARACTER SET `utf8mb4`[0m
+  [1m[35m (2.3ms)[0m  [1m[35mSET NAMES utf8mb4,  @@SESSION.sql_mode = CONCAT(CONCAT(@@sql_mode, ',STRICT_ALL_TABLES'), ',NO_AUTO_VALUE_ON_ZERO'),  @@SESSION.sql_auto_is_null = 0, @@SESSION.wait_timeout = 2147483[0m
+  [1m[35m (19.2ms)[0m  [1m[35mCREATE TABLE `schema_migrations` (`version` varchar(255) NOT NULL PRIMARY KEY)[0m
+  [1m[35m (24.8ms)[0m  [1m[35mCREATE TABLE `ar_internal_metadata` (`key` varchar(255) NOT NULL PRIMARY KEY, `value` varchar(255), `created_at` datetime(6) NOT NULL, `updated_at` datetime(6) NOT NULL)[0m
+  [1m[35m (0.3ms)[0m  [1m[34mSELECT GET_LOCK('630564156409192425', 0)[0m
+  [1m[35m (8.6ms)[0m  [1m[34mSELECT `schema_migrations`.`version` FROM `schema_migrations` ORDER BY `schema_migrations`.`version` ASC[0m
+  [1m[36mActiveRecord::InternalMetadata Load (0.8ms)[0m  [1m[34mSELECT `ar_internal_metadata`.* FROM `ar_internal_metadata` WHERE `ar_internal_metadata`.`key` = 'environment' LIMIT 1[0m
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mActiveRecord::InternalMetadata Create (0.4ms)[0m  [1m[32mINSERT INTO `ar_internal_metadata` (`key`, `value`, `created_at`, `updated_at`) VALUES ('environment', 'development', '2020-02-17 12:50:48.377748', '2020-02-17 12:50:48.377748')[0m
+  [1m[35m (2.7ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.3ms)[0m  [1m[34mSELECT RELEASE_LOCK('630564156409192425')[0m
+  [1m[35m (0.3ms)[0m  [1m[35mSET NAMES utf8mb4,  @@SESSION.sql_mode = CONCAT(CONCAT(@@sql_mode, ',STRICT_ALL_TABLES'), ',NO_AUTO_VALUE_ON_ZERO'),  @@SESSION.sql_auto_is_null = 0, @@SESSION.wait_timeout = 2147483[0m
+  [1m[35m (0.5ms)[0m  [1m[34mSELECT `schema_migrations`.`version` FROM `schema_migrations` ORDER BY `schema_migrations`.`version` ASC[0m
+Started GET "/" for ::1 at 2020-02-17 21:51:33 +0900
+  [1m[35m (1.3ms)[0m  [1m[35mSET NAMES utf8mb4,  @@SESSION.sql_mode = CONCAT(CONCAT(@@sql_mode, ',STRICT_ALL_TABLES'), ',NO_AUTO_VALUE_ON_ZERO'),  @@SESSION.sql_auto_is_null = 0, @@SESSION.wait_timeout = 2147483[0m
+Processing by Rails::WelcomeController#index as HTML
+  Rendering /Users/ranmaru/.rbenv/versions/2.6.5/lib/ruby/gems/2.6.0/gems/railties-6.0.2.1/lib/rails/templates/rails/welcome/index.html.erb
+  Rendered /Users/ranmaru/.rbenv/versions/2.6.5/lib/ruby/gems/2.6.0/gems/railties-6.0.2.1/lib/rails/templates/rails/welcome/index.html.erb (Duration: 20.0ms | Allocations: 483)
+Completed 200 OK in 51ms (Views: 35.9ms | ActiveRecord: 0.0ms | Allocations: 2721)
+
+

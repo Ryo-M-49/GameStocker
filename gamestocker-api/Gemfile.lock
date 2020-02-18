@@ -145,6 +145,9 @@ GEM
       rainbow (>= 2.2.2, < 4.0)
       ruby-progressbar (~> 1.7)
       unicode-display_width (>= 1.4.0, < 1.7)
+    rubocop-rails (2.4.2)
+      rack (>= 1.1)
+      rubocop (>= 0.72.0)
     ruby-progressbar (1.10.1)
     ruby_dep (1.5.0)
     solargraph (0.38.5)
@@ -196,6 +199,7 @@ DEPENDENCIES
   rack-cors
   rails (~> 6.0.2, >= 6.0.2.1)
   rubocop
+  rubocop-rails
   solargraph
   spring
   spring-watcher-listen (~> 2.0.0)

@@ -1,9 +1,9 @@
 # # 将来的には対応する規約の読込
 # inherit_from: .rubocop_todo.yml
 
-# # 追加した規約ファイル読込
-# require:
-#   - rubocop-rails
+# 追加した規約ファイル読込
+require:
+  - rubocop-rails
 
 AllCops:
   # Rubyバージョン指定

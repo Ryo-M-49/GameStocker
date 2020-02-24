@@ -9,11 +9,6 @@ import * as actionTypes from '../../store/actions/gameList';
 class GameList extends Component {
     constructor(props) {
         super(props);
-        this.state = {
-            games: null,
-            currentPage: 1,
-            error: false,
-        };
         this.pageChangedHandler = this.pageChangedHandler.bind(this);
     }
 

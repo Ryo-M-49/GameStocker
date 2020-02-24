@@ -1,3 +1,1 @@
-export {
-    updateGames
-} from './gameList';
+export { setCurrentPage, updateGames } from './gameList';

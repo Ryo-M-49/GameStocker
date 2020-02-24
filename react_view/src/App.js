@@ -10,16 +10,17 @@ import gameListReducer from './store/reducers/gameList';
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 
 const rootReducer = combineReducers({
-    gameList: gameListReducer
+    gameListReducer: gameListReducer,
 });
 
-const store = createStore(rootReducer, composeEnhancers(
-    applyMiddleware(thunk)
-));
+const store = createStore(
+    rootReducer,
+    composeEnhancers(applyMiddleware(thunk))
+);
 
 function App() {
     return (
-        <Provider>
+        <Provider store={store}>
             <BrowserRouter>
                 <ScrollToTop>
                     <div className="App">

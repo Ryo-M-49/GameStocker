@@ -1,21 +1,30 @@
-import * as actionTypes from '../actions/gameList';
+import * as actionTypes from '../actions/actionTypes';
+import { updateObject } from '../utility';
 
 const initialState = {
     games: null,
     currentPage: 1,
     error: false,
-    isLoggedIn: false
 }
 
-const gameListReducer = (state = initialState, action) => {
-    switch (action.type){
-        case actionTypes.UPDATE_GAMES:
-            return {
-                ...state,
-                games: {
-                    ...state.games,
-                    
-                }
-            };
+const setGames = (state, action) => {
+    return updateObject(state, {
+        games: action.games,
+        currentPage: action.currentPage,
+        error: action.error
+    });
+}
+
+const fetchGamesFailed = (state, action) => {
+    return updateObject( state, { error: true } );
+};
+
+const reducer = ( state = initialState, action ) => {
+    switch ( action.type ) {
+        case actionTypes.SET_GAMES: return setGames(state, action);    
+        case actionTypes.FETCH_GAMES_FAILED: return fetchGamesFailed(state, action);
+        default: return state;
     }
 };
+
+export default reducer;

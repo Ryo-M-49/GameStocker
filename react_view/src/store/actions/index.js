@@ -1,0 +1,3 @@
+export {
+    updateGames
+} from './gameList';

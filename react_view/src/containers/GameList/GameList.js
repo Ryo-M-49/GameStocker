@@ -1,10 +1,10 @@
 import React, { Component } from 'react';
-import { connect } from 'react-redux';
 import classes from './GameList.module.css';
+
 import axios from 'axios';
+
 import Game from '../../components/Game/Game';
 import Pagination from '../../components/UI/Pagination/Pagination';
-import * as actionTypes from '../../store/actions/gameList';
 
 class GameList extends Component {
     constructor(props) {
@@ -100,20 +100,6 @@ class GameList extends Component {
             </div>
         );
     }
-}
-
-const mapStatetoProps = state => {
-    return {
-        games: state.games,
-        currentPage: state.currentPage,
-        error: state.error
-    };
-}
-
-const mapDispatchToProps = dispatch => {
-    return {
-
-    };
 }
 
 export default GameList;

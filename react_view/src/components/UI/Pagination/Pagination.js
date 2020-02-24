@@ -7,6 +7,7 @@ const pagination = props => (
         <Pagination
             count={props.pageCount}
             onChange={props.pageChangedHandler}
+            page={props.pageNumber}
             color="primary"
         />
     </div>

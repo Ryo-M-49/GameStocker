@@ -21,6 +21,11 @@
     "react-router-dom": "^5.1.2",
     "react-scripts": "^3.2.0",
     "react-search-field": "^1.0.0",
+<<<<<<< HEAD
+    "redux": "^4.0.5",
+    "redux-thunk": "^2.3.0",
+=======
+>>>>>>> development
     "styled-components": "^5.0.0"
   },
   "scripts": {

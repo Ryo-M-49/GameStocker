@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
 import classes from './GameList.module.css';
 import Game from '../../components/Game/Game';
 import Pagination from '../../components/UI/Pagination/Pagination';

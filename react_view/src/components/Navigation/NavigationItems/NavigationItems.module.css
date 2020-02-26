@@ -9,6 +9,10 @@
     align-items: center;
 }
 
+.NavigationItems li:not(:last-child) {
+    margin-right: 10px;
+}
+
 @media (min-width: 500px) {
     .NavigationItems {
         flex-flow: row;

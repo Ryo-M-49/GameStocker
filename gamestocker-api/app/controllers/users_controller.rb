@@ -3,14 +3,6 @@ class UsersController < ApplicationController
         @user = User.all
         render json: @user
     end
-    
-    def show
-        @user = User.find(params[:id])
-    end
-
-    def new
-        @user = User.new
-    end
 
     def create
         @user = User.create(params[:user])
@@ -20,7 +12,7 @@ class UsersController < ApplicationController
     private
 
         def user_params
-            params.require(:user).permit(:name, :email, :password, :password_confirmation)
+            params.require(:user).permit(:fist_name, :last_name, :email, :password, :password_confirmation)
         end
     
 end

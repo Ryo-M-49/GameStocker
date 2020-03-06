@@ -28,6 +28,7 @@ ActiveRecord::Schema.define(version: 2020_03_04_135710) do
     t.string "first_name"
     t.string "last_name"
     t.string "email"
+    t.string "image"
     t.text "tokens"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false

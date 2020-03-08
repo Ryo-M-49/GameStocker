@@ -19,7 +19,7 @@ const yourReview = props => {
                     <img
                         className={classes.Img}
                         src={game.largeImageUrl}
-                        alt="game-image"
+                        alt="thumbnail"
                     />
                 </div>
                 <div className={classes.ButtonWrapper}>

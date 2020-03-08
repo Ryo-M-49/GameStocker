@@ -6,8 +6,8 @@ import Avatar from '@material-ui/core/Avatar';
 import Button from '@material-ui/core/Button';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import TextField from '@material-ui/core/TextField';
-import FormControlLabel from '@material-ui/core/FormControlLabel';
-import Checkbox from '@material-ui/core/Checkbox';
+// import FormControlLabel from '@material-ui/core/FormControlLabel';
+// import Checkbox from '@material-ui/core/Checkbox';
 import Link from '@material-ui/core/Link';
 import Grid from '@material-ui/core/Grid';
 import Box from '@material-ui/core/Box';
@@ -52,9 +52,40 @@ const styles = theme => ({
 });
 
 class SignIn extends Component {
+  
+  state = {
+    controls: {
+      email: null,
+      password: null
+    }
+  }
 
+  /**
+   * Handler to update the local state based on the input value typed in input forms (email/password).
+   * @param {object} event -  the target event selected by an user.
+   * @param {string} controlName - the property name of the local state you want to change.
+   * @returns {object} - the updated local state.
+   */
+  inputChangedHandler = ( event, controlName ) => {
+    const updatedControls = {
+        ...this.state.controls,
+        [controlName]: event.target.value
+    };
+    this.setState( { controls: updatedControls } );
+  }
+
+  /**
+   * Handler to trigger the handler to dispatch the auth action along with the local state (email/password).
+   * @param {object} event - the target event selected by an user.
+   * @returns {null} - dispatches the auth action.
+   */
+  submitHandler = ( event ) => {
+    event.preventDefault();
+    this.props.onAuth( this.state.controls.email, this.state.controls.password );
+  }
+  
   render() {
-    const { classes } = this.props;
+    const { classes } = this.props;    
 
     return(
       <Container component="main" maxWidth="xs">
@@ -77,6 +108,7 @@ class SignIn extends Component {
               name="email"
               autoComplete="email"
               autoFocus
+              onChange={(event) => this.inputChangedHandler(event, "email")}
             />
             <TextField
               variant="outlined"
@@ -88,17 +120,19 @@ class SignIn extends Component {
               type="password"
               id="password"
               autoComplete="current-password"
+              onChange={(event) => this.inputChangedHandler(event, "password")}
             />
-            <FormControlLabel
+            {/* <FormControlLabel
               control={<Checkbox value="remember" color="primary" />}
               label="Remember me"
-            />
+            /> */}
             <Button
               type="submit"
               fullWidth
               variant="contained"
               color="primary"
               className={classes.submit}
+              onClick={this.submitHandler}
             >
               Sign In
             </Button>
@@ -135,7 +169,7 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
   return {
-      onAuth: ( email, password, isSignup ) => dispatch( actions.auth( email, password, isSignup ) ),
+      onAuth: (email, password) => dispatch(actions.auth(email, password)),
       onSetAuthRedirectPath: () => dispatch(actions.setAuthRedirectPath('/'))
   };
 };

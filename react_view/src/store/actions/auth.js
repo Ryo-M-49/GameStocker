@@ -8,11 +8,11 @@ export const authStart = () => {
     };
 };
 
-export const authSuccess = (token, userId) => {
+export const authSuccess = (accessToken, uId) => {
     return {
         type: actionTypes.AUTH_SUCCESS,
-        idToken: token,
-        userId: userId
+        token: accessToken,
+        uid: uId
     };
 };
 
@@ -51,10 +51,9 @@ export const auth = (email, password) => {
         axios.post(url, authData)
             .then(response => {
                 console.log(response);
-                console.log(response.headers);
-                // localStorage.setItem('token', response.headers.access-token);
-                // localStorage.setItem('userId', response.headers.uId);
-                // dispatch(authSuccess(response.headers.access-token, response.headers.uId));
+                localStorage.setItem('token', response.headers['access-token']);
+                localStorage.setItem('userId', response.headers['uid']);
+                dispatch(authSuccess(response.headers['access-token'], response.headers['uid']));
             })
             .catch(err => {
                 dispatch(authFail(err.response.data.error));

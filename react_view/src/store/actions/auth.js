@@ -39,23 +39,22 @@ export const logout = () => {
 //     };
 // };
 
-export const auth = (email, password, isSignup) => {
+export const auth = (email, password) => {
     return dispatch => {
         dispatch(authStart());
         const authData = {
             email: email,
             password: password,
+            password_confirmation: password
         };
-        let url = 'https://www.googleapis.com/identitytoolkit/v3/relyingparty/signupNewUser?key=AIzaSyB5cHT6x62tTe-g27vBDIqWcwQWBSj3uiY';
-        if (!isSignup) {
-            url = 'https://www.googleapis.com/identitytoolkit/v3/relyingparty/verifyPassword?key=AIzaSyB5cHT6x62tTe-g27vBDIqWcwQWBSj3uiY';
-        }
+        let url = 'http://localhost:3001/api/auth/sign_in';
         axios.post(url, authData)
             .then(response => {
                 console.log(response);
-                localStorage.setItem('token', response.data.idToken);
-                localStorage.setItem('userId', response.data.localId);
-                dispatch(authSuccess(response.data.idToken, response.data.localId));
+                console.log(response.headers);
+                // localStorage.setItem('token', response.headers.access-token);
+                // localStorage.setItem('userId', response.headers.uId);
+                // dispatch(authSuccess(response.headers.access-token, response.headers.uId));
             })
             .catch(err => {
                 dispatch(authFail(err.response.data.error));

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Component } from 'react';
 import { Link as RouterLink } from 'react-router-dom';
 
 import Avatar from '@material-ui/core/Avatar';
@@ -12,7 +12,7 @@ import Grid from '@material-ui/core/Grid';
 import Box from '@material-ui/core/Box';
 import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
 import Typography from '@material-ui/core/Typography';
-import { makeStyles } from '@material-ui/core/styles';
+import { withStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
 
 function Copyright() {
@@ -28,7 +28,7 @@ function Copyright() {
   );
 }
 
-const useStyles = makeStyles(theme => ({
+const styles = theme => ({
   paper: {
     marginTop: theme.spacing(8),
     display: 'flex',
@@ -46,12 +46,13 @@ const useStyles = makeStyles(theme => ({
   submit: {
     margin: theme.spacing(3, 0, 2),
   },
-}));
+});
 
-export default function SignIn() {
-  const classes = useStyles();
+class SignIn extends Component {
 
-  return (
+  return() {
+    const { classes } = this.props;
+
     <Container component="main" maxWidth="xs">
       <CssBaseline />
       <div className={classes.paper}>
@@ -115,5 +116,7 @@ export default function SignIn() {
         <Copyright />
       </Box>
     </Container>
-  );
+  };
 }
+
+export default withStyles(styles)(SignIn);

@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
 import { Route, Switch } from 'react-router-dom';
 
 import Aux from '../Aux/Aux';
@@ -39,6 +40,7 @@ class Layout extends Component {
                     drawerToggleClicked={() => this.toggleDrawerHandler(true)}
                     drawerToggleClosed={() => this.toggleDrawerHandler(false)}
                     isOpen={this.state.showSideDrawer}
+                    isAuthenticated={this.props.isAuthenticated}
                 />
                 <main>
                     <Switch>
@@ -60,4 +62,10 @@ class Layout extends Component {
     }
 }
 
-export default Layout;
+const mapStateToProps = state => {
+    return {
+        isAuthenticated: state.authReducer.token !== null
+    };
+};
+
+export default connect( mapStateToProps )( Layout );

@@ -19,12 +19,15 @@ const navigationItems = props => (
                 style={{ color: 'white', fontSize: '30' }}
             />
         </NavigationItem>
-        <NavigationItem link="/signin" exact>
-            <Button style={{color: 'white'}}>Signin</Button>
-        </NavigationItem>
-        <NavigationItem link="/mypage" exact>
-            <Avatar alt="my-page" src={Image} />
-        </NavigationItem>
+        {props.isAuth ? 
+            <NavigationItem link="/mypage" exact>
+                <Avatar alt="my-page" src={Image} />
+            </NavigationItem>
+            :
+            <NavigationItem link="/signin" exact>
+                <Button style={{color: 'white'}}>Signin</Button>
+            </NavigationItem>
+        }
     </ul>
 );
 

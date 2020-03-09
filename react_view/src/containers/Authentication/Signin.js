@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Link as RouterLink } from 'react-router-dom';
+import { Link as RouterLink, Redirect } from 'react-router-dom';
 import { connect } from 'react-redux';
 
 import Avatar from '@material-ui/core/Avatar';
@@ -87,8 +87,22 @@ class SignIn extends Component {
   render() {
     const { classes } = this.props;    
 
+    let errorMessage = null;
+    if (this.props.error) {
+        errorMessage = (
+            <p>{this.props.error.message}</p>
+        );
+    }
+
+    let authRedirect = null;
+    if (this.props.isAuthenticated) {
+        authRedirect = <Redirect to={this.props.authRedirectPath}/>
+    }
+
     return(
       <Container component="main" maxWidth="xs">
+        {authRedirect}
+        {errorMessage}
         <CssBaseline />
         <div className={classes.paper}>
           <Avatar className={classes.avatar}>

@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { Route, Switch } from 'react-router-dom';
+import { Route, Switch, withRouter, Redirect  } from 'react-router-dom';
 
 import Aux from '../Aux/Aux';
 import Toolbar from '../../components/Navigation/Toolbar/Toolbar';
@@ -12,10 +12,16 @@ import YourReview from '../../components/YourReviews/YourReview/YourReview';
 import MyPage from '../../components/MyPage/MyPage';
 import Timeline from '../../components/Timeline/Timeline';
 
+import * as actions from '../../store/actions/index';
+
 class Layout extends Component {
     state = {
         showSideDrawer: false,
     };
+
+    componentDidMount () {
+        this.props.onTryAutoSignup();
+      }
 
     sideDrawerClosedHandler = () => {
         this.setState({ showSideDrawer: false });
@@ -34,6 +40,37 @@ class Layout extends Component {
     };
 
     render() {
+        let routes = (
+            <Switch>
+                <Route
+                    path="/yourreviews"
+                    exact
+                    component={YourReviews}
+                />
+                <Route path="/signin" exact component={Signin} />
+                <Route path="/signup" exact component={Signup} />
+                <Route path="/gamelist" exact component={GameList} />
+                <Route path="/:id" exact component={YourReview} />
+                <Route path="/" exact component={Timeline} />
+            </Switch>
+        )
+
+        if ( this.props.isAuthenticated ) {
+            routes = (
+                <Switch>
+                    <Route
+                        path="/yourreviews"
+                        exact
+                        component={YourReviews}
+                    />
+                    <Route path="/gamelist" exact component={GameList} />
+                    <Route path="/mypage" component={MyPage} />
+                    <Route path="/:id" exact component={YourReview} />
+                    <Route path="/" exact component={Timeline} />
+                </Switch>
+            );
+        }
+
         return (
             <Aux>
                 <Toolbar
@@ -43,19 +80,7 @@ class Layout extends Component {
                     isAuthenticated={this.props.isAuthenticated}
                 />
                 <main>
-                    <Switch>
-                        <Route
-                            path="/yourreviews"
-                            exact
-                            component={YourReviews}
-                        />
-                        <Route path="/signin" exact component={Signin} />
-                        <Route path="/signup" exact component={Signup} />
-                        <Route path="/gamelist" exact component={GameList} />
-                        <Route path="/mypage" component={MyPage} />
-                        <Route path="/:id" exact component={YourReview} />
-                        <Route path="/" exact component={Timeline} />
-                    </Switch>
+                    {routes}
                 </main>
             </Aux>
         );
@@ -68,4 +93,10 @@ const mapStateToProps = state => {
     };
 };
 
-export default connect( mapStateToProps )( Layout );
+const mapDispatchToProps = dispatch => {
+    return {
+        onTryAutoSignup: () => dispatch( actions.authCheckState() )
+    };
+};
+
+export default withRouter(connect( mapStateToProps, mapDispatchToProps )( Layout ));

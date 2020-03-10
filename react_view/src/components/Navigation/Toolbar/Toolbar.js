@@ -20,7 +20,10 @@ const toolbar = props => (
             <SearchBar />
         </div>
         <nav>
-            <NavigationItems />
+            <NavigationItems
+                logoutClicked={props.logoutHandler}
+                isAuth={props.isAuthenticated}
+             />
         </nav>
     </header>
 );

@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { Route, Switch, withRouter, Redirect  } from 'react-router-dom';
+import { Route, Switch, withRouter, Redirect } from 'react-router-dom';
 
 import Aux from '../Aux/Aux';
 import Toolbar from '../../components/Navigation/Toolbar/Toolbar';
@@ -19,9 +19,9 @@ class Layout extends Component {
         showSideDrawer: false,
     };
 
-    componentDidMount () {
+    componentDidMount() {
         this.props.onTryAutoSignup();
-      }
+    }
 
     sideDrawerClosedHandler = () => {
         this.setState({ showSideDrawer: false });
@@ -34,9 +34,7 @@ class Layout extends Component {
     };
 
     toggleDrawerHandler = isOpen => {
-        console.log('toggleDrawerHandler fired!');
         this.setState({ showSideDrawer: isOpen });
-        console.log(this.state.showSideDrawer);
     };
 
     render() {
@@ -52,7 +50,7 @@ class Layout extends Component {
             </Switch>
         );
 
-        if ( this.props.isAuthenticated ) {
+        if (this.props.isAuthenticated) {
             routes = (
                 <Switch>
                     <Route path="/yourreviews/:id" component={YourReview} />
@@ -74,9 +72,7 @@ class Layout extends Component {
                     logoutHandler={this.props.onLogout}
                     isAuthenticated={this.props.isAuthenticated}
                 />
-                <main>
-                    {routes}
-                </main>
+                <main>{routes}</main>
             </Aux>
         );
     }
@@ -84,15 +80,15 @@ class Layout extends Component {
 
 const mapStateToProps = state => {
     return {
-        isAuthenticated: state.authReducer.token !== null
+        isAuthenticated: state.authReducer.token !== null,
     };
 };
 
 const mapDispatchToProps = dispatch => {
     return {
-        onLogout: () => dispatch( actions.logout() ),
-        onTryAutoSignup: () => dispatch( actions.authCheckState() )
+        onLogout: () => dispatch(actions.logout()),
+        onTryAutoSignup: () => dispatch(actions.authCheckState()),
     };
 };
 
-export default withRouter(connect( mapStateToProps, mapDispatchToProps )( Layout ));
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(Layout));

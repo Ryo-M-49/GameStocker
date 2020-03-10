@@ -1,11 +1,3 @@
-export { 
-    setCurrentPage, 
-    updateGames 
-} from './gameList';
+export { setCurrentPage, updateGames } from './gameList';
 
-export {
-    auth,
-    logout,
-    setAuthRedirectPath,
-    authCheckState
-} from './auth';
+export { auth, logout, setAuthRedirectPath, authCheckState } from './auth';

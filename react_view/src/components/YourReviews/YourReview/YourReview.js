@@ -7,8 +7,7 @@ import ShareButton from '../../UI/ShareButton/ShareButton';
 import SaveButton from '../../UI/SaveButton/SaveButton';
 
 const yourReview = props => {
-    console.log(props.location);
-    const { game } = props.location.state.game;
+    const game = props.location.state.game;
 
     return (
         <div className={classes.YourReview}>

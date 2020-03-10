@@ -6,7 +6,6 @@ import Pagination from '../../components/UI/Pagination/Pagination';
 import * as actions from '../../store/actions/index';
 
 class GameList extends Component {
-
     componentDidMount() {
         this.props.onUpdateGames(this.props.currentPage);
     }

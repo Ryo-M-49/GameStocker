@@ -14,8 +14,8 @@ const game = props => {
                     pathname: 'yourreviews/' + props.game.jan,
                     exact: props.exact,
                     state: {
-                        game: props.game
-                    }
+                        game: props.game,
+                    },
                 }}
             >
                 <img

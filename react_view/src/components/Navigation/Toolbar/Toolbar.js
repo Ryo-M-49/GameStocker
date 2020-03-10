@@ -23,7 +23,7 @@ const toolbar = props => (
             <NavigationItems
                 logoutClicked={props.logoutHandler}
                 isAuth={props.isAuthenticated}
-             />
+            />
         </nav>
     </header>
 );

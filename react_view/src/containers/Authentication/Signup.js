@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { Link as RouterLink } from 'react-router-dom';
 import { connect } from 'react-redux';
 
+import Copyright from '../../components/UI/Copyright/Copyright';
 import Avatar from '@material-ui/core/Avatar';
 import Button from '@material-ui/core/Button';
 import CssBaseline from '@material-ui/core/CssBaseline';
@@ -16,19 +17,6 @@ import Typography from '@material-ui/core/Typography';
 import { withStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
 import * as actions from '../../store/actions/index';
-
-function Copyright() {
-    return (
-        <Typography variant="body2" color="textSecondary" align="center">
-            {'Copyright © '}
-            <Link color="inherit" href="https://material-ui.com/">
-                GameStocker
-            </Link>{' '}
-            {new Date().getFullYear()}
-            {'.'}
-        </Typography>
-    );
-}
 
 const styles = theme => ({
     paper: {
@@ -112,17 +100,6 @@ class SignUp extends Component {
                                     autoComplete="current-password"
                                 />
                             </Grid>
-                            <Grid item xs={12}>
-                                <FormControlLabel
-                                    control={
-                                        <Checkbox
-                                            value="allowExtraEmails"
-                                            color="primary"
-                                        />
-                                    }
-                                    label="I want to receive inspiration, marketing promotions and updates via email."
-                                />
-                            </Grid>
                         </Grid>
                         <Button
                             type="submit"
@@ -147,7 +124,7 @@ class SignUp extends Component {
                     </form>
                 </div>
                 <Box mt={5}>
-                    <Copyright />
+                    <Copyright link='http://localhost:3000/'/>
                 </Box>
             </Container>
         );

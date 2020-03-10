@@ -19,5 +19,6 @@ module.exports = {
         camelcase: ['warn', { properties: 'never' }], // オブジェクトのキーはキャメルじゃなくてよい
         'react/jsx-uses-vars': 1, // これを使うとJSXで使ってる変数がno-useとして認識されるのを防げた
         "react/jsx-uses-react": 1, //Reactをimportしてもno-var-useエラーが出ないように
+        "no-console": 1,
     },
 };

@@ -28,6 +28,17 @@ const navigationItems = props => (
                 <Button style={{color: 'white'}}>Signin</Button>
             </NavigationItem>
         }
+        {props.isAuth ?
+            <Button
+                onClick={props.logoutClicked}
+                style={{color: 'white'}}
+                >
+                    Signout
+            </Button>
+            :
+            null
+        }
+
     </ul>
 );
 

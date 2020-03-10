@@ -42,31 +42,25 @@ class Layout extends Component {
     render() {
         let routes = (
             <Switch>
-                <Route
-                    path="/yourreviews"
-                    exact
-                    component={YourReviews}
-                />
-                <Route path="/signin" exact component={Signin} />
-                <Route path="/signup" exact component={Signup} />
-                <Route path="/gamelist" exact component={GameList} />
-                <Route path="/:id" exact component={YourReview} />
+                <Route path="/yourreviews" component={YourReviews} />
+                <Route path="/signin" component={Signin} />
+                <Route path="/signup" component={Signup} />
+                <Route path="/gamelist" component={GameList} />
+                <Route path="/:id" component={YourReview} />
                 <Route path="/" exact component={Timeline} />
+                <Redirect to="/" />
             </Switch>
-        )
+        );
 
         if ( this.props.isAuthenticated ) {
             routes = (
                 <Switch>
-                    <Route
-                        path="/yourreviews"
-                        exact
-                        component={YourReviews}
-                    />
-                    <Route path="/gamelist" exact component={GameList} />
+                    <Route path="/yourreviews" component={YourReviews} />
+                    <Route path="/gamelist" component={GameList} />
                     <Route path="/mypage" component={MyPage} />
-                    <Route path="/:id" exact component={YourReview} />
+                    <Route path="/:id" component={YourReview} />
                     <Route path="/" exact component={Timeline} />
+                    <Redirect to="/" />
                 </Switch>
             );
         }
@@ -77,6 +71,7 @@ class Layout extends Component {
                     drawerToggleClicked={() => this.toggleDrawerHandler(true)}
                     drawerToggleClosed={() => this.toggleDrawerHandler(false)}
                     isOpen={this.state.showSideDrawer}
+                    logoutHandler={this.props.onLogout}
                     isAuthenticated={this.props.isAuthenticated}
                 />
                 <main>
@@ -95,6 +90,7 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
     return {
+        onLogout: () => dispatch( actions.logout() ),
         onTryAutoSignup: () => dispatch( actions.authCheckState() )
     };
 };

@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Link as RouterLink } from 'react-router-dom';
+import { Link as RouterLink, Redirect } from 'react-router-dom';
 import { connect } from 'react-redux';
 
 import Copyright from '../../components/UI/Copyright/Copyright';
@@ -7,8 +7,8 @@ import Avatar from '@material-ui/core/Avatar';
 import Button from '@material-ui/core/Button';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import TextField from '@material-ui/core/TextField';
-import FormControlLabel from '@material-ui/core/FormControlLabel';
-import Checkbox from '@material-ui/core/Checkbox';
+// import FormControlLabel from '@material-ui/core/FormControlLabel';
+// import Checkbox from '@material-ui/core/Checkbox';
 import Link from '@material-ui/core/Link';
 import Grid from '@material-ui/core/Grid';
 import Box from '@material-ui/core/Box';
@@ -40,7 +40,7 @@ const styles = theme => ({
 
 class SignUp extends Component {
   state = {
-    controls: {
+    userData: {
         firstName: null,
         lastName: null,
         email: null,
@@ -49,37 +49,48 @@ class SignUp extends Component {
     },
   };
   /**
-   * Handler to update the local state based on the input value typed in input forms (email/password).
+   * Handler to update the local state based on the input value typed in input forms.
    * @param {object} event -  the target event selected by an user.
    * @param {string} controlName - the property name of the local state you want to change.
    * @returns {object} - the updated local state.
    */
-  inputChangedHandler = (event, controlName) => {
-    const updatedControls = {
-        ...this.state.controls,
-        [controlName]: event.target.value,
+  inputChangedHandler = (event, userDataName) => {
+    const updatedUserData = {
+        ...this.state.userData,
+        [userDataName]: event.target.value,
     };
-    this.setState({ controls: updatedControls });
+    this.setState({ userData: updatedUserData });
   };
 
   /**
-   * Handler to trigger the handler to dispatch the auth action along with the local state (email/password).
+   * Handler to trigger the handler to dispatch the signup action along with the local state (userData).
    * @param {object} event - the target event selected by an user.
-   * @returns {null} - dispatches the auth action.
+   * @returns {null} - dispatches the signup action.
    */
   submitHandler = event => {
       event.preventDefault();
-      this.props.onAuth(
-          this.state.controls.email,
-          this.state.controls.password
+      this.props.onSignup(
+          this.state.userData
       );
   };
 
   render() {
         const { classes } = this.props;
 
+        let errorMessage = null;
+        if (this.props.error) {
+            errorMessage = <p>{this.props.error}</p>;
+        }
+
+        let authRedirect = null;
+        if (this.props.isAuthenticated) {
+            authRedirect = <Redirect to={this.props.authRedirectPath} />;
+        }
+
         return (
             <Container component="main" maxWidth="xs">
+                {authRedirect}
+                {errorMessage}
                 <CssBaseline />
                 <div className={classes.paper}>
                     <Avatar className={classes.avatar}>
@@ -88,7 +99,7 @@ class SignUp extends Component {
                     <Typography component="h1" variant="h5">
                         Sign up
                     </Typography>
-                    <form className={classes.form} noValidate>
+                    <form className={classes.form} noValidate onSubmit={this.submitHandler}>
                         <Grid container spacing={2}>
                             <Grid item xs={12} sm={6}>
                                 <TextField
@@ -155,7 +166,7 @@ class SignUp extends Component {
                                     fullWidth
                                     name="passwordConfirmation"
                                     label="Password Confirmation"
-                                    type="passwordConfirmation"
+                                    type="password"
                                     id="passwordConfirmation"
                                     autoComplete="current-password"
                                     onChange={event =>
@@ -195,23 +206,22 @@ class SignUp extends Component {
 }
 
 const mapStateToProps = state => {
-    return {
-        loading: state.authReducer.loading,
-        error: state.authReducer.error,
-        isAuthenticated: state.authReducer.token !== null,
-        authRedirectPath: state.authReducer.authReducerRedirectPath,
-    };
+  return {
+      loading: state.signupReducer.loading,
+      error: state.signupReducer.error,
+      signupRedirectPath: state.signupReducer.signupRedirectPath,
+      isAuthenticated: state.authReducer.token !== null,
+  };
 };
 
 const mapDispatchToProps = dispatch => {
-    return {
-        onAuth: (email, password, isSignup) =>
-            dispatch(actions.auth(email, password, isSignup)),
-        onSetAuthRedirectPath: () => dispatch(actions.setAuthRedirectPath('/')),
-    };
+  return {
+      onSignup: (userData) => dispatch(actions.signup(userData)),
+      onSetSignupRedirectPath: () => dispatch(actions.setSignupRedirectPath('/')),
+  };
 };
 
 export default connect(
-    mapStateToProps,
-    mapDispatchToProps
+  mapStateToProps,
+  mapDispatchToProps
 )(withStyles(styles)(SignUp));

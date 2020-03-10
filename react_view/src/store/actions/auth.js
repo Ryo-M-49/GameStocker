@@ -55,8 +55,8 @@ export const auth = (email, password) => {
                 localStorage.setItem('userId', response.headers['uid']);
                 dispatch(authSuccess(response.headers['access-token'], response.headers['uid']));
             })
-            .catch(err => {
-                dispatch(authFail(err.response.data.error));
+            .catch(error => {
+                dispatch(authFail(error));
             });
     };
 };

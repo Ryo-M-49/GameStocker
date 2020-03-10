@@ -22,7 +22,7 @@ function Copyright() {
   return (
     <Typography variant="body2" color="textSecondary" align="center">
       {'Copyright © '}
-      <Link color="inherit" href="https://material-ui.com/">
+      <Link color="inherit" href="http://localhost:3000/">
         GameStocker
       </Link>{' '}
       {new Date().getFullYear()}
@@ -146,7 +146,7 @@ class SignIn extends Component {
               variant="contained"
               color="primary"
               className={classes.submit}
-              onClick={this.submitHandler}
+              onClick={(event) => this.submitHandler(event)}
             >
               Sign In
             </Button>

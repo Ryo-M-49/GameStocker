@@ -90,7 +90,7 @@ class SignIn extends Component {
     let errorMessage = null;
     if (this.props.error) {
         errorMessage = (
-            <p>{this.props.error.message}</p>
+            <p>{this.props.error}</p>
         );
     }
 
@@ -111,7 +111,7 @@ class SignIn extends Component {
           <Typography component="h1" variant="h5">
             Sign in
           </Typography>
-          <form className={classes.form} noValidate>
+          <form className={classes.form} noValidate onSubmit={this.submitHandler}>
             <TextField
               variant="outlined"
               margin="normal"
@@ -146,7 +146,6 @@ class SignIn extends Component {
               variant="contained"
               color="primary"
               className={classes.submit}
-              onClick={(event) => this.submitHandler(event)}
             >
               Sign In
             </Button>
@@ -177,7 +176,7 @@ const mapStateToProps = state => {
       loading: state.authReducer.loading,
       error: state.authReducer.error,
       isAuthenticated: state.authReducer.token !== null,
-      authRedirectPath: state.authReducer.authReducerRedirectPath
+      authRedirectPath: state.authReducer.authRedirectPath
   };
 };
 

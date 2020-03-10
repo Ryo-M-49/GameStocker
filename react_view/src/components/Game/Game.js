@@ -11,7 +11,7 @@ const game = props => {
         <li className={classes.Game}>
             <Link
                 to={{
-                    pathname: '/review' + props.game.jan,
+                    pathname: 'yourreviews/' + props.game.jan,
                     exact: props.exact,
                     state: {
                         game: props.game

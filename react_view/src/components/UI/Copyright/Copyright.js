@@ -16,7 +16,7 @@ const copyright = props => {
     );
 }
 
-copyrigth.propTypes = {
+copyright.propTypes = {
     link: PropTypes.string.isRequired,
 };
 

@@ -39,7 +39,43 @@ const styles = theme => ({
 });
 
 class SignUp extends Component {
-    render() {
+  state = {
+    controls: {
+        firstName: null,
+        lastName: null,
+        email: null,
+        password: null,
+        passwordConfirmation: null
+    },
+  };
+  /**
+   * Handler to update the local state based on the input value typed in input forms (email/password).
+   * @param {object} event -  the target event selected by an user.
+   * @param {string} controlName - the property name of the local state you want to change.
+   * @returns {object} - the updated local state.
+   */
+  inputChangedHandler = (event, controlName) => {
+    const updatedControls = {
+        ...this.state.controls,
+        [controlName]: event.target.value,
+    };
+    this.setState({ controls: updatedControls });
+  };
+
+  /**
+   * Handler to trigger the handler to dispatch the auth action along with the local state (email/password).
+   * @param {object} event - the target event selected by an user.
+   * @returns {null} - dispatches the auth action.
+   */
+  submitHandler = event => {
+      event.preventDefault();
+      this.props.onAuth(
+          this.state.controls.email,
+          this.state.controls.password
+      );
+  };
+
+  render() {
         const { classes } = this.props;
 
         return (
@@ -64,6 +100,9 @@ class SignUp extends Component {
                                     id="firstName"
                                     label="First Name"
                                     autoFocus
+                                    onChange={event =>
+                                      this.inputChangedHandler(event, 'firstName')
+                                  }
                                 />
                             </Grid>
                             <Grid item xs={12} sm={6}>
@@ -75,6 +114,9 @@ class SignUp extends Component {
                                     label="Last Name"
                                     name="lastName"
                                     autoComplete="lname"
+                                    onChange={event =>
+                                      this.inputChangedHandler(event, 'lastName')
+                                  }
                                 />
                             </Grid>
                             <Grid item xs={12}>
@@ -86,6 +128,9 @@ class SignUp extends Component {
                                     label="Email Address"
                                     name="email"
                                     autoComplete="email"
+                                    onChange={event =>
+                                      this.inputChangedHandler(event, 'email')
+                                  }
                                 />
                             </Grid>
                             <Grid item xs={12}>
@@ -98,6 +143,24 @@ class SignUp extends Component {
                                     type="password"
                                     id="password"
                                     autoComplete="current-password"
+                                    onChange={event =>
+                                      this.inputChangedHandler(event, 'password')
+                                  }
+                                />
+                            </Grid>
+                            <Grid item xs={12}>
+                                <TextField
+                                    variant="outlined"
+                                    required
+                                    fullWidth
+                                    name="passwordConfirmation"
+                                    label="Password Confirmation"
+                                    type="passwordConfirmation"
+                                    id="passwordConfirmation"
+                                    autoComplete="current-password"
+                                    onChange={event =>
+                                      this.inputChangedHandler(event, 'passwordConfirmation')
+                                  }
                                 />
                             </Grid>
                         </Grid>

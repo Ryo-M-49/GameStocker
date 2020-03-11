@@ -5,9 +5,8 @@ const initialState = {
     userData: null,
     error: null,
     loading: false,
-    signupRedirectPath: '/'
+    signupRedirectPath: '/',
 };
-
 
 const signupStart = (state, action) => {
     return updateObject(state, { error: null, loading: true });

@@ -164,7 +164,7 @@ class SignIn extends Component {
                     </form>
                 </div>
                 <Box mt={8}>
-                    <Copyright link='http://localhost:3000/'/>
+                    <Copyright link="http://localhost:3000/" />
                 </Box>
             </Container>
         );

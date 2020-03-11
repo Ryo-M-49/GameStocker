@@ -39,42 +39,40 @@ const styles = theme => ({
 });
 
 class SignUp extends Component {
-  state = {
-    userData: {
-        firstName: null,
-        lastName: null,
-        email: null,
-        password: null,
-        passwordConfirmation: null
-    },
-  };
-  /**
-   * Handler to update the local state based on the input value typed in input forms.
-   * @param {object} event -  the target event selected by an user.
-   * @param {string} controlName - the property name of the local state you want to change.
-   * @returns {object} - the updated local state.
-   */
-  inputChangedHandler = (event, userDataName) => {
-    const updatedUserData = {
-        ...this.state.userData,
-        [userDataName]: event.target.value,
+    state = {
+        userData: {
+            firstName: null,
+            lastName: null,
+            email: null,
+            password: null,
+            passwordConfirmation: null,
+        },
     };
-    this.setState({ userData: updatedUserData });
-  };
+    /**
+     * Handler to update the local state based on the input value typed in input forms.
+     * @param {object} event -  the target event selected by an user.
+     * @param {string} controlName - the property name of the local state you want to change.
+     * @returns {object} - the updated local state.
+     */
+    inputChangedHandler = (event, userDataName) => {
+        const updatedUserData = {
+            ...this.state.userData,
+            [userDataName]: event.target.value,
+        };
+        this.setState({ userData: updatedUserData });
+    };
 
-  /**
-   * Handler to trigger the handler to dispatch the signup action along with the local state (userData).
-   * @param {object} event - the target event selected by an user.
-   * @returns {null} - dispatches the signup action.
-   */
-  submitHandler = event => {
-      event.preventDefault();
-      this.props.onSignup(
-          this.state.userData
-      );
-  };
+    /**
+     * Handler to trigger the handler to dispatch the signup action along with the local state (userData).
+     * @param {object} event - the target event selected by an user.
+     * @returns {null} - dispatches the signup action.
+     */
+    submitHandler = event => {
+        event.preventDefault();
+        this.props.onSignup(this.state.userData);
+    };
 
-  render() {
+    render() {
         const { classes } = this.props;
 
         let errorMessage = null;
@@ -99,7 +97,11 @@ class SignUp extends Component {
                     <Typography component="h1" variant="h5">
                         Sign up
                     </Typography>
-                    <form className={classes.form} noValidate onSubmit={this.submitHandler}>
+                    <form
+                        className={classes.form}
+                        noValidate
+                        onSubmit={this.submitHandler}
+                    >
                         <Grid container spacing={2}>
                             <Grid item xs={12} sm={6}>
                                 <TextField
@@ -112,8 +114,11 @@ class SignUp extends Component {
                                     label="First Name"
                                     autoFocus
                                     onChange={event =>
-                                      this.inputChangedHandler(event, 'firstName')
-                                  }
+                                        this.inputChangedHandler(
+                                            event,
+                                            'firstName'
+                                        )
+                                    }
                                 />
                             </Grid>
                             <Grid item xs={12} sm={6}>
@@ -126,8 +131,11 @@ class SignUp extends Component {
                                     name="lastName"
                                     autoComplete="lname"
                                     onChange={event =>
-                                      this.inputChangedHandler(event, 'lastName')
-                                  }
+                                        this.inputChangedHandler(
+                                            event,
+                                            'lastName'
+                                        )
+                                    }
                                 />
                             </Grid>
                             <Grid item xs={12}>
@@ -140,8 +148,8 @@ class SignUp extends Component {
                                     name="email"
                                     autoComplete="email"
                                     onChange={event =>
-                                      this.inputChangedHandler(event, 'email')
-                                  }
+                                        this.inputChangedHandler(event, 'email')
+                                    }
                                 />
                             </Grid>
                             <Grid item xs={12}>
@@ -155,8 +163,11 @@ class SignUp extends Component {
                                     id="password"
                                     autoComplete="current-password"
                                     onChange={event =>
-                                      this.inputChangedHandler(event, 'password')
-                                  }
+                                        this.inputChangedHandler(
+                                            event,
+                                            'password'
+                                        )
+                                    }
                                 />
                             </Grid>
                             <Grid item xs={12}>
@@ -170,8 +181,11 @@ class SignUp extends Component {
                                     id="passwordConfirmation"
                                     autoComplete="current-password"
                                     onChange={event =>
-                                      this.inputChangedHandler(event, 'passwordConfirmation')
-                                  }
+                                        this.inputChangedHandler(
+                                            event,
+                                            'passwordConfirmation'
+                                        )
+                                    }
                                 />
                             </Grid>
                         </Grid>
@@ -198,7 +212,7 @@ class SignUp extends Component {
                     </form>
                 </div>
                 <Box mt={5}>
-                    <Copyright link='http://localhost:3000/'/>
+                    <Copyright link="http://localhost:3000/" />
                 </Box>
             </Container>
         );
@@ -206,22 +220,23 @@ class SignUp extends Component {
 }
 
 const mapStateToProps = state => {
-  return {
-      loading: state.signupReducer.loading,
-      error: state.signupReducer.error,
-      signupRedirectPath: state.signupReducer.signupRedirectPath,
-      isAuthenticated: state.authReducer.token !== null,
-  };
+    return {
+        loading: state.signupReducer.loading,
+        error: state.signupReducer.error,
+        signupRedirectPath: state.signupReducer.signupRedirectPath,
+        isAuthenticated: state.authReducer.token !== null,
+    };
 };
 
 const mapDispatchToProps = dispatch => {
-  return {
-      onSignup: (userData) => dispatch(actions.signup(userData)),
-      onSetSignupRedirectPath: () => dispatch(actions.setSignupRedirectPath('/')),
-  };
+    return {
+        onSignup: userData => dispatch(actions.signup(userData)),
+        onSetSignupRedirectPath: () =>
+            dispatch(actions.setSignupRedirectPath('/')),
+    };
 };
 
 export default connect(
-  mapStateToProps,
-  mapDispatchToProps
+    mapStateToProps,
+    mapDispatchToProps
 )(withStyles(styles)(SignUp));

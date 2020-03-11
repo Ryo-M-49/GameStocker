@@ -6,14 +6,15 @@ const initialState = {
     first_name: null,
     last_name: null,
     image: null,
-    error: null
-}
+    introduction: null,
+    error: null,
+};
 
 const controlUserFail = (state, action) => {
     return updateObject(state, {
-        error: action.error   
-    })
-}
+        error: action.error,
+    });
+};
 
 const getUserSuccess = (state, action) => {
     return updateObject(state, {
@@ -21,9 +22,10 @@ const getUserSuccess = (state, action) => {
         first_name: action.first_name,
         last_name: action.last_name,
         image: action.image,
-        error: action.error
-    })
-}
+        introduction: action.introduction,
+        error: action.error,
+    });
+};
 
 const deleteUserSuccess = (state, action) => {
     return updateObject(state, {
@@ -31,9 +33,10 @@ const deleteUserSuccess = (state, action) => {
         first_name: null,
         last_name: null,
         image: null,
-        error: null 
-    })
-}
+        introduction: null,
+        error: null,
+    });
+};
 
 const reducer = (state = initialState, action) => {
     switch (action.type) {

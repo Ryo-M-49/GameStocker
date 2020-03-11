@@ -14,7 +14,7 @@ const copyright = props => {
             {'.'}
         </Typography>
     );
-}
+};
 
 copyright.propTypes = {
     link: PropTypes.string.isRequired,

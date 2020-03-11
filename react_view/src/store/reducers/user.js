@@ -6,6 +6,7 @@ const initialState = {
     first_name: null,
     last_name: null,
     image: null,
+    introduction: null,
     error: null
 }
 
@@ -21,6 +22,7 @@ const getUserSuccess = (state, action) => {
         first_name: action.first_name,
         last_name: action.last_name,
         image: action.image,
+        introduction: action.introduction,
         error: action.error
     })
 }
@@ -31,6 +33,7 @@ const deleteUserSuccess = (state, action) => {
         first_name: null,
         last_name: null,
         image: null,
+        introduction: null,
         error: null 
     })
 }

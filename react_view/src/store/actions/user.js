@@ -2,6 +2,12 @@ import axios from 'axios';
 import * as actionTypes from './actionTypes';
 
 // いったんauthのことは考えず、ここではアクションを実行するのに必要な引数だけ考えればよい
+export const controlUserFail = (error) => {
+    return {
+        type: actionTypes.CONTROL_USER_FAIL,
+        error: error
+    }
+}
 
 export const getUserSuccess = (userData) => {
     return {
@@ -10,13 +16,6 @@ export const getUserSuccess = (userData) => {
         first_name: userData.first_name,
         last_name: userData.last_name,
         image: userData.image
-    }
-}
-
-export const controlUserFail = (error) => {
-    return {
-        type: actionTypes.CONTROL_USER_FAIL,
-        error: error
     }
 }
 

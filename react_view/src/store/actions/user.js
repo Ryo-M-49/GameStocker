@@ -1,6 +1,8 @@
 import axios from 'axios';
 import * as actionTypes from './actionTypes';
 
+// いったんauthのことは考えず、ここではアクションを実行するのに必要な引数だけ考えればよい
+
 export const getUserSuccess = (userData) => {
     return {
         type: actionTypes.GET_USER_SUCCESS,
@@ -37,11 +39,12 @@ export const getUser = (userId) => {
 export const editUser = (userData) => {
     return dispatch => {
         const updatedUser = {
-            ...userData,
-            first_name: userData.first_name,
-            last_name: userData.last_name,
-            image: userData.image
-            // description: userData.description
+            user: {
+                first_name: userData.first_name,
+                last_name: userData.last_name,
+                image: userData.image
+                // description: userData.description
+            }
         };
         const url = `http://localhost:3001/users/${userId}`;
         axios
@@ -56,9 +59,6 @@ export const editUser = (userData) => {
             })
     }
 }
-
-//updateアクションを追加して、実際に試してみる
-// talnetでどうやってpatchリクエストを送る？
 
 export const deleteUser = (userId, email) => {
     return {

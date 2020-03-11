@@ -13,9 +13,9 @@ export const getUserSuccess = (userData) => {
     }
 }
 
-export const getUserFail = (error) => {
+export const controlUserFail = (error) => {
     return {
-        type: actionTypes.GET_USER_FAIL,
+        type: actionTypes.CONTROL_USER_FAIL,
         error: error
     }
 }
@@ -31,7 +31,7 @@ export const getUser = (userId) => {
                 );
             })
             .catch(error => {
-                dispatch(getUserFail(error));
+                dispatch(controlUserFail(error));
             })
     }
 }
@@ -55,27 +55,29 @@ export const editUser = (userData) => {
                 );
             })
             .catch(error => {
-                dispatch(getUserFail(error));
+                dispatch(controlUserFail(error));
             })
     }
 }
 
-export const deleteUser = (userId, email) => {
+export const deleteUserSuccess = () => {
     return {
-        type: actionTypes.GET_USER,
-        id: userId,
-        email: email
+        type: actionTypes.DELETE_USER_SUCCESS
     }
 }
 
-export const changePassword = (userId, email) => {
-    return {
-        type: actionTypes.CHANGE_PASSWORD,
-        id: userId,
-        email: email
+export const deleteUser = (userId) => {
+    return dispatch => {
+        const url = `http://localhost:3001/users/${userId}`;
+        axios
+            .delete(url)
+            .then(response => {
+                dispatch(
+                    deleteUserSuccess()
+                );
+            })
+            .catch(error => {
+                dispatch(controlUserFail(error));
+            })
     }
-}
-
-export const checkCurrentUser = (email, token) => {
-
 }

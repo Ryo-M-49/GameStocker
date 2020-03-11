@@ -15,7 +15,8 @@ export const getUserSuccess = (userData) => {
         id: userData.id,
         first_name: userData.first_name,
         last_name: userData.last_name,
-        image: userData.image
+        image: userData.image,
+        introduction: userData.introduction
     }
 }
 
@@ -41,8 +42,8 @@ export const editUser = (userData) => {
             user: {
                 first_name: userData.first_name,
                 last_name: userData.last_name,
-                image: userData.image
-                // description: userData.description
+                image: userData.image,
+                introduction: userData.introduction
             }
         };
         const url = `http://localhost:3001/users/${userId}`;

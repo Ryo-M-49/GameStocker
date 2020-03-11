@@ -10,21 +10,25 @@ import Image from '../../../assets/images/sample-profile.png';
 const navigationItems = props => (
     <ul className={classes.NavigationItems}>
         <NavigationItem link="/gamelist" exact>
-            <CreateIcon
-                style={{ color: 'white', fontSize: '30' }}
-            />
+            <CreateIcon style={{ color: 'white', fontSize: '30' }} />
         </NavigationItem>
         <NavigationItem link="/" exact>
-            <ViewListIcon
-                style={{ color: 'white', fontSize: '30' }}
-            />
+            <ViewListIcon style={{ color: 'white', fontSize: '30' }} />
         </NavigationItem>
-        <NavigationItem link="/signin" exact>
-            <Button style={{color: 'white'}}>Signin</Button>
-        </NavigationItem>
-        <NavigationItem link="/mypage" exact>
-            <Avatar alt="my-page" src={Image} />
-        </NavigationItem>
+        {props.isAuth ? (
+            <NavigationItem link="/mypage" exact>
+                <Avatar alt="my-page" src={Image} />
+            </NavigationItem>
+        ) : (
+            <NavigationItem link="/signin" exact>
+                <Button style={{ color: 'white' }}>Signin</Button>
+            </NavigationItem>
+        )}
+        {props.isAuth ? (
+            <Button onClick={props.logoutClicked} style={{ color: 'white' }}>
+                Signout
+            </Button>
+        ) : null}
     </ul>
 );
 

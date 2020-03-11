@@ -16,7 +16,7 @@ const rootReducer = combineReducers({
     gameListReducer: gameListReducer,
     authReducer: authReducer,
     signupReducer: signupReducer,
-    userReducer: userReducer
+    userReducer: userReducer,
 });
 
 const store = createStore(

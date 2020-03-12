@@ -8,13 +8,15 @@ import ScrollToTop from './hoc/ScrollToTop/ScrollToTop';
 import gameListReducer from './store/reducers/gameList';
 import authReducer from './store/reducers/auth';
 import signupReducer from './store/reducers/signup';
+import userReducer from './store/reducers/user';
 
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 
 const rootReducer = combineReducers({
     gameListReducer: gameListReducer,
     authReducer: authReducer,
-    signupReducer: signupReducer
+    signupReducer: signupReducer,
+    userReducer: userReducer,
 });
 
 const store = createStore(

@@ -75,3 +75,15 @@ export const authCheckState = () => {
         }
     };
 };
+
+// export const changePassword = (userId, email) => {
+//     return {
+//         type: actionTypes.CHANGE_PASSWORD,
+//         id: userId,
+//         email: email
+//     }
+// }
+
+// export const checkCurrentUser = (email, token) => {
+
+// }

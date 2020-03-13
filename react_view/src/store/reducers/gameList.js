@@ -5,6 +5,7 @@ const initialState = {
     games: null,
     currentPage: 1,
     error: false,
+    isSearched: false
 };
 
 const setGames = (state, action) => {

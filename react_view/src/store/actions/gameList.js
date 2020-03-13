@@ -21,7 +21,7 @@ export const fetchGamesFailed = () => {
     };
 };
 
-export const updateGames = currentPage => {
+export const updateGamesByPage = currentPage => {
     return dispatch => {
         axios
             .get(

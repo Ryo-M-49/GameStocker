@@ -21,13 +21,14 @@ export const fetchGamesFailed = () => {
     };
 };
 
-export const updateGames = currentPage => {
+export const updateGamesByPage = currentPage => {
     return dispatch => {
         axios
             .get(
                 `https://app.rakuten.co.jp/services/api/BooksGame/Search/20170404?format=json&hardware=PS&page=${currentPage}&hits=30&booksGenreId=006&applicationId=1009084489441242376`
             )
             .then(response => {
+                console.log(response.data);
                 dispatch(setGames(response.data));
             })
             .catch(error => {

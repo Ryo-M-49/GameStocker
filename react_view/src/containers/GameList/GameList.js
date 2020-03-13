@@ -6,8 +6,9 @@ import Pagination from '../../components/UI/Pagination/Pagination';
 import * as actions from '../../store/actions/index';
 
 class GameList extends Component {
+
     componentDidMount() {
-        this.props.onUpdateGames(this.props.currentPage);
+        this.props.onUpdateGamesByPage(this.props.currentPage);
     }
 
     /**
@@ -17,7 +18,7 @@ class GameList extends Component {
      */
     pageChangedHandler(selectedPage) {
         this.props.onChangeCurrentPage(selectedPage);
-        this.props.onUpdateGames(selectedPage);
+        this.props.onUpdateGamesByPage(selectedPage);
     }
 
     render() {
@@ -57,7 +58,7 @@ class GameList extends Component {
         );
     }
 }
-// Redux
+
 const mapStatetoProps = state => {
     return {
         games: state.gameListReducer.games,
@@ -68,8 +69,8 @@ const mapStatetoProps = state => {
 
 const mapDispatchToProps = dispatch => {
     return {
-        onUpdateGames: currentPage =>
-            dispatch(actions.updateGames(currentPage)),
+        onUpdateGamesByPage: currentPage =>
+            dispatch(actions.updateGamesByPage(currentPage)),
         onChangeCurrentPage: selectedPage =>
             dispatch(actions.setCurrentPage(selectedPage)),
     };

@@ -16,7 +16,7 @@ import { withStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
 
 import * as actions from '../../store/actions/index';
-import { checkValidity } from '../../shared/utility';
+import { addErrorMessage, checkValidity } from '../../shared/utility';
 
 const styles = theme => ({
     paper: {
@@ -67,7 +67,7 @@ class SignIn extends Component {
             }
         },
         isSignup: true,
-        isReadyToSubmit: false
+        errorMessages: []
     };
 
     /**
@@ -77,15 +77,21 @@ class SignIn extends Component {
      * @returns {object} - the updated local state.
      */
     inputChangedHandler = (event, controlName) => {
+        const copiedErrorMessages = [...this.state.errorMessages];
+        const currentErrorMessage = this.state.controls[controlName].validity.errorMessage;
+        const updatedValidity = checkValidity(event.target.value, this.state.controls[controlName].validation);
+
         const updatedControls = {
             ...this.state.controls,
             [controlName]: {
                 ...this.state.controls[controlName],
                 value: event.target.value,
-                validity: checkValidity(event.target.value, this.state.controls[controlName].validation)
+                validity: updatedValidity
             }
         };
+
         this.setState({ controls: updatedControls });
+        this.setState({ errorMessages: addErrorMessage(copiedErrorMessages, currentErrorMessage, updatedValidity.errorMessage)});
     };
 
     /**
@@ -104,11 +110,6 @@ class SignIn extends Component {
     render() {
         const { classes } = this.props;
 
-        let errorMessage = null;
-        if (this.state.error) {
-            errorMessage = <p>{this.props.error}</p>;
-        }
-
         let authRedirect = null;
         if (this.props.isAuthenticated) {
             authRedirect = <Redirect to={this.props.authRedirectPath} />;
@@ -117,7 +118,9 @@ class SignIn extends Component {
         return (
             <Container component="main" maxWidth="xs">
                 {authRedirect}
-                {errorMessage}
+                {this.state.errorMessages.length > 0 ? this.state.errorMessages.map((errorMessage, index) => (
+                    <p key={index}>{errorMessage}</p>
+                )): null }
                 <CssBaseline />
                 <div className={classes.paper}>
                     <Avatar className={classes.avatar}>

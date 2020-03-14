@@ -1,3 +1,17 @@
+export const addErrorMessage = (errorMessages, currentMessage, nextMessage) => {
+    if (nextMessage) {
+        if (errorMessages.includes(nextMessage)) {
+            return errorMessages;
+        } else {
+            errorMessages.push(nextMessage);
+            return errorMessages;
+        }
+    } else {
+        errorMessages.splice(errorMessages.indexOf(currentMessage), 1);
+        return errorMessages;
+    }
+}
+
 export const checkValidity = ( value, rules ) => {
     
     let isValid = true;
@@ -10,21 +24,21 @@ export const checkValidity = ( value, rules ) => {
     if ( rules.required ) {
         isValid = value.trim() !== '' && isValid;
         if (!isValid) {
-            errorMessage = 'Make sure the required items are all filled out!';
+            errorMessage = '* is required information!';
         }
     }
 
     if ( rules.minLength ) {
         isValid = value.length >= rules.minLength && isValid;
         if (!isValid) {
-            errorMessage = `At least ${rules.minLength} characters required!`;
+            errorMessage = `Password must be ${rules.minLength} characters or more!`;
         }
     }
 
     if ( rules.maxLength ) {
         isValid = value.length <= rules.maxLength && isValid;
         if (!isValid) {
-            errorMessage = `Over ${rules.maxLength} characters forbidden!`;
+            errorMessage = `This item must be ${rules.maxLength} characters or less`;
         }
     }
 
@@ -32,7 +46,7 @@ export const checkValidity = ( value, rules ) => {
         const pattern = /[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?/;
         isValid = pattern.test( value ) && isValid;
         if (!isValid) {
-            errorMessage = 'Email is invalid';
+            errorMessage = 'Email is invalid!';
         }
     }
 

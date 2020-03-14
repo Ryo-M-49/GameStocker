@@ -7,8 +7,6 @@ import Avatar from '@material-ui/core/Avatar';
 import Button from '@material-ui/core/Button';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import TextField from '@material-ui/core/TextField';
-// import FormControlLabel from '@material-ui/core/FormControlLabel';
-// import Checkbox from '@material-ui/core/Checkbox';
 import Link from '@material-ui/core/Link';
 import Grid from '@material-ui/core/Grid';
 import Box from '@material-ui/core/Box';
@@ -18,6 +16,7 @@ import { withStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
 
 import * as actions from '../../store/actions/index';
+import { addErrorMessage, checkValidity } from '../../shared/utility';
 
 const styles = theme => ({
     paper: {
@@ -39,12 +38,36 @@ const styles = theme => ({
     },
 });
 
+//もしサインインをトライ時にDBに存在しなければ、isSignupをfalseにしてそれをもとにエラーメッセージを出力
+
 class SignIn extends Component {
     state = {
         controls: {
-            email: null,
-            password: null,
+            email: {
+                value: '',
+                validation: {
+                    required: true,
+                    isEmail: true
+                },
+                validity: {
+                    isValid: false,
+                    errorMessage: null
+                }
+            },
+            password: {
+                value: '',
+                validation: {
+                    required: true,
+                    minLength: 6
+                },
+                validity: {
+                    isValid: false,
+                    errorMessage: null
+                }     
+            }
         },
+        isSignup: true,
+        errorMessages: []
     };
 
     /**
@@ -54,11 +77,21 @@ class SignIn extends Component {
      * @returns {object} - the updated local state.
      */
     inputChangedHandler = (event, controlName) => {
+        const copiedErrorMessages = [...this.state.errorMessages];
+        const currentErrorMessage = this.state.controls[controlName].validity.errorMessage;
+        const updatedValidity = checkValidity(event.target.value, this.state.controls[controlName].validation);
+
         const updatedControls = {
             ...this.state.controls,
-            [controlName]: event.target.value,
+            [controlName]: {
+                ...this.state.controls[controlName],
+                value: event.target.value,
+                validity: updatedValidity
+            }
         };
+
         this.setState({ controls: updatedControls });
+        this.setState({ errorMessages: addErrorMessage(copiedErrorMessages, currentErrorMessage, updatedValidity.errorMessage)});
     };
 
     /**
@@ -77,11 +110,6 @@ class SignIn extends Component {
     render() {
         const { classes } = this.props;
 
-        let errorMessage = null;
-        if (this.props.error) {
-            errorMessage = <p>{this.props.error}</p>;
-        }
-
         let authRedirect = null;
         if (this.props.isAuthenticated) {
             authRedirect = <Redirect to={this.props.authRedirectPath} />;
@@ -90,7 +118,9 @@ class SignIn extends Component {
         return (
             <Container component="main" maxWidth="xs">
                 {authRedirect}
-                {errorMessage}
+                {this.state.errorMessages.length > 0 ? this.state.errorMessages.map((errorMessage, index) => (
+                    <p key={index}>{errorMessage}</p>
+                )): null }
                 <CssBaseline />
                 <div className={classes.paper}>
                     <Avatar className={classes.avatar}>
@@ -132,10 +162,6 @@ class SignIn extends Component {
                                 this.inputChangedHandler(event, 'password')
                             }
                         />
-                        {/* <FormControlLabel
-              control={<Checkbox value="remember" color="primary" />}
-              label="Remember me"
-            /> */}
                         <Button
                             type="submit"
                             fullWidth
@@ -174,7 +200,6 @@ class SignIn extends Component {
 const mapStateToProps = state => {
     return {
         loading: state.authReducer.loading,
-        error: state.authReducer.error,
         isAuthenticated: state.authReducer.token !== null,
         authRedirectPath: state.authReducer.authRedirectPath,
     };

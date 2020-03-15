@@ -1,14 +1,23 @@
-export const addErrorMessage = (errorMessages, currentMessage, nextMessage) => {
-    if (nextMessage) {
-        if (errorMessages.includes(nextMessage)) {
-            return errorMessages;
+export const addErrorMessage = (copiedArray, errorObject) => {
+    if (errorObject.nextErrorMessage) {
+        if (errorObject.nextErrorMessage === errorObject.currentErrorMessage) {
+            return copiedArray;
         } else {
-            errorMessages.push(nextMessage);
-            return errorMessages;
+            copiedArray.push(
+                {
+                    message: errorObject.nextErrorMessage,
+                    isSnackbarOpen: true
+                }
+            );
+            return copiedArray;
         }
-    } else {
-        errorMessages.splice(errorMessages.indexOf(currentMessage), 1);
-        return errorMessages;
+    } else { 
+        if (errorObject.currentErrorMessage) {
+            copiedArray.splice(copiedArray.indexOf(errorObject.currentErrorMessage), 1);
+            return copiedArray;
+        } else {
+            return copiedArray;
+        }
     }
 }
 

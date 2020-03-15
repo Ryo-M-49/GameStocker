@@ -3,6 +3,7 @@ import { Link as RouterLink, Redirect } from 'react-router-dom';
 import { connect } from 'react-redux';
 
 import Copyright from '../../components/UI/Copyright/Copyright';
+import Snackbar from '@material-ui/core/Snackbar';
 import Avatar from '@material-ui/core/Avatar';
 import Button from '@material-ui/core/Button';
 import CssBaseline from '@material-ui/core/CssBaseline';
@@ -38,8 +39,6 @@ const styles = theme => ({
     },
 });
 
-//もしサインインをトライ時にDBに存在しなければ、isSignupをfalseにしてそれをもとにエラーメッセージを出力
-
 class SignIn extends Component {
     state = {
         controls: {
@@ -63,11 +62,11 @@ class SignIn extends Component {
                 validity: {
                     isValid: false,
                     errorMessage: null
-                }     
+                }
             }
         },
         isSignup: true,
-        errorMessages: []
+        errorMessages: [] 
     };
 
     /**
@@ -78,8 +77,12 @@ class SignIn extends Component {
      */
     inputChangedHandler = (event, controlName) => {
         const copiedErrorMessages = [...this.state.errorMessages];
-        const currentErrorMessage = this.state.controls[controlName].validity.errorMessage;
         const updatedValidity = checkValidity(event.target.value, this.state.controls[controlName].validation);
+
+        const errorInfo = {
+            currentErrorMessage: this.state.controls[controlName].validity.errorMessage,
+            nextErrorMessage: updatedValidity.errorMessage
+        };
 
         const updatedControls = {
             ...this.state.controls,
@@ -91,7 +94,7 @@ class SignIn extends Component {
         };
 
         this.setState({ controls: updatedControls });
-        this.setState({ errorMessages: addErrorMessage(copiedErrorMessages, currentErrorMessage, updatedValidity.errorMessage)});
+        this.setState({ errorMessages: addErrorMessage(copiedErrorMessages, errorInfo)});
     };
 
     /**
@@ -107,6 +110,16 @@ class SignIn extends Component {
         );
     };
 
+    // snackbarCloseHandler = () => {
+    //     let errorMessagesArray = [...this.state.errorMessages];
+    //     this.state.errorMessages.map((errorMessage, index) => {
+    //         if (errorMessage.isSnackbarOpen) {
+    //             errorMessagesArray[index].isSnackbarOpen = false;
+    //         }
+    //     });
+    //     this.setState({errorMessages: errorMessagesArray});
+    //   };
+
     render() {
         const { classes } = this.props;
 
@@ -118,9 +131,16 @@ class SignIn extends Component {
         return (
             <Container component="main" maxWidth="xs">
                 {authRedirect}
-                {this.state.errorMessages.length > 0 ? this.state.errorMessages.map((errorMessage, index) => (
-                    <p key={index}>{errorMessage}</p>
-                )): null }
+                {this.state.errorMessages.length > 0 ? this.state.errorMessages.map((errorMessage, index) => {
+                    return (
+                    <Snackbar
+                        anchorOrigin={ {vertical: 'top', horizontal: 'center'} }
+                        key={index}
+                        open={errorMessage.isSnackbarOpen}
+                        // onClose={this.snackbarCloseHandler}
+                        message={errorMessage.message}
+                    />
+                )}): null }
                 <CssBaseline />
                 <div className={classes.paper}>
                     <Avatar className={classes.avatar}>

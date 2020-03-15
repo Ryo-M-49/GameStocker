@@ -128,6 +128,32 @@ class SignIn extends Component {
             authRedirect = <Redirect to={this.props.authRedirectPath} />;
         }
 
+        let signinButton = (
+            <Button
+                type="submit"
+                fullWidth
+                variant="contained"
+                color="primary"
+                disabled
+                className={classes.submit}
+            >
+                Sign In
+            </Button>
+        )
+        if (this.state.errorMessages.length == 0) {
+            signinButton = (
+                <Button
+                    type="submit"
+                    fullWidth
+                    variant="contained"
+                    color="primary"
+                    className={classes.submit}
+                >
+                    Sign In
+                </Button>
+            )
+        }
+
         return (
             <Container component="main" maxWidth="xs">
                 {authRedirect}
@@ -182,15 +208,7 @@ class SignIn extends Component {
                                 this.inputChangedHandler(event, 'password')
                             }
                         />
-                        <Button
-                            type="submit"
-                            fullWidth
-                            variant="contained"
-                            color="primary"
-                            className={classes.submit}
-                        >
-                            Sign In
-                        </Button>
+                        {signinButton}
                         <Grid container>
                             <Grid item xs>
                                 <Link href="#" variant="body2">

@@ -3,6 +3,7 @@ import { Link as RouterLink, Redirect } from 'react-router-dom';
 import { connect } from 'react-redux';
 
 import Copyright from '../../components/UI/Copyright/Copyright';
+import Snackbar from '@material-ui/core/Snackbar';
 import Avatar from '@material-ui/core/Avatar';
 import Button from '@material-ui/core/Button';
 import CssBaseline from '@material-ui/core/CssBaseline';
@@ -17,6 +18,7 @@ import Typography from '@material-ui/core/Typography';
 import { withStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
 import * as actions from '../../store/actions/index';
+import { addErrorMessage, checkValidity } from '../../shared/utility';
 
 const styles = theme => ({
     paper: {
@@ -40,55 +42,146 @@ const styles = theme => ({
 
 class SignUp extends Component {
     state = {
-        userData: {
-            firstName: null,
-            lastName: null,
-            email: null,
-            password: null,
-            passwordConfirmation: null,
+        controls: {
+            firstName: {
+                value: '',
+                validation: {
+                    required: true
+                },
+                validity: {
+                    isValid: false,
+                    errorMessage: null
+                }
+            },
+            lastName: {
+                value: '',
+                validation: {
+                    required: true
+                },
+                validity: {
+                    isValid: false,
+                    errorMessage: null
+                }
+            },
+            email: {
+                value: '',
+                validation: {
+                    required: true,
+                    isEmail: true
+                },
+                validity: {
+                    isValid: false,
+                    errorMessage: null
+                }
+            },
+            password: {
+                value: '',
+                validation: {
+                    required: true,
+                    minLength: 6
+                },
+                validity: {
+                    isValid: false,
+                    errorMessage: null
+                }
+            },
+            passwordConfirmation: {
+                value: '',
+                validation: {
+                    required: true
+                },
+                validity: {
+                    isValid: false,
+                    errorMessage: null
+                }
+            }
         },
+        errorMessages: []
     };
+
     /**
-     * Handler to update the local state based on the input value typed in input forms.
+     * Handler to update the local state based on the input value typed in input forms (email/password).
      * @param {object} event -  the target event selected by an user.
      * @param {string} controlName - the property name of the local state you want to change.
      * @returns {object} - the updated local state.
      */
-    inputChangedHandler = (event, userDataName) => {
-        const updatedUserData = {
-            ...this.state.userData,
-            [userDataName]: event.target.value,
+    inputChangedHandler = (event, controlName) => {
+        const copiedErrorMessages = [...this.state.errorMessages];
+        const updatedValidity = checkValidity(event.target.value, this.state.controls[controlName].validation);
+        const errorInfo = {
+            currentErrorMessage: this.state.controls[controlName].validity.errorMessage,
+            nextErrorMessage: updatedValidity.errorMessage
         };
-        this.setState({ userData: updatedUserData });
+
+        let updatedControls = {
+            ...this.state.controls,
+            [controlName]: {
+                ...this.state.controls[controlName],
+                value: event.target.value,
+                validity: updatedValidity
+            }
+        };
+
+        this.setState({ controls: updatedControls });
+        this.setState({ errorMessages: addErrorMessage(copiedErrorMessages, errorInfo)});
     };
 
     /**
-     * Handler to trigger the handler to dispatch the signup action along with the local state (userData).
+     * Handler to trigger the handler to dispatch the signup action along with the local state (controls).
      * @param {object} event - the target event selected by an user.
      * @returns {null} - dispatches the signup action.
      */
-    submitHandler = event => {
+    signupHandler = event => {
         event.preventDefault();
-        this.props.onSignup(this.state.userData);
+        this.props.onSignup(this.state.controls);
     };
 
     render() {
         const { classes } = this.props;
-
-        let errorMessage = null;
-        if (this.props.error) {
-            errorMessage = <p>{this.props.error}</p>;
-        }
 
         let authRedirect = null;
         if (this.props.isAuthenticated) {
             authRedirect = <Redirect to={this.props.authRedirectPath} />;
         }
 
+        let signupButton = (
+            <Button
+                type="submit"
+                fullWidth
+                variant="contained"
+                color="primary"
+                disabled
+                className={classes.submit}
+            >
+                Sign Up
+            </Button>
+        )
+        if (this.state.errorMessages.length == 0) {
+            signupButton = (
+                <Button
+                    type="submit"
+                    fullWidth
+                    variant="contained"
+                    color="primary"
+                    className={classes.submit}
+                >
+                    Sign Up
+                </Button>
+            )
+        }
+
         return (
             <Container component="main" maxWidth="xs">
                 {authRedirect}
-                {errorMessage}
+                {this.state.errorMessages.length > 0 ? this.state.errorMessages.map((errorMessage, index) => {
+                    return (
+                    <Snackbar
+                        anchorOrigin={ {vertical: 'bottom', horizontal: 'right'} }
+                        key={index}
+                        open={errorMessage.isSnackbarOpen}
+                        message={errorMessage.message}
+                    />
+                )}): null }
                 <CssBaseline />
                 <div className={classes.paper}>
                     <Avatar className={classes.avatar}>
@@ -100,7 +193,7 @@ class SignUp extends Component {
                     <form
                         className={classes.form}
                         noValidate
-                        onSubmit={this.submitHandler}
+                        onSubmit={this.signupHandler}
                     >
                         <Grid container spacing={2}>
                             <Grid item xs={12} sm={6}>
@@ -189,15 +282,7 @@ class SignUp extends Component {
                                 />
                             </Grid>
                         </Grid>
-                        <Button
-                            type="submit"
-                            fullWidth
-                            variant="contained"
-                            color="primary"
-                            className={classes.submit}
-                        >
-                            Sign Up
-                        </Button>
+                        {signupButton}
                         <Grid container justify="flex-end">
                             <Grid item>
                                 <Link
@@ -230,7 +315,7 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
     return {
-        onSignup: userData => dispatch(actions.signup(userData)),
+        onSignup: controls => dispatch(actions.signup(controls)),
         onSetSignupRedirectPath: () =>
             dispatch(actions.setSignupRedirectPath('/')),
     };

@@ -26,10 +26,10 @@ export const signup = userData => {
     return dispatch => {
         dispatch(signupStart());
         const signupData = {
-            first_name: userData.firstName,
-            last_name: userData.lastName,
-            email: userData.email,
-            password: userData.password,
+            first_name: userData.firstName.value,
+            last_name: userData.lastName.value,
+            email: userData.email.value,
+            password: userData.password.value,
         };
         const url = 'http://localhost:3001/api/auth';
         axios

@@ -110,16 +110,6 @@ class SignIn extends Component {
         );
     };
 
-    // snackbarCloseHandler = () => {
-    //     let errorMessagesArray = [...this.state.errorMessages];
-    //     this.state.errorMessages.map((errorMessage, index) => {
-    //         if (errorMessage.isSnackbarOpen) {
-    //             errorMessagesArray[index].isSnackbarOpen = false;
-    //         }
-    //     });
-    //     this.setState({errorMessages: errorMessagesArray});
-    //   };
-
     render() {
         const { classes } = this.props;
 
@@ -163,7 +153,6 @@ class SignIn extends Component {
                         anchorOrigin={ {vertical: 'top', horizontal: 'center'} }
                         key={index}
                         open={errorMessage.isSnackbarOpen}
-                        // onClose={this.snackbarCloseHandler}
                         message={errorMessage.message}
                     />
                 )}): null }

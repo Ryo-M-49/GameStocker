@@ -4,11 +4,11 @@ import { Route, Switch, withRouter, Redirect } from 'react-router-dom';
 
 import Aux from '../Aux/Aux';
 import Toolbar from '../../components/Navigation/Toolbar/Toolbar';
-import YourReviews from '../../components/YourReviews/YourReviews';
+import ReviewList from '../../components/ReviewList/ReviewList';
 import Signin from '../../containers/Authentication/Signin';
 import Signup from '../../containers/Authentication/Signup';
 import GameList from '../../containers/GameList/GameList';
-import YourReview from '../../components/YourReviews/YourReview/YourReview';
+import YourReview from '../../components/YourReview/YourReview';
 import MyPage from '../../components/MyPage/MyPage';
 import Timeline from '../../components/Timeline/Timeline';
 
@@ -41,7 +41,7 @@ class Layout extends Component {
         let routes = (
             <Switch>
                 <Route path="/yourreviews/:id" component={YourReview} />
-                <Route path="/yourreviews" component={YourReviews} />
+                <Route path="/reviews" component={ReviewList} />
                 <Route path="/signin" component={Signin} />
                 <Route path="/signup" component={Signup} />
                 <Route path="/gamelist" component={GameList} />
@@ -54,7 +54,7 @@ class Layout extends Component {
             routes = (
                 <Switch>
                     <Route path="/yourreviews/:id" component={YourReview} />
-                    <Route path="/yourreviews" component={YourReviews} />
+                    <Route path="/reviews" component={ReviewList} />
                     <Route path="/gamelist" component={GameList} />
                     <Route path="/mypage" component={MyPage} />
                     <Route path="/" exact component={Timeline} />

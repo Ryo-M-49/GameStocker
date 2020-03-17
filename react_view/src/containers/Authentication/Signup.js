@@ -156,7 +156,7 @@ class SignUp extends Component {
                 Sign Up
             </Button>
         )
-        if (this.state.errorMessages.length == 0) {
+        if (this.state.errorMessages.length === 0) {
             signupButton = (
                 <Button
                     type="submit"

@@ -24,3 +24,6 @@ export const GET_USER = 'GET_USER';
 export const EDIT_USER = 'EDIT_USER';
 export const DELETE_USER_SUCCESS = 'DELETE_USER_SUCCESS';
 export const DELETE_USER = 'DELETE_USER';
+
+// for ./review.js
+export const SET_REVIEW = 'SET_GAMES';

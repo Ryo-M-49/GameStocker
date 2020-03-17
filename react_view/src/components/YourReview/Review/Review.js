@@ -17,9 +17,11 @@ const review = props => {
                 <h2 className={classes.Title}>{title}</h2>
                 <p>{description}</p>
             </div>
-            <Rating />
-            <Good />
-            <Bad />
+            <form>
+                <Rating />
+                <Good />
+                <Bad />
+            </form>
         </div>
     );
 };

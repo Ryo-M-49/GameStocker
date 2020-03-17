@@ -130,7 +130,7 @@ class SignIn extends Component {
                 Sign In
             </Button>
         )
-        if (this.state.errorMessages.length == 0) {
+        if (this.state.errorMessages.length === 0) {
             signinButton = (
                 <Button
                     type="submit"

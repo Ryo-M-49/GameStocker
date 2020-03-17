@@ -2,9 +2,9 @@ import React from 'react';
 import { withRouter } from 'react-router';
 import classes from './YourReview.module.css';
 import Review from './Review/Review';
-import QuitButton from '../../UI/QuitButton/QuitButton';
-import ShareButton from '../../UI/ShareButton/ShareButton';
-import SaveButton from '../../UI/SaveButton/SaveButton';
+import QuitButton from '../UI/QuitButton/QuitButton';
+import ShareButton from '../UI/ShareButton/ShareButton';
+import SaveButton from '../UI/SaveButton/SaveButton';
 
 const yourReview = props => {
     const game = props.location.state.game;

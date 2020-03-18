@@ -1,49 +1,27 @@
 import React, { useState } from 'react';
+import { makeStyles } from '@material-ui/core/styles';
 import { useDispatch, useSelector } from 'react-redux';
+import Paper from '@material-ui/core/Paper';
 import InputBase from '@material-ui/core/InputBase';
+import IconButton from '@material-ui/core/IconButton';
 import SearchIcon from '@material-ui/icons/Search';
-import { fade, makeStyles } from '@material-ui/core/styles';
 
 const useStyles = makeStyles(theme => ({
-    search: {
-        position: 'relative',
-        borderRadius: theme.shape.borderRadius,
-        backgroundColor: fade(theme.palette.common.white, 0.15),
-        '&:hover': {
-            backgroundColor: fade(theme.palette.common.white, 0.25),
-        },
-        marginLeft: 0,
-        width: '100%',
-        [theme.breakpoints.up('sm')]: {
-            marginLeft: theme.spacing(1),
-            width: 'auto',
-        },
+    root: {
+      padding: '1px 4px',
+      display: 'flex',
+      alignItems: 'center',
+      width: 400,
+      height: 40
     },
-    searchIcon: {
-        width: theme.spacing(7),
-        height: '100%',
-        position: 'absolute',
-        pointerEvents: 'none',
-        display: 'flex',
-        alignItems: 'center',
-        justifyContent: 'center',
+    input: {
+      marginLeft: theme.spacing(1),
+      flex: 1,
     },
-    inputRoot: {
-        color: 'inherit',
-        width: '400px',
+    iconButton: {
+      padding: 10,
     },
-    inputInput: {
-        padding: theme.spacing(1, 1, 1, 7),
-        transition: theme.transitions.create('width'),
-        width: '100%',
-        [theme.breakpoints.up('sm')]: {
-            width: 400,
-            '&:focus': {
-                width: 500,
-            },
-        },
-    },
-}));
+  }));
 
 /* 
 state: {
@@ -94,19 +72,16 @@ const SearchAppBar = props => {
     };
 
     return (
-        <div className={classes.search}>
-            <div className={classes.searchIcon}>
-                <SearchIcon />
-            </div>
+        <Paper component="form" className={classes.root}>
             <InputBase
-                placeholder="Find games you have played..."
-                classes={{
-                    root: classes.inputRoot,
-                    input: classes.inputInput,
-                }}
-                inputProps={{ 'aria-label': 'search' }}
+            className={classes.input}
+            placeholder="Find a game to write a review about!"
+            inputProps={{ 'aria-label': 'find a game to write a review about' }}
             />
-        </div>
+            <IconButton type="submit" className={classes.iconButton} aria-label="search">
+                <SearchIcon />
+            </IconButton>
+        </Paper>
     );
 }
 

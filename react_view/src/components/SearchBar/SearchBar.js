@@ -35,6 +35,7 @@ games = [];
 
 検索をサブミットする
 
+全てのページのgameを非同期でとって配列に格納する
 state:keywordを引数に関数１が動く
 	関数１では、引数のワードでgamesの配列にfilterをかける
 関数１の返り値はfilterごのgames配列

@@ -1,4 +1,4 @@
-export { setCurrentPage, updateGamesByPage } from './gameList';
+export { setCurrentPage, updateGamesByPage, fetchAllGames } from './gameList';
 
 export {
     authSuccess,

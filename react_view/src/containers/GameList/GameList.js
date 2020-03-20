@@ -62,8 +62,10 @@ class GameList extends Component {
 const mapStatetoProps = state => {
     return {
         games: state.gameListReducer.games,
+        allGames: state.gameListReducer.allGames,
         currentPage: state.gameListReducer.currentPage,
         error: state.gameListReducer.error,
+        isSearched: state.gameListReducer.isSearched
     };
 };
 

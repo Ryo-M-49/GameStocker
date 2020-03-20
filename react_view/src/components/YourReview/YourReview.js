@@ -1,13 +1,31 @@
-import React from 'react';
+import React, { useEffect } from 'react';
+import { useSelector, useDispatch } from 'react-redux';
 import { withRouter } from 'react-router';
 import classes from './YourReview.module.css';
 import Review from './Review/Review';
 import QuitButton from '../UI/QuitButton/QuitButton';
 import ShareButton from '../UI/ShareButton/ShareButton';
 import SaveButton from '../UI/SaveButton/SaveButton';
+import * as actions from '../../store/actions/index';
 
-const yourReview = props => {
+const YourReview = props => {
     const game = props.location.state.game;
+    console.log(game);
+
+    const gameSelector = state => state.reviewReducer.game;
+    const gameState = useSelector(gameSelector);
+    const dispatch = useDispatch();
+
+    const updatedGame = {
+        ...gameState,
+        id: game.jan,
+        title: game.title,
+        caption: game.itemCaption,
+        image: game.largeImageUrl,
+        gameUrl: game.itemUrl
+    };
+
+    useEffect(() => {dispatch(actions.setGame(updatedGame));}, [props.location.state.game]);
 
     return (
         <div className={classes.YourReview}>
@@ -34,4 +52,4 @@ const yourReview = props => {
     );
 };
 
-export default withRouter(yourReview);
+export default withRouter(YourReview);

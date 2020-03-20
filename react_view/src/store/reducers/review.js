@@ -2,14 +2,12 @@ import * as actionTypes from '../actions/actionTypes';
 import { updateObject } from './utility';
 
 const initialState = {
-    game: {
-        title: null,
-        image: null
-    },
     review: {
+        title: null,
+        image: null,
         good: null,
         bad: null,
-        rate: 3
+        rate: 3  
     }
 };
 

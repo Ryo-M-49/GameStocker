@@ -1,5 +1,7 @@
 export { setCurrentPage, updateGamesByPage, fetchAllGames } from './gameList';
 
+export { setReview } from './review';
+
 export {
     authSuccess,
     auth,
@@ -7,4 +9,5 @@ export {
     setAuthRedirectPath,
     authCheckState,
 } from './auth';
+
 export { signup, setSignupRedirectPath } from './signup';

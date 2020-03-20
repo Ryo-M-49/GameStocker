@@ -1,15 +1,48 @@
 import React from 'react';
+import { useSelector, useDispatch } from 'react-redux';
 import classes from './Bad.module.css';
 import ThumbDownIcon from '@material-ui/icons/ThumbDown';
-import ReviewText from '../ReviewText/ReviewText';
+import { withStyles } from '@material-ui/core/styles';
+import TextField from '@material-ui/core/TextField';
+import * as actions from '../../../../store/actions/index';
 
-const bad = props => (
-    <div className={classes.Bad}>
-        <ThumbDownIcon fontSize="large" />
-        <div className={classes.Content}>
-            <ReviewText title="Bad Point" />
+const StyledTextField = withStyles({
+    root: {
+        width: '500px',
+    },
+})(TextField);
+
+
+const Bad = props => {
+    const reviewSelector = state => state.reviewReducer.review;
+    const review = useSelector(reviewSelector);
+    const dispatch = useDispatch();
+
+    const inputChangedHandler = (newValue) => {
+        const updatedReview = {
+            ...review,
+            bad: newValue
+        };
+        dispatch(actions.setReview(updatedReview));
+    };
+    
+    return(
+        <div className={classes.Bad}>
+            <ThumbDownIcon fontSize="large" />
+            <div className={classes.Content}>
+                <StyledTextField
+                                id="outlined-multiline-static"
+                                label="Bad Point"
+                                multiline
+                                rows="3"
+                                placeholder="Write your opinion here!"
+                                variant="outlined"
+                                onChange={(event) => inputChangedHandler(event.target.value)}
+                            />
+            </div>
         </div>
-    </div>
-);
+    );
+};
 
-export default bad;
+
+export default Bad;

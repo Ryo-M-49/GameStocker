@@ -1,7 +1,9 @@
-import React from 'react';
+import React, { useState } from 'react';
+import { useSelector, useDispatch } from 'react-redux';
 import { makeStyles } from '@material-ui/core/styles';
 import Rating from '@material-ui/lab/Rating';
 import Box from '@material-ui/core/Box';
+import * as actions from '../../../../store/actions/index';
 
 const labels = {
     0.5: 'Very Bad',
@@ -29,9 +31,21 @@ const useStyles = makeStyles({
 });
 
 export default function HoverRating() {
-    const [value, setValue] = React.useState(2);
-    const [hover, setHover] = React.useState(-1);
+    const [value, setValue] = useState(2);
+    const [hover, setHover] = useState(-1);
     const classes = useStyles();
+
+    const reviewSelector = state => state.reviewReducer.review;
+    const review = useSelector(reviewSelector);
+    const dispatch = useDispatch();
+
+    const inputChangedHandler = (newValue) => {
+        const updatedReview = {
+            ...review,
+            rate: newValue
+        };
+        dispatch(actions.setReview(updatedReview));
+    };
 
     return (
         <div className={classes.root}>
@@ -41,6 +55,7 @@ export default function HoverRating() {
                 precision={0.5}
                 onChange={(event, newValue) => {
                     setValue(newValue);
+                    inputChangedHandler(newValue);
                 }}
                 onChangeActive={(event, newHover) => {
                     setHover(newHover);

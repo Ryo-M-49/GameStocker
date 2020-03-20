@@ -1,9 +1,15 @@
 import * as actionTypes from './actionTypes';
-import axios from 'axios';
 
 export const setReview = review => {
     return {
         type: actionTypes.SET_REVIEW,
         review: review,
+    };
+};
+
+export const setGame = game => {
+    return {
+        type: actionTypes.SET_GAME,
+        game: game,
     };
 };

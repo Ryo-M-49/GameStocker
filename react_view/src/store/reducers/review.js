@@ -3,13 +3,16 @@ import { updateObject } from './utility';
 
 const initialState = {
     game: {
+        id: null,
         title: null,
-        image: null
+        caption: null,
+        image: null,
+        gameUrl: null,
     },
     review: {
         good: null,
         bad: null,
-        rate: 3
+        rate: 3  
     }
 };
 
@@ -19,10 +22,18 @@ const setReview = (state, action) => {
     });
 };
 
+const setGame = (state, action) => {
+    return updateObject(state, {
+        game: action.game,
+    });
+};
+
 const reducer = (state = initialState, action) => {
     switch (action.type) {
-        case actionTypes.SET_GAMES:
+        case actionTypes.SET_REVIEW:
             return setReview(state, action);
+        case actionTypes.SET_GAME:
+            return setGame(state, action);
         default:
             return state;
     }

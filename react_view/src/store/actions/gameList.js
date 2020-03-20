@@ -12,9 +12,9 @@ export const setAllGames = allGames => {
     return {
         type: actionTypes.SET_ALL_GAMES,
         allGames: allGames,
-        isSearched: true
-    }
-}
+        isSearched: true,
+    };
+};
 
 export const setCurrentPage = selectedPage => {
     return {
@@ -29,7 +29,7 @@ export const fetchGamesFailed = () => {
     };
 };
 
-export const fetchAllGames = (pageCount) => {
+export const fetchAllGames = pageCount => {
     const games = [];
     for (let page = 1; page <= pageCount; page++) {
         axios
@@ -42,7 +42,7 @@ export const fetchAllGames = (pageCount) => {
             .catch(error => {
                 console.log('Failed to fetch all games');
             });
-    };
+    }
     return games;
 };
 
@@ -89,7 +89,6 @@ export const updateGamesByPage = currentPage => {
 // ページ数とゲーム数は計算で求めて設定する
 // 1ページ当たり30item入るので、item数を30で割ってページ数を出し、30分割する
 
-
 // gameコンポーネントに渡すときは
 // game = {
 // 	title: a,
@@ -119,7 +118,7 @@ export const updateGamesByPage = currentPage => {
 // 				title: a,
 // 				image: b,
 // 				etc: c,
-// 				...	
+// 				...
 // 			}
 // 		],
 // 		count: 1,
@@ -139,7 +138,7 @@ export const updateGamesByPage = currentPage => {
 // 				title: a,
 // 				image: b,
 // 				etc: c,
-// 				...	
+// 				...
 // 			}
 // 		],
 // 		count: 2,
@@ -148,7 +147,6 @@ export const updateGamesByPage = currentPage => {
 // 		...
 // 	},
 // ]
-	
 
 // 上記games配列のすべてのitemを配列に格納していく
 // const gamesArray = [];

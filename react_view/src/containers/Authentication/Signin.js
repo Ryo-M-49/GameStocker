@@ -46,27 +46,27 @@ class SignIn extends Component {
                 value: '',
                 validation: {
                     required: true,
-                    isEmail: true
+                    isEmail: true,
                 },
                 validity: {
                     isValid: false,
-                    errorMessage: null
-                }
+                    errorMessage: null,
+                },
             },
             password: {
                 value: '',
                 validation: {
                     required: true,
-                    minLength: 6
+                    minLength: 6,
                 },
                 validity: {
                     isValid: false,
-                    errorMessage: null
-                }
-            }
+                    errorMessage: null,
+                },
+            },
         },
         isSignup: true,
-        errorMessages: [] 
+        errorMessages: [],
     };
 
     /**
@@ -77,11 +77,15 @@ class SignIn extends Component {
      */
     inputChangedHandler = (event, controlName) => {
         const copiedErrorMessages = [...this.state.errorMessages];
-        const updatedValidity = checkValidity(event.target.value, this.state.controls[controlName].validation);
+        const updatedValidity = checkValidity(
+            event.target.value,
+            this.state.controls[controlName].validation
+        );
 
         const errorInfo = {
-            currentErrorMessage: this.state.controls[controlName].validity.errorMessage,
-            nextErrorMessage: updatedValidity.errorMessage
+            currentErrorMessage: this.state.controls[controlName].validity
+                .errorMessage,
+            nextErrorMessage: updatedValidity.errorMessage,
         };
 
         const updatedControls = {
@@ -89,12 +93,14 @@ class SignIn extends Component {
             [controlName]: {
                 ...this.state.controls[controlName],
                 value: event.target.value,
-                validity: updatedValidity
-            }
+                validity: updatedValidity,
+            },
         };
 
         this.setState({ controls: updatedControls });
-        this.setState({ errorMessages: addErrorMessage(copiedErrorMessages, errorInfo)});
+        this.setState({
+            errorMessages: addErrorMessage(copiedErrorMessages, errorInfo),
+        });
     };
 
     /**
@@ -129,7 +135,7 @@ class SignIn extends Component {
             >
                 Sign In
             </Button>
-        )
+        );
         if (this.state.errorMessages.length === 0) {
             signinButton = (
                 <Button
@@ -141,21 +147,27 @@ class SignIn extends Component {
                 >
                     Sign In
                 </Button>
-            )
+            );
         }
 
         return (
             <Container component="main" maxWidth="xs">
                 {authRedirect}
-                {this.state.errorMessages.length > 0 ? this.state.errorMessages.map((errorMessage, index) => {
-                    return (
-                    <Snackbar
-                        anchorOrigin={ {vertical: 'top', horizontal: 'center'} }
-                        key={index}
-                        open={errorMessage.isSnackbarOpen}
-                        message={errorMessage.message}
-                    />
-                )}): null }
+                {this.state.errorMessages.length > 0
+                    ? this.state.errorMessages.map((errorMessage, index) => {
+                          return (
+                              <Snackbar
+                                  anchorOrigin={{
+                                      vertical: 'top',
+                                      horizontal: 'center',
+                                  }}
+                                  key={index}
+                                  open={errorMessage.isSnackbarOpen}
+                                  message={errorMessage.message}
+                              />
+                          );
+                      })
+                    : null}
                 <CssBaseline />
                 <div className={classes.paper}>
                     <Avatar className={classes.avatar}>

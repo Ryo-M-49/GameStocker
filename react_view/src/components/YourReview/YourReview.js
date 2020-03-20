@@ -22,10 +22,12 @@ const YourReview = props => {
         title: game.title,
         caption: game.itemCaption,
         image: game.largeImageUrl,
-        gameUrl: game.itemUrl
+        gameUrl: game.itemUrl,
     };
 
-    useEffect(() => {dispatch(actions.setGame(updatedGame));}, [props.location.state.game]);
+    useEffect(() => {
+        dispatch(actions.setGame(updatedGame));
+    }, [props.location.state.game]);
 
     return (
         <div className={classes.YourReview}>

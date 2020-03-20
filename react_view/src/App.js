@@ -18,7 +18,7 @@ const rootReducer = combineReducers({
     authReducer: authReducer,
     signupReducer: signupReducer,
     userReducer: userReducer,
-    reviewReducer: reviewReducer
+    reviewReducer: reviewReducer,
 });
 
 const store = createStore(

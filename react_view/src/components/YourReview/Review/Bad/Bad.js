@@ -12,37 +12,35 @@ const StyledTextField = withStyles({
     },
 })(TextField);
 
-
 const Bad = props => {
     const reviewSelector = state => state.reviewReducer.review;
     const review = useSelector(reviewSelector);
     const dispatch = useDispatch();
 
-    const inputChangedHandler = (newValue) => {
+    const inputChangedHandler = newValue => {
         const updatedReview = {
             ...review,
-            bad: newValue
+            bad: newValue,
         };
         dispatch(actions.setReview(updatedReview));
     };
-    
-    return(
+
+    return (
         <div className={classes.Bad}>
             <ThumbDownIcon fontSize="large" />
             <div className={classes.Content}>
                 <StyledTextField
-                                id="outlined-multiline-static"
-                                label="Bad Point"
-                                multiline
-                                rows="3"
-                                placeholder="Write your opinion here!"
-                                variant="outlined"
-                                onChange={(event) => inputChangedHandler(event.target.value)}
-                            />
+                    id="outlined-multiline-static"
+                    label="Bad Point"
+                    multiline
+                    rows="3"
+                    placeholder="Write your opinion here!"
+                    variant="outlined"
+                    onChange={event => inputChangedHandler(event.target.value)}
+                />
             </div>
         </div>
     );
 };
-
 
 export default Bad;

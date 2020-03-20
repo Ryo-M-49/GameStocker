@@ -12,8 +12,8 @@ const initialState = {
     review: {
         good: null,
         bad: null,
-        rate: 3  
-    }
+        rate: 3,
+    },
 };
 
 const setReview = (state, action) => {

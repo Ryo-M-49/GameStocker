@@ -18,11 +18,11 @@ const YourReview = props => {
 
     const updatedGame = {
         ...gameState,
-        id: game.jan,
+        gameId: game.jan,
         title: game.title,
         caption: game.itemCaption,
         image: game.largeImageUrl,
-        gameUrl: game.itemUrl,
+        url: game.itemUrl,
     };
 
     useEffect(() => {

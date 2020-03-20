@@ -27,4 +27,5 @@ export const DELETE_USER_SUCCESS = 'DELETE_USER_SUCCESS';
 export const DELETE_USER = 'DELETE_USER';
 
 // for ./review.js
-export const SET_REVIEW = 'SET_GAMES';
+export const SET_REVIEW = 'SET_REVIEW';
+export const SET_GAME = 'SET_GAME';

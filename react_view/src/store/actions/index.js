@@ -1,6 +1,6 @@
 export { setCurrentPage, updateGamesByPage, fetchAllGames } from './gameList';
 
-export { setReview } from './review';
+export { setReview, setGame } from './review';
 
 export {
     authSuccess,

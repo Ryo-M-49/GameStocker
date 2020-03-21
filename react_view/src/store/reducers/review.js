@@ -3,17 +3,17 @@ import { updateObject } from './utility';
 
 const initialState = {
     game: {
-        id: null,
+        gameId: null,
         title: null,
         caption: null,
         image: null,
-        gameUrl: null,
+        url: null,
     },
     review: {
         good: null,
         bad: null,
-        rate: 3  
-    }
+        rate: 3,
+    },
 };
 
 const setReview = (state, action) => {

@@ -3,65 +3,65 @@ export const addErrorMessage = (copiedArray, errorObject) => {
         if (errorObject.nextErrorMessage === errorObject.currentErrorMessage) {
             return copiedArray;
         } else {
-            copiedArray.push(
-                {
-                    message: errorObject.nextErrorMessage,
-                    isSnackbarOpen: true
-                }
-            );
+            copiedArray.push({
+                message: errorObject.nextErrorMessage,
+                isSnackbarOpen: true,
+            });
             return copiedArray;
         }
-    } else { 
+    } else {
         if (errorObject.currentErrorMessage) {
-            copiedArray.splice(copiedArray.indexOf(errorObject.currentErrorMessage), 1);
+            copiedArray.splice(
+                copiedArray.indexOf(errorObject.currentErrorMessage),
+                1
+            );
             return copiedArray;
         } else {
             return copiedArray;
         }
     }
-}
+};
 
-export const checkValidity = ( value, rules ) => {
-    
+export const checkValidity = (value, rules) => {
     let isValid = true;
     let errorMessage = null;
 
-    if ( !rules ) {
+    if (!rules) {
         return true;
     }
 
-    if ( rules.required ) {
+    if (rules.required) {
         isValid = value.trim() !== '' && isValid;
         if (!isValid) {
             errorMessage = '* is required information!';
         }
     }
 
-    if ( rules.minLength ) {
+    if (rules.minLength) {
         isValid = value.length >= rules.minLength && isValid;
         if (!isValid) {
             errorMessage = `Password must be ${rules.minLength} characters or more!`;
         }
     }
 
-    if ( rules.maxLength ) {
+    if (rules.maxLength) {
         isValid = value.length <= rules.maxLength && isValid;
         if (!isValid) {
             errorMessage = `This item must be ${rules.maxLength} characters or less`;
         }
     }
 
-    if ( rules.isEmail ) {
+    if (rules.isEmail) {
         const pattern = /[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?/;
-        isValid = pattern.test( value ) && isValid;
+        isValid = pattern.test(value) && isValid;
         if (!isValid) {
             errorMessage = 'Email is invalid!';
         }
     }
 
-    if ( rules.isNumeric ) {
+    if (rules.isNumeric) {
         const pattern = /^\d+$/;
-        isValid = pattern.test( value ) && isValid;
+        isValid = pattern.test(value) && isValid;
         if (!isValid) {
             errorMessage = 'Only numeric is permitted in some item!';
         }
@@ -69,7 +69,6 @@ export const checkValidity = ( value, rules ) => {
 
     return {
         isValid: isValid,
-        errorMessage: errorMessage
-    }
-
-}
+        errorMessage: errorMessage,
+    };
+};

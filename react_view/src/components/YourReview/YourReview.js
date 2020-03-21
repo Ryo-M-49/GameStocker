@@ -18,14 +18,16 @@ const YourReview = props => {
 
     const updatedGame = {
         ...gameState,
-        id: game.jan,
+        gameId: game.jan,
         title: game.title,
         caption: game.itemCaption,
         image: game.largeImageUrl,
-        gameUrl: game.itemUrl
+        url: game.itemUrl,
     };
 
-    useEffect(() => {dispatch(actions.setGame(updatedGame));}, [props.location.state.game]);
+    useEffect(() => {
+        dispatch(actions.setGame(updatedGame));
+    }, [props.location.state.game]);
 
     return (
         <div className={classes.YourReview}>

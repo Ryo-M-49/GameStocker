@@ -6,7 +6,6 @@ import Pagination from '../../components/UI/Pagination/Pagination';
 import * as actions from '../../store/actions/index';
 
 class GameList extends Component {
-
     componentDidMount() {
         this.props.onUpdateGamesByPage(this.props.currentPage);
     }
@@ -65,7 +64,7 @@ const mapStatetoProps = state => {
         allGames: state.gameListReducer.allGames,
         currentPage: state.gameListReducer.currentPage,
         error: state.gameListReducer.error,
-        isSearched: state.gameListReducer.isSearched
+        isSearched: state.gameListReducer.isSearched,
     };
 };
 

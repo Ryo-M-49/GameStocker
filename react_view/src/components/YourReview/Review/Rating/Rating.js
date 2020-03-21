@@ -39,10 +39,10 @@ export default function HoverRating() {
     const review = useSelector(reviewSelector);
     const dispatch = useDispatch();
 
-    const inputChangedHandler = (newValue) => {
+    const inputChangedHandler = newValue => {
         const updatedReview = {
             ...review,
-            rate: newValue
+            rate: newValue,
         };
         dispatch(actions.setReview(updatedReview));
     };

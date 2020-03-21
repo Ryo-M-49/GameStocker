@@ -34,7 +34,7 @@ export const getUser = userId => {
     };
 };
 
-export const editUser = userData => {
+export const editUser = (userData, userId) => {
     return dispatch => {
         const updatedUser = {
             user: {

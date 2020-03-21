@@ -1,6 +1,8 @@
 import React from 'react';
+import { useSelector, useDispatch } from 'react-redux';
 import { withStyles } from '@material-ui/core/styles';
 import Button from '@material-ui/core/Button';
+import * as actions from '../../../../store/actions/index';
 
 const StyledButton = withStyles({
     root: {

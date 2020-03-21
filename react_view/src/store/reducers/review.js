@@ -3,11 +3,11 @@ import { updateObject } from './utility';
 
 const initialState = {
     game: {
-        id: null,
+        gameId: null,
         title: null,
         caption: null,
         image: null,
-        gameUrl: null,
+        url: null,
     },
     review: {
         good: null,

@@ -15,9 +15,9 @@ export const setGame = game => {
     };
 };
 
-export const createReview = reviewDetail => {
+export const createReview = (reviewDetail, userId) => {
     return dispatch => {
-        const url = `http://localhost:3001/reviews`;
+        const url = `http://localhost:3001/users/${userId}/reviews`;
         axios
             .post(url, reviewDetail)
             .then(response => {
@@ -29,9 +29,9 @@ export const createReview = reviewDetail => {
     };
 };
 
-export const updateReview = (reviewDetail, revieId) => {
+export const updateReview = (reviewDetail, userId, reviewId) => {
     return dispatch => {
-        const url = `http://localhost:3001/reviews/${reviewId}`;
+        const url = `http://localhost:3001/users/${userId}/reviews/${reviewId}`;
         axios
             .patch(url, reviewDetail)
             .then(response => {

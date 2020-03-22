@@ -10,14 +10,13 @@ import * as actions from '../../store/actions/index';
 
 const YourReview = props => {
     const game = props.location.state.game;
-    console.log(game);
-
-    const gameSelector = state => state.reviewReducer.game;
-    const gameState = useSelector(gameSelector);
+    const gameState = useSelector(state => state.reviewReducer.game);
+    const auth = useSelector(state => state.authReducer);
     const dispatch = useDispatch();
 
     const updatedGame = {
         ...gameState,
+        user_id: auth.userId,
         gameId: game.jan,
         title: game.title,
         caption: game.itemCaption,

@@ -54,9 +54,9 @@ class Layout extends Component {
             routes = (
                 <Switch>
                     <Route path="/users/:userId/yourreviews/:reviewId" component={YourReview} />
+                    <Route path="/users/:userId" component={MyPage} />
                     <Route path="/reviews" component={ReviewList} />
                     <Route path="/gamelist" component={GameList} />
-                    <Route path="/mypage" component={MyPage} />
                     <Route path="/" exact component={Timeline} />
                     <Redirect to="/" />
                 </Switch>

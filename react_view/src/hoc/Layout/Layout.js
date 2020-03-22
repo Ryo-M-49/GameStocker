@@ -53,7 +53,7 @@ class Layout extends Component {
         if (this.props.isAuthenticated) {
             routes = (
                 <Switch>
-                    <Route path="/yourreviews/:id" component={YourReview} />
+                    <Route path="/users/:userId/yourreviews/:reviewId" component={YourReview} />
                     <Route path="/reviews" component={ReviewList} />
                     <Route path="/gamelist" component={GameList} />
                     <Route path="/mypage" component={MyPage} />

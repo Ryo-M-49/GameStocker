@@ -7,12 +7,12 @@ import PropTypes from 'prop-types';
 
 const Game = props => {
     const title = props.game.title;
-    const user = useSelector(state => state.userReducer);
+    const auth = useSelector(state => state.authReducer);
     return (
         <li className={classes.Game}>
             <Link
                 to={{
-                    pathname: `users/${user.id}/yourreviews/${props.game.jan}`,
+                    pathname: `users/${auth.userId}/yourreviews/${props.game.jan}`,
                     exact: props.exact,
                     state: {
                         game: props.game,

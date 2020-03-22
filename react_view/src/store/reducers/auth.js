@@ -2,8 +2,9 @@ import * as actionTypes from '../actions/actionTypes';
 import { updateObject } from './utility';
 
 const initialState = {
-    token: null,
     userId: null,
+    token: null,
+    email: null,
     error: null,
     loading: false,
     authRedirectPath: '/',
@@ -15,8 +16,9 @@ const authStart = (state, action) => {
 
 const authSuccess = (state, action) => {
     return updateObject(state, {
+        userId: action.userId,
         token: action.token,
-        userId: action.uid,
+        email: action.uid,
         error: null,
         loading: false,
     });
@@ -30,7 +32,7 @@ const authFail = (state, action) => {
 };
 
 const authLogout = (state, action) => {
-    return updateObject(state, { token: null, userId: null });
+    return updateObject(state, { userId: null, token: null, email: null });
 };
 
 const setAuthRedirectPath = (state, action) => {

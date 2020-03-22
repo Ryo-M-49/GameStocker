@@ -16,15 +16,15 @@ const StyledButton = withStyles({
 const SaveButton = props => {
     const review = useSelector(state => state.reviewReducer.review);
     const game = useSelector(state => state.reviewReducer.game);
-    const user = useSelector(state => state.reviewReducer.user);
     const dispatch = useDispatch();
 
     const saveButtonClickedHandler = () => {
         const updatedReview = {
-            ...review,
-            ...game
+            ...game,
+            ...review
         };
-        dispatch(actions.createReview(updatedReview, user.id));
+        console.log(updatedReview);
+        dispatch(actions.createReview(updatedReview));
     };
     
     return (

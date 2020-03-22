@@ -15,13 +15,14 @@ export const setGame = game => {
     };
 };
 
-export const createReview = (reviewDetail, userId) => {
+export const createReview = (reviewDetail) => {
     return dispatch => {
+        const userId = reviewDetail.user_id;
         const url = `http://localhost:3001/users/${userId}/reviews`;
         axios
             .post(url, reviewDetail)
             .then(response => {
-                console.log(response, 'Revie creation success!');
+                console.log(response, 'Review creation success!');
             })
             .catch(error => {
                 console.log(error);

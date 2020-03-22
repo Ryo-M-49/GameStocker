@@ -12,7 +12,7 @@ class ReviewsController < ApplicationController
   end
 
   def create
-    @user.reviews.create(review_params)
+    @user.reviews.create!(review_params)
     render json: @user
   end
 
@@ -28,11 +28,11 @@ class ReviewsController < ApplicationController
   private
 
   def review_params
-    params.permit(:good, :bad, :rate, :gameId, :title, :caption, :image, :url)
+    params.permit(:good, :bad, :rate, :gameId, :title, :caption, :image, :url, :user_id)
   end
 
   def set_user
-    @user = User.find(params[:id])
+    @user = User.find(params[:user_id])
   end
 
   def set_user_review

@@ -20,10 +20,11 @@ const SaveButton = props => {
 
     const saveButtonClickedHandler = () => {
         const updatedReview = {
-            ...review,
-            ...game
+            ...game,
+            ...review
         };
-        dispatch(actions.createReview(updatedReview, ));
+        console.log(updatedReview);
+        dispatch(actions.createReview(updatedReview));
     };
     
     return (

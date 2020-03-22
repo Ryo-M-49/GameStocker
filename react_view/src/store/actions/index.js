@@ -10,4 +10,6 @@ export {
     authCheckState,
 } from './auth';
 
+export { getUser } from './user';
+
 export { signup, setSignupRedirectPath } from './signup';

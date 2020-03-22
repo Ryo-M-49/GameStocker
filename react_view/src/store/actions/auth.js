@@ -7,11 +7,12 @@ export const authStart = () => {
     };
 };
 
-export const authSuccess = (accessToken, uId) => {
+export const authSuccess = (userId, accessToken, email) => {
     return {
         type: actionTypes.AUTH_SUCCESS,
+        userId: userId,
         token: accessToken,
-        uid: uId,
+        uid: email,
     };
 };
 
@@ -42,10 +43,13 @@ export const auth = (email, password) => {
         axios
             .post(url, authData)
             .then(response => {
+                const data = response.data.data;
+                localStorage.setItem('userId', data.id);
                 localStorage.setItem('token', response.headers['access-token']);
-                localStorage.setItem('userId', response.headers['uid']);
+                localStorage.setItem('email', response.headers['uid']);
                 dispatch(
                     authSuccess(
+                        data.id,
                         response.headers['access-token'],
                         response.headers['uid']
                     )
@@ -71,7 +75,8 @@ export const authCheckState = () => {
             dispatch(logout());
         } else {
             const userId = localStorage.getItem('userId');
-            dispatch(authSuccess(token, userId));
+            const email = localStorage.getItem('email');
+            dispatch(authSuccess(userId, token, email));
         }
     };
 };

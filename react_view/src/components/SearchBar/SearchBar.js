@@ -47,10 +47,12 @@ const filterGames = (games, keyword) => {
     pageCount = Math.ceil(filteredGamesArray.length / MAXIMUM_ITEM_PER_PAGE);
 
     const searchedGames = {
-        items: filteredGamesArray,
+        Items: filteredGamesArray,
         page: 1,
         pageCount: pageCount
-    }
+    };
+
+    return searchedGames;
 
 };
 
@@ -67,8 +69,8 @@ const SearchAppBar = props => {
 
     const searchClickedHandler = (pageCount, keyword) => {
         const games = actions.fetchAllGames(pageCount);
-        filterGames(games, keyword);
-    };
+        // dispatch(action.setSearchedGames(filterGames(games, keyword));
+    }
 
     return (
         <Paper component="form" className={classes.root}>

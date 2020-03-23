@@ -1,4 +1,4 @@
-export { setCurrentPage, updateGamesByPage, fetchAllGames } from './gameList';
+export { setCurrentPage, setSearchedGames, updateGamesByPage, fetchAllGames } from './gameList';
 
 export { setReview, setGame, createReview, updateReview } from './review';
 

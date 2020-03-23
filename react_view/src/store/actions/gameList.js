@@ -2,12 +2,10 @@ import * as actionTypes from './actionTypes';
 import axios from 'axios';
 
 // Used to set games
-export const setGames = (games, currentPage, pageCount) => {
+export const setGames = (games) => {
     return {
         type: actionTypes.SET_GAMES,
         games: games,
-        currentPage: currentPage,
-        pageCount: pageCount,
         isSearched: false
     };
 };
@@ -17,8 +15,6 @@ export const setAllGames = (searchedGames, currentPage, pageCount) => {
     return {
         type: actionTypes.SET_ALL_GAMES,
         searchedGames: searchedGames,
-        currentPage: currentPage,
-        pageCount: pageCount,
         isSearched: true,
     };
 };
@@ -44,8 +40,7 @@ export const updateGamesByPage = currentPage => {
             )
             .then(response => {
                 console.log(response.data);
-                const results = response.data;
-                dispatch(setGames(results, results.page, results.pageCount));
+                dispatch(setGames(response.data));
             })
             .catch(error => {
                 dispatch(fetchGamesFailed());

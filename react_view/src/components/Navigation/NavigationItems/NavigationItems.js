@@ -29,12 +29,15 @@ const NavigationItems = props => {
                 </NavigationItem>
             )}
             {props.isAuth ? (
-                <Button onClick={props.logoutClicked} style={{ color: 'white' }}>
+                <Button
+                    onClick={props.logoutClicked}
+                    style={{ color: 'white' }}
+                >
                     Signout
                 </Button>
             ) : null}
         </ul>
     );
-}
+};
 
 export default NavigationItems;

@@ -38,7 +38,7 @@ const filterGames = (games, keyword) => {
         };
     };
 
-    filteredGamesArray = items.filter(item => {
+    const filteredGamesArray = items.filter(item => {
         if (item.title.indexOf(keyword) != -1) {
             return true;
         }

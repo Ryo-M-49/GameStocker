@@ -16,7 +16,7 @@ export const setGames = (games, currentPage, pageCount) => {
 export const setAllGames = (searchedGames, currentPage, pageCount) => {
     return {
         type: actionTypes.SET_ALL_GAMES,
-        searchedGames: games,
+        searchedGames: searchedGames,
         currentPage: currentPage,
         pageCount: pageCount,
         isSearched: true,

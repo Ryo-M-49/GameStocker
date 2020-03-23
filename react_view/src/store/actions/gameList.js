@@ -1,17 +1,24 @@
 import * as actionTypes from './actionTypes';
 import axios from 'axios';
 
-export const setGames = games => {
+// Used to set games
+export const setGames = (games, currentPage, pageCount) => {
     return {
         type: actionTypes.SET_GAMES,
         games: games,
+        currentPage: currentPage,
+        pageCount: pageCount,
+        isSearched: false
     };
 };
 
-export const setAllGames = allGames => {
+// Used to set searched games
+export const setAllGames = (games, currentPage, pageCount) => {
     return {
         type: actionTypes.SET_ALL_GAMES,
-        allGames: allGames,
+        games: games,
+        currentPage: currentPage,
+        pageCount: pageCount,
         isSearched: true,
     };
 };
@@ -31,19 +38,21 @@ export const fetchGamesFailed = () => {
 
 export const fetchAllGames = pageCount => {
     const games = [];
-    for (let page = 1; page <= pageCount; page++) {
-        axios
-            .get(
-                `https://app.rakuten.co.jp/services/api/BooksGame/Search/20170404?format=json&hardware=PS&page=${page}&hits=30&booksGenreId=006&applicationId=1009084489441242376`
-            )
-            .then(response => {
-                games.push(response.data);
-            })
-            .catch(error => {
-                console.log('Failed to fetch all games');
-            });
-    }
-    return games;
+    return dispatch => {
+        for (let page = 1; page <= pageCount; page++) {
+            axios
+                .get(
+                    `https://app.rakuten.co.jp/services/api/BooksGame/Search/20170404?format=json&hardware=PS&page=${page}&hits=30&booksGenreId=006&applicationId=1009084489441242376`
+                )
+                .then(response => {
+                    games.push(response.data);
+                })
+                .catch(error => {
+                    console.log('Failed to fetch all games');
+                });
+        };
+        dispatch(setAllGames(games));
+    };
 };
 
 export const updateGamesByPage = currentPage => {
@@ -54,7 +63,8 @@ export const updateGamesByPage = currentPage => {
             )
             .then(response => {
                 console.log(response.data);
-                dispatch(setGames(response.data));
+                const results = response.data;
+                dispatch(setGames(results, results.page, results.pageCount));
             })
             .catch(error => {
                 dispatch(fetchGamesFailed());

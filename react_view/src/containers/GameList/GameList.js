@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+    import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import classes from './GameList.module.css';
 import Game from '../../components/Game/Game';
@@ -36,7 +36,7 @@ class GameList extends Component {
 
             pagination = (
                 <Pagination
-                    pageCount={this.props.games.pageCount}
+                    pageCount={this.props.pageCount}
                     pageNumber={this.props.currentPage}
                     pageChangedHandler={(event, page) =>
                         this.pageChangedHandler(page)
@@ -61,8 +61,8 @@ class GameList extends Component {
 const mapStatetoProps = state => {
     return {
         games: state.gameListReducer.games,
-        allGames: state.gameListReducer.allGames,
         currentPage: state.gameListReducer.currentPage,
+        pageCount: state.gameListReducer.pageCount,
         error: state.gameListReducer.error,
         isSearched: state.gameListReducer.isSearched,
     };

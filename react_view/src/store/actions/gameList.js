@@ -11,9 +11,9 @@ export const setGames = (games) => {
 };
 
 // Used to set searched games
-export const setAllGames = (searchedGames, currentPage, pageCount) => {
+export const setSearchedGames = (searchedGames) => {
     return {
-        type: actionTypes.SET_ALL_GAMES,
+        type: actionTypes.SET_SEARCHED_GAMES,
         searchedGames: searchedGames,
         isSearched: true,
     };

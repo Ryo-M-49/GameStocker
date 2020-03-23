@@ -15,7 +15,7 @@ const setGames = (state, action) => {
     });
 };
 
-const setAllGames = (state, action) => {
+const setSearchedGames = (state, action) => {
     return updateObject(state, {
         searchedGames: action.searchedGames,
         isSearched: action.isSearched,
@@ -39,8 +39,8 @@ const reducer = (state = initialState, action) => {
     switch (action.type) {
         case actionTypes.SET_GAMES:
             return setGames(state, action);
-        case actionTypes.SET_ALL_GAMES:
-            return setAllGames(state, action);
+        case actionTypes.SET_SEARCHED_GAMES:
+            return setSearchedGames(state, action);
         case actionTypes.SET_CURRENT_PAGE:
             return setCurrentPage(state, action);
         case actionTypes.FETCH_GAMES_FAILED:

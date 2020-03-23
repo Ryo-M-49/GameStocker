@@ -3,6 +3,7 @@ import { updateObject } from './utility';
 
 const initialState = {
     games: null,
+    searchedGames: null,
     currentPage: null,
     pageCount: null,
     error: false,
@@ -20,7 +21,7 @@ const setGames = (state, action) => {
 
 const setAllGames = (state, action) => {
     return updateObject(state, {
-        games: action.games,
+        searchedGames: action.searchedGames,
         currentPage: action.currentPage,
         pageCount: action.pageCount,
         isSearched: action.isSearched,

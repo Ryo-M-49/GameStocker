@@ -13,10 +13,10 @@ export const setGames = (games, currentPage, pageCount) => {
 };
 
 // Used to set searched games
-export const setAllGames = (games, currentPage, pageCount) => {
+export const setAllGames = (searchedGames, currentPage, pageCount) => {
     return {
         type: actionTypes.SET_ALL_GAMES,
-        games: games,
+        searchedGames: games,
         currentPage: currentPage,
         pageCount: pageCount,
         isSearched: true,
@@ -38,7 +38,6 @@ export const fetchGamesFailed = () => {
 
 export const fetchAllGames = pageCount => {
     const games = [];
-    return dispatch => {
         for (let page = 1; page <= pageCount; page++) {
             axios
                 .get(
@@ -51,8 +50,7 @@ export const fetchAllGames = pageCount => {
                     console.log('Failed to fetch all games');
                 });
         };
-        dispatch(setAllGames(games));
-    };
+    return games;
 };
 
 export const updateGamesByPage = currentPage => {

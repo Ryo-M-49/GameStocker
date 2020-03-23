@@ -7,7 +7,8 @@ import * as actions from '../../store/actions/index';
 
 class GameList extends Component {
     componentDidMount() {
-        this.props.onUpdateGamesByPage(this.props.currentPage);
+
+        this.props.onUpdateGamesByPage(this.props.games ? this.props.games.page : 1 );
     }
 
     /**
@@ -36,8 +37,8 @@ class GameList extends Component {
 
             pagination = (
                 <Pagination
-                    pageCount={this.props.pageCount}
-                    pageNumber={this.props.currentPage}
+                    pageCount={this.props.games.pageCount}
+                    pageNumber={this.props.games.page}
                     pageChangedHandler={(event, page) =>
                         this.pageChangedHandler(page)
                     }
@@ -61,8 +62,6 @@ class GameList extends Component {
 const mapStatetoProps = state => {
     return {
         games: state.gameListReducer.games,
-        currentPage: state.gameListReducer.currentPage,
-        pageCount: state.gameListReducer.pageCount,
         error: state.gameListReducer.error,
         isSearched: state.gameListReducer.isSearched,
     };

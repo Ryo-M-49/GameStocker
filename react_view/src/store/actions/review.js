@@ -15,7 +15,7 @@ export const setGame = game => {
     };
 };
 
-export const createReview = (reviewDetail) => {
+export const createReview = reviewDetail => {
     return dispatch => {
         const userId = reviewDetail.user_id;
         const url = `http://localhost:3001/users/${userId}/reviews`;

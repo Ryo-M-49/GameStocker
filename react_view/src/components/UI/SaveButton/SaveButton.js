@@ -21,19 +21,19 @@ const SaveButton = props => {
     const saveButtonClickedHandler = () => {
         const updatedReview = {
             ...game,
-            ...review
+            ...review,
         };
         console.log(updatedReview);
         dispatch(actions.createReview(updatedReview));
     };
-    
+
     return (
         <div>
             <StyledButton
                 variant="contained"
                 color="secondary"
                 onClick={saveButtonClickedHandler}
-                >
+            >
                 Save
             </StyledButton>
         </div>

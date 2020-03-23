@@ -33,27 +33,26 @@ const filterGames = (games, keyword) => {
         for (let i = 0; i < games.length; i++) {
             for (let j = 0; j < games[i].Items.length; j++) {
                 const game = games[i].Items[j].Item;
-                    items.push({item: game});
-            };
-        };
-    };
+                items.push({ item: game });
+            }
+        }
+    }
 
     const filteredGamesArray = items.filter(item => {
         if (item.title.indexOf(keyword) != -1) {
             return true;
         }
     });
-    
+
     pageCount = Math.ceil(filteredGamesArray.length / MAXIMUM_ITEM_PER_PAGE);
 
     const searchedGames = {
         Items: filteredGamesArray,
         page: 1,
-        pageCount: pageCount
+        pageCount: pageCount,
     };
 
     return searchedGames;
-
 };
 
 const SearchAppBar = props => {
@@ -70,7 +69,7 @@ const SearchAppBar = props => {
     const searchClickedHandler = (pageCount, keyword) => {
         const games = actions.fetchAllGames(pageCount);
         // dispatch(action.setSearchedGames(filterGames(games, keyword));
-    }
+    };
 
     return (
         <Paper component="form" className={classes.root}>

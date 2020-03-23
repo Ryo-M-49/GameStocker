@@ -1,4 +1,4 @@
-    import React, { Component } from 'react';
+import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import classes from './GameList.module.css';
 import Game from '../../components/Game/Game';
@@ -7,8 +7,9 @@ import * as actions from '../../store/actions/index';
 
 class GameList extends Component {
     componentDidMount() {
-
-        this.props.onUpdateGamesByPage(this.props.games ? this.props.games.page : 1 );
+        this.props.onUpdateGamesByPage(
+            this.props.games ? this.props.games.page : 1
+        );
     }
 
     /**

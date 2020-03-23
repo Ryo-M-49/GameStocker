@@ -11,7 +11,7 @@ const initialState = {
 const setGames = (state, action) => {
     return updateObject(state, {
         games: action.games,
-        isSearched: action.isSearched
+        isSearched: action.isSearched,
     });
 };
 
@@ -26,8 +26,8 @@ const setCurrentPage = (state, action) => {
     return updateObject(state, {
         games: {
             ...state.games,
-            page: action.currentPage
-        }
+            page: action.currentPage,
+        },
     });
 };
 

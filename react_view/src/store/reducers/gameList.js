@@ -3,8 +3,7 @@ import { updateObject } from './utility';
 
 const initialState = {
     games: null,
-    allGames: null,
-    currentPage: 1,
+    searchedGames: null,
     error: false,
     isSearched: false,
 };
@@ -12,20 +11,23 @@ const initialState = {
 const setGames = (state, action) => {
     return updateObject(state, {
         games: action.games,
+        isSearched: action.isSearched
     });
 };
 
 const setAllGames = (state, action) => {
     return updateObject(state, {
-        allGames: action.allGames,
+        searchedGames: action.searchedGames,
         isSearched: action.isSearched,
     });
 };
 
 const setCurrentPage = (state, action) => {
     return updateObject(state, {
-        games: action.games,
-        currentPage: action.currentPage,
+        games: {
+            ...state.games,
+            page: action.currentPage
+        }
     });
 };
 
@@ -37,6 +39,8 @@ const reducer = (state = initialState, action) => {
     switch (action.type) {
         case actionTypes.SET_GAMES:
             return setGames(state, action);
+        case actionTypes.SET_ALL_GAMES:
+            return setAllGames(state, action);
         case actionTypes.SET_CURRENT_PAGE:
             return setCurrentPage(state, action);
         case actionTypes.FETCH_GAMES_FAILED:

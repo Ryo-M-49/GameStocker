@@ -48,23 +48,30 @@ export const updateGamesByPage = currentPage => {
     };
 };
 
-export const fetchAllGames = pageCount => {
+export const sleep = time => {
+    return new Promise((resolve, reject) => {
+        setTimeout(() => {
+            resolve();
+        }, time);
+    });
+}
+
+export const fetchAllGames = async (delay, pageCount) => {
     const games = [];
-    let promises = [];
     for (let page = 1; page <= pageCount; page++) {
-        promises.push(
-        axios
+        await axios
             .get(
                 `https://app.rakuten.co.jp/services/api/BooksGame/Search/20170404?format=json&hardware=PS&page=${page}&hits=30&booksGenreId=006&applicationId=1009084489441242376`
             )
             .then(response => {
                 games.push(response.data);
+                return Promise.resolve(response);
             })
             .catch(error => {
                 console.log('Failed to fetch all games');
-            })
-        )
-    }
+            });
+            await sleep(delay);
+    };
     console.log(games);
     return games;
 };

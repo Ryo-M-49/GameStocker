@@ -24,9 +24,17 @@ const useStyles = makeStyles(theme => ({
     },
 }));
 
+const divideArrayIntoPieces = (array, numsPerArray) => {
+  var arrayList = [];
+  var index = 0;
+  while(index < array.length){
+      arrayList.push(array.splice(index, index + numsPerArray));
+  }
+  return arrayList;
+}
+
 const filterGames = (games, keyword) => {
     const items = [];
-    const pageCount = null;
     const MAXIMUM_ITEM_PER_PAGE = 30;
 
     if (games.length > 0) {
@@ -39,15 +47,18 @@ const filterGames = (games, keyword) => {
     }
 
     const filteredGamesArray = items.filter(item => {
-        if (item.title.indexOf(keyword) != -1) {
+        if (item.title.indexOf(keyword) !== -1) {
             return true;
-        }
+        } 
+        return false;
     });
 
-    pageCount = Math.ceil(filteredGamesArray.length / MAXIMUM_ITEM_PER_PAGE);
+    const dividedGamesArray = divideArrayIntoPieces(filteredGamesArray, MAXIMUM_ITEM_PER_PAGE);
+    const pageCount = Math.ceil(filteredGamesArray.length / MAXIMUM_ITEM_PER_PAGE);
 
     const searchedGames = {
-        Items: filteredGamesArray,
+        Items: dividedGamesArray[0],
+        itemsArrayPerPage: dividedGamesArray,
         page: 1,
         pageCount: pageCount,
     };
@@ -66,19 +77,25 @@ const SearchAppBar = props => {
         setKeyword(event.target.value);
     };
 
-    const searchClickedHandler = (pageCount, keyword) => {
-        const games = actions.fetchAllGames(pageCount);
-        // dispatch(action.setSearchedGames(filterGames(games, keyword));
+    const submit = (event, pageCount, keyword) => {
+        event.preventDefault();
+        const games = actions.fetchAllGames(500, pageCount);
+        dispatch(actions.setSearchedGames(filterGames(games, keyword)));
+    };
+
+    const submitHandler = event => {
+        submit(event, games.pageCount, keyword);
     };
 
     return (
-        <Paper component="form" className={classes.root}>
+        <Paper component="form" className={classes.root} onSubmit={event => submitHandler(event)}>
             <InputBase
                 className={classes.input}
                 placeholder="Find a game to write a review about!"
                 inputProps={{
                     'aria-label': 'find a game to write a review about',
                 }}
+                onChange={inputChangedHandler}
             />
             <IconButton
                 type="submit"

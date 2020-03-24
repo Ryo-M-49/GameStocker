@@ -50,7 +50,9 @@ export const updateGamesByPage = currentPage => {
 
 export const fetchAllGames = pageCount => {
     const games = [];
+    let promises = [];
     for (let page = 1; page <= pageCount; page++) {
+        promises.push(
         axios
             .get(
                 `https://app.rakuten.co.jp/services/api/BooksGame/Search/20170404?format=json&hardware=PS&page=${page}&hits=30&booksGenreId=006&applicationId=1009084489441242376`
@@ -60,7 +62,9 @@ export const fetchAllGames = pageCount => {
             })
             .catch(error => {
                 console.log('Failed to fetch all games');
-            });
+            })
+        )
     }
+    console.log(games);
     return games;
 };

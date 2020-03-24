@@ -47,9 +47,10 @@ const filterGames = (games, keyword) => {
     }
 
     const filteredGamesArray = items.filter(item => {
-        if (item.title.indexOf(keyword) != -1) {
+        if (item.title.indexOf(keyword) !== -1) {
             return true;
-        }
+        } 
+        return false;
     });
 
     const dividedGamesArray = divideArrayIntoPieces(filteredGamesArray, MAXIMUM_ITEM_PER_PAGE);
@@ -78,7 +79,7 @@ const SearchAppBar = props => {
 
     const submit = (event, pageCount, keyword) => {
         event.preventDefault();
-        const games = actions.fetchAllGames(pageCount);
+        const games = actions.fetchAllGames(500, pageCount);
         dispatch(actions.setSearchedGames(filterGames(games, keyword)));
     };
 

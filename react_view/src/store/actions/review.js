@@ -26,6 +26,7 @@ export const getReview = (userId, gameId) => {
                         good: response.data.good,
                         bad: response.data.bad,
                         rate: response.data.rate,
+                        isExisted: true
                     }
                     dispatch(setReview(updatedReview));
                 }
@@ -36,8 +37,7 @@ export const getReview = (userId, gameId) => {
     };
 };
 
-export const createReview = reviewDetail => {
-    const userId = reviewDetail.user_id;
+export const createReview = (reviewDetail, userId) => {
     const url = `http://localhost:3001/users/${userId}/reviews`;
     axios
         .post(url, reviewDetail)

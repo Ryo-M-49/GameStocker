@@ -31,8 +31,8 @@ export const getReview = (userId, gameId) => {
                     dispatch(setReview(updatedReview));
                 } else {
                     const emptyReview = {
-                        good: null,
-                        bad: null,
+                        good: '',
+                        bad: '',
                         rate: null,
                         isExisted: false
                     }

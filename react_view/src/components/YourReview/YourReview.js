@@ -26,7 +26,8 @@ const YourReview = props => {
 
     useEffect(() => {
         dispatch(actions.setGame(updatedGame));
-    }, [props.location.state.game]);
+        dispatch(actions.getReview(updatedGame.user_id, updatedGame.gameId));
+    }, [game]);
 
     return (
         <div className={classes.YourReview}>

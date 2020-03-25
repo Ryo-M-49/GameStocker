@@ -15,14 +15,29 @@ export const setGame = game => {
     };
 };
 
-export const createReview = reviewDetail => {
+export const getReview = (userId, gameId) => {
     return dispatch => {
-        const userId = reviewDetail.user_id;
-        const url = `http://localhost:3001/users/${userId}/reviews`;
+        const url = `http://localhost:3001/users/${userId}/reviews/${gameId}`;
         axios
-            .post(url, reviewDetail)
+            .get(url)
             .then(response => {
-                console.log(response, 'Review creation success!');
+                if (response.data) {
+                    const updatedReview = {
+                        good: response.data.good,
+                        bad: response.data.bad,
+                        rate: response.data.rate,
+                        isExisted: true
+                    }
+                    dispatch(setReview(updatedReview));
+                } else {
+                    const emptyReview = {
+                        good: '',
+                        bad: '',
+                        rate: null,
+                        isExisted: false
+                    }
+                    dispatch(setReview(emptyReview));
+                }
             })
             .catch(error => {
                 console.log(error);
@@ -30,16 +45,26 @@ export const createReview = reviewDetail => {
     };
 };
 
+export const createReview = (reviewDetail, userId) => {
+    const url = `http://localhost:3001/users/${userId}/reviews`;
+    axios
+        .post(url, reviewDetail)
+        .then(response => {
+            console.log(response, 'Review POST success!');
+        })
+        .catch(error => {
+            console.log(error);
+        });
+};
+
 export const updateReview = (reviewDetail, userId, reviewId) => {
-    return dispatch => {
-        const url = `http://localhost:3001/users/${userId}/reviews/${reviewId}`;
-        axios
-            .patch(url, reviewDetail)
-            .then(response => {
-                console.log(response, 'Revie creation success!');
-            })
-            .catch(error => {
-                console.log(error);
-            });
-    };
+    const url = `http://localhost:3001/users/${userId}/reviews/${reviewId}`;
+    axios
+        .patch(url, reviewDetail)
+        .then(response => {
+            console.log(response, 'Revie update success!');
+        })
+        .catch(error => {
+            console.log(error);
+        });
 };

@@ -37,30 +37,26 @@ export const getReview = (userId, gameId) => {
 };
 
 export const createReview = reviewDetail => {
-    return dispatch => {
-        const userId = reviewDetail.user_id;
-        const url = `http://localhost:3001/users/${userId}/reviews`;
-        axios
-            .post(url, reviewDetail)
-            .then(response => {
-                console.log(response, 'Review POST success!');
-            })
-            .catch(error => {
-                console.log(error);
-            });
-    };
+    const userId = reviewDetail.user_id;
+    const url = `http://localhost:3001/users/${userId}/reviews`;
+    axios
+        .post(url, reviewDetail)
+        .then(response => {
+            console.log(response, 'Review POST success!');
+        })
+        .catch(error => {
+            console.log(error);
+        });
 };
 
 export const updateReview = (reviewDetail, userId, reviewId) => {
-    return dispatch => {
-        const url = `http://localhost:3001/users/${userId}/reviews/${reviewId}`;
-        axios
-            .patch(url, reviewDetail)
-            .then(response => {
-                console.log(response, 'Revie update success!');
-            })
-            .catch(error => {
-                console.log(error);
-            });
-    };
+    const url = `http://localhost:3001/users/${userId}/reviews/${reviewId}`;
+    axios
+        .patch(url, reviewDetail)
+        .then(response => {
+            console.log(response, 'Revie update success!');
+        })
+        .catch(error => {
+            console.log(error);
+        });
 };

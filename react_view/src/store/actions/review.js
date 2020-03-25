@@ -29,6 +29,14 @@ export const getReview = (userId, gameId) => {
                         isExisted: true
                     }
                     dispatch(setReview(updatedReview));
+                } else {
+                    const emptyReview = {
+                        good: null,
+                        bad: null,
+                        rate: null,
+                        isExisted: false
+                    }
+                    dispatch(setReview(emptyReview));
                 }
             })
             .catch(error => {

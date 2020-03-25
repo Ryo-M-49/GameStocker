@@ -31,10 +31,9 @@ const Bad = props => {
             <div className={classes.Content}>
                 <StyledTextField
                     id="outlined-multiline-static"
-                    label="Bad Point"
                     multiline
                     rows="3"
-                    placeholder="Write your opinion here!"
+                    placeholder="Write bad points!"
                     variant="outlined"
                     value={props.value}
                     onChange={event => inputChangedHandler(event.target.value)}

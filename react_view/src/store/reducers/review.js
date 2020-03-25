@@ -15,8 +15,8 @@ const initialState = {
         good: '',
         bad: '',
         rate: null,
+        isExisted: false
     },
-    isExisted: false,
 };
 
 const setReview = (state, action) => {

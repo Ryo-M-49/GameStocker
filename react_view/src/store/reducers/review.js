@@ -1,6 +1,7 @@
 import * as actionTypes from '../actions/actionTypes';
 import { updateObject } from './utility';
 
+// This state will be updated with information of an authenticated user every time YourReview component is rendered.
 const initialState = {
     game: {
         user_id: null,
@@ -11,10 +12,11 @@ const initialState = {
         url: null,
     },
     review: {
-        good: null,
-        bad: null,
-        rate: 3,
+        good: '',
+        bad: '',
+        rate: null,
     },
+    isExisted: false,
 };
 
 const setReview = (state, action) => {

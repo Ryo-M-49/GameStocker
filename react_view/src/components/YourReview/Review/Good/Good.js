@@ -36,6 +36,7 @@ const Good = props => {
                     rows="3"
                     placeholder="Write your opinion here!"
                     variant="outlined"
+                    value={props.value}
                     onChange={event => inputChangedHandler(event.target.value)}
                 />
             </div>

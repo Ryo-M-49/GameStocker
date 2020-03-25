@@ -5,7 +5,7 @@ export {
     fetchAllGames,
 } from './gameList';
 
-export { setReview, setGame, createReview, updateReview } from './review';
+export { setReview, setGame, getReview, createReview, updateReview } from './review';
 
 export {
     authSuccess,

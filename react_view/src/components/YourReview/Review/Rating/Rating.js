@@ -30,7 +30,7 @@ const useStyles = makeStyles({
     },
 });
 
-export default function HoverRating() {
+const HoverRating = props => {
     const [value, setValue] = useState(2);
     const [hover, setHover] = useState(-1);
     const classes = useStyles();
@@ -51,7 +51,7 @@ export default function HoverRating() {
         <div className={classes.root}>
             <Rating
                 name="hover-feedback"
-                value={value}
+                value={ props.value ? props.value : value}
                 precision={0.5}
                 onChange={(event, newValue) => {
                     setValue(newValue);
@@ -67,3 +67,5 @@ export default function HoverRating() {
         </div>
     );
 }
+
+export default HoverRating;

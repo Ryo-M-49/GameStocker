@@ -6,16 +6,19 @@ import Review from './Review/Review';
 import QuitButton from '../UI/QuitButton/QuitButton';
 import ShareButton from '../UI/ShareButton/ShareButton';
 import SaveButton from '../UI/SaveButton/SaveButton';
+import EditButton from '../UI/EditButton/EditButton';
 import * as actions from '../../store/actions/index';
 
 const YourReview = props => {
-    const game = props.location.state.game;
-    const gameState = useSelector(state => state.reviewReducer.game);
+    const review = useSelector(state => state.reviewReducer);
     const auth = useSelector(state => state.authReducer);
     const dispatch = useDispatch();
+    
+    const game = props.location.state.game;
+    const isReviewExisted = review.review.isExisted;
 
     const updatedGame = {
-        ...gameState,
+        ...review.game,
         user_id: auth.userId,
         gameId: game.jan,
         title: game.title,
@@ -26,7 +29,25 @@ const YourReview = props => {
 
     useEffect(() => {
         dispatch(actions.setGame(updatedGame));
-    }, [props.location.state.game]);
+        dispatch(actions.getReview(updatedGame.user_id, updatedGame.gameId));
+    }, [game]);
+
+    let buttons = (
+        <div className={classes.ButtonWrapper}>
+            <SaveButton />
+        </div>
+    );
+
+    if (isReviewExisted) {
+        buttons = (
+            <div className={classes.ButtonWrapper}>
+                <div className={classes.ShareButton}>
+                    <ShareButton />
+                </div>
+                <EditButton />
+            </div>
+        );
+    };
 
     return (
         <div className={classes.YourReview}>
@@ -42,12 +63,7 @@ const YourReview = props => {
                         alt="thumbnail"
                     />
                 </div>
-                <div className={classes.ButtonWrapper}>
-                    <div className={classes.ShareButton}>
-                        <ShareButton />
-                    </div>
-                    <SaveButton />
-                </div>
+                { buttons }
             </div>
         </div>
     );

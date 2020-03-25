@@ -1,6 +1,6 @@
 class ReviewsController < ApplicationController
   before_action :set_user
-  before_action :set_user_review, only: %i[show update destroy]
+  before_action :set_user_review, only: [:show, :update, :destroy]
 
   def index
     @review = Review.all
@@ -36,6 +36,6 @@ class ReviewsController < ApplicationController
   end
 
   def set_user_review
-    @review = @user.reviews.find_by(params[:id]) if @review
+    @review = @user.reviews.find_by(gameId: params[:id])
   end
 end

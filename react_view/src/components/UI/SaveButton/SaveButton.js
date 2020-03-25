@@ -24,7 +24,7 @@ const SaveButton = props => {
             ...review,
         };
         console.log(updatedReview);
-        dispatch(actions.createReview(updatedReview));
+        dispatch(actions.createReview(updatedReview, updatedReview.user_id));
     };
 
     return (

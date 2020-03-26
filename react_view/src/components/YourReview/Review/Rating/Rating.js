@@ -51,7 +51,7 @@ const HoverRating = props => {
         <div className={classes.root}>
             <Rating
                 name="hover-feedback"
-                value={ props.value ? props.value : value}
+                value={props.value ? props.value : value}
                 precision={0.5}
                 onChange={(event, newValue) => {
                     setValue(newValue);
@@ -66,6 +66,6 @@ const HoverRating = props => {
             )}
         </div>
     );
-}
+};
 
 export default HoverRating;

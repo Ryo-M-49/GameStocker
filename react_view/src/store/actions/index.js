@@ -5,7 +5,14 @@ export {
     fetchAllGames,
 } from './gameList';
 
-export { setReview, setGame, getReview, createReview, updateReview, toggleSnackbar } from './review';
+export {
+    setReview,
+    setGame,
+    getReview,
+    createReview,
+    updateReview,
+    toggleSnackbar,
+} from './review';
 
 export {
     authSuccess,
@@ -13,7 +20,7 @@ export {
     logout,
     setAuthRedirectPath,
     authCheckState,
-    toggleAuthSnackbar
+    toggleAuthSnackbar,
 } from './auth';
 
 export { getUser } from './user';

@@ -22,7 +22,13 @@ const SaveButton = props => {
             ...review.game,
             ...review.review,
         };
-        dispatch(actions.createReview(updatedReview, updatedReview.user_id, review.isSnackbarOpen));
+        dispatch(
+            actions.createReview(
+                updatedReview,
+                updatedReview.user_id,
+                review.isSnackbarOpen
+            )
+        );
     };
 
     return (

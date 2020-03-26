@@ -13,12 +13,12 @@ const Timeline = props => {
     const auth = useSelector(state => state.authReducer);
     const dispatch = useDispatch();
 
-    const snackbarClosedHandler = (isSnackbarOpen) => {
+    const snackbarClosedHandler = isSnackbarOpen => {
         dispatch(actions.toggleAuthSnackbar(isSnackbarOpen));
     };
 
-    let isOpen = auth.isSnackbarOpen.isOpen;
-    let type = auth.isSnackbarOpen.type;
+    const isOpen = auth.isSnackbarOpen.isOpen;
+    const type = auth.isSnackbarOpen.type;
     let notificationText = null;
     if (type === 'signin') {
         notificationText = 'Signed in!';
@@ -26,10 +26,10 @@ const Timeline = props => {
         notificationText = 'Signed out!';
     }
 
-    let snackbar = {
+    const snackbar = {
         isOpen: false,
-        type: 'null'
-    }
+        type: 'null',
+    };
 
     let notification = null;
     if (isOpen) {
@@ -40,13 +40,15 @@ const Timeline = props => {
                     horizontal: 'center',
                 }}
                 open={isOpen}
-                onClose={( snackbar ) => snackbarClosedHandler(snackbar)}
+                onClose={snackbar => snackbarClosedHandler(snackbar)}
             >
-
-                <MuiAlert severity="success" onClose={( snackbar ) => snackbarClosedHandler(snackbar)}>
+                <MuiAlert
+                    severity="success"
+                    onClose={snackbar => snackbarClosedHandler(snackbar)}
+                >
                     {notificationText}
                 </MuiAlert>
-            </ Snackbar>
+            </Snackbar>
         );
     }
     return (
@@ -65,7 +67,6 @@ const Timeline = props => {
             </ul>
         </div>
     );
-}
-
+};
 
 export default Timeline;

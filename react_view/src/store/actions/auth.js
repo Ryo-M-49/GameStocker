@@ -56,8 +56,8 @@ export const auth = (email, password) => {
                 );
                 const snackbar = {
                     isOpen: true,
-                    type: 'signin'
-                }
+                    type: 'signin',
+                };
                 dispatch(toggleAuthSnackbar(snackbar));
             })
             .catch(error => {
@@ -89,6 +89,6 @@ export const authCheckState = () => {
 export const toggleAuthSnackbar = isSnackbarOpen => {
     return {
         type: actionTypes.TOGGLE_AUTH_SNACKBAR,
-        isSnackbarOpen: isSnackbarOpen
+        isSnackbarOpen: isSnackbarOpen,
     };
-}
+};

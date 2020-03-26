@@ -26,16 +26,16 @@ export const getReview = (userId, gameId) => {
                         good: response.data.good,
                         bad: response.data.bad,
                         rate: response.data.rate,
-                        isExisted: true
-                    }
+                        isExisted: true,
+                    };
                     dispatch(setReview(updatedReview));
                 } else {
                     const emptyReview = {
                         good: '',
                         bad: '',
                         rate: null,
-                        isExisted: false
-                    }
+                        isExisted: false,
+                    };
                     dispatch(setReview(emptyReview));
                 }
             })
@@ -57,10 +57,15 @@ export const createReview = (reviewDetail, userId, isSnackbarOpen) => {
             .catch(error => {
                 console.log(error);
             });
-    }
+    };
 };
 
-export const updateReview = (reviewDetail, userId, reviewId, isSnackbarOpen) => {
+export const updateReview = (
+    reviewDetail,
+    userId,
+    reviewId,
+    isSnackbarOpen
+) => {
     return dispatch => {
         const url = `http://localhost:3001/users/${userId}/reviews/${reviewId}`;
         axios
@@ -71,12 +76,12 @@ export const updateReview = (reviewDetail, userId, reviewId, isSnackbarOpen) => 
             .catch(error => {
                 console.log(error);
             });
-    }
+    };
 };
 
 export const toggleSnackbar = isSnackbarOpen => {
     return {
         type: actionTypes.TOGGLE_SNACKBAR,
-        isSnackbarOpen: !isSnackbarOpen
+        isSnackbarOpen: !isSnackbarOpen,
     };
-}
+};

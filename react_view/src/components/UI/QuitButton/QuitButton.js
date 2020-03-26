@@ -13,17 +13,17 @@ const QuitButton = props => {
             good: '',
             bad: '',
             rate: null,
-            isExisted: false
-        }
+            isExisted: false,
+        };
         props.history.goBack();
         dispatch(actions.setReview(emptyReview));
-    }
+    };
 
     return (
         <div className={classes.QuitButton} onClick={buttonClickedHandler}>
             <i className="fa fa-times-circle"></i>
         </div>
     );
-}
+};
 
 export default withRouter(QuitButton);

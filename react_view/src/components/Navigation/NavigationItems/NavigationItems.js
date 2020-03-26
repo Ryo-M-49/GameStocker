@@ -18,8 +18,8 @@ const NavigationItems = props => {
         dispatch(actions.logout());
         const snackbar = {
             isOpen: true,
-            type: 'signout'
-        }
+            type: 'signout',
+        };
         dispatch(actions.toggleAuthSnackbar(snackbar));
     };
 

@@ -10,8 +10,8 @@ const initialState = {
     authRedirectPath: '/',
     isSnackbarOpen: {
         isOpen: false,
-        type: null
-    }
+        type: null,
+    },
 };
 
 const authStart = (state, action) => {

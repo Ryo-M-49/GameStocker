@@ -8,6 +8,10 @@ const initialState = {
     error: null,
     loading: false,
     authRedirectPath: '/',
+    isSnackbarOpen: {
+        isOpen: false,
+        type: null
+    }
 };
 
 const authStart = (state, action) => {
@@ -39,6 +43,12 @@ const setAuthRedirectPath = (state, action) => {
     return updateObject(state, { authRedirectPath: action.path });
 };
 
+const toggleAuthSnackbar = (state, action) => {
+    return updateObject(state, {
+        isSnackbarOpen: action.isSnackbarOpen,
+    });
+};
+
 const reducer = (state = initialState, action) => {
     switch (action.type) {
         case actionTypes.AUTH_START:
@@ -51,6 +61,8 @@ const reducer = (state = initialState, action) => {
             return authLogout(state, action);
         case actionTypes.SET_AUTH_REDIRECT_PATH:
             return setAuthRedirectPath(state, action);
+        case actionTypes.TOGGLE_AUTH_SNACKBAR:
+            return toggleAuthSnackbar(state, action);
         default:
             return state;
     }

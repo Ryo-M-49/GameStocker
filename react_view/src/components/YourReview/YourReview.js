@@ -1,7 +1,9 @@
-import React, { useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { withRouter } from 'react-router';
 import classes from './YourReview.module.css';
+import Snackbar from '@material-ui/core/Snackbar';
+import MuiAlert from '@material-ui/lab/Alert';
 import Review from './Review/Review';
 import QuitButton from '../UI/QuitButton/QuitButton';
 import ShareButton from '../UI/ShareButton/ShareButton';
@@ -17,14 +19,19 @@ const YourReview = props => {
     const game = props.location.state.game;
     const isReviewExisted = review.review.isExisted;
 
+    const id = localStorage.getItem('userId') ? localStorage.getItem('userId') : auth.userId;
     const updatedGame = {
         ...review.game,
-        user_id: auth.userId,
+        user_id: id,
         gameId: game.jan,
         title: game.title,
         caption: game.itemCaption,
         image: game.largeImageUrl,
         url: game.itemUrl,
+    };
+
+    const snackbarClosedHandler = (isSnackbarOpen) => {
+        dispatch(actions.toggleSnackbar(isSnackbarOpen));
     };
 
     useEffect(() => {
@@ -37,6 +44,25 @@ const YourReview = props => {
             <SaveButton />
         </div>
     );
+
+    let notification = null;
+    let isSnackbarOpen = review.isSnackbarOpen;
+    if (isSnackbarOpen) {
+        notification = (
+            <Snackbar
+                anchorOrigin={{
+                    vertical: 'top',
+                    horizontal: 'center',
+                }}
+                open={isSnackbarOpen}
+                onClose={( isSnackbarOpen ) => snackbarClosedHandler(isSnackbarOpen)}
+            >
+                <MuiAlert severity="success" onClose={( isSnackbarOpen ) => snackbarClosedHandler(isSnackbarOpen)}>
+                    Your change has been saved successfully!
+                </MuiAlert>
+            </ Snackbar>
+        );
+    }
 
     if (isReviewExisted) {
         buttons = (
@@ -51,6 +77,7 @@ const YourReview = props => {
 
     return (
         <div className={classes.YourReview}>
+            {notification}
             <QuitButton />
             <div className={classes.ReviewWrapper}>
                 <Review game={game} />

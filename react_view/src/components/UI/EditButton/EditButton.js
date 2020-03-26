@@ -16,7 +16,7 @@ const EditButton = props => {
         };
         delete updatedReview.isExisted;
 
-        dispatch(actions.updateReview(updatedReview, updatedReview.user_id, updatedReview.gameId));
+        dispatch(actions.updateReview(updatedReview, updatedReview.user_id, updatedReview.gameId, review.isSnackbarOpen));
     }
 
     return (

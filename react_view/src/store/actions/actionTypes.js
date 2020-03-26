@@ -29,3 +29,4 @@ export const DELETE_USER = 'DELETE_USER';
 // for ./review.js
 export const SET_REVIEW = 'SET_REVIEW';
 export const SET_GAME = 'SET_GAME';
+export const TOGGLE_SNACKBAR = 'TOGGLE_SNACKBAR';

@@ -14,17 +14,15 @@ const StyledButton = withStyles({
 })(Button);
 
 const SaveButton = props => {
-    const review = useSelector(state => state.reviewReducer.review);
-    const game = useSelector(state => state.reviewReducer.game);
+    const review = useSelector(state => state.reviewReducer);
     const dispatch = useDispatch();
 
     const saveButtonClickedHandler = () => {
         const updatedReview = {
-            ...game,
-            ...review,
+            ...review.game,
+            ...review.review,
         };
-        console.log(updatedReview);
-        dispatch(actions.createReview(updatedReview, updatedReview.user_id));
+        dispatch(actions.createReview(updatedReview, updatedReview.user_id, review.isSnackbarOpen));
     };
 
     return (

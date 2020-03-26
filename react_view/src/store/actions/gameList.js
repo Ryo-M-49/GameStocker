@@ -54,7 +54,7 @@ export const sleep = time => {
             resolve();
         }, time);
     });
-}
+};
 
 export const fetchAllGames = async (delay, pageCount) => {
     const games = [];
@@ -70,8 +70,8 @@ export const fetchAllGames = async (delay, pageCount) => {
             .catch(error => {
                 console.log('Failed to fetch all games');
             });
-            await sleep(delay);
-    };
+        await sleep(delay);
+    }
     console.log(games);
     return games;
 };

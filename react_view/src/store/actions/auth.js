@@ -54,6 +54,11 @@ export const auth = (email, password) => {
                         response.headers['uid']
                     )
                 );
+                const snackbar = {
+                    isOpen: true,
+                    type: 'signin',
+                };
+                dispatch(toggleAuthSnackbar(snackbar));
             })
             .catch(error => {
                 dispatch(authFail(error));
@@ -81,14 +86,9 @@ export const authCheckState = () => {
     };
 };
 
-// export const changePassword = (userId, email) => {
-//     return {
-//         type: actionTypes.CHANGE_PASSWORD,
-//         id: userId,
-//         email: email
-//     }
-// }
-
-// export const checkCurrentUser = (email, token) => {
-
-// }
+export const toggleAuthSnackbar = isSnackbarOpen => {
+    return {
+        type: actionTypes.TOGGLE_AUTH_SNACKBAR,
+        isSnackbarOpen: isSnackbarOpen,
+    };
+};

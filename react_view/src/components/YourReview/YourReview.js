@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { withRouter } from 'react-router';
 import classes from './YourReview.module.css';
@@ -15,11 +15,13 @@ const YourReview = props => {
     const review = useSelector(state => state.reviewReducer);
     const auth = useSelector(state => state.authReducer);
     const dispatch = useDispatch();
-    
+
     const game = props.location.state.game;
     const isReviewExisted = review.review.isExisted;
 
-    const id = localStorage.getItem('userId') ? localStorage.getItem('userId') : auth.userId;
+    const id = localStorage.getItem('userId')
+        ? localStorage.getItem('userId')
+        : auth.userId;
     const updatedGame = {
         ...review.game,
         user_id: id,
@@ -30,7 +32,7 @@ const YourReview = props => {
         url: game.itemUrl,
     };
 
-    const snackbarClosedHandler = (isSnackbarOpen) => {
+    const snackbarClosedHandler = isSnackbarOpen => {
         dispatch(actions.toggleSnackbar(isSnackbarOpen));
     };
 
@@ -46,7 +48,7 @@ const YourReview = props => {
     );
 
     let notification = null;
-    let isSnackbarOpen = review.isSnackbarOpen;
+    const isSnackbarOpen = review.isSnackbarOpen;
     if (isSnackbarOpen) {
         notification = (
             <Snackbar
@@ -55,12 +57,19 @@ const YourReview = props => {
                     horizontal: 'center',
                 }}
                 open={isSnackbarOpen}
-                onClose={( isSnackbarOpen ) => snackbarClosedHandler(isSnackbarOpen)}
+                onClose={isSnackbarOpen =>
+                    snackbarClosedHandler(isSnackbarOpen)
+                }
             >
-                <MuiAlert severity="success" onClose={( isSnackbarOpen ) => snackbarClosedHandler(isSnackbarOpen)}>
+                <MuiAlert
+                    severity="success"
+                    onClose={isSnackbarOpen =>
+                        snackbarClosedHandler(isSnackbarOpen)
+                    }
+                >
                     Your change has been saved successfully!
                 </MuiAlert>
-            </ Snackbar>
+            </Snackbar>
         );
     }
 
@@ -73,7 +82,7 @@ const YourReview = props => {
                 <EditButton />
             </div>
         );
-    };
+    }
 
     return (
         <div className={classes.YourReview}>
@@ -90,7 +99,7 @@ const YourReview = props => {
                         alt="thumbnail"
                     />
                 </div>
-                { buttons }
+                {buttons}
             </div>
         </div>
     );

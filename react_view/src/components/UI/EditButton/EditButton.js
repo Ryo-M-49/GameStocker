@@ -6,8 +6,18 @@ import EditIcon from '@material-ui/icons/Edit';
 import * as actions from '../../../store/actions/index';
 
 const EditButton = props => {
-    const review = useSelector(state => state.reviewReducer.review);
+    const review = useSelector(state => state.reviewReducer);
     const dispatch = useDispatch();
+
+    const buttonClickedHandler = () => {
+        const updatedReview = {
+            ...review.game,
+            ...review.review,
+        };
+        delete updatedReview.isExisted;
+
+        dispatch(actions.updateReview(updatedReview, updatedReview.user_id, updatedReview.gameId));
+    }
 
     return (
         <div>
@@ -15,7 +25,7 @@ const EditButton = props => {
                 variant="contained"
                 color="primary"
                 startIcon={<EditIcon />}
-                onClick={(review) => dispatch(actions.setReview(review))}
+                onClick={buttonClickedHandler}
             >
                 Edit
             </Button>

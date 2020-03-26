@@ -51,7 +51,7 @@ export const createReview = (reviewDetail, userId, isSnackbarOpen) => {
         axios
             .post(url, reviewDetail)
             .then(response => {
-                console.log(response, 'Review POST success!');
+                dispatch(getReview(userId, reviewDetail.gameId));
                 dispatch(toggleSnackbar(isSnackbarOpen));
             })
             .catch(error => {
@@ -66,8 +66,6 @@ export const updateReview = (reviewDetail, userId, reviewId, isSnackbarOpen) => 
         axios
             .patch(url, reviewDetail)
             .then(response => {
-                console.log(response, 'Review update success!');
-                console.log(isSnackbarOpen);
                 dispatch(toggleSnackbar(isSnackbarOpen));
             })
             .catch(error => {

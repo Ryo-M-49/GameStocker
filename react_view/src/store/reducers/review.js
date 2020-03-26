@@ -17,6 +17,7 @@ const initialState = {
         rate: null,
         isExisted: false
     },
+    isSnackbarOpen: false
 };
 
 const setReview = (state, action) => {
@@ -31,12 +32,20 @@ const setGame = (state, action) => {
     });
 };
 
+const toggleSnackbar = (state, action) => {
+    return updateObject(state, {
+        isSnackbarOpen: action.isSnackbarOpen,
+    });
+};
+
 const reducer = (state = initialState, action) => {
     switch (action.type) {
         case actionTypes.SET_REVIEW:
             return setReview(state, action);
         case actionTypes.SET_GAME:
             return setGame(state, action);
+        case actionTypes.TOGGLE_SNACKBAR:
+            return toggleSnackbar(state, action);
         default:
             return state;
     }

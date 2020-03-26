@@ -21,7 +21,6 @@ const toolbar = props => (
         </div>
         <nav>
             <NavigationItems
-                logoutClicked={props.logoutHandler}
                 isAuth={props.isAuthenticated}
             />
         </nav>

@@ -75,7 +75,6 @@ class Layout extends Component {
                     drawerToggleClicked={() => this.toggleDrawerHandler(true)}
                     drawerToggleClosed={() => this.toggleDrawerHandler(false)}
                     isOpen={this.state.showSideDrawer}
-                    logoutHandler={this.props.onLogout}
                     isAuthenticated={this.props.isAuthenticated}
                 />
                 <main>{routes}</main>
@@ -92,7 +91,6 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
     return {
-        onLogout: () => dispatch(actions.logout()),
         onTryAutoSignup: () => dispatch(actions.authCheckState()),
     };
 };

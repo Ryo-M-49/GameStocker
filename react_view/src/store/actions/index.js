@@ -13,6 +13,7 @@ export {
     logout,
     setAuthRedirectPath,
     authCheckState,
+    toggleAuthSnackbar
 } from './auth';
 
 export { getUser } from './user';

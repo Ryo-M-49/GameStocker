@@ -25,13 +25,13 @@ const useStyles = makeStyles(theme => ({
 }));
 
 const divideArrayIntoPieces = (array, numsPerArray) => {
-  var arrayList = [];
-  var index = 0;
-  while(index < array.length){
-      arrayList.push(array.splice(index, index + numsPerArray));
-  }
-  return arrayList;
-}
+    const arrayList = [];
+    const index = 0;
+    while (index < array.length) {
+        arrayList.push(array.splice(index, index + numsPerArray));
+    }
+    return arrayList;
+};
 
 const filterGames = (games, keyword) => {
     const items = [];
@@ -49,12 +49,17 @@ const filterGames = (games, keyword) => {
     const filteredGamesArray = items.filter(item => {
         if (item.title.indexOf(keyword) !== -1) {
             return true;
-        } 
+        }
         return false;
     });
 
-    const dividedGamesArray = divideArrayIntoPieces(filteredGamesArray, MAXIMUM_ITEM_PER_PAGE);
-    const pageCount = Math.ceil(filteredGamesArray.length / MAXIMUM_ITEM_PER_PAGE);
+    const dividedGamesArray = divideArrayIntoPieces(
+        filteredGamesArray,
+        MAXIMUM_ITEM_PER_PAGE
+    );
+    const pageCount = Math.ceil(
+        filteredGamesArray.length / MAXIMUM_ITEM_PER_PAGE
+    );
 
     const searchedGames = {
         Items: dividedGamesArray[0],
@@ -88,7 +93,11 @@ const SearchAppBar = props => {
     };
 
     return (
-        <Paper component="form" className={classes.root} onSubmit={event => submitHandler(event)}>
+        <Paper
+            component="form"
+            className={classes.root}
+            onSubmit={event => submitHandler(event)}
+        >
             <InputBase
                 className={classes.input}
                 placeholder="Find a game to write a review about!"

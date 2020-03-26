@@ -15,9 +15,9 @@ const initialState = {
         good: '',
         bad: '',
         rate: null,
-        isExisted: false
+        isExisted: false,
     },
-    isSnackbarOpen: false
+    isSnackbarOpen: false,
 };
 
 const setReview = (state, action) => {

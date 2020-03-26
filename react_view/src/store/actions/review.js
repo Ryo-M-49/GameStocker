@@ -45,26 +45,38 @@ export const getReview = (userId, gameId) => {
     };
 };
 
-export const createReview = (reviewDetail, userId) => {
-    const url = `http://localhost:3001/users/${userId}/reviews`;
-    axios
-        .post(url, reviewDetail)
-        .then(response => {
-            console.log(response, 'Review POST success!');
-        })
-        .catch(error => {
-            console.log(error);
-        });
+export const createReview = (reviewDetail, userId, isSnackbarOpen) => {
+    return dispatch => {
+        const url = `http://localhost:3001/users/${userId}/reviews`;
+        axios
+            .post(url, reviewDetail)
+            .then(response => {
+                dispatch(getReview(userId, reviewDetail.gameId));
+                dispatch(toggleSnackbar(isSnackbarOpen));
+            })
+            .catch(error => {
+                console.log(error);
+            });
+    }
 };
 
-export const updateReview = (reviewDetail, userId, reviewId) => {
-    const url = `http://localhost:3001/users/${userId}/reviews/${reviewId}`;
-    axios
-        .patch(url, reviewDetail)
-        .then(response => {
-            console.log(response, 'Revie update success!');
-        })
-        .catch(error => {
-            console.log(error);
-        });
+export const updateReview = (reviewDetail, userId, reviewId, isSnackbarOpen) => {
+    return dispatch => {
+        const url = `http://localhost:3001/users/${userId}/reviews/${reviewId}`;
+        axios
+            .patch(url, reviewDetail)
+            .then(response => {
+                dispatch(toggleSnackbar(isSnackbarOpen));
+            })
+            .catch(error => {
+                console.log(error);
+            });
+    }
 };
+
+export const toggleSnackbar = isSnackbarOpen => {
+    return {
+        type: actionTypes.TOGGLE_SNACKBAR,
+        isSnackbarOpen: !isSnackbarOpen
+    };
+}

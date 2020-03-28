@@ -10,8 +10,7 @@ import IconButton from '@material-ui/core/IconButton';
 import Typography from '@material-ui/core/Typography';
 import { red } from '@material-ui/core/colors';
 import FavoriteIcon from '@material-ui/icons/Favorite';
-import ShareIcon from '@material-ui/icons/Share';
-import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
+import Button from '@material-ui/core/Button';
 import MoreVertIcon from '@material-ui/icons/MoreVert';
 
 const useStyles = makeStyles(theme => ({
@@ -43,29 +42,26 @@ const ReviewCard = props => {
                         <MoreVertIcon />
                     </IconButton>
                 }
-                title="Game title here"
-                subheader="September 14, 2016"
+                title={props.title}
+                subheader={props.createdAt}
             />
             <CardMedia
                 className={classes.media}
                 image={props.image}
-                title="Game Image"
+                title={props.title}
             />
             <CardContent>
                 <Typography variant="body2" color="textSecondary" component="p">
-                    Good point here
+                    {props.good}
                 </Typography>
             </CardContent>
             <CardActions disableSpacing>
                 <IconButton aria-label="add to favorites">
                     <FavoriteIcon />
                 </IconButton>
-                <IconButton aria-label="share">
-                    <ShareIcon />
-                </IconButton>
-                <IconButton aria-label="show more">
-                    <ExpandMoreIcon />
-                </IconButton>
+                <Button size="small" color="primary">
+                    Read More
+                </Button>
             </CardActions>
         </Card>
     );

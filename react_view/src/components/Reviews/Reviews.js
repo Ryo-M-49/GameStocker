@@ -3,7 +3,7 @@ import classes from './Reviews.module.css';
 import GameImage1 from '../../assets/images/sample-game-1.jpg';
 import GameImage2 from '../../assets/images/sample-game-2.jpg';
 import GameImage3 from '../../assets/images/sample-game-3.jpg';
-import ReviewCard from '../Timeline/ReviewCard/ReviewCard';
+import ReviewCard from '../ReviewCard/ReviewCard';
 
 const Reviews = props => (
     <div className={classes.Reviews}>

@@ -1,6 +1,6 @@
 import React from 'react';
 import classes from './PopularReview.module.css';
-import SmallReviewCard from '../../Timeline/SmallReviewCard/SmallReviewCard';
+import SmallReviewCard from '../../SmallReviewCard/SmallReviewCard';
 import Image1 from '../../../assets/images/sample-game-1.jpg';
 import Image2 from '../../../assets/images/sample-game-2.jpg';
 import Image3 from '../../../assets/images/sample-game-3.jpg';

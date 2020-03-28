@@ -1,6 +1,6 @@
 import React from 'react';
 import classes from './RecentActivity.module.css';
-import SmallReviewCard from '../../Timeline/SmallReviewCard/SmallReviewCard';
+import SmallReviewCard from '../../SmallReviewCard/SmallReviewCard';
 import Image from '../../../assets/images/sample-game-2.jpg';
 
 const recentActivity = props => {

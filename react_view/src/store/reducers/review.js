@@ -17,12 +17,19 @@ const initialState = {
         rate: null,
         isExisted: false,
     },
+    reviews: null,
     isSnackbarOpen: false,
 };
 
 const setReview = (state, action) => {
     return updateObject(state, {
         review: action.review,
+    });
+};
+
+const setReviews = (state, action) => {
+    return updateObject(state, {
+        reviews: action.reviews,
     });
 };
 
@@ -42,6 +49,8 @@ const reducer = (state = initialState, action) => {
     switch (action.type) {
         case actionTypes.SET_REVIEW:
             return setReview(state, action);
+        case actionTypes.SET_REVIEWS:
+            return setReviews(state, action);
         case actionTypes.SET_GAME:
             return setGame(state, action);
         case actionTypes.TOGGLE_SNACKBAR:

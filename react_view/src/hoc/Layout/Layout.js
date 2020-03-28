@@ -4,7 +4,7 @@ import { Route, Switch, withRouter, Redirect } from 'react-router-dom';
 
 import Aux from '../Aux/Aux';
 import Toolbar from '../../components/Navigation/Toolbar/Toolbar';
-import ReviewList from '../../components/ReviewList/ReviewList';
+import Reviews from '../../components/Reviews/Reviews';
 import Signin from '../../containers/Authentication/Signin';
 import Signup from '../../containers/Authentication/Signup';
 import GameList from '../../containers/GameList/GameList';
@@ -40,11 +40,8 @@ class Layout extends Component {
     render() {
         let routes = (
             <Switch>
-                <Route
-                    path="/users/:userId/yourreviews/:reviewId"
-                    component={YourReview}
-                />
-                <Route path="/reviews" component={ReviewList} />
+                <Route path="/users/:userId/yourreviews/:reviewId" component={YourReview} />
+                <Route path="/users/:userId/yourreviews" component={Reviews} />
                 <Route path="/signin" component={Signin} />
                 <Route path="/signup" component={Signup} />
                 <Route path="/gamelist" component={GameList} />
@@ -56,12 +53,9 @@ class Layout extends Component {
         if (this.props.isAuthenticated) {
             routes = (
                 <Switch>
-                    <Route
-                        path="/users/:userId/yourreviews/:reviewId"
-                        component={YourReview}
-                    />
+                    <Route path="/users/:userId/yourreviews/:reviewId" component={YourReview} />
+                    <Route path="/users/:userId/yourreviews" component={Reviews} />
                     <Route path="/users/:userId" component={MyPage} />
-                    <Route path="/reviews" component={ReviewList} />
                     <Route path="/gamelist" component={GameList} />
                     <Route path="/" exact component={Timeline} />
                     <Redirect to="/" />

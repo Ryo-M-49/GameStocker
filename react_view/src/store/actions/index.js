@@ -7,8 +7,10 @@ export {
 
 export {
     setReview,
+    setReviews,
     setGame,
     getReview,
+    getReviews,
     createReview,
     updateReview,
     toggleSnackbar,

@@ -12,6 +12,11 @@ import EditButton from '../UI/EditButton/EditButton';
 import * as actions from '../../store/actions/index';
 
 const YourReview = props => {
+    useEffect(() => {
+        dispatch(actions.setGame(updatedGame));
+        dispatch(actions.getReview(updatedGame.user_id, updatedGame.gameId));
+    }, [game]);
+    
     const review = useSelector(state => state.reviewReducer);
     const auth = useSelector(state => state.authReducer);
     const dispatch = useDispatch();
@@ -36,10 +41,6 @@ const YourReview = props => {
         dispatch(actions.toggleSnackbar(isSnackbarOpen));
     };
 
-    useEffect(() => {
-        dispatch(actions.setGame(updatedGame));
-        dispatch(actions.getReview(updatedGame.user_id, updatedGame.gameId));
-    }, [game]);
 
     let buttons = (
         <div className={classes.ButtonWrapper}>

@@ -8,6 +8,13 @@ export const setReview = review => {
     };
 };
 
+export const setReviews = reviews => {
+    return {
+        type: actionTypes.SET_REVIEWS,
+        reviews: reviews,
+    };
+};
+
 export const setGame = game => {
     return {
         type: actionTypes.SET_GAME,
@@ -37,6 +44,25 @@ export const getReview = (userId, gameId) => {
                         isExisted: false,
                     };
                     dispatch(setReview(emptyReview));
+                }
+            })
+            .catch(error => {
+                console.log(error);
+            });
+    };
+};
+
+export const getReviews = (userId) => {
+    return dispatch => {
+        const url = `http://localhost:3001/users/${userId}/reviews`;
+        axios
+            .get(url)
+            .then(response => {
+                if (response.data) {
+                    console.log(response.data);
+                    dispatch(setReviews(response.data));
+                } else {
+                    dispatch(setReview(null));
                 }
             })
             .catch(error => {

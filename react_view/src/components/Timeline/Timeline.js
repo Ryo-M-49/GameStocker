@@ -6,7 +6,7 @@ import MuiAlert from '@material-ui/lab/Alert';
 import GameImage1 from '../../assets/images/sample-game-1.jpg';
 import GameImage2 from '../../assets/images/sample-game-2.jpg';
 import GameImage3 from '../../assets/images/sample-game-3.jpg';
-import ReviewCard from '../Timeline/ReviewCard/ReviewCard';
+import ReviewCard from '../ReviewCard/ReviewCard';
 import * as actions from '../../store/actions/index';
 
 const Timeline = props => {

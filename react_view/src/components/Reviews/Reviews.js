@@ -1,24 +1,42 @@
-import React from 'react';
+import React, { useEffect } from 'react';
+import { useSelector, useDispatch } from 'react-redux';
 import classes from './Reviews.module.css';
-import GameImage1 from '../../assets/images/sample-game-1.jpg';
-import GameImage2 from '../../assets/images/sample-game-2.jpg';
-import GameImage3 from '../../assets/images/sample-game-3.jpg';
 import ReviewCard from '../ReviewCard/ReviewCard';
+import * as actions from '../../store/actions/index';
 
-const Reviews = props => (
-    <div className={classes.Reviews}>
-        <ul className={classes.List}>
-            <li>
-                <ReviewCard image={GameImage1} />
-            </li>
-            <li>
-                <ReviewCard image={GameImage2} />
-            </li>
-            <li>
-                <ReviewCard image={GameImage3} />
-            </li>
-        </ul>
-    </div>
-);
+const Reviews = props => {
+    const reviews = useSelector(state => state.reviewReducer.reviews); 
+    const userId = useSelector(state => state.authReducer.userId);
+    const dispatch = useDispatch();
+
+    useEffect(() => {
+        dispatch(actions.getReviews(userId));
+    }, [userId]);
+
+    let reviewCard = null;
+    if (reviews) {
+        reviewCard = (
+            reviews.map((review, index) => (
+                <li key={index}>
+                    <ReviewCard 
+                        image={review.image} 
+                        title={review.title}
+                        createdAt={review.created_at}
+                        good={review.good}
+                    />
+                </li>
+            ))      
+        );
+    }
+    
+    return (
+        <div className={classes.Reviews}>
+            <ul className={classes.List}>
+                {reviewCard}
+            </ul>
+        </div>
+    );
+    
+}
 
 export default Reviews;

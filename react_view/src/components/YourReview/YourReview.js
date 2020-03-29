@@ -19,12 +19,7 @@ const YourReview = props => {
     
     const game = props.location.state.game;
     const isReviewExisted = review.review.isExisted;
-    
-    useEffect(() => {
-        dispatch(actions.setGame(updatedGame));
-        dispatch(actions.getReview(updatedGame.user_id, updatedGame.gameId));
-    }, [game]);
-    
+
     const id = localStorage.getItem('userId')
         ? localStorage.getItem('userId')
         : auth.userId;
@@ -37,6 +32,11 @@ const YourReview = props => {
         image: game.largeImageUrl,
         url: game.itemUrl,
     };
+
+    useEffect(() => {
+        dispatch(actions.setGame(updatedGame));
+        dispatch(actions.getReview(updatedGame.user_id, updatedGame.gameId));
+    }, [game]);
 
     const snackbarClosedHandler = isSnackbarOpen => {
         dispatch(actions.toggleSnackbar(isSnackbarOpen));

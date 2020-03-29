@@ -108,6 +108,6 @@ export const updateReview = (
 export const toggleSnackbar = isSnackbarOpen => {
     return {
         type: actionTypes.TOGGLE_SNACKBAR,
-        isSnackbarOpen: !isSnackbarOpen,
+        isSnackbarOpen: isSnackbarOpen,
     };
 };

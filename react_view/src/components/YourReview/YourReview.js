@@ -12,21 +12,18 @@ import EditButton from '../UI/EditButton/EditButton';
 import * as actions from '../../store/actions/index';
 
 const YourReview = props => {
-    useEffect(() => {
-        dispatch(actions.setGame(updatedGame));
-        dispatch(actions.getReview(updatedGame.user_id, updatedGame.gameId));
-    }, [game]);
     
     const review = useSelector(state => state.reviewReducer);
     const auth = useSelector(state => state.authReducer);
     const dispatch = useDispatch();
-
+    
     const game = props.location.state.game;
     const isReviewExisted = review.review.isExisted;
 
     const id = localStorage.getItem('userId')
         ? localStorage.getItem('userId')
         : auth.userId;
+
     const updatedGame = {
         ...review.game,
         user_id: id,
@@ -37,10 +34,10 @@ const YourReview = props => {
         url: game.itemUrl,
     };
 
-    const snackbarClosedHandler = isSnackbarOpen => {
-        dispatch(actions.toggleSnackbar(isSnackbarOpen));
-    };
-
+    useEffect(() => {
+        dispatch(actions.setGame(updatedGame));
+        dispatch(actions.getReview(updatedGame.user_id, updatedGame.gameId));
+    }, [props]);
 
     let buttons = (
         <div className={classes.ButtonWrapper}>
@@ -48,8 +45,12 @@ const YourReview = props => {
         </div>
     );
 
-    let notification = null;
+    const snackbarClosedHandler = () => {
+        dispatch(actions.toggleSnackbar(false));
+    };
+    
     const isSnackbarOpen = review.isSnackbarOpen;
+    let notification = null;
     if (isSnackbarOpen) {
         notification = (
             <Snackbar
@@ -58,15 +59,11 @@ const YourReview = props => {
                     horizontal: 'center',
                 }}
                 open={isSnackbarOpen}
-                onClose={isSnackbarOpen =>
-                    snackbarClosedHandler(isSnackbarOpen)
-                }
+                onClose={snackbarClosedHandler}
             >
                 <MuiAlert
                     severity="success"
-                    onClose={isSnackbarOpen =>
-                        snackbarClosedHandler(isSnackbarOpen)
-                    }
+                    onClose={snackbarClosedHandler}
                 >
                     Your change has been saved successfully!
                 </MuiAlert>

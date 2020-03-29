@@ -12,6 +12,7 @@ import { red } from '@material-ui/core/colors';
 import FavoriteIcon from '@material-ui/icons/Favorite';
 import Button from '@material-ui/core/Button';
 import MoreVertIcon from '@material-ui/icons/MoreVert';
+import Rating from '@material-ui/lab/Rating';
 
 const useStyles = makeStyles(theme => ({
     root: {
@@ -51,6 +52,7 @@ const ReviewCard = props => {
                 title={props.title}
             />
             <CardContent>
+                <Rating name="rating" defaultValue={props.rating} precision={0.5} readOnly />
                 <Typography variant="body2" color="textSecondary" component="p">
                     {props.good}
                 </Typography>

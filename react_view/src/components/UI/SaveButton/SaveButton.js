@@ -22,11 +22,12 @@ const SaveButton = props => {
             ...review.game,
             ...review.review,
         };
+        delete updatedReview.isExisted;
         dispatch(
             actions.createReview(
                 updatedReview,
                 updatedReview.user_id,
-                review.isSnackbarOpen
+                true
             )
         );
     };

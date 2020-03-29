@@ -12,18 +12,19 @@ import EditButton from '../UI/EditButton/EditButton';
 import * as actions from '../../store/actions/index';
 
 const YourReview = props => {
+    
+    const review = useSelector(state => state.reviewReducer);
+    const auth = useSelector(state => state.authReducer);
+    const dispatch = useDispatch();
+    
+    const game = props.location.state.game;
+    const isReviewExisted = review.review.isExisted;
+    
     useEffect(() => {
         dispatch(actions.setGame(updatedGame));
         dispatch(actions.getReview(updatedGame.user_id, updatedGame.gameId));
     }, [game]);
     
-    const review = useSelector(state => state.reviewReducer);
-    const auth = useSelector(state => state.authReducer);
-    const dispatch = useDispatch();
-
-    const game = props.location.state.game;
-    const isReviewExisted = review.review.isExisted;
-
     const id = localStorage.getItem('userId')
         ? localStorage.getItem('userId')
         : auth.userId;

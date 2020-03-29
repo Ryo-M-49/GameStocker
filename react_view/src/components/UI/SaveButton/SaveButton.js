@@ -22,6 +22,7 @@ const SaveButton = props => {
             ...review.game,
             ...review.review,
         };
+        delete updatedReview.isExisted;
         dispatch(
             actions.createReview(
                 updatedReview,

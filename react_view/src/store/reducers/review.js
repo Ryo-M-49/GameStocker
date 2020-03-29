@@ -18,21 +18,6 @@ const initialState = {
         isExisted: false,
     },
     reviews: null,
-        // The structure of reviews state will be like this below
-        // [
-        //     {
-        //         user_id: null,
-        //         gameId: null,
-        //         title: null,
-        //         caption: null,
-        //         image: null,
-        //         url: null,
-        //         good: '',
-        //         bad: '',
-        //         rate: null,
-        //         isExisted: false,
-        //     }, ...
-        // ]
     isSnackbarOpen: false,
 };
 

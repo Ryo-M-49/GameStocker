@@ -1,17 +1,20 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
+import axios from 'axios';
 import classes from './Timeline.module.css';
 import Snackbar from '@material-ui/core/Snackbar';
 import MuiAlert from '@material-ui/lab/Alert';
-import GameImage1 from '../../assets/images/sample-game-1.jpg';
-import GameImage2 from '../../assets/images/sample-game-2.jpg';
-import GameImage3 from '../../assets/images/sample-game-3.jpg';
 import ReviewCard from '../Reviews/ReviewCard/ReviewCard';
 import * as actions from '../../store/actions/index';
+import axios from 'axios';
 
 const Timeline = props => {
     const auth = useSelector(state => state.authReducer);
     const dispatch = useDispatch();
+
+    useEffect(() => {
+        dispatch(actions.getAllUser());
+    }, [props]);
 
     const isOpen = auth.isSnackbarOpen.isOpen;
     const type = auth.isSnackbarOpen.type;

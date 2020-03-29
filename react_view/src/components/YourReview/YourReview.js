@@ -23,6 +23,7 @@ const YourReview = props => {
     const id = localStorage.getItem('userId')
         ? localStorage.getItem('userId')
         : auth.userId;
+
     const updatedGame = {
         ...review.game,
         user_id: id,
@@ -36,7 +37,7 @@ const YourReview = props => {
     useEffect(() => {
         dispatch(actions.setGame(updatedGame));
         dispatch(actions.getReview(updatedGame.user_id, updatedGame.gameId));
-    }, [game]);
+    }, [props]);
 
     const snackbarClosedHandler = isSnackbarOpen => {
         dispatch(actions.toggleSnackbar(isSnackbarOpen));

@@ -15,6 +15,7 @@ import { red } from '@material-ui/core/colors';
 import FavoriteIcon from '@material-ui/icons/Favorite';
 import Button from '@material-ui/core/Button';
 import Rating from '@material-ui/lab/Rating';
+import { cutString } from '../../../shared/utility';
 
 const useStyles = makeStyles(theme => ({
     root: {
@@ -37,12 +38,13 @@ const useStyles = makeStyles(theme => ({
 }));
 
 const ReviewCard = props => {
-    const {title, image, rating, good, gameId, createdAt } = props.review;
+    let {title, image, rating, good, gameId, createdAt } = props.review;
     const userId = useSelector(state => state.authReducer.userId)
     const classes = useStyles();
-    console.log(props);
-    console.log(userId);
-    console.log(title);
+    const MAX_TEXT_LENGTH = 200;
+    if (good.length > MAX_TEXT_LENGTH) {
+        good = cutString(good, MAX_TEXT_LENGTH);
+    }
 
     return (
         <Card className={classes.root}>

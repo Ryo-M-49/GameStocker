@@ -72,3 +72,12 @@ export const checkValidity = (value, rules) => {
         errorMessage: errorMessage,
     };
 };
+
+export const cutString = (string, maxLength) => {
+    let result = '';
+    if (string.length > maxLength) {
+        result = string.substr(0, maxLength) + '...';
+    };
+
+    return result;
+}

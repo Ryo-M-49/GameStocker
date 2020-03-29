@@ -38,7 +38,7 @@ const useStyles = makeStyles(theme => ({
 }));
 
 const ReviewCard = props => {
-    let {title, image, rating, good, gameId, createdAt } = props.review;
+    let {title, image, rate, good, gameId, createdAt } = props.review;
     const userId = useSelector(state => state.authReducer.userId)
     const classes = useStyles();
     const MAX_TEXT_LENGTH = 200;
@@ -73,7 +73,7 @@ const ReviewCard = props => {
                 title={title}
             />
             <CardContent>
-                <Rating name="rating" defaultValue={rating} precision={0.5} readOnly />
+                <Rating name="rating" defaultValue={rate} precision={0.5} readOnly />
                 <Typography variant="body2" color="textSecondary" component="p">
                     {good}
                 </Typography>

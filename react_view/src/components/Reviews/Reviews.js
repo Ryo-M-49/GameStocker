@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import classes from './Reviews.module.css';
-import ReviewCard from '../ReviewCard/ReviewCard';
+import ReviewCard from './ReviewCard/ReviewCard';
 import * as actions from '../../store/actions/index';
 
 const Reviews = props => {

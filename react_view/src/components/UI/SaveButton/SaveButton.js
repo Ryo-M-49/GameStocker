@@ -27,7 +27,7 @@ const SaveButton = props => {
             actions.createReview(
                 updatedReview,
                 updatedReview.user_id,
-                review.isSnackbarOpen
+                true
             )
         );
     };

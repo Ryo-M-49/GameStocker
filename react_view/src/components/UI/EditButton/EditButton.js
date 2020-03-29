@@ -21,7 +21,7 @@ const EditButton = props => {
                 updatedReview,
                 updatedReview.user_id,
                 updatedReview.gameId,
-                review.isSnackbarOpen
+                true
             )
         );
     };

@@ -1,5 +1,8 @@
 import React from 'react';
+import { useSelector } from 'react-redux';
 import { makeStyles } from '@material-ui/core/styles';
+import { Link } from 'react-router-dom';
+
 import Card from '@material-ui/core/Card';
 import CardHeader from '@material-ui/core/CardHeader';
 import CardMedia from '@material-ui/core/CardMedia';
@@ -11,8 +14,8 @@ import Typography from '@material-ui/core/Typography';
 import { red } from '@material-ui/core/colors';
 import FavoriteIcon from '@material-ui/icons/Favorite';
 import Button from '@material-ui/core/Button';
-import MoreVertIcon from '@material-ui/icons/MoreVert';
 import Rating from '@material-ui/lab/Rating';
+import { cutString } from '../../../shared/utility';
 
 const useStyles = makeStyles(theme => ({
     root: {
@@ -22,48 +25,73 @@ const useStyles = makeStyles(theme => ({
     media: {
         height: 0,
         paddingTop: '56.25%', // 16:9
+        backgroundSize: 'contain',
     },
     avatar: {
         backgroundColor: red[500],
+        cursor: 'pointer',
+    },
+    button: {
+        marginLeft: 'auto',
+        marginRight: '0',
     },
 }));
 
 const ReviewCard = props => {
+    let {title, image, rating, good, gameId, createdAt } = props.review;
+    const userId = useSelector(state => state.authReducer.userId)
     const classes = useStyles();
+    const MAX_TEXT_LENGTH = 200;
+    if (good.length > MAX_TEXT_LENGTH) {
+        good = cutString(good, MAX_TEXT_LENGTH);
+    }
+
     return (
         <Card className={classes.root}>
             <CardHeader
                 avatar={
-                    <Avatar aria-label="recipe" className={classes.avatar}>
-                        R
-                    </Avatar>
+                    <Link to={`users/${userId}`} >
+                        <Avatar 
+                            aria-label="recipe" 
+                            className={classes.avatar}
+                        >
+                            R
+                        </Avatar>
+                    </Link>
                 }
                 action={
-                    <IconButton aria-label="settings">
-                        <MoreVertIcon />
+                    <IconButton aria-label="add to favorites">
+                        <FavoriteIcon />
                     </IconButton>
                 }
-                title={props.title}
-                subheader={props.createdAt}
+                title={title}
+                subheader={createdAt}
             />
             <CardMedia
                 className={classes.media}
-                image={props.image}
-                title={props.title}
+                image={image}
+                title={title}
             />
             <CardContent>
-                <Rating name="rating" defaultValue={props.rating} precision={0.5} readOnly />
+                <Rating name="rating" defaultValue={rating} precision={0.5} readOnly />
                 <Typography variant="body2" color="textSecondary" component="p">
-                    {props.good}
+                    {good}
                 </Typography>
             </CardContent>
             <CardActions disableSpacing>
-                <IconButton aria-label="add to favorites">
-                    <FavoriteIcon />
-                </IconButton>
-                <Button size="small" color="primary">
-                    Read More
-                </Button>
+                <Link
+                    to={{
+                        pathname: `yourreviews/${gameId}`,
+                        state: {
+                            game: props.review
+                        },
+                    }}
+                    className={classes.button}
+                >
+                    <Button size="small" color="primary">
+                        Read More
+                    </Button>
+                </Link>
             </CardActions>
         </Card>
     );

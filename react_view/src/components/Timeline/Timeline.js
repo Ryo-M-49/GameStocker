@@ -56,13 +56,8 @@ const Timeline = props => {
             {notification}
             <ul className={classes.List}>
                 <li>
-                    <ReviewCard image={GameImage1} />
-                </li>
-                <li>
-                    <ReviewCard image={GameImage2} />
-                </li>
-                <li>
-                    <ReviewCard image={GameImage3} />
+                    Implementing now
+                    {/* <ReviewCard image={GameImage1} /> */}
                 </li>
             </ul>
         </div>

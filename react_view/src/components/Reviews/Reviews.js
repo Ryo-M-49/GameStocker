@@ -23,11 +23,7 @@ const Reviews = props => {
             reviews.map((review, index) => (
                 <li key={index}>
                     <ReviewCard 
-                        image={review.image} 
-                        title={review.title}
-                        createdAt={review.created_at}
-                        good={review.good}
-                        rating={review.rate}
+                        review={review}
                     />
                 </li>
             ))      

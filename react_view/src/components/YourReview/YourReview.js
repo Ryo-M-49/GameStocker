@@ -46,15 +46,11 @@ const YourReview = props => {
     );
 
     const snackbarClosedHandler = () => {
-        const snackbar = {
-            isOpen: false,
-            type: 'null',
-        };
-        dispatch(actions.toggleAuthSnackbar(snackbar));
+        dispatch(actions.toggleSnackbar(false));
     };
-
-    let notification = null;
+    
     const isSnackbarOpen = review.isSnackbarOpen;
+    let notification = null;
     if (isSnackbarOpen) {
         notification = (
             <Snackbar

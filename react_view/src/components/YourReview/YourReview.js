@@ -39,16 +39,19 @@ const YourReview = props => {
         dispatch(actions.getReview(updatedGame.user_id, updatedGame.gameId));
     }, [props]);
 
-    const snackbarClosedHandler = isSnackbarOpen => {
-        dispatch(actions.toggleSnackbar(isSnackbarOpen));
-    };
-
-
     let buttons = (
         <div className={classes.ButtonWrapper}>
             <SaveButton />
         </div>
     );
+
+    const snackbarClosedHandler = () => {
+        const snackbar = {
+            isOpen: false,
+            type: 'null',
+        };
+        dispatch(actions.toggleAuthSnackbar(snackbar));
+    };
 
     let notification = null;
     const isSnackbarOpen = review.isSnackbarOpen;
@@ -60,15 +63,11 @@ const YourReview = props => {
                     horizontal: 'center',
                 }}
                 open={isSnackbarOpen}
-                onClose={isSnackbarOpen =>
-                    snackbarClosedHandler(isSnackbarOpen)
-                }
+                onClose={snackbarClosedHandler}
             >
                 <MuiAlert
                     severity="success"
-                    onClose={isSnackbarOpen =>
-                        snackbarClosedHandler(isSnackbarOpen)
-                    }
+                    onClose={snackbarClosedHandler}
                 >
                     Your change has been saved successfully!
                 </MuiAlert>

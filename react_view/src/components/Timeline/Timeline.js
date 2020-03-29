@@ -6,16 +6,12 @@ import MuiAlert from '@material-ui/lab/Alert';
 import GameImage1 from '../../assets/images/sample-game-1.jpg';
 import GameImage2 from '../../assets/images/sample-game-2.jpg';
 import GameImage3 from '../../assets/images/sample-game-3.jpg';
-import ReviewCard from '../ReviewCard/ReviewCard';
+import ReviewCard from '../Reviews/ReviewCard/ReviewCard';
 import * as actions from '../../store/actions/index';
 
 const Timeline = props => {
     const auth = useSelector(state => state.authReducer);
     const dispatch = useDispatch();
-
-    const snackbarClosedHandler = isSnackbarOpen => {
-        dispatch(actions.toggleAuthSnackbar(isSnackbarOpen));
-    };
 
     const isOpen = auth.isSnackbarOpen.isOpen;
     const type = auth.isSnackbarOpen.type;
@@ -26,9 +22,12 @@ const Timeline = props => {
         notificationText = 'Signed out!';
     }
 
-    const snackbar = {
-        isOpen: false,
-        type: 'null',
+    const snackbarClosedHandler = () => {
+        const snackbar = {
+            isOpen: false,
+            type: 'null',
+        };
+        dispatch(actions.toggleAuthSnackbar(snackbar));
     };
 
     let notification = null;
@@ -40,17 +39,18 @@ const Timeline = props => {
                     horizontal: 'center',
                 }}
                 open={isOpen}
-                onClose={snackbar => snackbarClosedHandler(snackbar)}
+                onClose={snackbarClosedHandler}
             >
                 <MuiAlert
                     severity="success"
-                    onClose={snackbar => snackbarClosedHandler(snackbar)}
+                    onClose={snackbarClosedHandler}
                 >
                     {notificationText}
                 </MuiAlert>
             </Snackbar>
         );
     }
+
     return (
         <div className={classes.Timeline}>
             {notification}

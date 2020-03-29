@@ -13,7 +13,11 @@ const Reviews = props => {
         dispatch(actions.getReviews(userId));
     }, [userId]);
 
-    let reviewCard = null;
+    let reviewCard = (
+        <p>
+            No review to show for now. Write a review!
+        </p>
+    );
     if (reviews) {
         reviewCard = (
             reviews.map((review, index) => (
@@ -23,6 +27,7 @@ const Reviews = props => {
                         title={review.title}
                         createdAt={review.created_at}
                         good={review.good}
+                        rating={review.rate}
                     />
                 </li>
             ))      

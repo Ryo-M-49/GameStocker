@@ -22,9 +22,14 @@ const useStyles = makeStyles(theme => ({
     media: {
         height: 0,
         paddingTop: '56.25%', // 16:9
+        backgroundSize: 'contain',
     },
     avatar: {
         backgroundColor: red[500],
+    },
+    button: {
+        marginLeft: 'auto',
+        marginRight: '0',
     },
 }));
 
@@ -39,8 +44,8 @@ const ReviewCard = props => {
                     </Avatar>
                 }
                 action={
-                    <IconButton aria-label="settings">
-                        <MoreVertIcon />
+                    <IconButton aria-label="add to favorites">
+                        <FavoriteIcon />
                     </IconButton>
                 }
                 title={props.title}
@@ -58,10 +63,7 @@ const ReviewCard = props => {
                 </Typography>
             </CardContent>
             <CardActions disableSpacing>
-                <IconButton aria-label="add to favorites">
-                    <FavoriteIcon />
-                </IconButton>
-                <Button size="small" color="primary">
+                <Button size="small" color="primary" className={classes.button}>
                     Read More
                 </Button>
             </CardActions>

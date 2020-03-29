@@ -37,8 +37,13 @@ const useStyles = makeStyles(theme => ({
 }));
 
 const ReviewCard = props => {
-    const classes = useStyles();
+    const {title, image, rating, good, gameId, createdAt } = props.review;
     const userId = useSelector(state => state.authReducer.userId)
+    const classes = useStyles();
+    console.log(props);
+    console.log(userId);
+    console.log(title);
+
     return (
         <Card className={classes.root}>
             <CardHeader
@@ -57,24 +62,34 @@ const ReviewCard = props => {
                         <FavoriteIcon />
                     </IconButton>
                 }
-                title={props.title}
-                subheader={props.createdAt}
+                title={title}
+                subheader={createdAt}
             />
             <CardMedia
                 className={classes.media}
-                image={props.image}
-                title={props.title}
+                image={image}
+                title={title}
             />
             <CardContent>
-                <Rating name="rating" defaultValue={props.rating} precision={0.5} readOnly />
+                <Rating name="rating" defaultValue={rating} precision={0.5} readOnly />
                 <Typography variant="body2" color="textSecondary" component="p">
-                    {props.good}
+                    {good}
                 </Typography>
             </CardContent>
             <CardActions disableSpacing>
-                <Button size="small" color="primary" className={classes.button}>
-                    Read More
-                </Button>
+                <Link
+                    to={{
+                        pathname: `yourreviews/${gameId}`,
+                        state: {
+                            game: props.review
+                        },
+                    }}
+                    className={classes.button}
+                >
+                    <Button size="small" color="primary">
+                        Read More
+                    </Button>
+                </Link>
             </CardActions>
         </Card>
     );

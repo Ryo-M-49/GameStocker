@@ -16,22 +16,22 @@ const YourReview = props => {
     const review = useSelector(state => state.reviewReducer);
     const auth = useSelector(state => state.authReducer);
     const dispatch = useDispatch();
-    
-    const game = props.location.state.game;
     const isReviewExisted = review.review.isExisted;
 
     const id = localStorage.getItem('userId')
         ? localStorage.getItem('userId')
         : auth.userId;
 
+
+    const game = props.location.state.game;
     const updatedGame = {
         ...review.game,
         user_id: id,
-        gameId: game.jan,
+        gameId: game.gameId,
         title: game.title,
-        caption: game.itemCaption,
-        image: game.largeImageUrl,
-        url: game.itemUrl,
+        caption: game.caption,
+        image: game.image,
+        url: game.url,
     };
 
     useEffect(() => {
@@ -93,7 +93,7 @@ const YourReview = props => {
                 <div className={classes.ImageWrapper}>
                     <img
                         className={classes.Img}
-                        src={game.largeImageUrl}
+                        src={game.image}
                         alt="thumbnail"
                     />
                 </div>

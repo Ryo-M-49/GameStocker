@@ -73,11 +73,10 @@ export const checkValidity = (value, rules) => {
     };
 };
 
+// Implement the if statement when calling the function to make sure the target string exceeds the limit length. 
 export const cutString = (string, maxLength) => {
     let result = '';
-    if (string.length > maxLength) {
-        result = string.substr(0, maxLength) + '...';
-    };
+    result = string.substr(0, maxLength) + '...';
 
     return result;
 }

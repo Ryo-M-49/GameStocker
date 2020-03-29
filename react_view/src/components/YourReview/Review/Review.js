@@ -9,7 +9,7 @@ const Review = props => {
     const review = useSelector(state => state.reviewReducer.review);
 
     const title = props.game.title;
-    let description = props.game.itemCaption;
+    let description = props.game.caption;
     if (description.length > 400) {
         description = description.substr(0, 400) + '...';
     }

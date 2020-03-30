@@ -2,8 +2,6 @@ import React from 'react';
 import { useSelector } from 'react-redux';
 import classes from './MyPage.module.css';
 import { Link } from 'react-router-dom';
-import YourPicture from './YourPicture/YourPicture';
-import Bio from './Bio/Bio';
 import EditButton from '../UI/EditButton/EditButton';
 import PopularReview from './PopularReview/PopularReview';
 import ToAllReviewsButton from '../UI/ToAllReviewsButton/ToAllReviewsButton';

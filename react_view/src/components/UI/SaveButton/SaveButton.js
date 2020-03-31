@@ -15,21 +15,33 @@ const StyledButton = withStyles({
 
 const SaveButton = props => {
     const review = useSelector(state => state.reviewReducer);
+    const user = useSelector(state => state.userReducer);
+    const userId = useSelector(state => state.authReducer.userId);
     const dispatch = useDispatch();
 
+
     const saveButtonClickedHandler = () => {
-        const updatedReview = {
-            ...review.game,
-            ...review.review,
-        };
-        delete updatedReview.isExisted;
-        dispatch(
-            actions.createReview(
-                updatedReview,
-                updatedReview.user_id,
-                true
-            )
-        );
+        if (props.type === 'review') {
+            const updatedReview = {
+                ...review.game,
+                ...review.review,
+            };
+            delete updatedReview.isExisted;
+            dispatch(
+                actions.createReview(
+                    updatedReview,
+                    updatedReview.user_id,
+                    true
+                )
+            );
+        } else if (props.type === 'mypage') {
+            const updatedUser = {
+                ...user,
+            };
+            dispatch(
+                actions.editUser(updatedUser, userId)
+            );
+        }
     };
 
     return (

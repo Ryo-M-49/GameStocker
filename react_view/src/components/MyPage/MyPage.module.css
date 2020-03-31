@@ -24,10 +24,20 @@
 
 .BioWrapper {
     display: flex;
+    align-items: flex-end;
+}
+
+.Introduction {
+    width: 70%;
+}
+
+.Name {
+    margin-top: 20px;
+    display: flex;
 }
 
 
-.EditButton {
+.Button {
     margin-top: 30px;
     text-align: right;
 }

@@ -8,7 +8,7 @@ import Review from './Review/Review';
 import QuitButton from '../UI/QuitButton/QuitButton';
 import ShareButton from '../UI/ShareButton/ShareButton';
 import SaveButton from '../UI/SaveButton/SaveButton';
-import EditButton from '../UI/EditButton/EditButton';
+import UpdateButton from '../UI/UpdateButton/UpdateButton';
 import * as actions from '../../store/actions/index';
 
 const YourReview = props => {
@@ -41,7 +41,7 @@ const YourReview = props => {
 
     let buttons = (
         <div className={classes.ButtonWrapper}>
-            <SaveButton />
+            <SaveButton type='review' />
         </div>
     );
 
@@ -77,7 +77,7 @@ const YourReview = props => {
                 <div className={classes.ShareButton}>
                     <ShareButton />
                 </div>
-                <EditButton />
+                <UpdateButton />
             </div>
         );
     }

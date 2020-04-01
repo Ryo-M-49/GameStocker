@@ -32,7 +32,7 @@ const Good = props => {
                 <StyledTextField
                     id="outlined-multiline-static"
                     multiline
-                    rows="3"
+                    rows="5"
                     placeholder="Write good points!"
                     variant="outlined"
                     value={props.value}

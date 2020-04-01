@@ -4,8 +4,8 @@ import { makeStyles } from '@material-ui/core/styles';
 import classes from './MyPage.module.css';
 import { Link } from 'react-router-dom';
 import Aux from '../../hoc/Aux/Aux';
-import Divider from '@material-ui/core/Divider';
 import EditButton from '../UI/EditButton/EditButton';
+import CancelButton from '../UI/CancelButton/CancelButton';
 import SaveButton from '../UI/SaveButton/SaveButton';
 import PopularReview from './PopularReview/PopularReview';
 import ToAllReviewsButton from '../UI/ToAllReviewsButton/ToAllReviewsButton';
@@ -42,6 +42,11 @@ const MyPage = props => {
         setIsEditing(!isEditing);
     }
 
+    const cancelClickedHandler = () => {
+        dispatch(actions.getUser(userId));
+        setIsEditing(!isEditing);
+    }
+
     useEffect(() => {
         dispatch(actions.getUser(userId));
     }, [props]);
@@ -58,7 +63,9 @@ const MyPage = props => {
                     <TextField
                         className={classStyles.root}
                         id="outlined-multiline-static"
-                        disabled={true}
+                        InputProps={{
+                            readOnly: true,
+                          }}
                         multiline
                         rows="8"
                         variant="outlined"
@@ -111,9 +118,14 @@ const MyPage = props => {
                     </div>
                 </div>
                 <div className={classes.Button}>
+                    <div>
+                        <CancelButton 
+                            clicked={ cancelClickedHandler }
+                        />
+                    </div>
                     <SaveButton 
                         type='mypage'
-                        onClick={ isEditing => setIsEditing(!isEditing) } 
+                        clicked={ buttonClickedHandler } 
                     />
                 </div>
             </Aux> 

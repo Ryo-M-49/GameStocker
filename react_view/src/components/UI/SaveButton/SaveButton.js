@@ -46,6 +46,7 @@ const SaveButton = props => {
             dispatch(
                 actions.editUser(updatedUser, userId)
             );
+            props.clicked();
         }
     };
 
@@ -54,7 +55,7 @@ const SaveButton = props => {
             <StyledButton
                 variant="contained"
                 color="secondary"
-                onClick={() => {saveButtonClickedHandler(); props.clicked()}}
+                onClick={saveButtonClickedHandler}
             >
                 Save
             </StyledButton>

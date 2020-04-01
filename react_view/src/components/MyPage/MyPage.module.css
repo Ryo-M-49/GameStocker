@@ -39,7 +39,12 @@
 
 .Button {
     margin-top: 30px;
-    text-align: right;
+    display: flex;
+    justify-content: flex-end;
+}
+
+.Button div {
+    margin-right: 5px;
 }
 
 .ToAllReviewsButtonWrapper {

@@ -58,7 +58,9 @@ const MyPage = props => {
                     <TextField
                         className={classStyles.root}
                         id="outlined-multiline-static"
-                        disabled={true}
+                        InputProps={{
+                            readOnly: true,
+                          }}
                         multiline
                         rows="8"
                         variant="outlined"
@@ -113,7 +115,7 @@ const MyPage = props => {
                 <div className={classes.Button}>
                     <SaveButton 
                         type='mypage'
-                        onClick={ isEditing => setIsEditing(!isEditing) } 
+                        clicked={ buttonClickedHandler } 
                     />
                 </div>
             </Aux> 

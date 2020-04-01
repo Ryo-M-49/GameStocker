@@ -35,12 +35,14 @@ const SaveButton = props => {
                 )
             );
         } else if (props.type === 'mypage') {
+            //Shaping the data to make it matched with the format of the request. 
             const updatedUser = {
                 user: {
                     ...user
                 }
             };
             delete updatedUser.user.id;
+
             dispatch(
                 actions.editUser(updatedUser, userId)
             );
@@ -52,7 +54,7 @@ const SaveButton = props => {
             <StyledButton
                 variant="contained"
                 color="secondary"
-                onClick={saveButtonClickedHandler}
+                onClick={() => {saveButtonClickedHandler(); props.clicked()}}
             >
                 Save
             </StyledButton>

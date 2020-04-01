@@ -36,17 +36,9 @@ export const getUser = userId => {
 
 export const editUser = (userData, userId) => {
     return dispatch => {
-        const updatedUser = {
-            user: {
-                first_name: userData.first_name,
-                last_name: userData.last_name,
-                image: userData.image,
-                introduction: userData.introduction,
-            },
-        };
         const url = `http://localhost:3001/users/${userId}`;
         axios
-            .patch(url, updatedUser)
+            .patch(url, userData)
             .then(response => {
                 dispatch(getUserSuccess(response.data));
             })

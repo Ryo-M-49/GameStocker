@@ -23,6 +23,7 @@ Bundler.require(*Rails.groups)
 
 module GamestockerApi
   class Application < Rails::Application
+    config.logger = Logger.new(STDOUT)
     config.action_controller.action_on_unpermitted_parameters = :raise
     # Initialize configuration defaults for originally generated Rails version.
     config.load_defaults 6.0

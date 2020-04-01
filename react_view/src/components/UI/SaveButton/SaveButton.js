@@ -36,8 +36,11 @@ const SaveButton = props => {
             );
         } else if (props.type === 'mypage') {
             const updatedUser = {
-                ...user,
+                user: {
+                    ...user
+                }
             };
+            delete updatedUser.user.id;
             dispatch(
                 actions.editUser(updatedUser, userId)
             );

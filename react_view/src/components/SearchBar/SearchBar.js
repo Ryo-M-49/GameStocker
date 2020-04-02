@@ -33,44 +33,6 @@ const divideArrayIntoPieces = (array, numsPerArray) => {
     return arrayList;
 };
 
-const filterGames = (games, keyword) => {
-    const items = [];
-    const MAXIMUM_ITEM_PER_PAGE = 30;
-
-    if (games.length > 0) {
-        for (let i = 0; i < games.length; i++) {
-            for (let j = 0; j < games[i].Items.length; j++) {
-                const game = games[i].Items[j].Item;
-                items.push({ item: game });
-            }
-        }
-    }
-
-    const filteredGamesArray = items.filter(item => {
-        if (item.title.indexOf(keyword) !== -1) {
-            return true;
-        }
-        return false;
-    });
-
-    const dividedGamesArray = divideArrayIntoPieces(
-        filteredGamesArray,
-        MAXIMUM_ITEM_PER_PAGE
-    );
-    const pageCount = Math.ceil(
-        filteredGamesArray.length / MAXIMUM_ITEM_PER_PAGE
-    );
-
-    const searchedGames = {
-        Items: dividedGamesArray[0],
-        itemsArrayPerPage: dividedGamesArray,
-        page: 1,
-        pageCount: pageCount,
-    };
-
-    return searchedGames;
-};
-
 const SearchAppBar = props => {
     const classes = useStyles();
     const [keyword, setKeyword] = useState('');
@@ -80,23 +42,21 @@ const SearchAppBar = props => {
 
     const inputChangedHandler = event => {
         setKeyword(event.target.value);
-    };
-
-    const submit = (event, pageCount, keyword) => {
-        event.preventDefault();
-        const games = actions.fetchAllGames(500, pageCount);
-        dispatch(actions.setSearchedGames(filterGames(games, keyword)));
+        console.log(keyword);
     };
 
     const submitHandler = event => {
-        submit(event, games.pageCount, keyword);
+        event.preventDefault();
+        console.log(keyword);
+        const encodedKeyword = encodeURI(keyword); 
+        dispatch(actions.updateGamesByTitle(encodedKeyword));
     };
 
     return (
         <Paper
             component="form"
             className={classes.root}
-            onSubmit={event => submitHandler(event)}
+            onSubmit={submitHandler}
         >
             <InputBase
                 className={classes.input}

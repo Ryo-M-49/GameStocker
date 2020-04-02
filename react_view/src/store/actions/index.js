@@ -1,8 +1,7 @@
 export {
     setCurrentPage,
-    setSearchedGames,
     updateGamesByPage,
-    fetchAllGames,
+    updateGamesByTitle,
 } from './gameList';
 
 export {

@@ -8,7 +8,7 @@ import * as actions from '../../../../store/actions/index';
 
 const StyledTextField = withStyles({
     root: {
-        width: '500px',
+        width: '550px',
     },
 })(TextField);
 

@@ -1,5 +1,3 @@
-import * as actionTypes from './actionTypes';
-
 export const like = (userId, gameId) => {
     return dispatch => {
         const url = `http://localhost:3001/users/${userId}/reviews/${gameId}/likes`;

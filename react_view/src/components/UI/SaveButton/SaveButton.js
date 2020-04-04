@@ -44,7 +44,7 @@ const SaveButton = props => {
             delete updatedUser.user.id;
 
             dispatch(
-                actions.editUser(updatedUser, userId)
+                actions.updateUser(updatedUser, userId)
             );
             props.clicked();
         }

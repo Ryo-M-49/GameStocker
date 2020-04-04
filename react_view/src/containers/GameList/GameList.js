@@ -12,11 +12,6 @@ class GameList extends Component {
         );
     }
 
-    /**
-     * Handler to change a page of a game list to render.
-     * @param {object} selectedPage - holds the number of the clicked page.
-     * @returns {null} - changes the state "currentPage" to the clicked page
-     */
     pageChangedHandler(selectedPage) {
         this.props.onChangeCurrentPage(selectedPage);
         this.props.onUpdateGamesByPage(selectedPage);

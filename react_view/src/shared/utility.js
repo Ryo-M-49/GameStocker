@@ -100,4 +100,4 @@ export const cutString = (string, maxLength) => {
     result = string.substr(0, maxLength) + '...';
 
     return result;
-}
+};

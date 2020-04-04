@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import Paper from '@material-ui/core/Paper';
 import InputBase from '@material-ui/core/InputBase';
 import IconButton from '@material-ui/core/IconButton';
@@ -24,31 +24,18 @@ const useStyles = makeStyles(theme => ({
     },
 }));
 
-const divideArrayIntoPieces = (array, numsPerArray) => {
-    const arrayList = [];
-    const index = 0;
-    while (index < array.length) {
-        arrayList.push(array.splice(index, index + numsPerArray));
-    }
-    return arrayList;
-};
-
 const SearchAppBar = props => {
     const classes = useStyles();
     const [keyword, setKeyword] = useState('');
-
-    const games = useSelector(state => state.gameListReducer.games);
     const dispatch = useDispatch();
 
     const inputChangedHandler = event => {
         setKeyword(event.target.value);
-        console.log(keyword);
     };
 
     const submitHandler = event => {
         event.preventDefault();
-        console.log(keyword);
-        const encodedKeyword = encodeURI(keyword); 
+        const encodedKeyword = encodeURI(keyword);
         dispatch(actions.updateGamesByTitle(encodedKeyword));
     };
 

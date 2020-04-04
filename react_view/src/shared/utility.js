@@ -1,27 +1,44 @@
-export const addErrorMessage = (copiedArray, errorObject) => {
-    if (errorObject.nextErrorMessage) {
-        if (errorObject.nextErrorMessage === errorObject.currentErrorMessage) {
-            return copiedArray;
+/**
+ * Update "errorMessages" based on the following conditions:
+ *      IF ("nextErrorMessage" is different from the exisiting one)
+ *          Push the new error message to "errorMessages" and return it.
+ *      IF ("nextErrorMessage" is same as the exisiting one )
+ *          return "errorMessages" as it is.
+ *      IF ("nextErrorMessage" is null )
+ *          return "errorMessages" after deleting the existing error message in it. 
+ * @param {array}  errorMessages - The current error message(s) for all input(email, password, etc.).
+ * @param {object} currentErrorMessage - The current error message of a specific input.
+ * @param {object} nextErrorMessage - The next error message of a specific input.
+ */
+export const updateErrorMessages = (errorMessages, currentErrorMessage, nextErrorMessage) => {
+    if (nextErrorMessage) {
+        if (nextErrorMessage === currentErrorMessage) {
+            return errorMessages;
         } else {
-            copiedArray.push({
-                message: errorObject.nextErrorMessage,
+            errorMessages.push({
+                message: nextErrorMessage,
                 isSnackbarOpen: true,
             });
-            return copiedArray;
+            return errorMessages;
         }
     } else {
-        if (errorObject.currentErrorMessage) {
-            copiedArray.splice(
-                copiedArray.indexOf(errorObject.currentErrorMessage),
+        if (currentErrorMessage) {
+            errorMessages.splice(
+                errorMessages.indexOf(currentErrorMessage),
                 1
             );
-            return copiedArray;
+            return errorMessages;
         } else {
-            return copiedArray;
+            return errorMessages;
         }
     }
 };
 
+/**
+ * Check the validity of "value" based on "rules", then return the validity and the corresponding error message as an object.
+ * @param {string/integer} value - Input value for various forms (email, password, etc.).
+ * @param {object}         rules - Rules with which you want to check the validity of "value".
+ */
 export const checkValidity = (value, rules) => {
     let isValid = true;
     let errorMessage = null;
@@ -73,7 +90,11 @@ export const checkValidity = (value, rules) => {
     };
 };
 
-// Implement the if statement when calling the function to make sure the target string exceeds the limit length.
+/**
+ * Cut "string" by "maxLength".
+ * @param {string}  string    - String you want to cut.
+ * @param {integer} maxLength - Length by which you want to cut "string".
+ */
 export const cutString = (string, maxLength) => {
     let result = '';
     result = string.substr(0, maxLength) + '...';

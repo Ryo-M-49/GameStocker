@@ -1,15 +1,12 @@
 import React, { Component } from 'react';
 import { Link as RouterLink, Redirect } from 'react-router-dom';
 import { connect } from 'react-redux';
-
 import Copyright from '../../components/UI/Copyright/Copyright';
 import Snackbar from '@material-ui/core/Snackbar';
 import Avatar from '@material-ui/core/Avatar';
 import Button from '@material-ui/core/Button';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import TextField from '@material-ui/core/TextField';
-// import FormControlLabel from '@material-ui/core/FormControlLabel';
-// import Checkbox from '@material-ui/core/Checkbox';
 import Link from '@material-ui/core/Link';
 import Grid from '@material-ui/core/Grid';
 import Box from '@material-ui/core/Box';
@@ -18,7 +15,7 @@ import Typography from '@material-ui/core/Typography';
 import { withStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
 import * as actions from '../../store/actions/index';
-import { addErrorMessage, checkValidity } from '../../shared/utility';
+import { updateErrorMessages, checkValidity } from '../../shared/utility';
 
 const styles = theme => ({
     paper: {
@@ -96,6 +93,7 @@ class SignUp extends Component {
                 },
             },
         },
+        // errorMessages holds all the error messages for each input(name/email/password etc.).
         errorMessages: [],
     };
 
@@ -106,17 +104,11 @@ class SignUp extends Component {
      * @returns {object} - the updated local state.
      */
     inputChangedHandler = (event, controlName) => {
-        const copiedErrorMessages = [...this.state.errorMessages];
+        // Update the inside of "controlName" state based on the latest user's input.
         const updatedValidity = checkValidity(
             event.target.value,
             this.state.controls[controlName].validation
         );
-        const errorInfo = {
-            currentErrorMessage: this.state.controls[controlName].validity
-                .errorMessage,
-            nextErrorMessage: updatedValidity.errorMessage,
-        };
-
         const updatedControls = {
             ...this.state.controls,
             [controlName]: {
@@ -125,10 +117,14 @@ class SignUp extends Component {
                 validity: updatedValidity,
             },
         };
-
         this.setState({ controls: updatedControls });
+
+        // Update "errorMessages" state based on the latest user's input. 
+        const copiedErrorMessages = [...this.state.errorMessages];
+        const currentErrorMessage = this.state.controls[controlName].validity.errorMessage;
+        const nextErrorMessage = updatedValidity.errorMessage;
         this.setState({
-            errorMessages: addErrorMessage(copiedErrorMessages, errorInfo),
+            errorMessages: updateErrorMessages(copiedErrorMessages, currentErrorMessage, nextErrorMessage),
         });
     };
 

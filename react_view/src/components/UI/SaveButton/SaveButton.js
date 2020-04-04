@@ -38,7 +38,10 @@ const SaveButton = props => {
             };
             delete updatedUser.user.id;
 
-            dispatch(actions.editUser(updatedUser, userId));
+            dispatch(
+                actions.updateUser(updatedUser, userId)
+            );
+
             props.clicked();
         }
     };

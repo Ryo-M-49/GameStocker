@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Link as RouterLink, Redirect } from 'react-router-dom';
 import { connect } from 'react-redux';
-
+import { withStyles } from '@material-ui/core/styles';
 import Copyright from '../../components/UI/Copyright/Copyright';
 import Snackbar from '@material-ui/core/Snackbar';
 import Avatar from '@material-ui/core/Avatar';
@@ -13,11 +13,9 @@ import Grid from '@material-ui/core/Grid';
 import Box from '@material-ui/core/Box';
 import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
 import Typography from '@material-ui/core/Typography';
-import { withStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
-
 import * as actions from '../../store/actions/index';
-import { addErrorMessage, checkValidity } from '../../shared/utility';
+import { updateErrorMessages, checkValidity } from '../../shared/utility';
 
 const styles = theme => ({
     paper: {
@@ -66,6 +64,7 @@ class SignIn extends Component {
             },
         },
         isSignup: true,
+        // errorMessages holds all the error messages for each input(email/password).
         errorMessages: [],
     };
 
@@ -73,21 +72,13 @@ class SignIn extends Component {
      * Handler to update the local state based on the input value typed in input forms (email/password).
      * @param {object} event -  the target event selected by an user.
      * @param {string} controlName - the property name of the local state you want to change.
-     * @returns {object} - the updated local state.
      */
     inputChangedHandler = (event, controlName) => {
-        const copiedErrorMessages = [...this.state.errorMessages];
+        // Update the inside of "controlName" state based on the latest user's input.
         const updatedValidity = checkValidity(
             event.target.value,
             this.state.controls[controlName].validation
         );
-
-        const errorInfo = {
-            currentErrorMessage: this.state.controls[controlName].validity
-                .errorMessage,
-            nextErrorMessage: updatedValidity.errorMessage,
-        };
-
         const updatedControls = {
             ...this.state.controls,
             [controlName]: {
@@ -96,19 +87,22 @@ class SignIn extends Component {
                 validity: updatedValidity,
             },
         };
-
         this.setState({ controls: updatedControls });
+
+        // Update "errorMessages" state based on the latest user's input. 
+        const copiedErrorMessages = [...this.state.errorMessages];
+        const currentErrorMessage = this.state.controls[controlName].validity.errorMessage;
+        const nextErrorMessage = updatedValidity.errorMessage;
         this.setState({
-            errorMessages: addErrorMessage(copiedErrorMessages, errorInfo),
+            errorMessages: updateErrorMessages(copiedErrorMessages, currentErrorMessage, nextErrorMessage),
         });
     };
 
     /**
-     * Handler to trigger the handler to dispatch the auth action along with the local state (email/password).
-     * @param {object} event - the target event selected by an user.
-     * @returns {null} - dispatches the auth action.
+     * Handler to trigger the dispatch for "auth" action along with the payload (email/password).
+     * @param {object} event - the target event(input) selected by an user.
      */
-    submitHandler = event => {
+    signinHandler = event => {
         event.preventDefault();
         this.props.onAuth(
             this.state.controls.email.value,
@@ -179,7 +173,7 @@ class SignIn extends Component {
                     <form
                         className={classes.form}
                         noValidate
-                        onSubmit={this.submitHandler}
+                        onSubmit={this.signinHandler}
                     >
                         <TextField
                             variant="outlined"

@@ -25,11 +25,10 @@ export const fetchGamesFailed = () => {
 
 export const updateGamesByPage = currentPage => {
     return dispatch => {
-        const url = `https://app.rakuten.co.jp/services/api/BooksGame/Search/20170404?format=json&hardware=PS&page=${currentPage}&hits=30&booksGenreId=006&applicationId=1009084489441242376`; 
+        const url = `https://app.rakuten.co.jp/services/api/BooksGame/Search/20170404?format=json&hardware=PS&page=${currentPage}&hits=30&booksGenreId=006&applicationId=1009084489441242376`;
         axios
             .get(url)
             .then(response => {
-                console.log(response.data);
                 dispatch(setGames(response.data));
             })
             .catch(error => {
@@ -44,8 +43,6 @@ export const updateGamesByTitle = title => {
         axios
             .get(url)
             .then(response => {
-                console.log(url);
-                console.log(response.data);
                 dispatch(setGames(response.data));
             })
             .catch(error => {
@@ -53,4 +50,3 @@ export const updateGamesByTitle = title => {
             });
     };
 };
-

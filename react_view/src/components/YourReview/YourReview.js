@@ -12,7 +12,6 @@ import UpdateButton from '../UI/UpdateButton/UpdateButton';
 import * as actions from '../../store/actions/index';
 
 const YourReview = props => {
-    
     const review = useSelector(state => state.reviewReducer);
     const auth = useSelector(state => state.authReducer);
     const dispatch = useDispatch();
@@ -21,7 +20,6 @@ const YourReview = props => {
     const id = localStorage.getItem('userId')
         ? localStorage.getItem('userId')
         : auth.userId;
-
 
     const game = props.location.state.game;
     const updatedGame = {
@@ -41,14 +39,14 @@ const YourReview = props => {
 
     let buttons = (
         <div className={classes.ButtonWrapper}>
-            <SaveButton type='review' />
+            <SaveButton type="review" />
         </div>
     );
 
     const snackbarClosedHandler = () => {
         dispatch(actions.toggleSnackbar(false));
     };
-    
+
     const isSnackbarOpen = review.isSnackbarOpen;
     let notification = null;
     if (isSnackbarOpen) {
@@ -61,10 +59,7 @@ const YourReview = props => {
                 open={isSnackbarOpen}
                 onClose={snackbarClosedHandler}
             >
-                <MuiAlert
-                    severity="success"
-                    onClose={snackbarClosedHandler}
-                >
+                <MuiAlert severity="success" onClose={snackbarClosedHandler}>
                     Your change has been saved successfully!
                 </MuiAlert>
             </Snackbar>

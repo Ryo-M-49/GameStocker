@@ -3,7 +3,7 @@ export const like = (userId, gameId) => {
         const url = `http://localhost:3001/users/${userId}/reviews/${gameId}/likes`;
         const likedReview = {
             user_id: userId,
-            review_id: gameId
+            review_id: gameId,
         };
         axios
             .post(url, likedReview)

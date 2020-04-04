@@ -21,7 +21,7 @@ const Game = props => {
                             caption: itemCaption,
                             image: largeImageUrl,
                             url: itemUrl,
-                        }
+                        },
                     },
                 }}
             >

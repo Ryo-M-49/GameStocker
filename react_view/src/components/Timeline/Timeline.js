@@ -37,10 +37,7 @@ const Timeline = props => {
                 open={isOpen}
                 onClose={snackbarClosedHandler}
             >
-                <MuiAlert
-                    severity="success"
-                    onClose={snackbarClosedHandler}
-                >
+                <MuiAlert severity="success" onClose={snackbarClosedHandler}>
                     {notificationText}
                 </MuiAlert>
             </Snackbar>

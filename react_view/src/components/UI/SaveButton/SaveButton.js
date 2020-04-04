@@ -19,7 +19,6 @@ const SaveButton = props => {
     const userId = useSelector(state => state.authReducer.userId);
     const dispatch = useDispatch();
 
-
     const saveButtonClickedHandler = () => {
         if (props.type === 'review') {
             const updatedReview = {
@@ -28,24 +27,21 @@ const SaveButton = props => {
             };
             delete updatedReview.isExisted;
             dispatch(
-                actions.createReview(
-                    updatedReview,
-                    updatedReview.user_id,
-                    true
-                )
+                actions.createReview(updatedReview, updatedReview.user_id, true)
             );
         } else if (props.type === 'mypage') {
-            //Shaping the data to make it matched with the format of the request. 
+            // Shaping the data to make it matched with the format of the request.
             const updatedUser = {
                 user: {
-                    ...user
-                }
+                    ...user,
+                },
             };
             delete updatedUser.user.id;
 
             dispatch(
                 actions.updateUser(updatedUser, userId)
             );
+
             props.clicked();
         }
     };

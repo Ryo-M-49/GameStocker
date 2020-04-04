@@ -1,7 +1,6 @@
 import * as actionTypes from './actionTypes';
 import axios from 'axios';
 
-// Used to set games
 export const setGames = games => {
     return {
         type: actionTypes.SET_GAMES,

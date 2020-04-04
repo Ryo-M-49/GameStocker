@@ -24,6 +24,6 @@ export {
     toggleAuthSnackbar,
 } from './auth';
 
-export { getUserSuccess, getUser, editUser } from './user';
+export { getUserSuccess, getUser, updateUser } from './user';
 
 export { signup, setSignupRedirectPath } from './signup';

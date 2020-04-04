@@ -1,7 +1,6 @@
 import * as actionTypes from './actionTypes';
 import axios from 'axios';
 
-// Used to set games
 export const setGames = games => {
     return {
         type: actionTypes.SET_GAMES,
@@ -29,7 +28,6 @@ export const updateGamesByPage = currentPage => {
         axios
             .get(url)
             .then(response => {
-                console.log(response.data);
                 dispatch(setGames(response.data));
             })
             .catch(error => {
@@ -44,8 +42,6 @@ export const updateGamesByTitle = title => {
         axios
             .get(url)
             .then(response => {
-                console.log(url);
-                console.log(response.data);
                 dispatch(setGames(response.data));
             })
             .catch(error => {

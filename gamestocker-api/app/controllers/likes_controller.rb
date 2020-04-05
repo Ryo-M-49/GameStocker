@@ -1,16 +1,35 @@
 class LikesController < ApplicationController
   before_action :set_user
-  before_action :set_user_review, only: [:create]
+  before_action :set_user_review
+
+  def index
+    likes = Like.order(created_at: :desc)
+    render json: likes
+  end
+
+  def show
+    like = Like.find_by(user_id: @user.id, review_id: params[:id])
+    if like.nil? then
+      render json: { 'isLiked': false, 'like': nil }
+    else 
+      render json: { 'isLiked': true, 'like': like }
+    end
+
+  end
 
   def create
-    @review.like(@user)
-    render json: @review
+    @review.likes.create(user_id: @user.id)
+    data = {
+      'review': @review,
+      'user': @user
+    }
+    render json: data
   end
 
   def destroy
-    @review = Like.find(params[:id]).review
-    @review.unlike(@user)
-    render json: @review
+    @like = Like.find_by(user_id: @user.id, review_id: params[:id])
+    @like.destroy
+    render json: { 'isLiked': false, 'like': nil }
   end
 
   private

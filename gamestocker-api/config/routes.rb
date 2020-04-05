@@ -10,7 +10,7 @@ Rails.application.routes.draw do
   end
   resources :users do 
     resources :reviews do 
-      resources :likes, only: [:create, :destroy]
+      resources :likes
     end
   end
 end

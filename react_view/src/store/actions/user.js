@@ -34,7 +34,7 @@ export const getUser = userId => {
     };
 };
 
-export const editUser = (userData, userId) => {
+export const updateUser = (userData, userId) => {
     return dispatch => {
         const url = `http://localhost:3001/users/${userId}`;
         axios

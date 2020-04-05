@@ -1,7 +1,6 @@
 import React from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import Drawer from '@material-ui/core/Drawer';
-import Avatar from '@material-ui/core/Avatar';
 import MenuButton from '../../UI/MenuButton/MenuButton';
 import List from '@material-ui/core/List';
 import ListItem from '@material-ui/core/ListItem';
@@ -9,8 +8,6 @@ import NavigationItem from '../NavigationItems/NavigationItem/NavigationItem';
 import Button from '@material-ui/core/Button';
 import ListItemIcon from '@material-ui/core/ListItemIcon';
 import ArrowRightIcon from '@material-ui/icons/ArrowRight';
-import CreateIcon from '@material-ui/icons/Create';
-import Image from '../../../assets/images/sample-profile.png';
 import * as actions from '../../../store/actions/index';
 
 const SideDrawer = props => {
@@ -46,10 +43,7 @@ const SideDrawer = props => {
 
     const signout = (
         <NavigationItem link={'/'} exact>
-            <Button
-                onClick={signoutClickedHandler}
-                style={{ color: 'black' }}
-            >
+            <Button onClick={signoutClickedHandler} style={{ color: 'black' }}>
                 Signout
             </Button>
         </NavigationItem>
@@ -82,16 +76,14 @@ const SideDrawer = props => {
                     onKeyDown={props.onDrawerClosed}
                 >
                     <List>
-                        {components.map(
-                            (component, index) => (
-                                <ListItem button key={index}>
-                                    <ListItemIcon>
-                                        <ArrowRightIcon />
-                                    </ListItemIcon>
-                                    {component}
-                                </ListItem>
-                            )
-                        )}
+                        {components.map((component, index) => (
+                            <ListItem button key={index}>
+                                <ListItemIcon>
+                                    <ArrowRightIcon />
+                                </ListItemIcon>
+                                {component}
+                            </ListItem>
+                        ))}
                     </List>
                 </div>
             </Drawer>

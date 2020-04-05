@@ -38,8 +38,8 @@ const useStyles = makeStyles(theme => ({
 }));
 
 const ReviewCard = props => {
-    let {title, image, rate, good, gameId, createdAt } = props.review;
-    const userId = useSelector(state => state.authReducer.userId)
+    let { title, image, rate, good, gameId, createdAt } = props.review;
+    const userId = useSelector(state => state.authReducer.userId);
     const classes = useStyles();
     const MAX_TEXT_LENGTH = 200;
     if (good.length > MAX_TEXT_LENGTH) {
@@ -50,11 +50,8 @@ const ReviewCard = props => {
         <Card className={classes.root}>
             <CardHeader
                 avatar={
-                    <Link to={`users/${userId}`} >
-                        <Avatar 
-                            aria-label="recipe" 
-                            className={classes.avatar}
-                        >
+                    <Link to={`users/${userId}`}>
+                        <Avatar aria-label="recipe" className={classes.avatar}>
                             R
                         </Avatar>
                     </Link>
@@ -67,13 +64,14 @@ const ReviewCard = props => {
                 title={title}
                 subheader={createdAt}
             />
-            <CardMedia
-                className={classes.media}
-                image={image}
-                title={title}
-            />
+            <CardMedia className={classes.media} image={image} title={title} />
             <CardContent>
-                <Rating name="rating" defaultValue={rate} precision={0.5} readOnly />
+                <Rating
+                    name="rating"
+                    defaultValue={rate}
+                    precision={0.5}
+                    readOnly
+                />
                 <Typography variant="body2" color="textSecondary" component="p">
                     {good}
                 </Typography>
@@ -83,7 +81,7 @@ const ReviewCard = props => {
                     to={{
                         pathname: `yourreviews/${gameId}`,
                         state: {
-                            game: props.review
+                            game: props.review,
                         },
                     }}
                     className={classes.button}

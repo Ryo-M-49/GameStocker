@@ -40,7 +40,10 @@ class Layout extends Component {
     render() {
         let routes = (
             <Switch>
-                <Route path="/users/:userId/yourreviews/:reviewId" component={YourReview} />
+                <Route
+                    path="/users/:userId/yourreviews/:reviewId"
+                    component={YourReview}
+                />
                 <Route path="/users/:userId/yourreviews" component={Reviews} />
                 <Route path="/signin" component={Signin} />
                 <Route path="/signup" component={Signup} />
@@ -53,8 +56,14 @@ class Layout extends Component {
         if (this.props.isAuthenticated) {
             routes = (
                 <Switch>
-                    <Route path="/users/:userId/yourreviews/:reviewId" component={YourReview} />
-                    <Route path="/users/:userId/yourreviews" component={Reviews} />
+                    <Route
+                        path="/users/:userId/yourreviews/:reviewId"
+                        component={YourReview}
+                    />
+                    <Route
+                        path="/users/:userId/yourreviews"
+                        component={Reviews}
+                    />
                     <Route path="/users/:userId" component={MyPage} />
                     <Route path="/gamelist" component={GameList} />
                     <Route path="/" exact component={Timeline} />

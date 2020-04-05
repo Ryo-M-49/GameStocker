@@ -10,9 +10,9 @@ class LikesController < ApplicationController
   def show
     like = Like.find_by(user_id: @user.id, review_id: params[:id])
     if like.nil? then
-      render json: { message: 'This review is not liked!' }
+      render json: { 'isLiked': false, 'like': nil }
     else 
-      render json: like
+      render json: { 'isLiked': true, 'like': like }
     end
 
   end

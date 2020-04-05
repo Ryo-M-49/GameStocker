@@ -3,7 +3,7 @@ class ReviewsController < ApplicationController
   before_action :set_user_review, only: [:show, :update, :destroy]
 
   def index
-    @review = @user.reviews.all
+    @review = Review.all
     render json: @review
   end
 

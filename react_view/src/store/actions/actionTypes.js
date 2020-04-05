@@ -31,3 +31,6 @@ export const SET_REVIEW = 'SET_REVIEW';
 export const SET_REVIEWS = 'SET_REVIEWS';
 export const SET_GAME = 'SET_GAME';
 export const TOGGLE_SNACKBAR = 'TOGGLE_SNACKBAR';
+
+// for ./like.js
+export const SET_LIKE = 'SET_LIKE';

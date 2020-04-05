@@ -29,7 +29,7 @@ class LikesController < ApplicationController
   def destroy
     @like = Like.find_by(user_id: @user.id, review_id: params[:id])
     @like.destroy
-    render json: @review
+    render json: { 'isLiked': false, 'like': nil }
   end
 
   private

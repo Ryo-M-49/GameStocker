@@ -33,7 +33,7 @@ export const getReview = (userId, gameId) => {
                         good: response.data.good,
                         bad: response.data.bad,
                         rate: response.data.rate,
-                        likeCount: response.data.like_count,
+                        likes_count: response.data.likes_count,
                         isExisted: true,
                     };
                     dispatch(setReview(updatedReview));
@@ -42,7 +42,7 @@ export const getReview = (userId, gameId) => {
                         good: '',
                         bad: '',
                         rate: null,
-                        likeCount: null,
+                        like_count: null,
                         isExisted: false,
                     };
                     dispatch(setReview(emptyReview));

@@ -40,12 +40,12 @@ const MyPage = props => {
 
     const buttonClickedHandler = () => {
         setIsEditing(!isEditing);
-    }
+    };
 
     const cancelClickedHandler = () => {
         dispatch(actions.getUser(userId));
         setIsEditing(!isEditing);
-    }
+    };
 
     useEffect(() => {
         dispatch(actions.getUser(userId));
@@ -65,7 +65,7 @@ const MyPage = props => {
                         id="outlined-multiline-static"
                         InputProps={{
                             readOnly: true,
-                          }}
+                        }}
                         multiline
                         rows="8"
                         variant="outlined"
@@ -74,9 +74,7 @@ const MyPage = props => {
                 </div>
             </div>
             <div className={classes.Button}>
-                <EditButton 
-                    clickedHandler={ buttonClickedHandler }
-                />
+                <EditButton clickedHandler={buttonClickedHandler} />
             </div>
         </Aux>
     );
@@ -89,17 +87,27 @@ const MyPage = props => {
                         <div className={classes.Name}>
                             <TextField
                                 className={classStyles.name}
-                                id="standard-basic" 
-                                label="First Name" 
-                                value={user.first_name ? user.first_name : ''} 
-                                onChange={event => inputChangedHandler(event.target.value, 'first_name')}
+                                id="standard-basic"
+                                label="First Name"
+                                value={user.first_name ? user.first_name : ''}
+                                onChange={event =>
+                                    inputChangedHandler(
+                                        event.target.value,
+                                        'first_name'
+                                    )
+                                }
                             />
                             <TextField
                                 className={classStyles.name}
-                                id="standard-basic" 
-                                label="Last Name" 
-                                value={user.last_name ? user.last_name : ''} 
-                                onChange={event => inputChangedHandler(event.target.value, 'last_name')}
+                                id="standard-basic"
+                                label="Last Name"
+                                value={user.last_name ? user.last_name : ''}
+                                onChange={event =>
+                                    inputChangedHandler(
+                                        event.target.value,
+                                        'last_name'
+                                    )
+                                }
                             />
                         </div>
                     </div>
@@ -113,22 +121,22 @@ const MyPage = props => {
                             placeholder="Write your introduction!"
                             variant="outlined"
                             value={user.introduction ? user.introduction : ''}
-                            onChange={event => inputChangedHandler(event.target.value, 'introduction')}
+                            onChange={event =>
+                                inputChangedHandler(
+                                    event.target.value,
+                                    'introduction'
+                                )
+                            }
                         />
                     </div>
                 </div>
                 <div className={classes.Button}>
                     <div>
-                        <CancelButton 
-                            clicked={ cancelClickedHandler }
-                        />
+                        <CancelButton clicked={cancelClickedHandler} />
                     </div>
-                    <SaveButton 
-                        type='mypage'
-                        clicked={ buttonClickedHandler } 
-                    />
+                    <SaveButton type="mypage" clicked={buttonClickedHandler} />
                 </div>
-            </Aux> 
+            </Aux>
         );
     }
 

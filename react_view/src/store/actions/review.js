@@ -52,14 +52,13 @@ export const getReview = (userId, gameId) => {
     };
 };
 
-export const getReviews = (userId) => {
+export const getReviews = userId => {
     return dispatch => {
         const url = `http://localhost:3001/users/${userId}/reviews`;
         axios
             .get(url)
             .then(response => {
                 if (response.data) {
-                    console.log(response.data);
                     dispatch(setReviews(response.data));
                 } else {
                     dispatch(setReview(null));

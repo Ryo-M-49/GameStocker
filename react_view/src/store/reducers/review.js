@@ -15,7 +15,7 @@ const initialState = {
         good: '',
         bad: '',
         rate: null,
-        likeCount: null,
+        likes_count: null,
         isExisted: false,
     },
     reviews: null,

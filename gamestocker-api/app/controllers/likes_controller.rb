@@ -38,6 +38,6 @@ class LikesController < ApplicationController
   end
 
   def set_user_review
-    @review = Review.find_by(gameId: params[:review_id])
+    @review = Review.find_by(id: params[:review_id])
   end
 end

@@ -27,7 +27,7 @@ const MyPage = props => {
     const classStyles = useStyles();
     const [isEditing, setIsEditing] = useState(false);
     const user = useSelector(state => state.userReducer);
-    const userId = useSelector(state => state.authReducer.userId);
+    const userId = localStorage.getItem('userId');
     const dispatch = useDispatch();
 
     const inputChangedHandler = (newValue, controlName) => {

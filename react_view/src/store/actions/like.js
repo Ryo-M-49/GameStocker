@@ -6,9 +6,9 @@ export const setLike = review => {
     };
 };
 
-export const like = (userId, gameId) => {
+export const like = (userId, reviewId) => {
     return dispatch => {
-        const url = `http://localhost:3001/users/${userId}/reviews/${gameId}/likes`;
+        const url = `http://localhost:3001/users/${userId}/reviews/${reviewId}/likes`;
         axios
             .post(url)
             .then(response => {
@@ -20,9 +20,9 @@ export const like = (userId, gameId) => {
     };
 };
 
-export const unlike = (userId, gameId, likeId) => {
+export const unlike = (userId, reviewId, likeId) => {
     return dispatch => {
-        const url = `http://localhost:3001/users/${userId}/reviews/${gameId}/likes/${likeId}`;
+        const url = `http://localhost:3001/users/${userId}/reviews/${reviewId}/likes/${likeId}`;
         axios
             .delete(url)
             .then(response => {

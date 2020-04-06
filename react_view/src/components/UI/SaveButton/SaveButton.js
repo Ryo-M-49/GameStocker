@@ -26,6 +26,7 @@ const SaveButton = props => {
                 ...review.review,
             };
             delete updatedReview.isExisted;
+            delete updatedReview.likes_count;
             dispatch(
                 actions.createReview(updatedReview, updatedReview.user_id, true)
             );

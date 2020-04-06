@@ -6,18 +6,21 @@ import * as actions from '../../store/actions/index';
 
 const Reviews = props => {
     const reviews = useSelector(state => state.reviewReducer.reviews);
-    const userId = useSelector(state => state.authReducer.userId);
+    const userId = localStorage.getItem('userId');
     const dispatch = useDispatch();
 
     useEffect(() => {
         dispatch(actions.getReviews(userId));
-    }, [userId]);
+    }, [props]);
 
     let reviewCard = <p>No review to show for now. Write a review!</p>;
     if (reviews) {
-        reviewCard = reviews.map((review, index) => (
+        const yourReviews = reviews.filter(review => {
+            if(review.user_id == userId) return true; 
+         });
+        reviewCard = yourReviews.map((yourReview, index) => (
             <li key={index}>
-                <ReviewCard review={review} />
+                <ReviewCard review={yourReview} />
             </li>
         ));
     }

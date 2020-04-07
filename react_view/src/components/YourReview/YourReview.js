@@ -90,11 +90,13 @@ const YourReview = props => {
             </div>
             <div className={classes.RightContent}>
                 <div className={classes.ImageWrapper}>
-                    <img
-                        className={classes.Img}
-                        src={game.image}
-                        alt="thumbnail"
-                    />
+                    <a href={game.url}　target="_blank">
+                        <img
+                            className={classes.Img}
+                            src={game.image}
+                            alt="thumbnail"
+                        />
+                    </a>
                 </div>
                 {buttons}
             </div>

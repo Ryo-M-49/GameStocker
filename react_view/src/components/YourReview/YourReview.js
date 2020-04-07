@@ -6,7 +6,7 @@ import Snackbar from '@material-ui/core/Snackbar';
 import MuiAlert from '@material-ui/lab/Alert';
 import Review from './Review/Review';
 import QuitButton from '../UI/QuitButton/QuitButton';
-import ShareButton from '../UI/ShareButton/ShareButton';
+import ShareButton from '../UI/DeleteButton/DeleteButton';
 import SaveButton from '../UI/SaveButton/SaveButton';
 import UpdateButton from '../UI/UpdateButton/UpdateButton';
 import * as actions from '../../store/actions/index';

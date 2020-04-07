@@ -103,6 +103,7 @@ const ReviewCard = props => {
                         pathname: `users/${user_id}/reviews/${gameId}`,
                         state: {
                             game: props.review,
+                            user_id: user_id,
                         },
                     }}
                     className={classes.button}

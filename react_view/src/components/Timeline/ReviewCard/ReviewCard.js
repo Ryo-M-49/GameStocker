@@ -100,7 +100,7 @@ const ReviewCard = props => {
             <CardActions disableSpacing>
                 <Link
                     to={{
-                        pathname: `users/${user_id}/yourreviews/${gameId}`,
+                        pathname: `users/${user_id}/reviews/${gameId}`,
                         state: {
                             game: props.review,
                         },

@@ -46,10 +46,10 @@ class Layout extends Component {
             <Switch>
                 {gameListRedirect}
                 <Route
-                    path="/users/:userId/yourreviews/:reviewId"
+                    path="/users/:userId/reviews/:reviewId"
                     component={YourReview}
                 />
-                <Route path="/users/:userId/yourreviews" component={Reviews} />
+                <Route path="/users/:userId/reviews" component={Reviews} />
                 <Route path="/signin" component={Signin} />
                 <Route path="/signup" component={Signup} />
                 <Route path="/gamelist" component={GameList} />
@@ -63,11 +63,11 @@ class Layout extends Component {
                 <Switch>
                     {gameListRedirect}
                     <Route
-                        path="/users/:userId/yourreviews/:reviewId"
+                        path="/users/:userId/reviews/:reviewId"
                         component={YourReview}
                     />
                     <Route
-                        path="/users/:userId/yourreviews"
+                        path="/users/:userId/reviews"
                         component={Reviews}
                     />
                     <Route path="/users/:userId" component={MyPage} />

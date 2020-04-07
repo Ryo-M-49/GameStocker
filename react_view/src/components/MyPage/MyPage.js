@@ -87,7 +87,7 @@ const MyPage = props => {
                         <div className={classes.Name}>
                             <TextField
                                 className={classStyles.name}
-                                id="standard-basic"
+                                id="first-name"
                                 label="First Name"
                                 value={user.first_name ? user.first_name : ''}
                                 onChange={event =>
@@ -99,7 +99,7 @@ const MyPage = props => {
                             />
                             <TextField
                                 className={classStyles.name}
-                                id="standard-basic"
+                                id="last-name"
                                 label="Last Name"
                                 value={user.last_name ? user.last_name : ''}
                                 onChange={event =>

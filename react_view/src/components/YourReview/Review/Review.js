@@ -21,9 +21,9 @@ const Review = props => {
                 <p>{description}</p>
             </div>
             <form>
-                <Rating value={review.rate} />
-                <Good value={review.good} />
-                <Bad value={review.bad} />
+                <Rating value={review.rate} isYourReview={props.isYourReview} />
+                <Good value={review.good} isYourReview={props.isYourReview}/>
+                <Bad value={review.bad} isYourReview={props.isYourReview}/>
             </form>
         </div>
     );

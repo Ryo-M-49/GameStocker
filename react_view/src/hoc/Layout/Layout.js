@@ -38,8 +38,13 @@ class Layout extends Component {
     };
 
     render() {
+        let gameListRedirect = null;
+        if (this.props.isSearched) {
+            gameListRedirect = <Redirect to="/gamelist" />;
+        }
         let routes = (
             <Switch>
+                {gameListRedirect}
                 <Route
                     path="/users/:userId/yourreviews/:reviewId"
                     component={YourReview}
@@ -56,6 +61,7 @@ class Layout extends Component {
         if (this.props.isAuthenticated) {
             routes = (
                 <Switch>
+                    {gameListRedirect}
                     <Route
                         path="/users/:userId/yourreviews/:reviewId"
                         component={YourReview}
@@ -89,6 +95,7 @@ class Layout extends Component {
 const mapStateToProps = state => {
     return {
         isAuthenticated: state.authReducer.token !== null,
+        isSearched: state.gameListReducer.isSearched,
     };
 };
 

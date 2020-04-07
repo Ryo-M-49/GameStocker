@@ -146,7 +146,7 @@ const MyPage = props => {
                 {bio}
                 <PopularReview />
                 <div className={classes.ToAllReviewsButtonWrapper}>
-                    <Link to={`/users/${userId}/yourreviews`}>
+                    <Link to={`/users/${userId}/reviews`}>
                         <ToAllReviewsButton />
                     </Link>
                 </div>

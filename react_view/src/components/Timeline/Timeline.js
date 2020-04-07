@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import classes from './Timeline.module.css';
-import ReviewCard from '../Reviews/ReviewCard/ReviewCard';
+import ReviewCard from './ReviewCard/ReviewCard';
 import Snackbar from '@material-ui/core/Snackbar';
 import MuiAlert from '@material-ui/lab/Alert';
 import * as actions from '../../store/actions/index';

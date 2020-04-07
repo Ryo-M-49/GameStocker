@@ -47,12 +47,18 @@ const HoverRating = props => {
         dispatch(actions.setReview(updatedReview));
     };
 
+    let isReadOnly = true;
+    if (props.isYourReview) {
+        isReadOnly = false;
+    }
+
     return (
         <div className={classes.root}>
             <Rating
                 name="hover-feedback"
                 value={props.value ? props.value : value}
                 precision={0.5}
+                readOnly={isReadOnly}
                 onChange={(event, newValue) => {
                     setValue(newValue);
                     inputChangedHandler(newValue);

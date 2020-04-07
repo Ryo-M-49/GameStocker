@@ -17,7 +17,9 @@ const Review = props => {
     return (
         <div className={classes.Review}>
             <div className={classes.Description}>
-                <h2 className={classes.Title}>{title}</h2>
+                <a href={props.game.url}　target="_blank">
+                    <h2 className={classes.Title}>{title}</h2>
+                </a>
                 <p>{description}</p>
             </div>
             <form>

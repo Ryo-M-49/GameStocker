@@ -22,6 +22,7 @@ const YourReview = props => {
         : auth.userId;
 
     const game = props.location.state.game;
+    const reviewerId = props.location.state.user_id;
     const updatedGame = {
         ...review.game,
         user_id: game.user_id,
@@ -34,7 +35,7 @@ const YourReview = props => {
 
     useEffect(() => {
         dispatch(actions.setGame(updatedGame));
-        dispatch(actions.getReview(updatedGame.user_id, updatedGame.gameId));
+        dispatch(actions.getReview(reviewerId, updatedGame.gameId));
     }, [props]);
 
     const snackbarClosedHandler = () => {
@@ -60,7 +61,7 @@ const YourReview = props => {
         );
     }
 
-    let isYourReview = yourId == game.user_id;
+    let isYourReview = yourId == reviewerId;
 
     let buttons = null
     if (isYourReview && isReviewExisted) {

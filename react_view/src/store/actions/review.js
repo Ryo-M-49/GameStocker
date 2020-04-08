@@ -78,6 +78,7 @@ export const createReview = (reviewDetail, userId, isSnackbarOpen) => {
         axios
             .post(url, reviewDetail)
             .then(response => {
+                console.log(response.data);
                 dispatch(getReview(userId, reviewDetail.gameId));
                 dispatch(toggleSnackbar(isSnackbarOpen));
             })

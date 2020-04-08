@@ -1,0 +1,10 @@
+.LikeButton {
+    margin-top: 8px;
+    margin-right: 8px;
+    display: flex;
+    align-items: center;
+}
+
+.FavoriteIcon {
+    color: red;
+}

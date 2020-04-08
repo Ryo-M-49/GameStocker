@@ -1,16 +1,16 @@
 import React from 'react';
 import Button from '@material-ui/core/Button';
-import PublishIcon from '@material-ui/icons/Publish';
+import DeleteIcon from '@material-ui/icons/Delete';
 
 const shareButton = props => (
     <div>
         <Button
             variant="contained"
             color="primary"
-            startIcon={<PublishIcon />}
+            startIcon={<DeleteIcon />}
             // onClick={buttonClickedHandler}
         >
-            SHARE
+            DELETE
         </Button>
     </div>
 );

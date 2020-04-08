@@ -25,6 +25,11 @@ const Good = props => {
         dispatch(actions.setReview(updatedReview));
     };
 
+    let isReadOnly = true;
+    if (props.isYourReview) {
+        isReadOnly = false;
+    }
+
     return (
         <div className={classes.Good}>
             <ThumbUpIcon fontSize="large" />
@@ -36,6 +41,9 @@ const Good = props => {
                     placeholder="Write good points!"
                     variant="outlined"
                     value={props.value}
+                    InputProps={{
+                        readOnly: isReadOnly,
+                      }}
                     onChange={event => inputChangedHandler(event.target.value)}
                 />
             </div>

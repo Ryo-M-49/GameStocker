@@ -42,7 +42,7 @@ export const getReview = (userId, gameId) => {
                         good: '',
                         bad: '',
                         rate: null,
-                        like_count: null,
+                        likes_count: null,
                         isExisted: false,
                     };
                     dispatch(setReview(emptyReview));

@@ -3,7 +3,7 @@ class ReviewsController < ApplicationController
   before_action :set_user_review, only: [:show, :update, :destroy]
 
   def index
-    @review = @user.reviews.all
+    @review = Review.all
     render json: @review
   end
 
@@ -28,7 +28,7 @@ class ReviewsController < ApplicationController
   private
 
   def review_params
-    params.permit(:good, :bad, :rate, :gameId, :title, :caption, :image, :url, :user_id)
+    params.permit(:good, :bad, :rate, :gameId, :title, :caption, :image, :url, :user_id, :likes_count, :id)
   end
 
   def set_user

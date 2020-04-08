@@ -6,7 +6,7 @@ import Snackbar from '@material-ui/core/Snackbar';
 import MuiAlert from '@material-ui/lab/Alert';
 import Review from './Review/Review';
 import QuitButton from '../UI/QuitButton/QuitButton';
-import ShareButton from '../UI/ShareButton/ShareButton';
+import ShareButton from '../UI/DeleteButton/DeleteButton';
 import SaveButton from '../UI/SaveButton/SaveButton';
 import UpdateButton from '../UI/UpdateButton/UpdateButton';
 import * as actions from '../../store/actions/index';
@@ -17,14 +17,15 @@ const YourReview = props => {
     const dispatch = useDispatch();
     const isReviewExisted = review.review.isExisted;
 
-    const id = localStorage.getItem('userId')
+    const yourId = localStorage.getItem('userId')
         ? localStorage.getItem('userId')
         : auth.userId;
 
     const game = props.location.state.game;
+    const reviewerId = props.location.state.user_id;
     const updatedGame = {
         ...review.game,
-        user_id: id,
+        user_id: game.user_id,
         gameId: game.gameId,
         title: game.title,
         caption: game.caption,
@@ -34,14 +35,8 @@ const YourReview = props => {
 
     useEffect(() => {
         dispatch(actions.setGame(updatedGame));
-        dispatch(actions.getReview(updatedGame.user_id, updatedGame.gameId));
+        dispatch(actions.getReview(reviewerId, updatedGame.gameId));
     }, [props]);
-
-    let buttons = (
-        <div className={classes.ButtonWrapper}>
-            <SaveButton type="review" />
-        </div>
-    );
 
     const snackbarClosedHandler = () => {
         dispatch(actions.toggleSnackbar(false));
@@ -66,13 +61,22 @@ const YourReview = props => {
         );
     }
 
-    if (isReviewExisted) {
+    let isYourReview = yourId == reviewerId;
+
+    let buttons = null
+    if (isYourReview && isReviewExisted) {
         buttons = (
             <div className={classes.ButtonWrapper}>
                 <div className={classes.ShareButton}>
                     <ShareButton />
                 </div>
                 <UpdateButton />
+            </div>
+        );
+    } else if (isYourReview && !isReviewExisted) {
+        buttons = (
+            <div className={classes.ButtonWrapper}>
+                <SaveButton type="review" />
             </div>
         );
     }
@@ -82,15 +86,17 @@ const YourReview = props => {
             {notification}
             <QuitButton />
             <div className={classes.ReviewWrapper}>
-                <Review game={game} />
+                <Review game={game} isYourReview={isYourReview}/>
             </div>
             <div className={classes.RightContent}>
                 <div className={classes.ImageWrapper}>
-                    <img
-                        className={classes.Img}
-                        src={game.image}
-                        alt="thumbnail"
-                    />
+                    <a href={game.url}　target="_blank">
+                        <img
+                            className={classes.Img}
+                            src={game.image}
+                            alt="thumbnail"
+                        />
+                    </a>
                 </div>
                 {buttons}
             </div>

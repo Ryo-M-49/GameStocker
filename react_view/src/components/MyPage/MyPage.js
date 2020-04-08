@@ -27,7 +27,7 @@ const MyPage = props => {
     const classStyles = useStyles();
     const [isEditing, setIsEditing] = useState(false);
     const user = useSelector(state => state.userReducer);
-    const userId = useSelector(state => state.authReducer.userId);
+    const userId = localStorage.getItem('userId');
     const dispatch = useDispatch();
 
     const inputChangedHandler = (newValue, controlName) => {
@@ -87,7 +87,7 @@ const MyPage = props => {
                         <div className={classes.Name}>
                             <TextField
                                 className={classStyles.name}
-                                id="standard-basic"
+                                id="first-name"
                                 label="First Name"
                                 value={user.first_name ? user.first_name : ''}
                                 onChange={event =>
@@ -99,7 +99,7 @@ const MyPage = props => {
                             />
                             <TextField
                                 className={classStyles.name}
-                                id="standard-basic"
+                                id="last-name"
                                 label="Last Name"
                                 value={user.last_name ? user.last_name : ''}
                                 onChange={event =>
@@ -146,7 +146,7 @@ const MyPage = props => {
                 {bio}
                 <PopularReview />
                 <div className={classes.ToAllReviewsButtonWrapper}>
-                    <Link to={`/users/${userId}/yourreviews`}>
+                    <Link to={`/users/${userId}/reviews`}>
                         <ToAllReviewsButton />
                     </Link>
                 </div>

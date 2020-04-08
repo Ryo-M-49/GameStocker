@@ -47,7 +47,7 @@ const useStyles = makeStyles(theme => ({
 }));
 
 const ReviewCard = props => {
-    let { title, image, rate, good, likes_count, gameId, createdAt } = props.review;
+    let { user_id, title, image, rate, good, likes_count, gameId, createdAt } = props.review;
     const userId = useSelector(state => state.authReducer.userId);
     const classes = useStyles();
     const MAX_TEXT_LENGTH = 200;
@@ -100,10 +100,10 @@ const ReviewCard = props => {
             <CardActions disableSpacing>
                 <Link
                     to={{
-                        pathname: `reviews/${gameId}`,
+                        pathname: `users/${user_id}/reviews/${gameId}`,
                         state: {
                             game: props.review,
-                            user_id: userId,
+                            user_id: user_id,
                         },
                     }}
                     className={classes.button}

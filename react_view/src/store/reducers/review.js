@@ -12,6 +12,7 @@ const initialState = {
         url: null,
     },
     review: {
+        id: null,
         good: '',
         bad: '',
         rate: null,

@@ -65,8 +65,6 @@ class GameList extends Component {
             );
         }
 
-        console.log(this.props.games);
-
         return (
             <div className={classes.GameList}>
                 {component}

@@ -16,7 +16,7 @@ const StyledButton = withStyles({
 const SaveButton = props => {
     const review = useSelector(state => state.reviewReducer);
     const user = useSelector(state => state.userReducer);
-    const userId = useSelector(state => state.authReducer.userId);
+    const userId = localStorage.getItem('userId');
     const dispatch = useDispatch();
 
     const saveButtonClickedHandler = () => {
@@ -28,7 +28,7 @@ const SaveButton = props => {
             delete updatedReview.isExisted;
             delete updatedReview.likes_count;
             dispatch(
-                actions.createReview(updatedReview, updatedReview.user_id, true)
+                actions.createReview(updatedReview, userId, true)
             );
         } else if (props.type === 'mypage') {
             // Shaping the data to make it matched with the format of the request.

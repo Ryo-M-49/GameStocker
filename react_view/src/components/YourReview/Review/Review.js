@@ -17,13 +17,15 @@ const Review = props => {
     return (
         <div className={classes.Review}>
             <div className={classes.Description}>
-                <h2 className={classes.Title}>{title}</h2>
+                <a href={props.game.url}　target="_blank">
+                    <h2 className={classes.Title}>{title}</h2>
+                </a>
                 <p>{description}</p>
             </div>
             <form>
-                <Rating value={review.rate} />
-                <Good value={review.good} />
-                <Bad value={review.bad} />
+                <Rating value={review.rate} isYourReview={props.isYourReview} />
+                <Good value={review.good} isYourReview={props.isYourReview}/>
+                <Bad value={review.bad} isYourReview={props.isYourReview}/>
             </form>
         </div>
     );

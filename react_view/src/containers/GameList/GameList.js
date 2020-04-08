@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import classes from './GameList.module.css';
 import Game from '../../components/Game/Game';
-import Pagination from '../../components/UI/Pagination/Pagination';
+import GamelistPagenation from '../../components/UI/Pagination/Pagination';
 import * as actions from '../../store/actions/index';
 
 class GameList extends Component {
@@ -32,7 +32,7 @@ class GameList extends Component {
             }
 
             pagination = (
-                <Pagination
+                <GamelistPagenation
                     pageCount={this.props.games.pageCount}
                     pageNumber={this.props.games.page}
                     pageChangedHandler={(event, page) =>

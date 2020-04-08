@@ -17,6 +17,13 @@
     margin: 30px auto;
 }
 
+.Error {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
 h2 {
     font-weight: normal;
 }

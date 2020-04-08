@@ -1,6 +1,6 @@
 class ReviewsController < ApplicationController
   before_action :set_user
-  before_action :set_user_review, only: [:show, :update, :destroy]
+  before_action :set_user_review, only: [:update, :destroy]
 
   def index
     @review = Review.all
@@ -8,6 +8,7 @@ class ReviewsController < ApplicationController
   end
 
   def show
+    @review = @user.reviews.find_by(gameId: params[:id])
     render json: @review
   end
 
@@ -36,6 +37,6 @@ class ReviewsController < ApplicationController
   end
 
   def set_user_review
-    @review = @user.reviews.find_by(gameId: params[:id])
+    @review = @user.reviews.find(params[:id])
   end
 end

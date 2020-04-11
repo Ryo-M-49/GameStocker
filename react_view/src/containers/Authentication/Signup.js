@@ -211,8 +211,8 @@ class SignUp extends Component {
                           return (
                               <Snackbar
                                   anchorOrigin={{
-                                      vertical: 'bottom',
-                                      horizontal: 'right',
+                                      vertical: 'top',
+                                      horizontal: 'center',
                                   }}
                                   key={index}
                                   open={errorMessage.isSnackbarOpen}

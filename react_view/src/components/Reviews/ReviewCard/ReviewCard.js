@@ -56,7 +56,7 @@ const ReviewCard = props => {
         gameId,
         createdAt,
     } = props.review;
-    const userId = useSelector(state => state.authReducer.userId);
+    const userId = localStorage.getItem('userId');
     const classes = useStyles();
     const MAX_TEXT_LENGTH = 200;
     if (good.length > MAX_TEXT_LENGTH) {

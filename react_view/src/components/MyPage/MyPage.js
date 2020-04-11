@@ -49,6 +49,7 @@ const MyPage = props => {
 
     useEffect(() => {
         dispatch(actions.getUser(userId));
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [props]);
 
     let bio = (

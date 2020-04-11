@@ -27,9 +27,7 @@ const SaveButton = props => {
             };
             delete updatedReview.isExisted;
             delete updatedReview.likes_count;
-            dispatch(
-                actions.createReview(updatedReview, userId, true)
-            );
+            dispatch(actions.createReview(updatedReview, userId));
         } else if (props.type === 'mypage') {
             // Shaping the data to make it matched with the format of the request.
             const updatedUser = {
@@ -39,9 +37,7 @@ const SaveButton = props => {
             };
             delete updatedUser.user.id;
 
-            dispatch(
-                actions.updateUser(updatedUser, userId)
-            );
+            dispatch(actions.updateUser(updatedUser, userId));
 
             props.clicked();
         }

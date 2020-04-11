@@ -66,10 +66,7 @@ class Layout extends Component {
                         path="/users/:userId/reviews/:reviewId"
                         component={YourReview}
                     />
-                    <Route
-                        path="/users/:userId/reviews"
-                        component={Reviews}
-                    />
+                    <Route path="/users/:userId/reviews" component={Reviews} />
                     <Route path="/users/:userId" component={MyPage} />
                     <Route path="/gamelist" component={GameList} />
                     <Route path="/" exact component={Timeline} />

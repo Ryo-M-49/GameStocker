@@ -54,22 +54,16 @@ class GameList extends Component {
             </Aux>
         );
 
-        if (this.props.games && this.props.games.count == 0) {
+        if (this.props.games && this.props.games.count === 0) {
             component = (
                 <div className={classes.Error}>
                     <SentimentVeryDissatisfiedIcon />
-                    <p>
-                        No game is found
-                    </p>
+                    <p>No game is found</p>
                 </div>
             );
         }
 
-        return (
-            <div className={classes.GameList}>
-                {component}
-            </div>
-        );
+        return <div className={classes.GameList}>{component}</div>;
     }
 }
 

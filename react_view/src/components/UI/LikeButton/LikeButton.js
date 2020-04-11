@@ -1,48 +1,34 @@
-import React, { useState, useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import classes from './LikeButton.module.css';
 import FavoriteIcon from '@material-ui/icons/Favorite';
 import FavoriteBorderIcon from '@material-ui/icons/FavoriteBorder';
 import * as actions from '../../../store/actions/index';
-import axios from 'axios';
-
-async function fetchLike (userId, reviewId) {
-    const url = `http://localhost:3001/users/${userId}/reviews/${reviewId}/likes/1`;
-    let result = null;
-    axios
-        .get(url)
-        .then(response => {
-            result = response.data;
-        })
-        .catch(error => {
-            console.log(error);
-        });
-    console.log('result in fetchLike is ', result);
-    return result;
-};
 
 const LikeButton = props => {
-    let { likesCount, reviewId } = props;
-    const like = useSelector(state => state.likeReducer.like);
-    const userId = useSelector(state => state.authReducer.userId);
+    let { likesCount, userId, reviewId } = props;
     const dispatch = useDispatch();
+    const likes = useSelector(state => state.likeReducer.likes);
 
-    const [localLike, setLocalLike] = useState(null);
     const [count, setCount] = useState(likesCount);
 
+    useEffect(() => {
+        dispatch(actions.fetchLike(likes, userId, reviewId));
+    }, [props, likes, count]);
+
     const onLikeHandler = () => {
-        dispatch(actions.like(userId, reviewId));
+        dispatch(actions.like(likes, userId, reviewId));
         setCount(count + 1);
     }
     const onUnlikeHandler = () => {
-        dispatch(actions.unlike(userId, reviewId, like.id));
+        dispatch(actions.unlike(likes, userId, reviewId, likes[reviewId].id));
         setCount(count - 1);
     }
 
-    useEffect(() => {
-        setLocalLike(like);
-    }, [props, like, count]);
-
+    console.log('likes is ', likes);
+    console.log('reviewId is', reviewId);
+    console.log(`like with reviewId = ${reviewId} is `, likes[reviewId]);
+    
     let favorite = (
         <div className={classes.LikeButton}>
             <FavoriteBorderIcon 
@@ -53,7 +39,7 @@ const LikeButton = props => {
         </div>
     );
 
-    if (localLike) {
+    if (likes[reviewId]) {
         favorite = (
             <div className={classes.LikeButton}>
                 <FavoriteIcon 

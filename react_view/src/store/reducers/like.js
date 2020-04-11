@@ -2,12 +2,12 @@ import * as actionTypes from '../actions/actionTypes';
 import { updateObject } from './utility';
 
 const initialState = {
-    like: null,
+    likes: {},
 };
 
 const setLike = (state, action) => {
     return updateObject(state, {
-        like: action.like,
+        likes: action.likes,
     });
 };
 

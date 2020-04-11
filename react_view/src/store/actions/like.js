@@ -1,21 +1,21 @@
 import axios from 'axios';
 import * as actionTypes from './actionTypes';
 
-export const setLike = like => {
+export const setLike = likes => {
     return {
         type: actionTypes.SET_LIKE,
-        like: like,
+        likes: likes,
     };
 };
 
-export const fetchLike = (userId, reviewId) => {
+export const fetchLike = (likes, userId, reviewId) => {
     return dispatch => {
         const url = `http://localhost:3001/users/${userId}/reviews/${reviewId}/likes/1`;
         axios
             .get(url)
             .then(response => {
-                dispatch(setLike(response.data));
-                return response.data;
+                likes[reviewId] = response.data; 
+                dispatch(setLike(likes));
             })
             .catch(error => {
                 console.log(error);
@@ -23,14 +23,14 @@ export const fetchLike = (userId, reviewId) => {
     }
 };
 
-export const like = (userId, reviewId) => {
+export const like = (likes, userId, reviewId) => {
     return dispatch => {
         const url = `http://localhost:3001/users/${userId}/reviews/${reviewId}/likes`;
         axios
             .post(url)
             .then(response => {
-                console.log('like triggered', response.data);
-                dispatch(setLike(response.data));
+                likes[reviewId] = response.data; 
+                dispatch(setLike(likes));
             })
             .catch(error => {
                 console.log(error);
@@ -38,13 +38,14 @@ export const like = (userId, reviewId) => {
     };
 };
 
-export const unlike = (userId, reviewId, likeId) => {
+export const unlike = (likes, userId, reviewId, likeId) => {
     return dispatch => {
         const url = `http://localhost:3001/users/${userId}/reviews/${reviewId}/likes/${likeId}`;
         axios
             .delete(url)
             .then(response => {
-                dispatch(setLike(null));
+                delete likes[reviewId];
+                dispatch(setLike(likes));
             })
             .catch(error => {
                 console.log(error);

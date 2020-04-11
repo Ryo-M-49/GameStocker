@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { makeStyles } from '@material-ui/core/styles';
 import { Link } from 'react-router-dom';
@@ -14,8 +14,6 @@ import { red } from '@material-ui/core/colors';
 import Button from '@material-ui/core/Button';
 import Rating from '@material-ui/lab/Rating';
 import { cutString } from '../../../shared/utility';
-import * as actions from '../../../store/actions/index';
-import axios from 'axios';
 
 const useStyles = makeStyles(theme => ({
     root: {
@@ -40,25 +38,8 @@ const useStyles = makeStyles(theme => ({
 const ReviewCard = props => {
     let { id, user_id, title, image, rate, good, likes_count, gameId, createdAt } = props.review;
     const userId = useSelector(state => state.authReducer.userId);
-    const dispatch = useDispatch();
 
     const classes = useStyles();
-
-    function fetchLike (userId, id) {
-        const url = `http://localhost:3001/users/${userId}/reviews/${id}/likes/1`;
-        axios
-            .get(url)
-            .then(response => {
-                dispatch(actions.setLike(response.data));
-            })
-            .catch(error => {
-                console.log(error);
-            });
-    };
-
-    useEffect(() => {
-        fetchLike(userId, id);
-    }, [props]);
 
     const MAX_TEXT_LENGTH = 200;
     if (good.length > MAX_TEXT_LENGTH) {
@@ -66,7 +47,8 @@ const ReviewCard = props => {
     }
 
     let favorite = <LikeButton 
-                        likesCount={likes_count} 
+                        likesCount={likes_count}
+                        userId={userId} 
                         reviewId={id}
                     />
 

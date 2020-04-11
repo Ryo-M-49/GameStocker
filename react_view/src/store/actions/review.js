@@ -29,7 +29,6 @@ export const getReview = (userId, gameId) => {
             .get(url)
             .then(response => {
                 if (response.data) {
-                    console.log('getReview triggered' ,response.data);
                     const updatedReview = {
                         id: response.data.id,
                         good: response.data.good,

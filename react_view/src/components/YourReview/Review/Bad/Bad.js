@@ -43,7 +43,7 @@ const Bad = props => {
                     value={props.value}
                     InputProps={{
                         readOnly: isReadOnly,
-                      }}
+                    }}
                     onChange={event => inputChangedHandler(event.target.value)}
                 />
             </div>

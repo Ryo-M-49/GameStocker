@@ -58,18 +58,12 @@ class GameList extends Component {
             component = (
                 <div className={classes.Error}>
                     <SentimentVeryDissatisfiedIcon />
-                    <p>
-                        No game is found
-                    </p>
+                    <p>No game is found</p>
                 </div>
             );
         }
 
-        return (
-            <div className={classes.GameList}>
-                {component}
-            </div>
-        );
+        return <div className={classes.GameList}>{component}</div>;
     }
 }
 

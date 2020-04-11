@@ -89,12 +89,17 @@ class SignIn extends Component {
         };
         this.setState({ controls: updatedControls });
 
-        // Update "errorMessages" state based on the latest user's input. 
+        // Update "errorMessages" state based on the latest user's input.
         const copiedErrorMessages = [...this.state.errorMessages];
-        const currentErrorMessage = this.state.controls[controlName].validity.errorMessage;
+        const currentErrorMessage = this.state.controls[controlName].validity
+            .errorMessage;
         const nextErrorMessage = updatedValidity.errorMessage;
         this.setState({
-            errorMessages: updateErrorMessages(copiedErrorMessages, currentErrorMessage, nextErrorMessage),
+            errorMessages: updateErrorMessages(
+                copiedErrorMessages,
+                currentErrorMessage,
+                nextErrorMessage
+            ),
         });
     };
 

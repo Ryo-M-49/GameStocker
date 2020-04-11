@@ -28,7 +28,7 @@ const Timeline = props => {
         dispatch(actions.toggleAuthSnackbar(snackbar));
     };
 
-    //Snackbar settings
+    // Snackbar settings
     const isOpen = auth.isSnackbarOpen.isOpen;
     const type = auth.isSnackbarOpen.type;
     let notificationText = null;
@@ -67,9 +67,7 @@ const Timeline = props => {
     return (
         <div className={classes.Timeline}>
             {notification}
-            <ul className={classes.List}>
-                {reviewCard}
-            </ul>
+            <ul className={classes.List}>{reviewCard}</ul>
         </div>
     );
 };

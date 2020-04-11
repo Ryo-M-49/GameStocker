@@ -43,11 +43,19 @@ const useStyles = makeStyles(theme => ({
     },
     favoriteIcon: {
         color: 'red',
-    }
+    },
 }));
 
 const ReviewCard = props => {
-    let { title, image, rate, good, likes_count, gameId, createdAt } = props.review;
+    let {
+        title,
+        image,
+        rate,
+        good,
+        likes_count,
+        gameId,
+        createdAt,
+    } = props.review;
     const userId = useSelector(state => state.authReducer.userId);
     const classes = useStyles();
     const MAX_TEXT_LENGTH = 200;
@@ -57,15 +65,14 @@ const ReviewCard = props => {
 
     let favorite = (
         <div className={classes.action}>
-            <FavoriteBorderIcon />
-            0
+            <FavoriteBorderIcon />0
         </div>
     );
 
     if (likes_count) {
         favorite = (
             <div className={classes.action}>
-                <FavoriteIcon className={classes.favoriteIcon}/>
+                <FavoriteIcon className={classes.favoriteIcon} />
                 {likes_count}
             </div>
         );

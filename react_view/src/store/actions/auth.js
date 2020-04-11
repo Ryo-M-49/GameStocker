@@ -61,6 +61,11 @@ export const auth = (email, password) => {
                 dispatch(toggleAuthSnackbar(snackbar));
             })
             .catch(error => {
+                const snackbar = {
+                    isOpen: true,
+                    type: 'signin-fail',
+                };
+                dispatch(toggleAuthSnackbar(snackbar));
                 dispatch(authFail(error));
             });
     };

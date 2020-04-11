@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { Link as RouterLink, Redirect } from 'react-router-dom';
 import { connect } from 'react-redux';
 import Copyright from '../../components/UI/Copyright/Copyright';
+import Alert from '@material-ui/lab/Alert';
 import Snackbar from '@material-ui/core/Snackbar';
 import Avatar from '@material-ui/core/Avatar';
 import Button from '@material-ui/core/Button';
@@ -143,6 +144,14 @@ class SignUp extends Component {
         this.props.onSignup(this.state.controls);
     };
 
+    snackbarClosedHandler = () => {
+        const snackbar = {
+            isOpen: false,
+            type: null,
+        };
+        this.props.onToggleAuthSnackbar(snackbar);
+    };
+
     render() {
         const { classes } = this.props;
 
@@ -177,9 +186,26 @@ class SignUp extends Component {
             );
         }
 
+        let signinErrorMessage = null;
+        if (this.props.error) {
+            signinErrorMessage = (
+                <Snackbar 
+                    anchorOrigin={{
+                        vertical: 'top',
+                        horizontal: 'center',
+                    }}
+                    open={this.props.isSnackbarOpen}
+                    onClose={this.snackbarClosedHandler}            
+                >
+                    <Alert severity="error">{this.props.error.message}</Alert>
+                </Snackbar>
+            )
+        }
+
         return (
             <Container component="main" maxWidth="xs">
                 {authRedirect}
+                {signinErrorMessage}
                 {this.state.errorMessages.length > 0
                     ? this.state.errorMessages.map((errorMessage, index) => {
                           return (
@@ -191,7 +217,9 @@ class SignUp extends Component {
                                   key={index}
                                   open={errorMessage.isSnackbarOpen}
                                   message={errorMessage.message}
-                              />
+                              >
+                                <Alert severity="error">{errorMessage.message}</Alert>
+                              </Snackbar>
                           );
                       })
                     : null}
@@ -323,6 +351,8 @@ const mapStateToProps = state => {
         error: state.signupReducer.error,
         signupRedirectPath: state.signupReducer.signupRedirectPath,
         isAuthenticated: state.authReducer.token !== null,
+        error: state.signupReducer.error,
+        isSnackbarOpen: state.authReducer.isSnackbarOpen.isOpen,
     };
 };
 
@@ -331,6 +361,7 @@ const mapDispatchToProps = dispatch => {
         onSignup: controls => dispatch(actions.signup(controls)),
         onSetSignupRedirectPath: () =>
             dispatch(actions.setSignupRedirectPath('/')),
+        onToggleAuthSnackbar: snackbar => dispatch(actions.toggleAuthSnackbar(snackbar)),
     };
 };
 

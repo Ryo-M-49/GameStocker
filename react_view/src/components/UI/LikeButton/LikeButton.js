@@ -14,6 +14,7 @@ const LikeButton = props => {
 
     useEffect(() => {
         dispatch(actions.fetchLike(likes, userId, reviewId));
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [props, likes, count]);
 
     const onLikeHandler = () => {

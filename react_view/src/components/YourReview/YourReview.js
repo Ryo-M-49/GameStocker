@@ -36,6 +36,7 @@ const YourReview = props => {
     useEffect(() => {
         dispatch(actions.setGame(updatedGame));
         dispatch(actions.getReview(reviewerId, game.gameId));
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [props]);
 
     const snackbarClosedHandler = () => {
@@ -61,7 +62,7 @@ const YourReview = props => {
         );
     }
 
-    let isYourReview = yourId == reviewerId;
+    let isYourReview = yourId === reviewerId;
 
     let buttons = null
     if (isYourReview && isReviewExisted) {
@@ -90,7 +91,7 @@ const YourReview = props => {
             </div>
             <div className={classes.RightContent}>
                 <div className={classes.ImageWrapper}>
-                    <a href={game.url}　target="_blank">
+                    <a href={game.url}　target="_blank" rel="noopener noreferrer">
                         <img
                             className={classes.Img}
                             src={game.image}

@@ -14,13 +14,13 @@ export const fetchLike = (likes, userId, reviewId) => {
         axios
             .get(url)
             .then(response => {
-                likes[reviewId] = response.data; 
+                likes[reviewId] = response.data;
                 dispatch(setLike(likes));
             })
             .catch(error => {
                 console.log(error);
             });
-    }
+    };
 };
 
 export const like = (likes, userId, reviewId) => {
@@ -29,7 +29,7 @@ export const like = (likes, userId, reviewId) => {
         axios
             .post(url)
             .then(response => {
-                likes[reviewId] = response.data; 
+                likes[reviewId] = response.data;
                 dispatch(setLike(likes));
             })
             .catch(error => {

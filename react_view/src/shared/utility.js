@@ -5,12 +5,16 @@
  *      IF ("nextErrorMessage" is same as the exisiting one )
  *          return "errorMessages" as it is.
  *      IF ("nextErrorMessage" is null )
- *          return "errorMessages" after deleting the existing error message in it. 
+ *          return "errorMessages" after deleting the existing error message in it.
  * @param {array}  errorMessages - The current error message(s) for all input(email, password, etc.).
  * @param {object} currentErrorMessage - The current error message of a specific input.
  * @param {object} nextErrorMessage - The next error message of a specific input.
  */
-export const updateErrorMessages = (errorMessages, currentErrorMessage, nextErrorMessage) => {
+export const updateErrorMessages = (
+    errorMessages,
+    currentErrorMessage,
+    nextErrorMessage
+) => {
     if (nextErrorMessage) {
         if (nextErrorMessage === currentErrorMessage) {
             return errorMessages;
@@ -23,10 +27,7 @@ export const updateErrorMessages = (errorMessages, currentErrorMessage, nextErro
         }
     } else {
         if (currentErrorMessage) {
-            errorMessages.splice(
-                errorMessages.indexOf(currentErrorMessage),
-                1
-            );
+            errorMessages.splice(errorMessages.indexOf(currentErrorMessage), 1);
             return errorMessages;
         } else {
             return errorMessages;

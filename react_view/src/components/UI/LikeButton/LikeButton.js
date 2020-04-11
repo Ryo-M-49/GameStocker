@@ -6,7 +6,7 @@ import FavoriteBorderIcon from '@material-ui/icons/FavoriteBorder';
 import * as actions from '../../../store/actions/index';
 
 const LikeButton = props => {
-    let { likesCount, userId, reviewId } = props;
+    const { likesCount, userId, reviewId } = props;
     const dispatch = useDispatch();
     const likes = useSelector(state => state.likeReducer.likes);
 
@@ -14,24 +14,25 @@ const LikeButton = props => {
 
     useEffect(() => {
         dispatch(actions.fetchLike(likes, userId, reviewId));
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [props, likes, count]);
 
     const onLikeHandler = () => {
         dispatch(actions.like(likes, userId, reviewId));
         setCount(count + 1);
-    }
+    };
     const onUnlikeHandler = () => {
         dispatch(actions.unlike(likes, userId, reviewId, likes[reviewId].id));
         setCount(count - 1);
-    }
+    };
 
     console.log('likes is ', likes);
     console.log('reviewId is', reviewId);
     console.log(`like with reviewId = ${reviewId} is `, likes[reviewId]);
-    
+
     let favorite = (
         <div className={classes.LikeButton}>
-            <FavoriteBorderIcon 
+            <FavoriteBorderIcon
                 onClick={onLikeHandler}
                 className={classes.Icon}
             />
@@ -42,7 +43,7 @@ const LikeButton = props => {
     if (likes[reviewId]) {
         favorite = (
             <div className={classes.LikeButton}>
-                <FavoriteIcon 
+                <FavoriteIcon
                     onClick={onUnlikeHandler}
                     className={classes.FavoriteIcon}
                 />
@@ -50,12 +51,8 @@ const LikeButton = props => {
             </div>
         );
     }
-    
-    return (
-        <div>
-            {favorite}
-        </div>
-    );
+
+    return <div>{favorite}</div>;
 };
 
 export default LikeButton;

@@ -17,6 +17,7 @@ const Timeline = props => {
         } else {
             dispatch(actions.getReviews(1));
         }
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [props]);
 
     const snackbarClosedHandler = () => {
@@ -27,7 +28,7 @@ const Timeline = props => {
         dispatch(actions.toggleAuthSnackbar(snackbar));
     };
 
-    //Snackbar settings
+    // Snackbar settings
     const isOpen = auth.isSnackbarOpen.isOpen;
     const type = auth.isSnackbarOpen.type;
     let notificationText = null;
@@ -66,9 +67,7 @@ const Timeline = props => {
     return (
         <div className={classes.Timeline}>
             {notification}
-            <ul className={classes.List}>
-                {reviewCard}
-            </ul>
+            <ul className={classes.List}>{reviewCard}</ul>
         </div>
     );
 };

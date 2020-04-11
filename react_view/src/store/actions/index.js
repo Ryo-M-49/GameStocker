@@ -12,6 +12,7 @@ export {
     getReviews,
     createReview,
     updateReview,
+    deleteReview,
     toggleSnackbar,
 } from './review';
 

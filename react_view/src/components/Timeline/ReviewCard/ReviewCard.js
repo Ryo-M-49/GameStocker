@@ -1,5 +1,5 @@
 import React from 'react';
-import { useSelector, useDispatch } from 'react-redux';
+import { useSelector } from 'react-redux';
 import { makeStyles } from '@material-ui/core/styles';
 import { Link } from 'react-router-dom';
 import LikeButton from '../../UI/LikeButton/LikeButton';
@@ -36,8 +36,18 @@ const useStyles = makeStyles(theme => ({
 }));
 
 const ReviewCard = props => {
-    let { id, user_id, title, image, rate, good, likes_count, gameId, createdAt } = props.review;
-    const userId = useSelector(state => state.authReducer.userId);
+    let {
+        id,
+        user_id,
+        title,
+        image,
+        rate,
+        good,
+        likes_count,
+        gameId,
+        createdAt,
+    } = props.review;
+    const userId = localStorage.getItem('userId');
 
     const classes = useStyles();
 
@@ -46,11 +56,9 @@ const ReviewCard = props => {
         good = cutString(good, MAX_TEXT_LENGTH);
     }
 
-    let favorite = <LikeButton 
-                        likesCount={likes_count}
-                        userId={userId} 
-                        reviewId={id}
-                    />
+    const favorite = (
+        <LikeButton likesCount={likes_count} userId={userId} reviewId={id} />
+    );
 
     return (
         <Card className={classes.root}>

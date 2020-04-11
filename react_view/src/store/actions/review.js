@@ -63,7 +63,7 @@ export const getReviews = userId => {
             .get(url)
             .then(response => {
                 if (response.data) {
-                    console.log('getReviews triggered' ,response.data);
+                    console.log('getReviews triggered', response.data);
                     dispatch(setReviews(response.data));
                 } else {
                     dispatch(setReview(null));
@@ -75,15 +75,15 @@ export const getReviews = userId => {
     };
 };
 
-export const createReview = (reviewDetail, userId, isSnackbarOpen) => {
+export const createReview = (reviewDetail, userId) => {
     return dispatch => {
         const url = `http://localhost:3001/users/${userId}/reviews`;
         axios
             .post(url, reviewDetail)
             .then(response => {
-                console.log('createReview triggered',  response.data);
+                console.log('createReview triggered', response.data);
                 dispatch(getReview(userId, reviewDetail.gameId));
-                dispatch(toggleSnackbar(isSnackbarOpen));
+                dispatch(toggleSnackbar(true));
             })
             .catch(error => {
                 console.log(error);
@@ -95,14 +95,39 @@ export const updateReview = (
     reviewDetail,
     userId,
     reviewId,
-    isSnackbarOpen
 ) => {
     return dispatch => {
         const url = `http://localhost:3001/users/${userId}/reviews/${reviewId}`;
         axios
             .patch(url, reviewDetail)
             .then(response => {
-                dispatch(toggleSnackbar(isSnackbarOpen));
+                dispatch(toggleSnackbar(true));
+            })
+            .catch(error => {
+                console.log(error);
+            });
+    };
+};
+
+export const deleteReview = (
+    userId,
+    reviewId,
+) => {
+    return dispatch => {
+        const url = `http://localhost:3001/users/${userId}/reviews/${reviewId}`;
+        axios
+            .delete(url)
+            .then(response => {
+                dispatch(toggleSnackbar(true));
+                let emptyReview = {
+                    id: null,
+                    good: '',
+                    bad: '',
+                    rate: null,
+                    likes_count: null,
+                    isExisted: false,
+                };
+                dispatch(setReview(emptyReview));
             })
             .catch(error => {
                 console.log(error);

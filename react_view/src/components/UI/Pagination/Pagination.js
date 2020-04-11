@@ -24,7 +24,7 @@ const GamelistPagination = props => {
             />
         </div>
     );
-}
+};
 
 GamelistPagination.propTypes = {
     pageCount: PropTypes.number.isRequired,

@@ -72,6 +72,7 @@ const mapStatetoProps = state => {
         games: state.gameListReducer.games,
         error: state.gameListReducer.error,
         isSearched: state.gameListReducer.isSearched,
+        isAuthenticated: state.authReducer.token !== null,
     };
 };
 

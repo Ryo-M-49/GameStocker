@@ -1,5 +1,5 @@
 import React from 'react';
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 import { makeStyles } from '@material-ui/core/styles';
 import { Link } from 'react-router-dom';
 import LikeButton from '../../UI/LikeButton/LikeButton';
@@ -36,15 +36,21 @@ const useStyles = makeStyles(theme => ({
 }));
 
 const ReviewCard = props => {
-    let { user_id, title, image, rate, good, likes_count, gameId, createdAt } = props.review;
+    let { id, user_id, title, image, rate, good, likes_count, gameId, createdAt } = props.review;
     const userId = useSelector(state => state.authReducer.userId);
+
     const classes = useStyles();
+
     const MAX_TEXT_LENGTH = 200;
     if (good.length > MAX_TEXT_LENGTH) {
         good = cutString(good, MAX_TEXT_LENGTH);
     }
 
-    let favorite = <LikeButton likesCount={likes_count}/>
+    let favorite = <LikeButton 
+                        likesCount={likes_count}
+                        userId={userId} 
+                        reviewId={id}
+                    />
 
     return (
         <Card className={classes.root}>

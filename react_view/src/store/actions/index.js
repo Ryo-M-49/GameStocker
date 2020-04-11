@@ -28,4 +28,4 @@ export { getUserSuccess, getUser, updateUser } from './user';
 
 export { signup, setSignupRedirectPath } from './signup';
 
-export { like, unlike } from './like';
+export { setLike, fetchLike, like, unlike } from './like';

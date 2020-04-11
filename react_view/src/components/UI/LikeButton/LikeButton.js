@@ -1,16 +1,55 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
+import { useSelector, useDispatch } from 'react-redux';
 import classes from './LikeButton.module.css';
 import FavoriteIcon from '@material-ui/icons/Favorite';
 import FavoriteBorderIcon from '@material-ui/icons/FavoriteBorder';
+import * as actions from '../../../store/actions/index';
 
 const LikeButton = props => {
+    let { likesCount, userId, reviewId } = props;
+    const dispatch = useDispatch();
+    const likes = useSelector(state => state.likeReducer.likes);
 
+    const [count, setCount] = useState(likesCount);
+
+    useEffect(() => {
+        dispatch(actions.fetchLike(likes, userId, reviewId));
+    }, [props, likes, count]);
+
+    const onLikeHandler = () => {
+        dispatch(actions.like(likes, userId, reviewId));
+        setCount(count + 1);
+    }
+    const onUnlikeHandler = () => {
+        dispatch(actions.unlike(likes, userId, reviewId, likes[reviewId].id));
+        setCount(count - 1);
+    }
+
+    console.log('likes is ', likes);
+    console.log('reviewId is', reviewId);
+    console.log(`like with reviewId = ${reviewId} is `, likes[reviewId]);
+    
     let favorite = (
         <div className={classes.LikeButton}>
-            <FavoriteBorderIcon />
-            {props.likesCount}
+            <FavoriteBorderIcon 
+                onClick={onLikeHandler}
+                className={classes.Icon}
+            />
+            {count}
         </div>
     );
+
+    if (likes[reviewId]) {
+        favorite = (
+            <div className={classes.LikeButton}>
+                <FavoriteIcon 
+                    onClick={onUnlikeHandler}
+                    className={classes.FavoriteIcon}
+                />
+                {count}
+            </div>
+        );
+    }
     
     return (
         <div>

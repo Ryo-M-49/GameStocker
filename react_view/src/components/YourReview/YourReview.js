@@ -35,7 +35,7 @@ const YourReview = props => {
 
     useEffect(() => {
         dispatch(actions.setGame(updatedGame));
-        dispatch(actions.getReview(reviewerId, updatedGame.gameId));
+        dispatch(actions.getReview(reviewerId, game.gameId));
     }, [props]);
 
     const snackbarClosedHandler = () => {

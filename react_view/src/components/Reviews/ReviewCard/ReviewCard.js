@@ -1,5 +1,4 @@
 import React from 'react';
-import { useSelector } from 'react-redux';
 import { makeStyles } from '@material-ui/core/styles';
 import { Link } from 'react-router-dom';
 
@@ -11,9 +10,8 @@ import CardActions from '@material-ui/core/CardActions';
 import Avatar from '@material-ui/core/Avatar';
 import Typography from '@material-ui/core/Typography';
 import { red } from '@material-ui/core/colors';
-import FavoriteIcon from '@material-ui/icons/Favorite';
-import FavoriteBorderIcon from '@material-ui/icons/FavoriteBorder';
 import Button from '@material-ui/core/Button';
+import LikeButton from '../../UI/LikeButton/LikeButton';
 import Rating from '@material-ui/lab/Rating';
 import { cutString } from '../../../shared/utility';
 
@@ -48,6 +46,7 @@ const useStyles = makeStyles(theme => ({
 
 const ReviewCard = props => {
     let {
+        id,
         title,
         image,
         rate,
@@ -58,25 +57,15 @@ const ReviewCard = props => {
     } = props.review;
     const userId = localStorage.getItem('userId');
     const classes = useStyles();
+
     const MAX_TEXT_LENGTH = 200;
     if (good.length > MAX_TEXT_LENGTH) {
         good = cutString(good, MAX_TEXT_LENGTH);
     }
 
-    let favorite = (
-        <div className={classes.action}>
-            <FavoriteBorderIcon />0
-        </div>
+    const favorite = (
+        <LikeButton likesCount={likes_count} userId={userId} reviewId={id} />
     );
-
-    if (likes_count) {
-        favorite = (
-            <div className={classes.action}>
-                <FavoriteIcon className={classes.favoriteIcon} />
-                {likes_count}
-            </div>
-        );
-    }
 
     return (
         <Card className={classes.root}>

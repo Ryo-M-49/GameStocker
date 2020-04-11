@@ -62,7 +62,7 @@ const YourReview = props => {
         );
     }
 
-    const isYourReview = yourId === reviewerId;
+    const isYourReview = yourId == reviewerId;
 
     let buttons = null;
     if (isYourReview && isReviewExisted) {

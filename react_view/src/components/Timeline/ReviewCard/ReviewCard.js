@@ -47,7 +47,7 @@ const ReviewCard = props => {
         gameId,
         createdAt,
     } = props.review;
-    const userId = useSelector(state => state.authReducer.userId);
+    const userId = localStorage.getItem('userId');
 
     const classes = useStyles();
 

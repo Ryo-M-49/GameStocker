@@ -18,14 +18,7 @@ const UpdateButton = props => {
         };
         delete updatedReview.isExisted;
 
-        dispatch(
-            actions.updateReview(
-                updatedReview,
-                userId,
-                reviewId,
-                true
-            )
-        );
+        dispatch(actions.updateReview(updatedReview, userId, reviewId, true));
     };
 
     return (

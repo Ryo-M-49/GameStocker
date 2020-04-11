@@ -17,12 +17,12 @@ const Reviews = props => {
     let reviewCard = <p>No review to show for now. Write a review!</p>;
     if (reviews) {
         const yourReviews = reviews.filter(review => {
-            if(review.user_id === userId) { 
+            if (review.user_id === userId) {
                 return true;
             } else {
                 return false;
-            } 
-         });
+            }
+        });
         reviewCard = yourReviews.map((yourReview, index) => (
             <li key={index}>
                 <ReviewCard review={yourReview} />

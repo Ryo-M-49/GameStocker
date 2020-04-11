@@ -24,9 +24,9 @@ const setCurrentPage = (state, action) => {
 };
 
 const fetchGamesFailed = (state, action) => {
-    return updateObject(state, { 
-        error: action.error, 
-        isSearched: action.isSearched, 
+    return updateObject(state, {
+        error: action.error,
+        isSearched: action.isSearched,
     });
 };
 

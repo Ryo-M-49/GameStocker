@@ -63,7 +63,7 @@ export const getReviews = userId => {
             .get(url)
             .then(response => {
                 if (response.data) {
-                    console.log('getReviews triggered' ,response.data);
+                    console.log('getReviews triggered', response.data);
                     dispatch(setReviews(response.data));
                 } else {
                     dispatch(setReview(null));
@@ -81,7 +81,7 @@ export const createReview = (reviewDetail, userId, isSnackbarOpen) => {
         axios
             .post(url, reviewDetail)
             .then(response => {
-                console.log('createReview triggered',  response.data);
+                console.log('createReview triggered', response.data);
                 dispatch(getReview(userId, reviewDetail.gameId));
                 dispatch(toggleSnackbar(isSnackbarOpen));
             })

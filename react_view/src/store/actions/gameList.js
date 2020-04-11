@@ -5,8 +5,8 @@ export const setSearched = () => {
     return {
         type: actionTypes.SET_SEARCHED,
         isSearched: true,
-    }
-}
+    };
+};
 
 export const setGames = games => {
     return {
@@ -28,7 +28,6 @@ export const fetchGamesFailed = () => {
         type: actionTypes.FETCH_GAMES_FAILED,
         error: true,
         isSearched: false,
-
     };
 };
 

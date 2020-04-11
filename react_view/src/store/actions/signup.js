@@ -17,7 +17,7 @@ export const signupSuccess = userData => {
 
 export const signupFail = error => {
     return {
-        type: actionTypes.SIGNUP_SUCCESS,
+        type: actionTypes.SIGNUP_FAIL,
         error: error,
     };
 };
@@ -49,6 +49,12 @@ export const signup = userData => {
                 );
             })
             .catch(error => {
+                const snackbar = {
+                    isOpen: true,
+                    type: 'signup-fail',
+                };
+                console.log('Catched error', error);
+                dispatch(actions.toggleAuthSnackbar(snackbar));
                 dispatch(signupFail(error));
             });
     };

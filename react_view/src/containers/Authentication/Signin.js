@@ -4,6 +4,7 @@ import { connect } from 'react-redux';
 import { withStyles } from '@material-ui/core/styles';
 import Copyright from '../../components/UI/Copyright/Copyright';
 import Snackbar from '@material-ui/core/Snackbar';
+import Alert from '@material-ui/lab/Alert';
 import Avatar from '@material-ui/core/Avatar';
 import Button from '@material-ui/core/Button';
 import CssBaseline from '@material-ui/core/CssBaseline';
@@ -115,13 +116,16 @@ class SignIn extends Component {
         );
     };
 
+    snackbarClosedHandler = () => {
+        const snackbar = {
+            isOpen: false,
+            type: null,
+        };
+        this.props.onToggleAuthSnackbar(snackbar);
+    };
+
     render() {
         const { classes } = this.props;
-
-        let authRedirect = null;
-        if (this.props.isAuthenticated) {
-            authRedirect = <Redirect to={this.props.authRedirectPath} />;
-        }
 
         let signinButton = (
             <Button
@@ -149,9 +153,31 @@ class SignIn extends Component {
             );
         }
 
+        let signinErrorMessage = null;
+        if (this.props.error) {
+            signinErrorMessage = (
+                <Snackbar 
+                    anchorOrigin={{
+                        vertical: 'top',
+                        horizontal: 'center',
+                    }}
+                    open={this.props.isSnackbarOpen}
+                    onClose={this.snackbarClosedHandler}            
+                >
+                    <Alert severity="error">{this.props.error.message}</Alert>
+                </Snackbar>
+            )
+        }
+
+        let authRedirect = null;
+        if (this.props.isAuthenticated) {
+            authRedirect = <Redirect to={this.props.authRedirectPath} />;
+        }
+
         return (
             <Container component="main" maxWidth="xs">
                 {authRedirect}
+                {signinErrorMessage}
                 {this.state.errorMessages.length > 0
                     ? this.state.errorMessages.map((errorMessage, index) => {
                           return (
@@ -162,8 +188,9 @@ class SignIn extends Component {
                                   }}
                                   key={index}
                                   open={errorMessage.isSnackbarOpen}
-                                  message={errorMessage.message}
-                              />
+                              >
+                                  <Alert severity="error">{errorMessage.message}</Alert>
+                              </Snackbar>
                           );
                       })
                     : null}
@@ -240,6 +267,8 @@ const mapStateToProps = state => {
         loading: state.authReducer.loading,
         isAuthenticated: state.authReducer.token !== null,
         authRedirectPath: state.authReducer.authRedirectPath,
+        error: state.authReducer.error,
+        isSnackbarOpen: state.authReducer.isSnackbarOpen.isOpen,
     };
 };
 
@@ -247,6 +276,7 @@ const mapDispatchToProps = dispatch => {
     return {
         onAuth: (email, password) => dispatch(actions.auth(email, password)),
         onSetAuthRedirectPath: () => dispatch(actions.setAuthRedirectPath('/')),
+        onToggleAuthSnackbar: snackbar => dispatch(actions.toggleAuthSnackbar(snackbar)),
     };
 };
 

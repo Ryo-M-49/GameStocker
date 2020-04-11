@@ -5,6 +5,11 @@
     align-items: center;
 }
 
+.Icon {
+    cursor: pointer;
+}
+
 .FavoriteIcon {
+    cursor: pointer;
     color: red;
 }

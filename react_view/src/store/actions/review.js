@@ -64,6 +64,7 @@ export const getReviews = userId => {
             .get(url)
             .then(response => {
                 if (response.data) {
+                    console.log('getReviews triggered' ,response.data);
                     dispatch(setReviews(response.data));
                 } else {
                     dispatch(setReview(null));

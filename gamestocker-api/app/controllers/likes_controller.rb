@@ -8,28 +8,23 @@ class LikesController < ApplicationController
   end
 
   def show
-    like = Like.find_by(user_id: @user.id, review_id: params[:id])
-    if like.nil? then
-      render json: { 'isLiked': false, 'like': nil }
-    else 
-      render json: { 'isLiked': true, 'like': like }
-    end
-
+    like = Like.find_by(user_id: @user.id, review_id: params[:review_id])
+    render json: like
   end
 
   def create
     @review.likes.create(user_id: @user.id)
-    data = {
-      'review': @review,
-      'user': @user
-    }
-    render json: data
+    like = Like.find_by(user_id: @user.id, review_id: params[:review_id])
+    render json: like
   end
 
   def destroy
-    @like = Like.find_by(user_id: @user.id, review_id: params[:id])
-    @like.destroy
-    render json: { 'isLiked': false, 'like': nil }
+    @like = Like.find(params[:id])
+    if @like.destroy
+      render json: {'status': 'success'}
+    else 
+      render json: {'status': 'fail'}
+    end
   end
 
   private

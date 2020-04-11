@@ -1,6 +1,7 @@
 import React, { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { withRouter } from 'react-router';
+import { Redirect } from 'react-router-dom';
 import classes from './YourReview.module.css';
 import Snackbar from '@material-ui/core/Snackbar';
 import MuiAlert from '@material-ui/lab/Alert';
@@ -82,8 +83,15 @@ const YourReview = props => {
         );
     }
 
+    const isAuthenticated = auth.token !== null;
+    let authRedirect = null;
+    if (!isAuthenticated) {
+        authRedirect = <Redirect to="/signin" />;
+    }
+
     return (
         <div className={classes.YourReview}>
+            {authRedirect}
             {notification}
             <QuitButton />
             <div className={classes.ReviewWrapper}>

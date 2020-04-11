@@ -29,6 +29,7 @@ const LikeButton = props => {
     console.log('likes is ', likes);
     console.log('reviewId is', reviewId);
     console.log(`like with reviewId = ${reviewId} is `, likes[reviewId]);
+    console.log(`likes[${reviewId}] is `, likes[reviewId]);
 
     let favorite = (
         <div className={classes.LikeButton}>

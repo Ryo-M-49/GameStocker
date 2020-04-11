@@ -35,11 +35,14 @@ export const signup = userData => {
         axios
             .post(url, signupData)
             .then(response => {
+                const data = response.data.data;
+                localStorage.setItem('userId', data.id);
                 localStorage.setItem('token', response.headers['access-token']);
-                localStorage.setItem('userId', response.headers['uid']);
+                localStorage.setItem('email', response.headers['uid']);
                 dispatch(signupSuccess(userData));
                 dispatch(
                     actions.authSuccess(
+                        data.id,
                         response.headers['access-token'],
                         response.headers['uid']
                     )

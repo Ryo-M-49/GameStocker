@@ -7,6 +7,8 @@ import * as actions from '../../../store/actions/index';
 
 const UpdateButton = props => {
     const review = useSelector(state => state.reviewReducer);
+    const reviewId = useSelector(state => state.reviewReducer.review.id);
+    const userId = localStorage.getItem('userId');
     const dispatch = useDispatch();
 
     const buttonClickedHandler = () => {
@@ -19,8 +21,8 @@ const UpdateButton = props => {
         dispatch(
             actions.updateReview(
                 updatedReview,
-                updatedReview.user_id,
-                updatedReview.gameId,
+                userId,
+                reviewId,
                 true
             )
         );

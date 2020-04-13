@@ -51,7 +51,6 @@ const MyPage = props => {
     useEffect(() => {
         dispatch(actions.getUser(userId));
         dispatch(actions.getUserReviews(userId));
-        console.log(reviews);
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [props]);
 

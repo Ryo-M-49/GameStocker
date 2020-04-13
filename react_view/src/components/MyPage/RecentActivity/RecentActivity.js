@@ -1,6 +1,6 @@
 import React from 'react';
 import classes from './RecentActivity.module.css';
-import SmallReviewCard from '../../SmallReviewCard/SmallReviewCard';
+import SmallReviewCard from './SmallReviewCard/SmallReviewCard';
 
 const RecentActivity = props => {
     const { reviews } = props;

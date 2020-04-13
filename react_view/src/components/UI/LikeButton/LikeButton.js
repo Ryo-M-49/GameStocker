@@ -14,6 +14,8 @@ const LikeButton = props => {
 
     useEffect(() => {
         dispatch(actions.fetchLike(likes, userId, reviewId));
+        console.log('likes is ', likes);
+        console.log(`likes[${reviewId}] is `, likes[reviewId]);
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [props, likes, count]);
 
@@ -25,11 +27,6 @@ const LikeButton = props => {
         dispatch(actions.unlike(likes, userId, reviewId, likes[reviewId].id));
         setCount(count - 1);
     };
-
-    console.log('likes is ', likes);
-    console.log('reviewId is', reviewId);
-    console.log(`like with reviewId = ${reviewId} is `, likes[reviewId]);
-    console.log(`likes[${reviewId}] is `, likes[reviewId]);
 
     let favorite = (
         <div className={classes.LikeButton}>

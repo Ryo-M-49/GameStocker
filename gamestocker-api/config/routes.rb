@@ -12,6 +12,8 @@ Rails.application.routes.draw do
     resources :reviews do 
       collection do
         get :show_by_user
+        get :show_by_recent
+        get :show_by_like
       end
       resources :likes
     end

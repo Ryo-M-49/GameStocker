@@ -11,6 +11,8 @@ export {
     getReview,
     getAllReviews,
     getUserReviews,
+    getUserReviewsByRecent,
+    getUserReviewsByLike,
     createReview,
     updateReview,
     deleteReview,

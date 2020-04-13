@@ -56,14 +56,31 @@ export const getReview = (userId, gameId) => {
     };
 };
 
-export const getReviews = userId => {
+export const getAllReviews = userId => {
     return dispatch => {
         const url = `http://localhost:3001/users/${userId}/reviews`;
         axios
             .get(url)
             .then(response => {
                 if (response.data) {
-                    console.log('getReviews triggered', response.data);
+                    dispatch(setReviews(response.data));
+                } else {
+                    dispatch(setReview(null));
+                }
+            })
+            .catch(error => {
+                console.log(error);
+            });
+    };
+};
+
+export const getUserReviews = userId => {
+    return dispatch => {
+        const url = `http://localhost:3001/users/${userId}/reviews/show_by_user`;
+        axios
+            .get(url)
+            .then(response => {
+                if (response.data) {
                     dispatch(setReviews(response.data));
                 } else {
                     dispatch(setReview(null));

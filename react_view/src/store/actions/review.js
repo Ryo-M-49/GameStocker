@@ -92,6 +92,42 @@ export const getUserReviews = userId => {
     };
 };
 
+export const getUserReviewsByRecent = userId => {
+    return dispatch => {
+        const url = `http://localhost:3001/users/${userId}/reviews/show_by_recent`;
+        axios
+            .get(url)
+            .then(response => {
+                if (response.data) {
+                    dispatch(setReviews(response.data));
+                } else {
+                    dispatch(setReview(null));
+                }
+            })
+            .catch(error => {
+                console.log(error);
+            });
+    };
+};
+
+export const getUserReviewsByLike = userId => {
+    return dispatch => {
+        const url = `http://localhost:3001/users/${userId}/reviews/show_by_like`;
+        axios
+            .get(url)
+            .then(response => {
+                if (response.data) {
+                    dispatch(setReviews(response.data));
+                } else {
+                    dispatch(setReview(null));
+                }
+            })
+            .catch(error => {
+                console.log(error);
+            });
+    };
+};
+
 export const createReview = (reviewDetail, userId) => {
     return dispatch => {
         const url = `http://localhost:3001/users/${userId}/reviews`;

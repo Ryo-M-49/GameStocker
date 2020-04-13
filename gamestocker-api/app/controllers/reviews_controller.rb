@@ -12,6 +12,11 @@ class ReviewsController < ApplicationController
     render json: @review
   end
 
+  def show_by_user
+    @review = @user.reviews.all
+    render json: @review
+  end
+
   def create
     @user.reviews.create!(review_params)
     render json: @user

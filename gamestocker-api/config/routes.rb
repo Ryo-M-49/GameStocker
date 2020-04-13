@@ -10,6 +10,9 @@ Rails.application.routes.draw do
   end
   resources :users do 
     resources :reviews do 
+      collection do
+        get :show_by_user
+      end
       resources :likes
     end
   end

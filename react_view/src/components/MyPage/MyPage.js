@@ -27,6 +27,7 @@ const MyPage = props => {
     const classStyles = useStyles();
     const [isEditing, setIsEditing] = useState(false);
     const user = useSelector(state => state.userReducer);
+    const reviews = useSelector(state => state.reviewReducer.reviews);
     const userId = localStorage.getItem('userId');
     const dispatch = useDispatch();
 
@@ -49,6 +50,7 @@ const MyPage = props => {
 
     useEffect(() => {
         dispatch(actions.getUser(userId));
+        dispatch(actions.getUserReviews(userId));
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [props]);
 
@@ -145,7 +147,7 @@ const MyPage = props => {
         <div className={classes.MyPage}>
             <div className={classes.MyPageLeft}>
                 {bio}
-                <PopularReview />
+                <PopularReview reviews={reviews}/>
                 <div className={classes.ToAllReviewsButtonWrapper}>
                     <Link to={`/users/${userId}/reviews`}>
                         <ToAllReviewsButton />
@@ -153,7 +155,7 @@ const MyPage = props => {
                 </div>
             </div>
             <div className={classes.MyPageRight}>
-                <RecentActivity />
+                <RecentActivity reviews={reviews}/>
             </div>
         </div>
     );

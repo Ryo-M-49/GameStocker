@@ -17,6 +17,16 @@ class ReviewsController < ApplicationController
     render json: @review
   end
 
+  def show_by_recent
+    @review = @user.reviews.order('updated_at DESC')
+    render json: @review
+  end
+
+  def show_by_like
+    @review = @user.reviews.order('likes_count DESC')
+    render json: @review
+  end
+
   def create
     @user.reviews.create!(review_params)
     render json: @user

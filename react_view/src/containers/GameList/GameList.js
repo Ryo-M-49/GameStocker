@@ -5,6 +5,7 @@ import Aux from '../../hoc/Aux/Aux';
 import Game from '../../components/Game/Game';
 import GamelistPagenation from '../../components/UI/Pagination/Pagination';
 import SentimentVeryDissatisfiedIcon from '@material-ui/icons/SentimentVeryDissatisfied';
+import CircularProgress from '@material-ui/core/CircularProgress';
 import * as actions from '../../store/actions/index';
 
 class GameList extends Component {
@@ -63,6 +64,14 @@ class GameList extends Component {
             );
         }
 
+        if (this.props.isLoading) {
+            component = (
+                <div className={classes.Progress}>
+                    <CircularProgress size='5rem'/>
+                </div>
+            );
+        }
+
         return <div className={classes.GameList}>{component}</div>;
     }
 }
@@ -72,6 +81,7 @@ const mapStatetoProps = state => {
         games: state.gameListReducer.games,
         error: state.gameListReducer.error,
         isSearched: state.gameListReducer.isSearched,
+        isLoading: state.gameListReducer.isLoading,
         isAuthenticated: state.authReducer.token !== null,
     };
 };

@@ -1,5 +1,6 @@
 // for ./gameList.js
 export const SET_SEARCHED = 'SET_SEARCHED';
+export const SET_LOADING = 'SET_LOADING';
 export const SET_GAMES = 'SET_GAMES';
 export const SET_CURRENT_PAGE = 'SET_CURRENT_PAGE';
 export const UPDATE_GAMES = 'UPDATE_GAMES';

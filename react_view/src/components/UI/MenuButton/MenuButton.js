@@ -6,10 +6,9 @@ const menuButton = props => {
     return (
         <div>
             <Button
-                variant="contained"
                 startIcon={<MenuIcon />}
                 onClick={props.clicked}
-                style={{ backgroundColor: 'white' }}
+                style={{ color: 'white' }}
             >
                 Menu
             </Button>

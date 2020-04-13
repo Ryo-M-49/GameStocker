@@ -10,20 +10,15 @@ const Reviews = props => {
     const dispatch = useDispatch();
 
     useEffect(() => {
-        dispatch(actions.getReviews(userId));
+        dispatch(actions.getUserReviews(userId));
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [props]);
 
     let reviewCard = <p>No review to show for now. Write a review!</p>;
     if (reviews) {
-        const yourReviews = reviews.filter(review => {
-            if (review.user_id == userId) {
-                return true;
-            }
-        });
-        reviewCard = yourReviews.map((yourReview, index) => (
+        reviewCard = reviews.map((review, index) => (
             <li key={index}>
-                <ReviewCard review={yourReview} />
+                <ReviewCard review={review} />
             </li>
         ));
     }

@@ -13,9 +13,9 @@ const Timeline = props => {
 
     useEffect(() => {
         if (auth.userId) {
-            dispatch(actions.getReviews(auth.userId));
+            dispatch(actions.getAllReviews(auth.userId));
         } else {
-            dispatch(actions.getReviews(1));
+            dispatch(actions.getAllReviews(1));
         }
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [props]);

@@ -5,6 +5,13 @@ const initialState = {
     games: null,
     error: false,
     isSearched: false,
+    isLoading: false,
+};
+
+const setLoading = (state, action) => {
+    return updateObject(state, {
+        isLoading: action.isLoading,
+    });
 };
 
 const setGames = (state, action) => {
@@ -32,6 +39,8 @@ const fetchGamesFailed = (state, action) => {
 
 const reducer = (state = initialState, action) => {
     switch (action.type) {
+        case actionTypes.SET_LOADING:
+            return setLoading(state, action);
         case actionTypes.SET_GAMES:
             return setGames(state, action);
         case actionTypes.SET_CURRENT_PAGE:

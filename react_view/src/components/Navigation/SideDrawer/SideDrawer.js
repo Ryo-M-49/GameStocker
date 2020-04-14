@@ -16,6 +16,7 @@ const SideDrawer = props => {
 
     const signoutClickedHandler = () => {
         dispatch(actions.logout());
+        dispatch(actions.setLike({}));
         const snackbar = {
             isOpen: true,
             type: 'signout',

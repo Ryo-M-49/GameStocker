@@ -1,6 +1,13 @@
 import axios from 'axios';
 import * as actionTypes from './actionTypes';
 
+export const setLoading = isLoading => {
+    return {
+        type: actionTypes.SET_LOADING,
+        isLoading: isLoading,
+    };
+};
+
 export const setReview = review => {
     return {
         type: actionTypes.SET_REVIEW,
@@ -24,10 +31,12 @@ export const setGame = game => {
 
 export const getReview = (userId, gameId) => {
     return dispatch => {
+        dispatch(setLoading(true));
         const url = `http://localhost:3001/users/${userId}/reviews/${gameId}`;
         axios
             .get(url)
             .then(response => {
+                dispatch(setLoading(false));
                 if (response.data) {
                     const updatedReview = {
                         id: response.data.id,
@@ -51,6 +60,7 @@ export const getReview = (userId, gameId) => {
                 }
             })
             .catch(error => {
+                dispatch(setLoading(false));
                 console.log(error);
             });
     };
@@ -58,10 +68,12 @@ export const getReview = (userId, gameId) => {
 
 export const getAllReviews = userId => {
     return dispatch => {
+        dispatch(setLoading(true));
         const url = `http://localhost:3001/users/${userId}/reviews`;
         axios
             .get(url)
             .then(response => {
+                dispatch(setLoading(false));
                 if (response.data) {
                     dispatch(setReviews(response.data));
                 } else {
@@ -69,6 +81,7 @@ export const getAllReviews = userId => {
                 }
             })
             .catch(error => {
+                dispatch(setLoading(false));
                 console.log(error);
             });
     };
@@ -76,10 +89,12 @@ export const getAllReviews = userId => {
 
 export const getUserReviews = userId => {
     return dispatch => {
+        dispatch(setLoading(true));
         const url = `http://localhost:3001/users/${userId}/reviews/show_by_user`;
         axios
             .get(url)
             .then(response => {
+                dispatch(setLoading(false));
                 if (response.data) {
                     dispatch(setReviews(response.data));
                 } else {
@@ -87,6 +102,7 @@ export const getUserReviews = userId => {
                 }
             })
             .catch(error => {
+                dispatch(setLoading(false));
                 console.log(error);
             });
     };
@@ -94,10 +110,12 @@ export const getUserReviews = userId => {
 
 export const getUserReviewsByRecent = userId => {
     return dispatch => {
+        dispatch(setLoading(true));
         const url = `http://localhost:3001/users/${userId}/reviews/show_by_recent`;
         axios
             .get(url)
             .then(response => {
+                dispatch(setLoading(false));
                 if (response.data) {
                     dispatch(setReviews(response.data));
                 } else {
@@ -105,6 +123,7 @@ export const getUserReviewsByRecent = userId => {
                 }
             })
             .catch(error => {
+                dispatch(setLoading(false));
                 console.log(error);
             });
     };
@@ -112,10 +131,12 @@ export const getUserReviewsByRecent = userId => {
 
 export const getUserReviewsByLike = userId => {
     return dispatch => {
+        dispatch(setLoading(true));
         const url = `http://localhost:3001/users/${userId}/reviews/show_by_like`;
         axios
             .get(url)
             .then(response => {
+                dispatch(setLoading(false));
                 if (response.data) {
                     dispatch(setReviews(response.data));
                 } else {
@@ -123,6 +144,7 @@ export const getUserReviewsByLike = userId => {
                 }
             })
             .catch(error => {
+                dispatch(setLoading(false));
                 console.log(error);
             });
     };
@@ -130,15 +152,18 @@ export const getUserReviewsByLike = userId => {
 
 export const createReview = (reviewDetail, userId) => {
     return dispatch => {
+        dispatch(setLoading(true));
         const url = `http://localhost:3001/users/${userId}/reviews`;
         axios
             .post(url, reviewDetail)
             .then(response => {
+                dispatch(setLoading(false));
                 console.log('createReview triggered', response.data);
                 dispatch(getReview(userId, reviewDetail.gameId));
                 dispatch(toggleSnackbar(true));
             })
             .catch(error => {
+                dispatch(setLoading(false));
                 console.log(error);
             });
     };
@@ -150,13 +175,16 @@ export const updateReview = (
     reviewId,
 ) => {
     return dispatch => {
+        dispatch(setLoading(true));
         const url = `http://localhost:3001/users/${userId}/reviews/${reviewId}`;
         axios
             .patch(url, reviewDetail)
             .then(response => {
+                dispatch(setLoading(false));
                 dispatch(toggleSnackbar(true));
             })
             .catch(error => {
+                dispatch(setLoading(false));
                 console.log(error);
             });
     };
@@ -167,10 +195,12 @@ export const deleteReview = (
     reviewId,
 ) => {
     return dispatch => {
+        dispatch(setLoading(true));
         const url = `http://localhost:3001/users/${userId}/reviews/${reviewId}`;
         axios
             .delete(url)
             .then(response => {
+                dispatch(setLoading(false));
                 dispatch(toggleSnackbar(true));
                 let emptyReview = {
                     id: null,
@@ -183,6 +213,7 @@ export const deleteReview = (
                 dispatch(setReview(emptyReview));
             })
             .catch(error => {
+                dispatch(setLoading(false));
                 console.log(error);
             });
     };

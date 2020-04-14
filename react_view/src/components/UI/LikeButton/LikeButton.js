@@ -3,6 +3,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import classes from './LikeButton.module.css';
 import FavoriteIcon from '@material-ui/icons/Favorite';
 import FavoriteBorderIcon from '@material-ui/icons/FavoriteBorder';
+import Aux from '../../../hoc/Aux/Aux';
 import * as actions from '../../../store/actions/index';
 
 const LikeButton = props => {
@@ -11,46 +12,62 @@ const LikeButton = props => {
     const likes = useSelector(state => state.likeReducer.likes);
 
     const [count, setCount] = useState(likesCount);
+    const [isLiked, setIsLiked] = useState(false);
 
     useEffect(() => {
         dispatch(actions.fetchLike(likes, userId, reviewId));
-        console.log('likes is ', likes);
-        console.log(`likes[${reviewId}] is `, likes[reviewId]);
+        const timer = setTimeout(() => {
+            if (likes[reviewId]) {
+                setIsLiked(true);
+            }
+        }, 200);
+        return () => clearTimeout(timer);
         // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [props, likes, count]);
+    }, [
+        props, 
+        likes,
+        count, 
+        isLiked
+    ]);
 
     const onLikeHandler = () => {
         dispatch(actions.like(likes, userId, reviewId));
         setCount(count + 1);
+        setIsLiked(true);
     };
     const onUnlikeHandler = () => {
         dispatch(actions.unlike(likes, userId, reviewId, likes[reviewId].id));
         setCount(count - 1);
+        setIsLiked(false);
     };
 
     let favorite = (
-        <div className={classes.LikeButton}>
+        <Aux>
             <FavoriteBorderIcon
                 onClick={onLikeHandler}
                 className={classes.Icon}
             />
             {count}
-        </div>
+        </Aux>
     );
 
-    if (likes[reviewId]) {
+    if (isLiked) {
         favorite = (
-            <div className={classes.LikeButton}>
+            <Aux>
                 <FavoriteIcon
                     onClick={onUnlikeHandler}
                     className={classes.FavoriteIcon}
                 />
                 {count}
-            </div>
+            </Aux>
         );
     }
 
-    return <div>{favorite}</div>;
+    return (
+        <div className={classes.LikeButton}>
+            {favorite}
+        </div>
+    );
 };
 
 export default LikeButton;

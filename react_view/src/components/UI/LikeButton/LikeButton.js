@@ -15,7 +15,9 @@ const LikeButton = props => {
     const [isLiked, setIsLiked] = useState(false);
 
     useEffect(() => {
-        dispatch(actions.fetchLike(likes, userId, reviewId));
+        if (userId) {
+            dispatch(actions.fetchLike(likes, userId, reviewId));
+        }
         const timer = setTimeout(() => {
             if (likes[reviewId]) {
                 setIsLiked(true);

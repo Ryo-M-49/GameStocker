@@ -11,6 +11,7 @@ import * as actions from '../../store/actions/index';
 const Timeline = props => {
     const reviews = useSelector(state => state.reviewReducer.reviews);
     const auth = useSelector(state => state.authReducer);
+    const likes = useSelector(state => state.likeReducer.likes);
     const isLoading = useSelector(state => state.reviewReducer.isLoading);
     const dispatch = useDispatch();
 
@@ -21,7 +22,7 @@ const Timeline = props => {
             dispatch(actions.getAllReviews(1));
         }
         // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [props]);
+    }, [props, likes]);
 
     const snackbarClosedHandler = () => {
         const snackbar = {

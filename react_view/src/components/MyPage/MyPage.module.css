@@ -62,3 +62,10 @@
     width: 200px;
     height: auto;
 }
+
+.Progress {
+    padding: 10rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}

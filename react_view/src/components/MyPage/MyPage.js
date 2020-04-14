@@ -13,6 +13,7 @@ import RecentActivity from './RecentActivity/RecentActivity';
 import ProfileImage from '../../assets/images/sample-profile.png';
 import Avatar from '../UI/Avatar/Avatar';
 import TextField from '@material-ui/core/TextField';
+import CircularProgress from '@material-ui/core/CircularProgress';
 import * as actions from '../../store/actions/index';
 
 const useStyles = makeStyles(theme => ({
@@ -28,6 +29,7 @@ const MyPage = props => {
     const [isEditing, setIsEditing] = useState(false);
     const user = useSelector(state => state.userReducer);
     const reviews = useSelector(state => state.reviewReducer.reviews);
+    const isLoading = useSelector(state => state.reviewReducer.isLoading);
     const userId = localStorage.getItem('userId');
     const dispatch = useDispatch();
 
@@ -143,8 +145,8 @@ const MyPage = props => {
         );
     }
 
-    return (
-        <div className={classes.MyPage}>
+    let component = (
+        <Aux>
             <div className={classes.MyPageLeft}>
                 {bio}
                 <PopularReview reviews={reviews}/>
@@ -157,6 +159,19 @@ const MyPage = props => {
             <div className={classes.MyPageRight}>
                 <RecentActivity reviews={reviews}/>
             </div>
+        </Aux>
+    );
+
+    if (isLoading) {
+        component = <CircularProgress
+                        className={classes.Progress} 
+                        size='5rem'
+                    />
+    }
+
+    return (
+        <div className={classes.MyPage}>
+            {component}
         </div>
     );
 };

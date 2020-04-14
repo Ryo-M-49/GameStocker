@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
+import { Redirect } from 'react-router-dom';
 import classes from './LikeButton.module.css';
 import FavoriteIcon from '@material-ui/icons/Favorite';
 import FavoriteBorderIcon from '@material-ui/icons/FavoriteBorder';
@@ -10,12 +11,17 @@ const LikeButton = props => {
     const { likesCount, userId, reviewId } = props;
     const dispatch = useDispatch();
     const likes = useSelector(state => state.likeReducer.likes);
+    const token = useSelector(state => state.authReducer.token);
+    const isAuthenticated = token !== null;
 
     const [count, setCount] = useState(likesCount);
     const [isLiked, setIsLiked] = useState(false);
+    const [authRedirect, setAuthRedirect] = useState(null);
 
     useEffect(() => {
-        dispatch(actions.fetchLike(likes, userId, reviewId));
+        if (isAuthenticated) {
+            dispatch(actions.fetchLike(likes, userId, reviewId));
+        }
         const timer = setTimeout(() => {
             if (likes[reviewId]) {
                 setIsLiked(true);
@@ -27,18 +33,28 @@ const LikeButton = props => {
         props, 
         likes,
         count, 
-        isLiked
+        isLiked,
+        authRedirect,
     ]);
 
     const onLikeHandler = () => {
-        dispatch(actions.like(likes, userId, reviewId));
-        setCount(count + 1);
-        setIsLiked(true);
+        if (isAuthenticated) {
+            dispatch(actions.like(likes, userId, reviewId));
+            setCount(count + 1);
+            setIsLiked(true);
+        } else {
+            setAuthRedirect(<Redirect to="/signin" />);
+        }
     };
+
     const onUnlikeHandler = () => {
-        dispatch(actions.unlike(likes, userId, reviewId, likes[reviewId].id));
-        setCount(count - 1);
-        setIsLiked(false);
+        if (isAuthenticated) {
+            dispatch(actions.unlike(likes, userId, reviewId, likes[reviewId].id));
+            setCount(count - 1);
+            setIsLiked(false);
+        } else {
+            setAuthRedirect(<Redirect to="/signin" />);
+        }
     };
 
     let favorite = (
@@ -65,6 +81,7 @@ const LikeButton = props => {
 
     return (
         <div className={classes.LikeButton}>
+            {authRedirect}
             {favorite}
         </div>
     );

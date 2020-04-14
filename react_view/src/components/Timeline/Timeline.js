@@ -21,7 +21,7 @@ const Timeline = props => {
             dispatch(actions.getAllReviews(1));
         }
         // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [props, isLoading]);
+    }, [props]);
 
     const snackbarClosedHandler = () => {
         const snackbar = {

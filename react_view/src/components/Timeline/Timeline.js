@@ -4,11 +4,14 @@ import classes from './Timeline.module.css';
 import ReviewCard from './ReviewCard/ReviewCard';
 import Snackbar from '@material-ui/core/Snackbar';
 import MuiAlert from '@material-ui/lab/Alert';
+import CircularProgress from '@material-ui/core/CircularProgress';
+import Aux from '../../hoc/Aux/Aux';
 import * as actions from '../../store/actions/index';
 
 const Timeline = props => {
     const reviews = useSelector(state => state.reviewReducer.reviews);
     const auth = useSelector(state => state.authReducer);
+    const isLoading = useSelector(state => state.reviewReducer.isLoading);
     const dispatch = useDispatch();
 
     useEffect(() => {
@@ -18,7 +21,7 @@ const Timeline = props => {
             dispatch(actions.getAllReviews(1));
         }
         // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [props]);
+    }, [props, isLoading]);
 
     const snackbarClosedHandler = () => {
         const snackbar = {
@@ -64,10 +67,20 @@ const Timeline = props => {
         ));
     }
 
-    return (
-        <div className={classes.Timeline}>
+    let component = (
+        <Aux>
             {notification}
             <ul className={classes.List}>{reviewCard}</ul>
+        </Aux>
+    );
+
+    if (isLoading) {
+        component = <CircularProgress size='5rem'/>
+    }
+
+    return (
+        <div className={classes.Timeline}>
+            {component}
         </div>
     );
 };

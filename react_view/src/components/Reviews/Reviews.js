@@ -2,10 +2,12 @@ import React, { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import classes from './Reviews.module.css';
 import ReviewCard from './ReviewCard/ReviewCard';
+import CircularProgress from '@material-ui/core/CircularProgress';
 import * as actions from '../../store/actions/index';
 
 const Reviews = props => {
     const reviews = useSelector(state => state.reviewReducer.reviews);
+    const isLoading = useSelector(state => state.reviewReducer.isLoading);
     const userId = localStorage.getItem('userId');
     const dispatch = useDispatch();
 
@@ -23,9 +25,15 @@ const Reviews = props => {
         ));
     }
 
+    let component = <ul className={classes.List}>{reviewCard}</ul>;
+
+    if (isLoading) {
+        component = <CircularProgress size='5rem'/>
+    }
+
     return (
         <div className={classes.Reviews}>
-            <ul className={classes.List}>{reviewCard}</ul>
+            {component}
         </div>
     );
 };

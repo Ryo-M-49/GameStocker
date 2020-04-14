@@ -28,7 +28,10 @@ const Reviews = props => {
     let component = <ul className={classes.List}>{reviewCard}</ul>;
 
     if (isLoading) {
-        component = <CircularProgress size='5rem'/>
+        component = <CircularProgress
+                        className={classes.Progress} 
+                        size='5rem'
+                    />
     }
 
     return (

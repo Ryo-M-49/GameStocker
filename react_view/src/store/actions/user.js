@@ -20,26 +20,26 @@ export const getUserSuccess = userData => {
     };
 };
 
-export const setImageSuccess = image => {
+export const setImage = image => {
     return {
-        type: actionTypes.SET_IMAGE_SUCCESS,
+        type: actionTypes.SET_IMAGE,
         image: image,
     };
 };
 
-export const setImage = (image, userId) => {
-    return dispatch => {
-        const url = `http://localhost:3001/users/${userId}/upload_image`;
-        axios
-            .post(url, image)
-            .then(response => {
-                dispatch(setImageSuccess(response.data.image));
-            })
-            .catch(error => {
-                console.log(error);
-            });
-    };
-};
+// export const setImage = (image, userId) => {
+//     return dispatch => {
+//         const url = `http://localhost:3001/users/${userId}/upload_image`;
+//         axios
+//             .post(url, image)
+//             .then(response => {
+//                 dispatch(setImageSuccess(response.data.image));
+//             })
+//             .catch(error => {
+//                 console.log(error);
+//             });
+//     };
+// };
 
 export const getUser = userId => {
     return dispatch => {

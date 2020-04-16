@@ -27,6 +27,7 @@ const useStyles = makeStyles(theme => ({
         width: '100px',
     },
 }));
+
 const MyPage = props => {
     const classStyles = useStyles();
     const [isEditing, setIsEditing] = useState(false);
@@ -34,8 +35,9 @@ const MyPage = props => {
     const reviews = useSelector(state => state.reviewReducer.reviews);
     const isLoading = useSelector(state => state.reviewReducer.isLoading);
     const userId = localStorage.getItem('userId');
+    const profileImage = user.image;
     const dispatch = useDispatch();
-
+    
     const inputChangedHandler = (newValue, controlName) => {
         const updatedUser = {
             ...user,
@@ -63,7 +65,7 @@ const MyPage = props => {
         <Aux>
             <div className={classes.BioWrapper}>
                 <div className={classes.Picture}>
-                    <Avatar image={ProfileImage} />
+                    <Avatar image={profileImage ? profileImage : DefaultImage} />
                     <p>{user.first_name + ' ' + user.last_name}</p>
                 </div>
                 <div className={classes.Introduction}>

@@ -21,6 +21,12 @@ class Layout extends Component {
 
     componentDidMount() {
         this.props.onTryAutoSignup();
+        const timer = setTimeout(() => {
+            if (this.props.userId) {
+                this.props.onGetUser(this.props.userId);
+            }
+        }, 200);
+        return () => clearTimeout(timer);
     }
 
     sideDrawerClosedHandler = () => {
@@ -91,6 +97,7 @@ class Layout extends Component {
 
 const mapStateToProps = state => {
     return {
+        userId: state.authReducer.userId,
         isAuthenticated: state.authReducer.token !== null,
         isSearched: state.gameListReducer.isSearched,
     };
@@ -99,6 +106,7 @@ const mapStateToProps = state => {
 const mapDispatchToProps = dispatch => {
     return {
         onTryAutoSignup: () => dispatch(actions.authCheckState()),
+        onGetUser: (userId) => dispatch(actions.getUser(userId)),
     };
 };
 

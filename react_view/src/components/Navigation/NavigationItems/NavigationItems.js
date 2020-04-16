@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { userEffect, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import classes from './NavigationItems.module.css';
 import Aux from '../../../hoc/Aux/Aux';
@@ -17,6 +17,12 @@ const NavigationItems = props => {
     const userName = user.first_name + ' ' + user.last_name;
     const dispatch = useDispatch();
 
+    useEffect(() => {
+        if (auth.userId) {
+            dispatch(actions.getUser(auth.userId));
+        }
+    }, [props, userName]);
+
     const signoutClickedHandler = () => {
         dispatch(actions.logout());
         dispatch(actions.setLike({}));
@@ -34,7 +40,7 @@ const NavigationItems = props => {
                     startIcon={<Avatar alt="my-page" src={profileImage ? profileImage : DefaultImage} />}
                     style={{ color: 'white' }}
                 >
-                    {user.first_name ? userName : null}
+                    {user.first_name ? userName : ' '}
                 </Button>
             </NavigationItem>
             <NavigationItem link={'/'} exact>

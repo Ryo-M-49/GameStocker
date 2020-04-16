@@ -27,5 +27,10 @@
 
 .SearchBar {
     margin-left: auto;
+    margin-right: 10rem;
+}
+
+.AuthSearchBar {
+    margin-left: auto;
     margin-right: 3rem;
 }

@@ -16,7 +16,7 @@ const controlUserFail = (state, action) => {
     });
 };
 
-const setImageSuccess = (state, action) => {
+const setImage = (state, action) => {
     return updateObject(state, {
         image: action.image,
     });
@@ -48,8 +48,8 @@ const reducer = (state = initialState, action) => {
     switch (action.type) {
         case actionTypes.CONTROL_USER_FAIL:
             return controlUserFail(state, action);
-        case actionTypes.SET_IMAGE_SUCCESS:
-            return setImageSuccess(state, action);
+        case actionTypes.SET_IMAGE:
+            return setImage(state, action);
         case actionTypes.GET_USER_SUCCESS:
             return getUserSuccess(state, action);
         case actionTypes.DELETE_USER_SUCCESS:

@@ -10,7 +10,7 @@ import SaveButton from '../UI/SaveButton/SaveButton';
 import PopularReview from './PopularReview/PopularReview';
 import ToAllReviewsButton from '../UI/ToAllReviewsButton/ToAllReviewsButton';
 import RecentActivity from './RecentActivity/RecentActivity';
-import ProfileImage from '../../assets/images/sample-profile.png';
+import ProfileImage from '../../assets/images/default-user.png';
 import Avatar from '../UI/Avatar/Avatar';
 import TextField from '@material-ui/core/TextField';
 import CircularProgress from '@material-ui/core/CircularProgress';

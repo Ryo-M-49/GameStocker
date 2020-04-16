@@ -1,12 +1,17 @@
 import React from 'react';
+import { useSelector } from 'react-redux';
 import classes from './YourPicture.module.css';
-import ProfileImage from '../../../assets/images/sample-profile.png';
+import DefaultImage from '../../../assets/images/default-user.png';
 import Avatar from '../../UI/Avatar/Avatar';
 
-const userPicture = props => (
-    <div className={classes.Picture}>
-        <Avatar image={ProfileImage} />
-    </div>
-);
+const UserPicture = props => {
+    const profileImage = useSelector(state => state.userReducer.image);
 
-export default userPicture;
+    return (
+        <div className={classes.Picture}>
+            <Avatar image={profileImage ? profileImage : DefaultImage} />
+        </div>
+    );
+}
+
+export default UserPicture;

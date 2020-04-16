@@ -63,10 +63,20 @@ const NavigationItems = props => {
     return (
         <ul className={classes.NavigationItems}>
             <NavigationItem link="/gamelist" exact>
-                <CreateIcon style={{ color: 'white', fontSize: '30' }} />
+                <Button
+                    startIcon={<CreateIcon style={{ color: 'white', fontSize: '30' }} />}
+                    style={{ color: 'white' }}
+                >
+                    WRITE
+                </Button>
             </NavigationItem>
             <NavigationItem link="/" exact>
-                <ViewListIcon style={{ color: 'white', fontSize: '30' }} />
+                <Button
+                    startIcon={<ViewListIcon style={{ color: 'white', fontSize: '30' }} />}
+                    style={{ color: 'white' }}
+                >
+                    TIMELINE
+                </Button>
             </NavigationItem>
             {props.isAuth ? authItems : notAuthItems}
         </ul>

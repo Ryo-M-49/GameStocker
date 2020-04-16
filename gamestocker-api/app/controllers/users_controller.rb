@@ -11,8 +11,8 @@ class UsersController < ApplicationController
 
   def update
     @user = User.find(params[:id])
+    @user.file = params["uploaded_image"]
     @user.update(user_params)
-    logger.debug @user.errors.inspect
     render json: @user
   end
 

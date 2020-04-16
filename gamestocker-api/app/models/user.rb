@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 class User < ApplicationRecord
+  mount_uploader :image, UserImageUploader
   has_many :reviews, dependent: :destroy
   has_many :likes, dependent: :destroy
   

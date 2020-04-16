@@ -7,11 +7,14 @@ import CreateIcon from '@material-ui/icons/Create';
 import ViewListIcon from '@material-ui/icons/ViewList';
 import Button from '@material-ui/core/Button';
 import Avatar from '@material-ui/core/Avatar';
-import Image from '../../../assets/images/default-user.png';
+import DefaultImage from '../../../assets/images/default-user.png';
 import * as actions from '../../../store/actions/index';
 
 const NavigationItems = props => {
     const auth = useSelector(state => state.authReducer);
+    const user = useSelector(state => state.userReducer);
+    const profileImage = user.image;
+    const userName = user.first_name + ' ' + user.last_name;
     const dispatch = useDispatch();
 
     const signoutClickedHandler = () => {
@@ -26,8 +29,13 @@ const NavigationItems = props => {
 
     const authItems = (
         <Aux>
-            <NavigationItem link={`users/${auth.userId}`} exact>
-                <Avatar alt="my-page" src={Image} />
+            <NavigationItem className={classes.NavigationItem} link={`users/${auth.userId}`} exact>
+                <Button
+                    startIcon={<Avatar alt="my-page" src={profileImage ? profileImage : DefaultImage} />}
+                    style={{ color: 'white' }}
+                >
+                    {user.first_name ? userName : null}
+                </Button>
             </NavigationItem>
             <NavigationItem link={'/'} exact>
                 <Button

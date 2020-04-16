@@ -7,7 +7,7 @@ import CreateIcon from '@material-ui/icons/Create';
 import ViewListIcon from '@material-ui/icons/ViewList';
 import Button from '@material-ui/core/Button';
 import Avatar from '@material-ui/core/Avatar';
-import Image from '../../../assets/images/default-profile.png';
+import Image from '../../../assets/images/default-user.png';
 import * as actions from '../../../store/actions/index';
 
 const NavigationItems = props => {

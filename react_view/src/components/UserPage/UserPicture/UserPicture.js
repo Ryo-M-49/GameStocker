@@ -1,6 +1,6 @@
 import React from 'react';
 import classes from './YourPicture.module.css';
-import ProfileImage from '../../../assets/images/default-profile.png';
+import ProfileImage from '../../../assets/images/default-user.png';
 import Avatar from '../../UI/Avatar/Avatar';
 
 const userPicture = props => (

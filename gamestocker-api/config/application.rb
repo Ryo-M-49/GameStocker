@@ -29,6 +29,7 @@ module GamestockerApi
     config.load_defaults 6.0
 
     config.hosts << "3001-a0f0b383-d8ff-4662-833e-3dbff2e8205c.ws-ap01.gitpod.io"
+    config.autoload_paths << Rails.root.join('app', 'uploaders')
     # Settings in config/environments/* take precedence over those specified here.
     # Application configuration can go into files in config/initializers
     # -- all .rb files in that directory are automatically loaded after loading

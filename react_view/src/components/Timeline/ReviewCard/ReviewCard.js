@@ -46,6 +46,11 @@ const ReviewCard = props => {
         gameId,
         createdAt,
     } = props.review;
+
+    let firstName = props.user.first_name;
+    let lastName = props.user.last_name;
+    let userImage = props.user.image;
+
     const userId = localStorage.getItem('userId');
 
     const classes = useStyles();

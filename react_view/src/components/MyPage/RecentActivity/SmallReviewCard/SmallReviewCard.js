@@ -53,7 +53,9 @@ const smallReviewCard = props => {
                             pathname: `${user_id}/reviews/${gameId}`,
                             state: {
                                 game: props.review,
-                                user_id: user_id,
+                                user: {
+                                    userId: user_id
+                                }
                             },
                         }}
                     >

@@ -22,7 +22,9 @@ const Game = props => {
                             image: largeImageUrl,
                             url: itemUrl,
                         },
-                        user_id: auth.userId,
+                        user: {
+                            userId: auth.userId,
+                        }
                     },
                 }}
             >

@@ -113,7 +113,12 @@ const ReviewCard = props => {
                         pathname: readmorePath,
                         state: {
                             game: props.review,
-                            user_id: user_id,
+                            user: {
+                                userId: user_id,
+                                firstName: firstName,
+                                lastName: lastName,
+                                userImage: userImage
+                            }
                         },
                     }}
                     className={classes.button}

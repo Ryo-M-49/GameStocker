@@ -21,31 +21,36 @@ const Timeline = props => {
 
     const fetchUsers = useCallback(() => {
         try {
-            //Fetching all reviews
+            // Fetching all reviews
             setIsLoading(true);
             const url = `http://localhost:3001/users/1/reviews`;
             const promise = Promise.resolve(axios.get(url));
-            promise.then(response => {
-                const reviews = response.data;
-                setReviews(reviews);
-                const listOfRequests = reviews.map(review => axios.get(`http://localhost:3001/users/${review.user_id}`));
-                return listOfRequests;
-            })
-            //Resolving promises of user data of each review
-            .then(responses => {
-                return Promise.all(responses)
-            })
-            //Set users state with the fethed data from the api
-            .then(responses => {
-                const users = responses.map((result) => result.data);
-                setUsers(users);
-                setIsLoading(false);
-            });
-        } catch(error) {
+            promise
+                .then(response => {
+                    const reviews = response.data;
+                    setReviews(reviews);
+                    const listOfRequests = reviews.map(review =>
+                        axios.get(
+                            `http://localhost:3001/users/${review.user_id}`
+                        )
+                    );
+                    return listOfRequests;
+                })
+                // Resolving promises of user data of each review
+                .then(responses => {
+                    return Promise.all(responses);
+                })
+                // Set users state with the fethed data from the api
+                .then(responses => {
+                    const users = responses.map(result => result.data);
+                    setUsers(users);
+                    setIsLoading(false);
+                });
+        } catch (error) {
             setIsLoading(false);
             console.error(error);
         }
-      }, []);
+    }, []);
 
     useEffect(() => {
         fetchUsers();
@@ -93,8 +98,7 @@ const Timeline = props => {
             <li key={index}>
                 <ReviewCard review={reviews[index]} user={user} />
             </li>
-            )
-        );
+        ));
     }
 
     let component = (
@@ -105,14 +109,10 @@ const Timeline = props => {
     );
 
     if (isLoading) {
-        component = <CircularProgress size='5rem'/>
+        component = <CircularProgress size="5rem" />;
     }
 
-    return (
-        <div className={classes.Timeline}>
-            {component}
-        </div>
-    );
+    return <div className={classes.Timeline}>{component}</div>;
 };
 
 export default Timeline;

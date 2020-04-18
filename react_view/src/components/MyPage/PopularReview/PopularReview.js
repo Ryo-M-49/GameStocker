@@ -14,8 +14,8 @@ const popularReview = props => {
         });
 
         const array = [];
-        const MAX_LENGTH_REVIEW = 3
-        for (let i = 0; i < MAX_LENGTH_REVIEW; i++){
+        const MAX_LENGTH_REVIEW = 3;
+        for (let i = 0; i < MAX_LENGTH_REVIEW; i++) {
             array.push(
                 <li className={classes.ReviewCard} key={i}>
                     <SmallReviewCard review={reviews[i]} />
@@ -29,13 +29,10 @@ const popularReview = props => {
         <div className={classes.PopularReview}>
             <div className={classes.ReviewWrapper}>
                 <h2>Your Popular Review</h2>
-                <ul className={classes.ReviewList}>
-                    {reviewCard}
-                </ul>
+                <ul className={classes.ReviewList}>{reviewCard}</ul>
             </div>
         </div>
     );
-}
-
+};
 
 export default popularReview;

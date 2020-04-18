@@ -13,15 +13,16 @@ const Timeline = props => {
     // const reviews = useSelector(state => state.reviewReducer.reviews);
     const auth = useSelector(state => state.authReducer);
     const likes = useSelector(state => state.likeReducer.likes);
-    const isLoading = useSelector(state => state.reviewReducer.isLoading);
     const dispatch = useDispatch();
 
-    const [reviews, setReviews] = useState([]); // use state rerender component on each call setUsers;
-    const [users, setUsers] = useState([]); // use state rerender component on each call setUsers;
+    const [reviews, setReviews] = useState([]);
+    const [users, setUsers] = useState([]);
+    const [isLoading, setIsLoading] = useState(false);
 
     const fetchUsers = useCallback(() => {
         try {
             //Fetching all reviews
+            setIsLoading(true);
             const url = `http://localhost:3001/users/1/reviews`;
             const promise = Promise.resolve(axios.get(url));
             promise.then(response => {
@@ -38,8 +39,10 @@ const Timeline = props => {
             .then(responses => {
                 const users = responses.map((result) => result.data);
                 setUsers(users);
+                setIsLoading(false);
             });
         } catch(error) {
+            setIsLoading(false);
             console.error(error);
         }
       }, []);

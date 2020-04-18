@@ -35,7 +35,7 @@ const useStyles = makeStyles(theme => ({
     },
     rating: {
         margin: '.7rem 0',
-    }
+    },
 }));
 
 const ReviewCard = props => {
@@ -51,9 +51,9 @@ const ReviewCard = props => {
         createdAt,
     } = props.review;
 
-    let firstName = props.user.first_name;
-    let lastName = props.user.last_name;
-    let userImage = props.user.image;
+    const firstName = props.user.first_name;
+    const lastName = props.user.last_name;
+    const userImage = props.user.image;
 
     const yourId = localStorage.getItem('userId');
 
@@ -68,9 +68,9 @@ const ReviewCard = props => {
         <LikeButton likesCount={likes_count} userId={yourId} reviewId={id} />
     );
 
-    //Switch the router link to YourReview component based on the current page
+    // Switch the router link to YourReview component based on the current page
     let readmorePath = `users/${user_id}/reviews/${gameId}`;
-    let location = useLocation();
+    const location = useLocation();
     if (location.pathname == `/users/${yourId}/reviews`) {
         readmorePath = `reviews/${gameId}`;
     }
@@ -80,7 +80,11 @@ const ReviewCard = props => {
             <CardHeader
                 avatar={
                     <Link to={`users/${user_id}`}>
-                        <Avatar aria-label="recipe" className={classes.avatar} src={userImage} />
+                        <Avatar
+                            aria-label="recipe"
+                            className={classes.avatar}
+                            src={userImage}
+                        />
                     </Link>
                 }
                 action={favorite}
@@ -90,7 +94,11 @@ const ReviewCard = props => {
             <CardMedia className={classes.media} image={image} title={title} />
             <CardContent>
                 <div className={classes.title}>
-                    <Typography variant="subtitle1" color="textPrimary" component="p">
+                    <Typography
+                        variant="subtitle1"
+                        color="textPrimary"
+                        component="p"
+                    >
                         {title}
                     </Typography>
                 </div>
@@ -100,8 +108,7 @@ const ReviewCard = props => {
                         defaultValue={rate}
                         precision={0.5}
                         readOnly
-                        />
-
+                    />
                 </div>
                 <Typography variant="body2" color="textSecondary" component="p">
                     {good}
@@ -117,8 +124,8 @@ const ReviewCard = props => {
                                 userId: user_id,
                                 firstName: firstName,
                                 lastName: lastName,
-                                userImage: userImage
-                            }
+                                userImage: userImage,
+                            },
                         },
                     }}
                     className={classes.button}

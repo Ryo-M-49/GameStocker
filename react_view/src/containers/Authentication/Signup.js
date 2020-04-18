@@ -189,17 +189,17 @@ class SignUp extends Component {
         let signinErrorMessage = null;
         if (this.props.error) {
             signinErrorMessage = (
-                <Snackbar 
+                <Snackbar
                     anchorOrigin={{
                         vertical: 'top',
                         horizontal: 'center',
                     }}
                     open={this.props.isSnackbarOpen}
-                    onClose={this.snackbarClosedHandler}            
+                    onClose={this.snackbarClosedHandler}
                 >
                     <Alert severity="error">{this.props.error.message}</Alert>
                 </Snackbar>
-            )
+            );
         }
 
         return (
@@ -218,7 +218,9 @@ class SignUp extends Component {
                                   open={errorMessage.isSnackbarOpen}
                                   message={errorMessage.message}
                               >
-                                <Alert severity="error">{errorMessage.message}</Alert>
+                                  <Alert severity="error">
+                                      {errorMessage.message}
+                                  </Alert>
                               </Snackbar>
                           );
                       })
@@ -361,7 +363,8 @@ const mapDispatchToProps = dispatch => {
         onSignup: controls => dispatch(actions.signup(controls)),
         onSetSignupRedirectPath: () =>
             dispatch(actions.setSignupRedirectPath('/')),
-        onToggleAuthSnackbar: snackbar => dispatch(actions.toggleAuthSnackbar(snackbar)),
+        onToggleAuthSnackbar: snackbar =>
+            dispatch(actions.toggleAuthSnackbar(snackbar)),
     };
 };
 

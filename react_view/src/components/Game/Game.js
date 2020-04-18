@@ -24,7 +24,7 @@ const Game = props => {
                         },
                         user: {
                             userId: auth.userId,
-                        }
+                        },
                     },
                 }}
             >

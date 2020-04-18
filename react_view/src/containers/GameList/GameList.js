@@ -67,7 +67,7 @@ class GameList extends Component {
         if (this.props.isLoading) {
             component = (
                 <div className={classes.Progress}>
-                    <CircularProgress size='5rem'/>
+                    <CircularProgress size="5rem" />
                 </div>
             );
         }

@@ -1,17 +1,19 @@
 import React, { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import classes from './Reviews.module.css';
-import ReviewCard from './ReviewCard/ReviewCard';
+import ReviewCard from '../Timeline/ReviewCard/ReviewCard';
 import CircularProgress from '@material-ui/core/CircularProgress';
 import * as actions from '../../store/actions/index';
 
 const Reviews = props => {
     const reviews = useSelector(state => state.reviewReducer.reviews);
+    const user = useSelector(state => state.userReducer);
     const isLoading = useSelector(state => state.reviewReducer.isLoading);
     const userId = localStorage.getItem('userId');
     const dispatch = useDispatch();
 
     useEffect(() => {
+        dispatch(actions.getUser(userId));
         dispatch(actions.getUserReviews(userId));
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [props]);
@@ -20,7 +22,7 @@ const Reviews = props => {
     if (reviews) {
         reviewCard = reviews.map((review, index) => (
             <li key={index}>
-                <ReviewCard review={review} />
+                <ReviewCard review={review} user={user}/>
             </li>
         ));
     }

@@ -8,7 +8,6 @@ import CircularProgress from '@material-ui/core/CircularProgress';
 import Aux from '../../hoc/Aux/Aux';
 import * as actions from '../../store/actions/index';
 import axios from 'axios';
-import { ListSubheader } from '@material-ui/core';
 
 const Timeline = props => {
     // const reviews = useSelector(state => state.reviewReducer.reviews);

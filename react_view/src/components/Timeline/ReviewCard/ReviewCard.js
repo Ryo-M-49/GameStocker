@@ -9,7 +9,6 @@ import CardContent from '@material-ui/core/CardContent';
 import CardActions from '@material-ui/core/CardActions';
 import Avatar from '@material-ui/core/Avatar';
 import Typography from '@material-ui/core/Typography';
-import { red } from '@material-ui/core/colors';
 import Button from '@material-ui/core/Button';
 import Rating from '@material-ui/lab/Rating';
 import { cutString } from '../../../shared/utility';
@@ -25,13 +24,18 @@ const useStyles = makeStyles(theme => ({
         backgroundSize: 'contain',
     },
     avatar: {
-        backgroundColor: red[500],
         cursor: 'pointer',
     },
     button: {
         marginLeft: 'auto',
         marginRight: '0',
     },
+    title: {
+        textAlign: 'center',
+    },
+    rating: {
+        margin: '.7rem 0',
+    }
 }));
 
 const ReviewCard = props => {
@@ -69,23 +73,29 @@ const ReviewCard = props => {
             <CardHeader
                 avatar={
                     <Link to={`users/${userId}`}>
-                        <Avatar aria-label="recipe" className={classes.avatar}>
-                            R
-                        </Avatar>
+                        <Avatar aria-label="recipe" className={classes.avatar} src={userImage} />
                     </Link>
                 }
                 action={favorite}
-                title={title}
+                title={firstName + ' ' + lastName}
                 subheader={createdAt}
             />
             <CardMedia className={classes.media} image={image} title={title} />
             <CardContent>
-                <Rating
-                    name="rating"
-                    defaultValue={rate}
-                    precision={0.5}
-                    readOnly
-                />
+                <div className={classes.title}>
+                    <Typography variant="subtitle1" color="textPrimary" component="p">
+                        {title}
+                    </Typography>
+                </div>
+                <div className={classes.rating}>
+                    <Rating
+                        name="rating"
+                        defaultValue={rate}
+                        precision={0.5}
+                        readOnly
+                        />
+
+                </div>
                 <Typography variant="body2" color="textSecondary" component="p">
                     {good}
                 </Typography>

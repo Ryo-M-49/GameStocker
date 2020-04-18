@@ -30,14 +30,16 @@ const useStyles = makeStyles(theme => ({
 
 const MyPage = props => {
     const classStyles = useStyles();
-    const [isEditing, setIsEditing] = useState(false);
+
+    //Information of the login user
     const user = useSelector(state => state.userReducer);
+    //Reviews of the login user
     const reviews = useSelector(state => state.reviewReducer.reviews);
     const isLoading = useSelector(state => state.reviewReducer.isLoading);
-    const userId = localStorage.getItem('userId');
-    const profileImage = user.image;
+    const [isEditing, setIsEditing] = useState(false);
     const dispatch = useDispatch();
 
+// --- Event handlers
     const inputChangedHandler = (newValue, controlName) => {
         const updatedUser = {
             ...user,
@@ -51,22 +53,37 @@ const MyPage = props => {
     };
 
     const cancelClickedHandler = () => {
-        dispatch(actions.getUser(userId));
+        dispatch(actions.getUser(user.id));
         setIsEditing(!isEditing);
     };
+// Event Handlers ---
 
     useEffect(() => {
-        dispatch(actions.getUser(userId));
-        dispatch(actions.getUserReviews(userId));
+        dispatch(actions.getUser(user.id));
+        dispatch(actions.getUserReviews(user.id));
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [props]);
 
+// --- Dropzone to update the user image
+    const onDrop = useCallback(acceptedFiles => {
+        if (acceptedFiles && acceptedFiles[0]) {
+            const formPayLoad = new FormData();
+            formPayLoad.append('uploaded_image', acceptedFiles[0]);
+            dispatch(actions.setImage(formPayLoad));
+        }
+    }, []);
+    const { getRootProps, getInputProps, isDragActive } = useDropzone({
+        onDrop,
+    });
+// Dropzone to update the user image ---
+
+// --- UI of the left hand side of the page
     let bio = (
         <Aux>
             <div className={classes.BioWrapper}>
                 <div className={classes.Picture}>
                     <Avatar
-                        image={profileImage ? profileImage : DefaultImage}
+                        image={user.image ? user.image : DefaultImage}
                     />
                     <p>{user.first_name + ' ' + user.last_name}</p>
                 </div>
@@ -90,24 +107,16 @@ const MyPage = props => {
             </div>
         </Aux>
     );
+// UI of the left hand side of the page ---
 
-    const onDrop = useCallback(acceptedFiles => {
-        if (acceptedFiles && acceptedFiles[0]) {
-            const formPayLoad = new FormData();
-            formPayLoad.append('uploaded_image', acceptedFiles[0]);
-            dispatch(actions.setImage(formPayLoad));
-        }
-    }, []);
-    const { getRootProps, getInputProps, isDragActive } = useDropzone({
-        onDrop,
-    });
+// --- UI of the left hand side of the page during the editing mode
     if (isEditing) {
         bio = (
             <Aux>
                 <div className={classes.BioWrapper}>
                     <div className={classes.Picture}>
                         <Avatar
-                            image={profileImage ? profileImage : DefaultImage}
+                            image={user.image ? user.image : DefaultImage}
                         />
                         <div className={classes.Dropzone} {...getRootProps()}>
                             <input {...getInputProps()} />
@@ -182,14 +191,16 @@ const MyPage = props => {
             </Aux>
         );
     }
+// UI of the left hand side of the page during the editing mode ---
 
+// --- The entire UI of the page
     let component = (
         <Aux>
             <div className={classes.MyPageLeft}>
                 {bio}
                 <PopularReview reviews={reviews} />
                 <div className={classes.ToAllReviewsButtonWrapper}>
-                    <Link to={`/users/${userId}/reviews`}>
+                    <Link to={`/users/${user.id}/reviews`}>
                         <ToAllReviewsButton />
                     </Link>
                 </div>
@@ -199,7 +210,9 @@ const MyPage = props => {
             </div>
         </Aux>
     );
+// The entire UI of the page ---
 
+    // Loading animation will be rendered while fething the data from the api
     if (isLoading) {
         component = (
             <CircularProgress className={classes.Progress} size="5rem" />

@@ -1,6 +1,6 @@
 import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 import LikeButton from '../../UI/LikeButton/LikeButton';
 import Card from '@material-ui/core/Card';
 import CardHeader from '@material-ui/core/CardHeader';
@@ -9,7 +9,6 @@ import CardContent from '@material-ui/core/CardContent';
 import CardActions from '@material-ui/core/CardActions';
 import Avatar from '@material-ui/core/Avatar';
 import Typography from '@material-ui/core/Typography';
-import { red } from '@material-ui/core/colors';
 import Button from '@material-ui/core/Button';
 import Rating from '@material-ui/lab/Rating';
 import { cutString } from '../../../shared/utility';
@@ -25,13 +24,18 @@ const useStyles = makeStyles(theme => ({
         backgroundSize: 'contain',
     },
     avatar: {
-        backgroundColor: red[500],
         cursor: 'pointer',
     },
     button: {
         marginLeft: 'auto',
         marginRight: '0',
     },
+    title: {
+        textAlign: 'center',
+    },
+    rating: {
+        margin: '.7rem 0',
+    }
 }));
 
 const ReviewCard = props => {
@@ -46,7 +50,12 @@ const ReviewCard = props => {
         gameId,
         createdAt,
     } = props.review;
-    const userId = localStorage.getItem('userId');
+
+    let firstName = props.user.first_name;
+    let lastName = props.user.last_name;
+    let userImage = props.user.image;
+
+    const yourId = localStorage.getItem('userId');
 
     const classes = useStyles();
 
@@ -56,31 +65,44 @@ const ReviewCard = props => {
     }
 
     const favorite = (
-        <LikeButton likesCount={likes_count} userId={userId} reviewId={id} />
+        <LikeButton likesCount={likes_count} userId={yourId} reviewId={id} />
     );
+
+    //Switch the router link to YourReview component based on the current page
+    let readmorePath = `users/${user_id}/reviews/${gameId}`;
+    let location = useLocation();
+    if (location.pathname == `/users/${yourId}/reviews`) {
+        readmorePath = `reviews/${gameId}`;
+    }
 
     return (
         <Card className={classes.root}>
             <CardHeader
                 avatar={
-                    <Link to={`users/${userId}`}>
-                        <Avatar aria-label="recipe" className={classes.avatar}>
-                            R
-                        </Avatar>
+                    <Link to={`users/${user_id}`}>
+                        <Avatar aria-label="recipe" className={classes.avatar} src={userImage} />
                     </Link>
                 }
                 action={favorite}
-                title={title}
+                title={firstName + ' ' + lastName}
                 subheader={createdAt}
             />
             <CardMedia className={classes.media} image={image} title={title} />
             <CardContent>
-                <Rating
-                    name="rating"
-                    defaultValue={rate}
-                    precision={0.5}
-                    readOnly
-                />
+                <div className={classes.title}>
+                    <Typography variant="subtitle1" color="textPrimary" component="p">
+                        {title}
+                    </Typography>
+                </div>
+                <div className={classes.rating}>
+                    <Rating
+                        name="rating"
+                        defaultValue={rate}
+                        precision={0.5}
+                        readOnly
+                        />
+
+                </div>
                 <Typography variant="body2" color="textSecondary" component="p">
                     {good}
                 </Typography>
@@ -88,7 +110,7 @@ const ReviewCard = props => {
             <CardActions disableSpacing>
                 <Link
                     to={{
-                        pathname: `users/${user_id}/reviews/${gameId}`,
+                        pathname: readmorePath,
                         state: {
                             game: props.review,
                             user_id: user_id,

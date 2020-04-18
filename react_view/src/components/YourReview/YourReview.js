@@ -22,8 +22,10 @@ const YourReview = props => {
         ? localStorage.getItem('userId')
         : auth.userId;
 
+    //These are props that are passed from Link in ReviewCard component
     const game = props.location.state.game;
-    const reviewerId = props.location.state.user_id;
+    const reviewerId = props.location.state.user.userId;
+    const user = props.location.state.user;
     const updatedGame = {
         ...review.game,
         user_id: game.user_id,
@@ -44,6 +46,8 @@ const YourReview = props => {
         dispatch(actions.toggleSnackbar(false));
     };
 
+    //Toggle Snackbar open/close
+    //Snackbar shows the result of user's action such as Save, Update, Delete a review
     const isSnackbarOpen = review.isSnackbarOpen;
     let notification = null;
     if (isSnackbarOpen) {
@@ -63,9 +67,11 @@ const YourReview = props => {
         );
     }
 
+    //Toggle buttons based on existence and owner of the review
     const isYourReview = yourId == reviewerId;
-
     let buttons = null;
+
+    //Show ShareButton + UpdateButton if existed and your review 
     if (isYourReview && isReviewExisted) {
         buttons = (
             <div className={classes.ButtonWrapper}>
@@ -75,7 +81,10 @@ const YourReview = props => {
                 <UpdateButton />
             </div>
         );
-    } else if (isYourReview && !isReviewExisted) {
+    }; 
+
+    //Show SaveButton + UpdateButton if not existed and your review
+    if (isYourReview && !isReviewExisted) {
         buttons = (
             <div className={classes.ButtonWrapper}>
                 <SaveButton type="review" />
@@ -83,6 +92,7 @@ const YourReview = props => {
         );
     }
 
+    //Redirect if not authenticated
     const isAuthenticated = auth.token !== null;
     let authRedirect = null;
     if (!isAuthenticated) {
@@ -95,7 +105,7 @@ const YourReview = props => {
             {notification}
             <QuitButton />
             <div className={classes.ReviewWrapper}>
-                <Review game={game} isYourReview={isYourReview} />
+                <Review game={game} user={user} isYourReview={isYourReview} />
             </div>
             <div className={classes.RightContent}>
                 <div className={classes.ImageWrapper}>

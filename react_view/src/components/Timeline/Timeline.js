@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState, useCallback } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import classes from './Timeline.module.css';
 import ReviewCard from './ReviewCard/ReviewCard';
@@ -7,20 +7,47 @@ import MuiAlert from '@material-ui/lab/Alert';
 import CircularProgress from '@material-ui/core/CircularProgress';
 import Aux from '../../hoc/Aux/Aux';
 import * as actions from '../../store/actions/index';
+import axios from 'axios';
+import { ListSubheader } from '@material-ui/core';
 
 const Timeline = props => {
-    const reviews = useSelector(state => state.reviewReducer.reviews);
+    // const reviews = useSelector(state => state.reviewReducer.reviews);
     const auth = useSelector(state => state.authReducer);
     const likes = useSelector(state => state.likeReducer.likes);
     const isLoading = useSelector(state => state.reviewReducer.isLoading);
     const dispatch = useDispatch();
 
-    useEffect(() => {
-        if (auth.userId) {
-            dispatch(actions.getAllReviews(auth.userId));
-        } else {
-            dispatch(actions.getAllReviews(1));
+    const [reviews, setReviews] = useState([]); // use state rerender component on each call setUsers;
+    const [users, setUsers] = useState([]); // use state rerender component on each call setUsers;
+
+    const fetchUsers = useCallback(() => {
+        try {
+            //Fetching all reviews
+            const url = `http://localhost:3001/users/1/reviews`;
+            const promise = Promise.resolve(axios.get(url));
+            promise.then(response => {
+                const reviews = response.data;
+                setReviews(reviews);
+                const listOfRequests = reviews.map(review => axios.get(`http://localhost:3001/users/${review.user_id}`));
+                return listOfRequests;
+            })
+            //Resolving promises of user data of each review
+            .then(responses => {
+                return Promise.all(responses)
+            })
+            //Set users state with the fethed data from the api
+            .then(responses => {
+                const users = responses.map((result) => result.data);
+                setUsers(users);
+                console.log('users are now ', users);
+            });
+        } catch(error) {
+            console.error(error);
         }
+      }, []);
+
+    useEffect(() => {
+        fetchUsers();
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [props, likes]);
 
@@ -61,11 +88,12 @@ const Timeline = props => {
 
     let reviewCard = <p>No review to show for now. Write a review!</p>;
     if (reviews) {
-        reviewCard = reviews.map((review, index) => (
+        reviewCard = users.map((user, index) => (
             <li key={index}>
-                <ReviewCard review={review} />
+                <ReviewCard review={reviews[index]} user={user} />
             </li>
-        ));
+            )
+        );
     }
 
     let component = (

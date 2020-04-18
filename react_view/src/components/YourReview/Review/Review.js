@@ -1,12 +1,22 @@
 import React from 'react';
 import { useSelector } from 'react-redux';
+import { Link } from 'react-router-dom';
 import classes from './Review.module.css';
+import Avatar from '@material-ui/core/Avatar';
+import Typography from '@material-ui/core/Typography';
 import Rating from './Rating/Rating';
 import Good from './Good/Good';
 import Bad from './Bad/Bad';
 
 const Review = props => {
     const review = useSelector(state => state.reviewReducer.review);
+    const user = useSelector(state => state.userReducer);
+    let { userId, firstName, lastName, userImage } = props.user;
+    if (firstName == undefined) {
+        firstName = user.first_name;
+        lastName = user.last_name;
+        userImage = user.image;
+    }
 
     const title = props.game.title;
     let description = props.game.caption;
@@ -25,6 +35,14 @@ const Review = props => {
                     <h2 className={classes.Title}>{title}</h2>
                 </a>
                 <p>{description}</p>
+            </div>
+            <div className={classes.User}>
+                <Link to={`/users/${userId}`}>
+                    <Avatar aria-label="recipe" className={classes.Avatar} src={userImage} />
+                </Link>
+                <Typography variant="h5" color="textPrimary">
+                    {firstName + ' ' + lastName}
+                </Typography>
             </div>
             <form>
                 <Rating value={review.rate} isYourReview={props.isYourReview} />

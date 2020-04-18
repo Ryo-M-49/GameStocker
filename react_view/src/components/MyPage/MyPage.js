@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useCallback } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import {useDropzone} from 'react-dropzone'
+import { useDropzone } from 'react-dropzone';
 import { makeStyles } from '@material-ui/core/styles';
 import classes from './MyPage.module.css';
 import { Link } from 'react-router-dom';
@@ -37,7 +37,7 @@ const MyPage = props => {
     const userId = localStorage.getItem('userId');
     const profileImage = user.image;
     const dispatch = useDispatch();
-    
+
     const inputChangedHandler = (newValue, controlName) => {
         const updatedUser = {
             ...user,
@@ -65,7 +65,9 @@ const MyPage = props => {
         <Aux>
             <div className={classes.BioWrapper}>
                 <div className={classes.Picture}>
-                    <Avatar image={profileImage ? profileImage : DefaultImage} />
+                    <Avatar
+                        image={profileImage ? profileImage : DefaultImage}
+                    />
                     <p>{user.first_name + ' ' + user.last_name}</p>
                 </div>
                 <div className={classes.Introduction}>
@@ -91,35 +93,39 @@ const MyPage = props => {
 
     const onDrop = useCallback(acceptedFiles => {
         if (acceptedFiles && acceptedFiles[0]) {
-            let formPayLoad = new FormData();
+            const formPayLoad = new FormData();
             formPayLoad.append('uploaded_image', acceptedFiles[0]);
             dispatch(actions.setImage(formPayLoad));
         }
-      }, []);
-    const {getRootProps, getInputProps, isDragActive} = useDropzone({onDrop})
+    }, []);
+    const { getRootProps, getInputProps, isDragActive } = useDropzone({
+        onDrop,
+    });
     if (isEditing) {
         bio = (
             <Aux>
                 <div className={classes.BioWrapper}>
                     <div className={classes.Picture}>
-                        <Avatar image={profileImage ? profileImage : DefaultImage} />
+                        <Avatar
+                            image={profileImage ? profileImage : DefaultImage}
+                        />
                         <div className={classes.Dropzone} {...getRootProps()}>
                             <input {...getInputProps()} />
-                            {
-                                isDragActive ?
+                            {isDragActive ? (
                                 <Button
                                     startIcon={<ImageIcon />}
-                                    variant='contained'
+                                    variant="contained"
                                 >
                                     DROP IMAGE
-                                </Button> :
+                                </Button>
+                            ) : (
                                 <Button
                                     startIcon={<ImageIcon />}
-                                    variant='contained'
+                                    variant="contained"
                                 >
                                     UPLOAD
                                 </Button>
-                            }
+                            )}
                         </div>
                         <div className={classes.Name}>
                             <TextField
@@ -181,7 +187,7 @@ const MyPage = props => {
         <Aux>
             <div className={classes.MyPageLeft}>
                 {bio}
-                <PopularReview reviews={reviews}/>
+                <PopularReview reviews={reviews} />
                 <div className={classes.ToAllReviewsButtonWrapper}>
                     <Link to={`/users/${userId}/reviews`}>
                         <ToAllReviewsButton />
@@ -189,23 +195,18 @@ const MyPage = props => {
                 </div>
             </div>
             <div className={classes.MyPageRight}>
-                <RecentActivity reviews={reviews}/>
+                <RecentActivity reviews={reviews} />
             </div>
         </Aux>
     );
 
     if (isLoading) {
-        component = <CircularProgress
-                        className={classes.Progress} 
-                        size='5rem'
-                    />
+        component = (
+            <CircularProgress className={classes.Progress} size="5rem" />
+        );
     }
 
-    return (
-        <div className={classes.MyPage}>
-            {component}
-        </div>
-    );
+    return <div className={classes.MyPage}>{component}</div>;
 };
 
 export default MyPage;

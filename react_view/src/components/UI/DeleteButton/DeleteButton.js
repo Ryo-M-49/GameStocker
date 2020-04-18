@@ -8,10 +8,10 @@ const DeleteButton = props => {
     const userId = localStorage.getItem('userId');
     const reviewId = useSelector(state => state.reviewReducer.review.id);
     const dispatch = useDispatch();
-    
+
     const deleteButtonClickedHandler = () => {
         dispatch(actions.deleteReview(userId, reviewId));
-    }
+    };
 
     return (
         <div>
@@ -25,6 +25,6 @@ const DeleteButton = props => {
             </Button>
         </div>
     );
-}
+};
 
 export default DeleteButton;

@@ -14,8 +14,8 @@ const RecentActivity = props => {
         });
 
         const array = [];
-        const MAX_LENGTH_REVIEW = 2
-        for (let i = 0; i < MAX_LENGTH_REVIEW; i++){
+        const MAX_LENGTH_REVIEW = 2;
+        for (let i = 0; i < MAX_LENGTH_REVIEW; i++) {
             array.push(
                 <li className={classes.ReviewCard} key={i}>
                     <SmallReviewCard review={reviews[i]} />
@@ -28,9 +28,7 @@ const RecentActivity = props => {
     return (
         <div className={classes.RecentActivity}>
             <h2 className={classes.Header}>Recent Activity</h2>
-            <ul className={classes.RecentReviews}>
-                {reviewCard}
-            </ul>
+            <ul className={classes.RecentReviews}>{reviewCard}</ul>
         </div>
     );
 };

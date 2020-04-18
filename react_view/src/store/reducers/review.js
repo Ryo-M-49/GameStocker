@@ -22,7 +22,7 @@ const initialState = {
     reviews: null,
     // The structure of reviews state will be like this below
     // [
-    //     {        
+    //     {
     //         id: null,
     //         user_id: null,
     //         gameId: null,

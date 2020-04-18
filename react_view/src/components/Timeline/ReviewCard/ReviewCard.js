@@ -1,6 +1,6 @@
 import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 import LikeButton from '../../UI/LikeButton/LikeButton';
 import Card from '@material-ui/core/Card';
 import CardHeader from '@material-ui/core/CardHeader';
@@ -55,7 +55,7 @@ const ReviewCard = props => {
     let lastName = props.user.last_name;
     let userImage = props.user.image;
 
-    const userId = localStorage.getItem('userId');
+    const yourId = localStorage.getItem('userId');
 
     const classes = useStyles();
 
@@ -65,14 +65,21 @@ const ReviewCard = props => {
     }
 
     const favorite = (
-        <LikeButton likesCount={likes_count} userId={userId} reviewId={id} />
+        <LikeButton likesCount={likes_count} userId={yourId} reviewId={id} />
     );
+
+    //Switch the router link to YourReview component based on the current page
+    let readmorePath = `users/${user_id}/reviews/${gameId}`;
+    let location = useLocation();
+    if (location.pathname == `/users/${yourId}/reviews`) {
+        readmorePath = `reviews/${gameId}`;
+    }
 
     return (
         <Card className={classes.root}>
             <CardHeader
                 avatar={
-                    <Link to={`users/${userId}`}>
+                    <Link to={`users/${user_id}`}>
                         <Avatar aria-label="recipe" className={classes.avatar} src={userImage} />
                     </Link>
                 }
@@ -103,7 +110,7 @@ const ReviewCard = props => {
             <CardActions disableSpacing>
                 <Link
                     to={{
-                        pathname: `users/${user_id}/reviews/${gameId}`,
+                        pathname: readmorePath,
                         state: {
                             game: props.review,
                             user_id: user_id,

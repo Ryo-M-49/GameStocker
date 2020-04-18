@@ -38,7 +38,6 @@ const Timeline = props => {
             .then(responses => {
                 const users = responses.map((result) => result.data);
                 setUsers(users);
-                console.log('users are now ', users);
             });
         } catch(error) {
             console.error(error);

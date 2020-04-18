@@ -35,9 +35,18 @@ const NavigationItems = props => {
 
     const authItems = (
         <Aux>
-            <NavigationItem className={classes.NavigationItem} link={`users/${auth.userId}`} exact>
+            <NavigationItem
+                className={classes.NavigationItem}
+                link={`users/${auth.userId}`}
+                exact
+            >
                 <Button
-                    startIcon={<Avatar alt="my-page" src={profileImage ? profileImage : DefaultImage} />}
+                    startIcon={
+                        <Avatar
+                            alt="my-page"
+                            src={profileImage ? profileImage : DefaultImage}
+                        />
+                    }
                     style={{ color: 'white' }}
                 >
                     {user.first_name ? userName : ' '}
@@ -64,7 +73,11 @@ const NavigationItems = props => {
         <ul className={classes.NavigationItems}>
             <NavigationItem link="/gamelist" exact>
                 <Button
-                    startIcon={<CreateIcon style={{ color: 'white', fontSize: '30' }} />}
+                    startIcon={
+                        <CreateIcon
+                            style={{ color: 'white', fontSize: '30' }}
+                        />
+                    }
                     style={{ color: 'white' }}
                 >
                     WRITE
@@ -72,7 +85,11 @@ const NavigationItems = props => {
             </NavigationItem>
             <NavigationItem link="/" exact>
                 <Button
-                    startIcon={<ViewListIcon style={{ color: 'white', fontSize: '30' }} />}
+                    startIcon={
+                        <ViewListIcon
+                            style={{ color: 'white', fontSize: '30' }}
+                        />
+                    }
                     style={{ color: 'white' }}
                 >
                     TIMELINE

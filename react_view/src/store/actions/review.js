@@ -169,11 +169,7 @@ export const createReview = (reviewDetail, userId) => {
     };
 };
 
-export const updateReview = (
-    reviewDetail,
-    userId,
-    reviewId,
-) => {
+export const updateReview = (reviewDetail, userId, reviewId) => {
     return dispatch => {
         dispatch(setLoading(true));
         const url = `http://localhost:3001/users/${userId}/reviews/${reviewId}`;
@@ -190,10 +186,7 @@ export const updateReview = (
     };
 };
 
-export const deleteReview = (
-    userId,
-    reviewId,
-) => {
+export const deleteReview = (userId, reviewId) => {
     return dispatch => {
         dispatch(setLoading(true));
         const url = `http://localhost:3001/users/${userId}/reviews/${reviewId}`;
@@ -202,7 +195,7 @@ export const deleteReview = (
             .then(response => {
                 dispatch(setLoading(false));
                 dispatch(toggleSnackbar(true));
-                let emptyReview = {
+                const emptyReview = {
                     id: null,
                     good: '',
                     bad: '',

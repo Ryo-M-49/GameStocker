@@ -10,7 +10,7 @@ import Typography from '@material-ui/core/Typography';
 import { cutString } from '../../../../shared/utility';
 
 const smallReviewCard = props => {
-    let component = <p>nothing to show now</p>
+    let component = <p>nothing to show now</p>;
     if (props.review) {
         let { user_id, image, title, good, gameId } = props.review;
         const MAX_LENGTH_TITLE = 10;
@@ -55,7 +55,7 @@ const smallReviewCard = props => {
                                 game: props.review,
                                 user: {
                                     userId: user_id,
-                                }
+                                },
                             },
                         }}
                     >
@@ -67,11 +67,7 @@ const smallReviewCard = props => {
             </Card>
         );
     }
-    return (
-        <div>
-            {component}
-        </div>
-    );
+    return <div>{component}</div>;
 };
 
 export default smallReviewCard;

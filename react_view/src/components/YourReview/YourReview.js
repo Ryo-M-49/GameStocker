@@ -22,7 +22,7 @@ const YourReview = props => {
         ? localStorage.getItem('userId')
         : auth.userId;
 
-    //These are props that are passed from Link in ReviewCard component
+    // These are props that are passed from Link in ReviewCard component
     const game = props.location.state.game;
     const reviewerId = props.location.state.user.userId;
     const user = props.location.state.user;
@@ -46,8 +46,8 @@ const YourReview = props => {
         dispatch(actions.toggleSnackbar(false));
     };
 
-    //Toggle Snackbar open/close
-    //Snackbar shows the result of user's action such as Save, Update, Delete a review
+    // Toggle Snackbar open/close
+    // Snackbar shows the result of user's action such as Save, Update, Delete a review
     const isSnackbarOpen = review.isSnackbarOpen;
     let notification = null;
     if (isSnackbarOpen) {
@@ -67,11 +67,11 @@ const YourReview = props => {
         );
     }
 
-    //Toggle buttons based on existence and owner of the review
+    // Toggle buttons based on existence and owner of the review
     const isYourReview = yourId == reviewerId;
     let buttons = null;
 
-    //Show ShareButton + UpdateButton if existed and your review 
+    // Show ShareButton + UpdateButton if existed and your review
     if (isYourReview && isReviewExisted) {
         buttons = (
             <div className={classes.ButtonWrapper}>
@@ -81,9 +81,9 @@ const YourReview = props => {
                 <UpdateButton />
             </div>
         );
-    }; 
+    }
 
-    //Show SaveButton + UpdateButton if not existed and your review
+    // Show SaveButton + UpdateButton if not existed and your review
     if (isYourReview && !isReviewExisted) {
         buttons = (
             <div className={classes.ButtonWrapper}>
@@ -92,7 +92,7 @@ const YourReview = props => {
         );
     }
 
-    //Redirect if not authenticated
+    // Redirect if not authenticated
     const isAuthenticated = auth.token !== null;
     let authRedirect = null;
     if (!isAuthenticated) {

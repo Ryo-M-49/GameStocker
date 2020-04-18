@@ -38,7 +38,11 @@ const Review = props => {
             </div>
             <div className={classes.User}>
                 <Link to={`/users/${userId}`}>
-                    <Avatar aria-label="recipe" className={classes.Avatar} src={userImage} />
+                    <Avatar
+                        aria-label="recipe"
+                        className={classes.Avatar}
+                        src={userImage}
+                    />
                 </Link>
                 <Typography variant="h5" color="textPrimary">
                     {firstName + ' ' + lastName}

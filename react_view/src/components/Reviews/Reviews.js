@@ -22,7 +22,7 @@ const Reviews = props => {
     if (reviews) {
         reviewCard = reviews.map((review, index) => (
             <li key={index}>
-                <ReviewCard review={review} user={user}/>
+                <ReviewCard review={review} user={user} />
             </li>
         ));
     }
@@ -30,17 +30,12 @@ const Reviews = props => {
     let component = <ul className={classes.List}>{reviewCard}</ul>;
 
     if (isLoading) {
-        component = <CircularProgress
-                        className={classes.Progress} 
-                        size='5rem'
-                    />
+        component = (
+            <CircularProgress className={classes.Progress} size="5rem" />
+        );
     }
 
-    return (
-        <div className={classes.Reviews}>
-            {component}
-        </div>
-    );
+    return <div className={classes.Reviews}>{component}</div>;
 };
 
 export default Reviews;

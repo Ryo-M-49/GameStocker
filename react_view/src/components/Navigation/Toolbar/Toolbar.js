@@ -21,7 +21,11 @@ const Toolbar = props => {
                 onDrawerClosed={props.drawerToggleClosed}
                 isOpen={props.isOpen}
             />
-            <div className={ isAuthenticated ? classes.AuthSearchBar : classes.SearchBar}>
+            <div
+                className={
+                    isAuthenticated ? classes.AuthSearchBar : classes.SearchBar
+                }
+            >
                 <SearchBar />
             </div>
             <nav>
@@ -29,6 +33,6 @@ const Toolbar = props => {
             </nav>
         </header>
     );
-}
+};
 
 export default Toolbar;

@@ -29,13 +29,7 @@ const LikeButton = props => {
         }, 200);
         return () => clearTimeout(timer);
         // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [
-        props, 
-        likes,
-        count, 
-        isLiked,
-        authRedirect,
-    ]);
+    }, [props, likes, count, isLiked, authRedirect]);
 
     const onLikeHandler = () => {
         if (isAuthenticated) {
@@ -49,7 +43,9 @@ const LikeButton = props => {
 
     const onUnlikeHandler = () => {
         if (isAuthenticated) {
-            dispatch(actions.unlike(likes, userId, reviewId, likes[reviewId].id));
+            dispatch(
+                actions.unlike(likes, userId, reviewId, likes[reviewId].id)
+            );
             setCount(count - 1);
             setIsLiked(false);
         } else {

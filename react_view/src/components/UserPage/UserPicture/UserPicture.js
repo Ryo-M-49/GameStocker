@@ -12,6 +12,6 @@ const UserPicture = props => {
             <Avatar image={profileImage ? profileImage : DefaultImage} />
         </div>
     );
-}
+};
 
 export default UserPicture;

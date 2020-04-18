@@ -156,17 +156,17 @@ class SignIn extends Component {
         let signinErrorMessage = null;
         if (this.props.error) {
             signinErrorMessage = (
-                <Snackbar 
+                <Snackbar
                     anchorOrigin={{
                         vertical: 'top',
                         horizontal: 'center',
                     }}
                     open={this.props.isSnackbarOpen}
-                    onClose={this.snackbarClosedHandler}            
+                    onClose={this.snackbarClosedHandler}
                 >
                     <Alert severity="error">{this.props.error.message}</Alert>
                 </Snackbar>
-            )
+            );
         }
 
         let authRedirect = null;
@@ -189,7 +189,9 @@ class SignIn extends Component {
                                   key={index}
                                   open={errorMessage.isSnackbarOpen}
                               >
-                                  <Alert severity="error">{errorMessage.message}</Alert>
+                                  <Alert severity="error">
+                                      {errorMessage.message}
+                                  </Alert>
                               </Snackbar>
                           );
                       })
@@ -276,7 +278,8 @@ const mapDispatchToProps = dispatch => {
     return {
         onAuth: (email, password) => dispatch(actions.auth(email, password)),
         onSetAuthRedirectPath: () => dispatch(actions.setAuthRedirectPath('/')),
-        onToggleAuthSnackbar: snackbar => dispatch(actions.toggleAuthSnackbar(snackbar)),
+        onToggleAuthSnackbar: snackbar =>
+            dispatch(actions.toggleAuthSnackbar(snackbar)),
     };
 };
 

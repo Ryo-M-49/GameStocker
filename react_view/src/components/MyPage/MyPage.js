@@ -31,15 +31,15 @@ const useStyles = makeStyles(theme => ({
 const MyPage = props => {
     const classStyles = useStyles();
 
-    //Information of the login user
+    // Information of the login user
     const user = useSelector(state => state.userReducer);
-    //Reviews of the login user
+    // Reviews of the login user
     const reviews = useSelector(state => state.reviewReducer.reviews);
     const isLoading = useSelector(state => state.reviewReducer.isLoading);
     const [isEditing, setIsEditing] = useState(false);
     const dispatch = useDispatch();
 
-// --- Event handlers
+    // --- Event handlers
     const inputChangedHandler = (newValue, controlName) => {
         const updatedUser = {
             ...user,
@@ -56,7 +56,7 @@ const MyPage = props => {
         dispatch(actions.getUser(user.id));
         setIsEditing(!isEditing);
     };
-// Event Handlers ---
+    // Event Handlers ---
 
     useEffect(() => {
         dispatch(actions.getUser(user.id));
@@ -64,7 +64,7 @@ const MyPage = props => {
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [props]);
 
-// --- Dropzone to update the user image
+    // --- Dropzone to update the user image
     const onDrop = useCallback(acceptedFiles => {
         if (acceptedFiles && acceptedFiles[0]) {
             const formPayLoad = new FormData();
@@ -75,16 +75,14 @@ const MyPage = props => {
     const { getRootProps, getInputProps, isDragActive } = useDropzone({
         onDrop,
     });
-// Dropzone to update the user image ---
+    // Dropzone to update the user image ---
 
-// --- UI of the left hand side of the page
+    // --- UI of the left hand side of the page
     let bio = (
         <Aux>
             <div className={classes.BioWrapper}>
                 <div className={classes.Picture}>
-                    <Avatar
-                        image={user.image ? user.image : DefaultImage}
-                    />
+                    <Avatar image={user.image ? user.image : DefaultImage} />
                     <p>{user.first_name + ' ' + user.last_name}</p>
                 </div>
                 <div className={classes.Introduction}>
@@ -107,9 +105,9 @@ const MyPage = props => {
             </div>
         </Aux>
     );
-// UI of the left hand side of the page ---
+    // UI of the left hand side of the page ---
 
-// --- UI of the left hand side of the page during the editing mode
+    // --- UI of the left hand side of the page during the editing mode
     if (isEditing) {
         bio = (
             <Aux>
@@ -191,9 +189,9 @@ const MyPage = props => {
             </Aux>
         );
     }
-// UI of the left hand side of the page during the editing mode ---
+    // UI of the left hand side of the page during the editing mode ---
 
-// --- The entire UI of the page
+    // --- The entire UI of the page
     let component = (
         <Aux>
             <div className={classes.MyPageLeft}>
@@ -210,7 +208,7 @@ const MyPage = props => {
             </div>
         </Aux>
     );
-// The entire UI of the page ---
+    // The entire UI of the page ---
 
     // Loading animation will be rendered while fething the data from the api
     if (isLoading) {

@@ -18,6 +18,7 @@ import ImageIcon from '@material-ui/icons/Image';
 import TextField from '@material-ui/core/TextField';
 import CircularProgress from '@material-ui/core/CircularProgress';
 import * as actions from '../../store/actions/index';
+import axios from 'axios';
 
 const useStyles = makeStyles(theme => ({
     root: {
@@ -31,21 +32,33 @@ const useStyles = makeStyles(theme => ({
 const MyPage = props => {
     const classStyles = useStyles();
 
+    const userId = props.match.params.userId;
+    const [user, setUser] = useState({});
+
     // Information of the login user
-    const user = useSelector(state => state.userReducer);
+    const yourId = useSelector(state => state.userReducer.id);
+
     // Reviews of the login user
     const reviews = useSelector(state => state.reviewReducer.reviews);
-    const isLoading = useSelector(state => state.reviewReducer.isLoading);
+
+    // State of component
     const [isEditing, setIsEditing] = useState(false);
+    const [isLoading, setIsLoading] = useState(false);
     const dispatch = useDispatch();
 
-    // --- Event handlers
+// --- Event handlers
+
+    // Handler in the input form when editing. It updates the user information based on the input
     const inputChangedHandler = (newValue, controlName) => {
         const updatedUser = {
             ...user,
             [controlName]: newValue,
         };
-        dispatch(actions.getUserSuccess(updatedUser));
+        //Update local state
+        setUser(updatedUser);
+        //Update Reudux state to pass info to SaveButton
+        dispatch(actions.getUserSuccess(user));
+        console.log('user is now', user);
     };
 
     const buttonClickedHandler = () => {
@@ -53,18 +66,48 @@ const MyPage = props => {
     };
 
     const cancelClickedHandler = () => {
-        dispatch(actions.getUser(user.id));
+        dispatch(actions.getUser(userId));
         setIsEditing(!isEditing);
     };
-    // Event Handlers ---
+// Event Handlers ---
+
+    const fetchUser = useCallback(() => {
+        setIsLoading(true);
+        const url = `http://localhost:3001/users/${userId}`;
+        axios
+            .get(url)
+            .then(response => {
+                setUser({
+                    id: response.data.id,
+                    first_name: response.data.first_name,
+                    last_name: response.data.last_name,
+                    image: response.data.image,
+                    introduction: response.data.introduction,
+                    error: null,
+                });
+                setIsLoading(false);
+            })
+            .catch(error => {
+                setUser({
+                    id: null,
+                    first_name: null,
+                    last_name: null,
+                    image: null,
+                    introduction: null,
+                    error: error,
+                })
+                setIsLoading(false);
+            });
+    }, []);
 
     useEffect(() => {
-        dispatch(actions.getUser(user.id));
-        dispatch(actions.getUserReviews(user.id));
+        console.log('useEffect called');
+        fetchUser(userId);
+        dispatch(actions.getUserReviews(userId));
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [props]);
 
-    // --- Dropzone to update the user image
+// --- Dropzone to update the user image
     const onDrop = useCallback(acceptedFiles => {
         if (acceptedFiles && acceptedFiles[0]) {
             const formPayLoad = new FormData();
@@ -75,9 +118,18 @@ const MyPage = props => {
     const { getRootProps, getInputProps, isDragActive } = useDropzone({
         onDrop,
     });
-    // Dropzone to update the user image ---
+// Dropzone to update the user image ---
 
-    // --- UI of the left hand side of the page
+    let editButton = null;
+    if (userId == yourId) {
+        editButton = (
+            <div className={classes.Button}>
+                <EditButton clickedHandler={buttonClickedHandler} />
+            </div>
+        );
+    }
+
+// --- UI of the left hand side of the page
     let bio = (
         <Aux>
             <div className={classes.BioWrapper}>
@@ -100,14 +152,12 @@ const MyPage = props => {
                     />
                 </div>
             </div>
-            <div className={classes.Button}>
-                <EditButton clickedHandler={buttonClickedHandler} />
-            </div>
+            {editButton}
         </Aux>
     );
-    // UI of the left hand side of the page ---
+// UI of the left hand side of the page ---
 
-    // --- UI of the left hand side of the page during the editing mode
+// --- UI of the left hand side of the page during the editing mode
     if (isEditing) {
         bio = (
             <Aux>
@@ -189,9 +239,9 @@ const MyPage = props => {
             </Aux>
         );
     }
-    // UI of the left hand side of the page during the editing mode ---
+// UI of the left hand side of the page during the editing mode ---
 
-    // --- The entire UI of the page
+// --- The entire UI of the page
     let component = (
         <Aux>
             <div className={classes.MyPageLeft}>
@@ -208,9 +258,9 @@ const MyPage = props => {
             </div>
         </Aux>
     );
-    // The entire UI of the page ---
+// The entire UI of the page ---
 
-    // Loading animation will be rendered while fething the data from the api
+// Loading animation will be rendered while fething data from the api
     if (isLoading) {
         component = (
             <CircularProgress className={classes.Progress} size="5rem" />

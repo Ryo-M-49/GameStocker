@@ -36,6 +36,8 @@ const SaveButton = props => {
                 },
             };
             delete updatedUser.user.id;
+            delete updatedUser.user.image;
+            delete updatedUser.user.error;
 
             dispatch(actions.updateUser(updatedUser, userId));
 

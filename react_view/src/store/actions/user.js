@@ -10,6 +10,7 @@ export const controlUserFail = error => {
 };
 
 export const getUserSuccess = userData => {
+    console.trace();
     return {
         type: actionTypes.GET_USER_SUCCESS,
         id: userData.id,
@@ -47,6 +48,8 @@ export const getUser = userId => {
         axios
             .get(url)
             .then(response => {
+                console.trace();
+                console.log('getUser called! response.data is ', response.data);
                 dispatch(getUserSuccess(response.data));
             })
             .catch(error => {

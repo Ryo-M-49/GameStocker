@@ -9,12 +9,18 @@ import Button from '@material-ui/core/Button';
 import Avatar from '@material-ui/core/Avatar';
 import DefaultImage from '../../../assets/images/default-user.png';
 import * as actions from '../../../store/actions/index';
+import { cutString } from '../../../shared/utility';
 
 const NavigationItems = props => {
     const auth = useSelector(state => state.authReducer);
     const user = useSelector(state => state.userReducer);
     const profileImage = user.image;
-    const userName = user.first_name + ' ' + user.last_name;
+    const MAX_LENGTH_NAME = 5;
+
+    let userName = user.first_name + ' ' + user.last_name;
+    if (userName.length > MAX_LENGTH_NAME) {
+        userName = cutString(userName, MAX_LENGTH_NAME);
+    }
     const dispatch = useDispatch();
 
     const signoutClickedHandler = () => {
@@ -44,7 +50,7 @@ const NavigationItems = props => {
                     }
                     style={{ color: 'white' }}
                 >
-                    {user.first_name ? userName : ' '}
+                    {user ? userName : ' '}
                 </Button>
             </NavigationItem>
             <NavigationItem link={'/'} exact>

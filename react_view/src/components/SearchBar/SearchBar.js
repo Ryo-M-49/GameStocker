@@ -12,7 +12,7 @@ const useStyles = makeStyles(theme => ({
         padding: '1px 4px',
         display: 'flex',
         alignItems: 'center',
-        width: 400,
+        width: 350,
         height: 40,
     },
     input: {
@@ -47,9 +47,9 @@ const SearchAppBar = props => {
         >
             <InputBase
                 className={classes.input}
-                placeholder="Find a game to write a review about!"
+                placeholder="Find a game!"
                 inputProps={{
-                    'aria-label': 'find a game to write a review about',
+                    'aria-label': 'find a game!',
                 }}
                 onChange={inputChangedHandler}
             />

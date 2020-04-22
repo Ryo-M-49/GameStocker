@@ -16,7 +16,7 @@ const StyledButton = withStyles({
 const SaveButton = props => {
     const review = useSelector(state => state.reviewReducer);
     const user = useSelector(state => state.userReducer);
-    const userId = localStorage.getItem('userId');
+    const userId = user.id;
     const dispatch = useDispatch();
 
     const saveButtonClickedHandler = () => {
@@ -36,6 +36,8 @@ const SaveButton = props => {
                 },
             };
             delete updatedUser.user.id;
+            delete updatedUser.user.image;
+            delete updatedUser.user.error;
 
             dispatch(actions.updateUser(updatedUser, userId));
 

@@ -50,7 +50,6 @@ const MyPage = props => {
 
     // Handler in the input form when editing. It updates the user information based on the input
     const inputChangedHandler = (newValue, controlName) => {
-        console.log('user is now', user);
         const updatedUser = {
             ...user,
             [controlName]: newValue,
@@ -58,7 +57,8 @@ const MyPage = props => {
         //Update local state
         setUser(updatedUser);
         //Update Reudux state to pass info to SaveButton
-        dispatch(actions.getUserSuccess(updatedUser));
+        dispatch(actions.getUserSuccess(user));
+        console.log('user is now', user);
     };
 
     const buttonClickedHandler = () => {

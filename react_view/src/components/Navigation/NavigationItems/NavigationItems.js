@@ -17,12 +17,6 @@ const NavigationItems = props => {
     const userName = user.first_name + ' ' + user.last_name;
     const dispatch = useDispatch();
 
-    useEffect(() => {
-        if (auth.userId) {
-            dispatch(actions.getUser(auth.userId));
-        }
-    }, [props, userName]);
-
     const signoutClickedHandler = () => {
         dispatch(actions.logout());
         dispatch(actions.setLike({}));
@@ -33,6 +27,7 @@ const NavigationItems = props => {
         dispatch(actions.toggleAuthSnackbar(snackbar));
     };
 
+// Items to render if authenticated
     const authItems = (
         <Aux>
             <NavigationItem
@@ -63,6 +58,7 @@ const NavigationItems = props => {
         </Aux>
     );
 
+// Items to render if not authenticated
     const notAuthItems = (
         <NavigationItem link="/signin" exact>
             <Button style={{ color: 'white' }}>Signin</Button>

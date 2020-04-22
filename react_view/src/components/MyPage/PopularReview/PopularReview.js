@@ -28,7 +28,7 @@ const popularReview = props => {
     return (
         <div className={classes.PopularReview}>
             <div className={classes.ReviewWrapper}>
-                <h2>Your Popular Review</h2>
+                <h2>Popular Review</h2>
                 <ul className={classes.ReviewList}>{reviewCard}</ul>
             </div>
         </div>

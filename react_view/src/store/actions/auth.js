@@ -1,4 +1,5 @@
 import axios from 'axios';
+import * as actions from './index';
 import * as actionTypes from './actionTypes';
 
 export const authStart = () => {
@@ -54,6 +55,7 @@ export const auth = (email, password) => {
                         response.headers['uid']
                     )
                 );
+                dispatch(actions.getUser(data.id));
                 const snackbar = {
                     isOpen: true,
                     type: 'signin',

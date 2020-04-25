@@ -55,7 +55,7 @@ const Timeline = props => {
     useEffect(() => {
         fetchUsers();
         // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [props, likes]);
+    }, [likes]);
 
     const snackbarClosedHandler = () => {
         const snackbar = {

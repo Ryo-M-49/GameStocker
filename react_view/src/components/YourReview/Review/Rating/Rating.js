@@ -5,19 +5,6 @@ import Rating from '@material-ui/lab/Rating';
 import Box from '@material-ui/core/Box';
 import * as actions from '../../../../store/actions/index';
 
-const labels = {
-    0.5: 'Very Bad',
-    1: ' Bad',
-    1.5: 'Poor',
-    2: 'Poor+',
-    2.5: 'OK',
-    3: 'OK+',
-    3.5: 'Good',
-    4: 'Good+',
-    4.5: 'Excellent',
-    5: 'Excellent+',
-};
-
 const useStyles = makeStyles({
     root: {
         width: 200,
@@ -67,9 +54,6 @@ const HoverRating = props => {
                     setHover(newHover);
                 }}
             />
-            {value !== null && (
-                <Box ml={2}>{labels[hover !== -1 ? hover : value]}</Box>
-            )}
         </div>
     );
 };

@@ -10,7 +10,6 @@ export const controlUserFail = error => {
 };
 
 export const getUserSuccess = userData => {
-    console.trace();
     return {
         type: actionTypes.GET_USER_SUCCESS,
         id: userData.id,

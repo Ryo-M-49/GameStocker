@@ -58,7 +58,6 @@ const MyPage = props => {
         setUser(updatedUser);
         //Update Reudux state to pass info to SaveButton
         dispatch(actions.getUserSuccess(user));
-        console.log('user is now', user);
     };
 
     const buttonClickedHandler = () => {
@@ -101,11 +100,10 @@ const MyPage = props => {
     }, []);
 
     useEffect(() => {
-        console.log('useEffect called');
         fetchUser(userId);
         dispatch(actions.getUserReviews(userId));
         // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [props]);
+    }, []);
 
 // --- Dropzone to update the user image
     const onDrop = useCallback(acceptedFiles => {

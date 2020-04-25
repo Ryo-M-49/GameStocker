@@ -38,7 +38,7 @@ const NavigationItems = props => {
         <Aux>
             <NavigationItem
                 className={classes.NavigationItem}
-                link={`users/${auth.userId}`}
+                link={`/users/${auth.userId}`}
                 exact
             >
                 <Button

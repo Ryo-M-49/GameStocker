@@ -48,8 +48,6 @@ export const getUser = userId => {
         axios
             .get(url)
             .then(response => {
-                console.trace();
-                console.log('getUser called! response.data is ', response.data);
                 dispatch(getUserSuccess(response.data));
             })
             .catch(error => {

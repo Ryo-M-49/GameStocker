@@ -51,7 +51,7 @@ const SideDrawer = props => {
     );
 
     const mypage = (
-        <NavigationItem link={`users/${auth.userId}`} exact>
+        <NavigationItem link={`/users/${auth.userId}`} exact>
             <Button style={{ color: 'black' }}>Mypage</Button>
         </NavigationItem>
     );

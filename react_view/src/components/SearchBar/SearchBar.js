@@ -47,7 +47,7 @@ const SearchAppBar = props => {
         >
             <InputBase
                 className={classes.input}
-                placeholder="Find a game!"
+                placeholder="Find a game to stock!"
                 inputProps={{
                     'aria-label': 'find a game!',
                 }}

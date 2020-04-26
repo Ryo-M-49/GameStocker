@@ -5,7 +5,7 @@ import SmallReviewCard from './SmallReviewCard/SmallReviewCard';
 const RecentActivity = props => {
     const { reviews } = props;
 
-    let reviewCard = <p>No review to show for now. Write a review!</p>;
+    let reviewCard = null;
     if (reviews) {
         reviews.sort((a, b) => {
             if (a.updated_at > b.updated_at) return 1;

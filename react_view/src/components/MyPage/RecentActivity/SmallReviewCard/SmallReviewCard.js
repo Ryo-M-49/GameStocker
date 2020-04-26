@@ -10,7 +10,7 @@ import Typography from '@material-ui/core/Typography';
 import { cutString } from '../../../../shared/utility';
 
 const smallReviewCard = props => {
-    let component = <p>nothing to show now</p>;
+    let component = null;
     if (props.review) {
         let { user_id, image, title, good, gameId } = props.review;
         const MAX_LENGTH_TITLE = 10;

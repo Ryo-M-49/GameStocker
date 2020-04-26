@@ -1,5 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import { makeStyles } from '@material-ui/core/styles';
 import Card from '@material-ui/core/Card';
 import CardActionArea from '@material-ui/core/CardActionArea';
 import CardActions from '@material-ui/core/CardActions';
@@ -10,7 +11,8 @@ import Typography from '@material-ui/core/Typography';
 import { cutString } from '../../../../shared/utility';
 
 const smallReviewCard = props => {
-    let component = <p>nothing to show now</p>;
+
+    let component = null;
     if (props.review) {
         let { user_id, image, title, good, gameId } = props.review;
         const MAX_LENGTH_TITLE = 10;

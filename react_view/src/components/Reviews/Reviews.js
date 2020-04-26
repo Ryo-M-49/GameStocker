@@ -19,7 +19,7 @@ const Reviews = props => {
     }, [props]);
 
     let reviewCard = <p>No review to show for now. Write a review!</p>;
-    if (reviews) {
+    if (reviews.length > 0) {
         reviewCard = reviews.map((review, index) => (
             <li key={index}>
                 <ReviewCard review={review} user={user} />

@@ -33,7 +33,7 @@ const NavigationItems = props => {
         dispatch(actions.toggleAuthSnackbar(snackbar));
     };
 
-// Items to render if authenticated
+    // Items to render if authenticated
     const authItems = (
         <Aux>
             <NavigationItem
@@ -64,7 +64,7 @@ const NavigationItems = props => {
         </Aux>
     );
 
-// Items to render if not authenticated
+    // Items to render if not authenticated
     const notAuthItems = (
         <NavigationItem link="/signin" exact>
             <Button style={{ color: 'white' }}>Signin</Button>

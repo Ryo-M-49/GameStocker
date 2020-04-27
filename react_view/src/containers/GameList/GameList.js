@@ -9,15 +9,33 @@ import CircularProgress from '@material-ui/core/CircularProgress';
 import * as actions from '../../store/actions/index';
 
 class GameList extends Component {
+    state = {
+        isSearched: this.props.search.isSearched,
+    };
+
     componentDidMount() {
-        this.props.onUpdateGamesByPage(
-            this.props.games ? this.props.games.page : 1
-        );
+        const currentPage = this.props.games ? this.props.games.page : 1;
+        if (this.props.search.isSearched) {
+            this.props.onUpdateGamesByTitle(this.props.search.keyword, 1);
+        } else {
+            this.props.onUpdateGamesByPage(currentPage);
+        }
+    }
+
+    componentWillUnmount() {
+        this.props.onSetSearch(false, null);
     }
 
     pageChangedHandler(selectedPage) {
         this.props.onChangeCurrentPage(selectedPage);
-        this.props.onUpdateGamesByPage(selectedPage);
+        if (this.props.search.isSearched) {
+            this.props.onUpdateGamesByTitle(
+                this.props.search.searchKeyword,
+                selectedPage
+            );
+        } else {
+            this.props.onUpdateGamesByPage(selectedPage);
+        }
     }
 
     render() {
@@ -80,7 +98,7 @@ const mapStatetoProps = state => {
     return {
         games: state.gameListReducer.games,
         error: state.gameListReducer.error,
-        isSearched: state.gameListReducer.isSearched,
+        search: state.gameListReducer.search,
         isLoading: state.gameListReducer.isLoading,
         isAuthenticated: state.authReducer.token !== null,
     };
@@ -88,8 +106,12 @@ const mapStatetoProps = state => {
 
 const mapDispatchToProps = dispatch => {
     return {
+        onSetSearch: (isSearched, keyword) =>
+            dispatch(actions.setSearch(isSearched, keyword)),
         onUpdateGamesByPage: currentPage =>
             dispatch(actions.updateGamesByPage(currentPage)),
+        onUpdateGamesByTitle: (keyword, currentPage) =>
+            dispatch(actions.updateGamesByTitle(keyword, currentPage)),
         onChangeCurrentPage: selectedPage =>
             dispatch(actions.setCurrentPage(selectedPage)),
     };

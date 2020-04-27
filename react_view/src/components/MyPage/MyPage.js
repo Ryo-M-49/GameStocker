@@ -46,7 +46,7 @@ const MyPage = props => {
     const [isLoading, setIsLoading] = useState(false);
     const dispatch = useDispatch();
 
-// --- Event handlers
+    // --- Event handlers
 
     // Handler in the input form when editing. It updates the user information based on the input
     const inputChangedHandler = (newValue, controlName) => {
@@ -54,9 +54,9 @@ const MyPage = props => {
             ...user,
             [controlName]: newValue,
         };
-        //Update local state
+        // Update local state
         setUser(updatedUser);
-        //Update Reudux state to pass info to SaveButton
+        // Update Reudux state to pass info to SaveButton
         dispatch(actions.getUserSuccess(user));
     };
 
@@ -68,7 +68,7 @@ const MyPage = props => {
         dispatch(actions.getUser(userId));
         setIsEditing(!isEditing);
     };
-// Event Handlers ---
+    // Event Handlers ---
 
     const fetchUser = useCallback(() => {
         setIsLoading(true);
@@ -94,7 +94,7 @@ const MyPage = props => {
                     image: null,
                     introduction: null,
                     error: error,
-                })
+                });
                 setIsLoading(false);
             });
     }, []);
@@ -105,7 +105,7 @@ const MyPage = props => {
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
 
-// --- Dropzone to update the user image
+    // --- Dropzone to update the user image
     const onDrop = useCallback(acceptedFiles => {
         if (acceptedFiles && acceptedFiles[0]) {
             const formPayLoad = new FormData();
@@ -116,7 +116,7 @@ const MyPage = props => {
     const { getRootProps, getInputProps, isDragActive } = useDropzone({
         onDrop,
     });
-// Dropzone to update the user image ---
+    // Dropzone to update the user image ---
 
     let editButton = null;
     if (userId == yourId) {
@@ -127,7 +127,7 @@ const MyPage = props => {
         );
     }
 
-// --- UI of the left hand side of the page
+    // --- UI of the left hand side of the page
     let bio = (
         <Aux>
             <div className={classes.BioWrapper}>
@@ -153,9 +153,9 @@ const MyPage = props => {
             {editButton}
         </Aux>
     );
-// UI of the left hand side of the page ---
+    // UI of the left hand side of the page ---
 
-// --- UI of the left hand side of the page during the editing mode
+    // --- UI of the left hand side of the page during the editing mode
     if (isEditing) {
         bio = (
             <Aux>
@@ -237,9 +237,9 @@ const MyPage = props => {
             </Aux>
         );
     }
-// UI of the left hand side of the page during the editing mode ---
+    // UI of the left hand side of the page during the editing mode ---
 
-// --- The entire UI of the page
+    // --- The entire UI of the page
     let component = (
         <Aux>
             <div className={classes.MyPageLeft}>
@@ -256,9 +256,9 @@ const MyPage = props => {
             </div>
         </Aux>
     );
-// The entire UI of the page ---
+    // The entire UI of the page ---
 
-// Loading animation will be rendered while fething data from the api
+    // Loading animation will be rendered while fething data from the api
     if (isLoading) {
         component = (
             <CircularProgress className={classes.Progress} size="5rem" />

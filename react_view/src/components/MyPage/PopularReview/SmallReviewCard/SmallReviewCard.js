@@ -11,7 +11,6 @@ import Typography from '@material-ui/core/Typography';
 import { cutString } from '../../../../shared/utility';
 
 const smallReviewCard = props => {
-
     let component = null;
     if (props.review) {
         let { user_id, image, title, good, gameId } = props.review;

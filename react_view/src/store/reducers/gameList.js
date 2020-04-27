@@ -4,8 +4,21 @@ import { updateObject } from './utility';
 const initialState = {
     games: null,
     error: false,
-    isSearched: false,
+    search: {
+        isSearched: false,
+        keyword: null,
+    },
     isLoading: false,
+};
+
+const setSearch = (state, action) => {
+    return updateObject(state, {
+        search: {
+            ...state.search,
+            isSearched: action.isSearched,
+            keyword: action.keyword,
+        },
+    });
 };
 
 const setLoading = (state, action) => {
@@ -39,6 +52,8 @@ const fetchGamesFailed = (state, action) => {
 
 const reducer = (state = initialState, action) => {
     switch (action.type) {
+        case actionTypes.SET_SEARCH:
+            return setSearch(state, action);
         case actionTypes.SET_LOADING:
             return setLoading(state, action);
         case actionTypes.SET_GAMES:

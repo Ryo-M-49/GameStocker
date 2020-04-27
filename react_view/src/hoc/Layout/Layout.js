@@ -45,39 +45,54 @@ class Layout extends Component {
 
     render() {
         let gameListRedirect = null;
-        if (this.props.isSearched) {
-            gameListRedirect = <Redirect to="/gamelist" />;
-        }
-        let routes = (
-            <Switch>
-                {gameListRedirect}
-                <Route
-                    path="/users/:userId/reviews/:reviewId"
-                    component={YourReview}
+        if (this.props.search.isSearched) {
+            gameListRedirect = (
+                <Redirect
+                    to={{
+                        pathname: '/gamelist',
+                        // state: { keyword: this.props.search.keyword }
+                    }}
                 />
-                <Route path="/users/:userId/reviews" component={Reviews} />
-                <Route path="/signin" component={Signin} />
-                <Route path="/signup" component={Signup} />
-                <Route path="/gamelist" component={GameList} />
-                <Route path="/" exact component={Timeline} />
-                <Redirect to="/" />
-            </Switch>
-        );
-
-        if (this.props.isAuthenticated) {
-            routes = (
+            );
+        }
+        console.log('gameListReidrect is now ', gameListRedirect);
+        let routes = (
+            <Aux>
+                {gameListRedirect}
                 <Switch>
-                    {gameListRedirect}
                     <Route
                         path="/users/:userId/reviews/:reviewId"
                         component={YourReview}
                     />
                     <Route path="/users/:userId/reviews" component={Reviews} />
-                    <Route path="/users/:userId" component={MyPage} />
+                    <Route path="/signin" component={Signin} />
+                    <Route path="/signup" component={Signup} />
                     <Route path="/gamelist" component={GameList} />
                     <Route path="/" exact component={Timeline} />
                     <Redirect to="/" />
                 </Switch>
+            </Aux>
+        );
+
+        if (this.props.isAuthenticated) {
+            routes = (
+                <Aux>
+                    {gameListRedirect}
+                    <Switch>
+                        <Route
+                            path="/users/:userId/reviews/:reviewId"
+                            component={YourReview}
+                        />
+                        <Route
+                            path="/users/:userId/reviews"
+                            component={Reviews}
+                        />
+                        <Route path="/users/:userId" component={MyPage} />
+                        <Route path="/gamelist" component={GameList} />
+                        <Route path="/" exact component={Timeline} />
+                        <Redirect to="/" />
+                    </Switch>
+                </Aux>
             );
         }
 
@@ -99,7 +114,7 @@ const mapStateToProps = state => {
     return {
         userId: state.authReducer.userId,
         isAuthenticated: state.authReducer.token !== null,
-        isSearched: state.gameListReducer.isSearched,
+        search: state.gameListReducer.search,
     };
 };
 

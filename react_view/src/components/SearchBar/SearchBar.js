@@ -37,7 +37,7 @@ const SearchAppBar = props => {
         event.preventDefault();
         dispatch(actions.setSearch(false, null));
         const encodedKeyword = encodeURI(keyword);
-        dispatch(actions.setSearch(true, encodedKeyword));
+        dispatch(actions.updateGamesByTitle(encodedKeyword, 1));
     };
 
     return (

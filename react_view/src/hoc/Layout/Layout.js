@@ -55,7 +55,6 @@ class Layout extends Component {
                 />
             );
         }
-        console.log('gameListReidrect is now ', gameListRedirect);
         let routes = (
             <Aux>
                 {gameListRedirect}

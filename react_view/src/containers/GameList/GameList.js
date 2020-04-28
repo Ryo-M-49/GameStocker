@@ -5,19 +5,16 @@ import Aux from '../../hoc/Aux/Aux';
 import Game from '../../components/Game/Game';
 import GamelistPagenation from '../../components/UI/Pagination/Pagination';
 import SentimentVeryDissatisfiedIcon from '@material-ui/icons/SentimentVeryDissatisfied';
+import Button from '@material-ui/core/Button';
+import ArrowBackIcon from '@material-ui/icons/ArrowBack';
 import CircularProgress from '@material-ui/core/CircularProgress';
 import * as actions from '../../store/actions/index';
 
 class GameList extends Component {
-    state = {
-        isSearched: this.props.search.isSearched,
-    };
 
     componentDidMount() {
         const currentPage = this.props.games ? this.props.games.page : 1;
-        if (this.props.search.isSearched) {
-            this.props.onUpdateGamesByTitle(this.props.search.keyword, 1);
-        } else {
+        if (!this.props.search.isSearched) {
             this.props.onUpdateGamesByPage(currentPage);
         }
     }
@@ -30,12 +27,18 @@ class GameList extends Component {
         this.props.onChangeCurrentPage(selectedPage);
         if (this.props.search.isSearched) {
             this.props.onUpdateGamesByTitle(
-                this.props.search.searchKeyword,
+                this.props.search.keyword,
                 selectedPage
             );
         } else {
             this.props.onUpdateGamesByPage(selectedPage);
         }
+    }
+
+    goBackClickedHandler() {
+        const currentPage = this.props.games ? this.props.games.page : 1;
+        this.props.onUpdateGamesByPage(currentPage);
+        this.props.onSetSearch(false, null);
     }
 
     render() {
@@ -72,6 +75,27 @@ class GameList extends Component {
                 <div className={classes.Pagination}>{pagination}</div>
             </Aux>
         );
+
+        if (this.props.search.isSearched) {
+            component = (
+                <Aux>
+                    <Button
+                        variant="contained"
+                        color="primary"
+                        startIcon={<ArrowBackIcon />}
+                        onClick={() => this.goBackClickedHandler()}
+                    >
+                        Back
+                    </Button>
+                    <ul className={classes.GameListUl}>
+                        {gamesArray.map((gameObject, index) => (
+                            <Game key={index} game={gameObject.game} />
+                        ))}
+                    </ul>
+                    <div className={classes.Pagination}>{pagination}</div>
+                </Aux> 
+            );
+        }
 
         if (this.props.games && this.props.games.count === 0) {
             component = (

@@ -1,12 +1,11 @@
 import React, { useState, useEffect, useCallback } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { useDropzone } from 'react-dropzone';
 import { makeStyles } from '@material-ui/core/styles';
 import classes from './MyPage.module.css';
 import { Link } from 'react-router-dom';
 import Aux from '../../hoc/Aux/Aux';
+import ImageUploadButton from '../UI/ImageUploadButton/ImageUploadButton';
 import EditButton from '../UI/EditButton/EditButton';
-import Button from '@material-ui/core/Button';
 import CancelButton from '../UI/CancelButton/CancelButton';
 import SaveButton from '../UI/SaveButton/SaveButton';
 import PopularReview from './PopularReview/PopularReview';
@@ -14,7 +13,6 @@ import ToAllReviewsButton from '../UI/ToAllReviewsButton/ToAllReviewsButton';
 import RecentActivity from './RecentActivity/RecentActivity';
 import DefaultImage from '../../assets/images/default-user.png';
 import Avatar from '../UI/Avatar/Avatar';
-import ImageIcon from '@material-ui/icons/Image';
 import TextField from '@material-ui/core/TextField';
 import CircularProgress from '@material-ui/core/CircularProgress';
 import * as actions from '../../store/actions/index';
@@ -105,19 +103,6 @@ const MyPage = props => {
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
 
-    // --- Dropzone to update the user image
-    const onDrop = useCallback(acceptedFiles => {
-        if (acceptedFiles && acceptedFiles[0]) {
-            const formPayLoad = new FormData();
-            formPayLoad.append('uploaded_image', acceptedFiles[0]);
-            dispatch(actions.setImage(formPayLoad));
-        }
-    }, []);
-    const { getRootProps, getInputProps, isDragActive } = useDropzone({
-        onDrop,
-    });
-    // Dropzone to update the user image ---
-
     let editButton = null;
     if (userId == yourId) {
         editButton = (
@@ -164,24 +149,7 @@ const MyPage = props => {
                         <Avatar
                             image={user.image ? user.image : DefaultImage}
                         />
-                        <div className={classes.Dropzone} {...getRootProps()}>
-                            <input {...getInputProps()} />
-                            {isDragActive ? (
-                                <Button
-                                    startIcon={<ImageIcon />}
-                                    variant="contained"
-                                >
-                                    DROP IMAGE
-                                </Button>
-                            ) : (
-                                <Button
-                                    startIcon={<ImageIcon />}
-                                    variant="contained"
-                                >
-                                    UPLOAD
-                                </Button>
-                            )}
-                        </div>
+                        <ImageUploadButton/>
                         <div className={classes.Name}>
                             <TextField
                                 className={classStyles.name}

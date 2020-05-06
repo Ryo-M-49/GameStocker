@@ -11,7 +11,6 @@ class UsersController < ApplicationController
 
   def update
     @user = User.find(params[:id])
-    # @user.file = params["uploaded_image"]
     @user.update(user_params)
     render json: @user
   end
@@ -23,6 +22,14 @@ class UsersController < ApplicationController
   private
 
   def user_params
-    params.require(:user).permit(:first_name, :last_name, :image, :introduction)
+    params.require(:user).permit(:first_name, :last_name, :introduction, {
+      image: [
+        :url, 
+        thumb: [
+          :url
+        ]
+      ]
+    })
   end
 end
+

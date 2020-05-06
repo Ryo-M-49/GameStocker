@@ -63,10 +63,6 @@
     height: auto;
 }
 
-.Dropzone {
-    margin: 1rem;
-}
-
 .Progress {
     padding: 10rem;
     display: flex;

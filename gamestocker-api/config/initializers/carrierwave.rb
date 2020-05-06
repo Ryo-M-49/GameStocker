@@ -7,7 +7,7 @@ CarrierWave.configure do |config|
       # シークレットキー
       aws_secret_access_key: ENV['AWS_SECRET_ACCESS_KEY'],
       # Tokyo
-      region:                'ap-northeast-1',
+      region:                ENV['AWS_DEFAULT_REGION'],
     }
   
     # 公開・非公開の切り替え

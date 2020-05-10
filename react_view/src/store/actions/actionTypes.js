@@ -23,6 +23,7 @@ export const SIGNUP_FAIL = 'SIGNUP_FAIL';
 export const SET_SIGNUP_REDIRECT_PATH = 'SET_SIGNUP_REDIRECT_PATH';
 
 // for ./user.js
+export const SET_ISLOADING = 'SET_ISLOADING';
 export const CONTROL_USER_FAIL = 'GET_USER_FAIL';
 export const SET_IMAGE = 'SET_IMAGE';
 export const GET_USER_SUCCESS = 'GET_USER_SUCCESS';

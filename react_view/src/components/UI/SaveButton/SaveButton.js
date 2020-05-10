@@ -32,14 +32,13 @@ const SaveButton = props => {
             // Shaping the data to make it matched with the format of the request.
             const updatedUser = {
                 user: {
-                    ...user,
+                    first_name: user.first_name,
+                    last_name: user.last_name,
+                    introduction: user.introduction,
+                    image: user.image,
                 },
             };
-            delete updatedUser.user.id;
-            delete updatedUser.user.error;
-
             dispatch(actions.updateUser(updatedUser, userId));
-
             props.clicked();
         }
     };

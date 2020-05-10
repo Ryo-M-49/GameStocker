@@ -16,7 +16,6 @@ import Avatar from '../UI/Avatar/Avatar';
 import TextField from '@material-ui/core/TextField';
 import CircularProgress from '@material-ui/core/CircularProgress';
 import * as actions from '../../store/actions/index';
-import axios from 'axios';
 
 const useStyles = makeStyles(theme => ({
     root: {
@@ -29,19 +28,18 @@ const useStyles = makeStyles(theme => ({
 
 const MyPage = props => {
     const classStyles = useStyles();
-
     const userId = props.match.params.userId;
-    const [user, setUser] = useState({});
 
     // Information of the login user
-    const yourId = useSelector(state => state.userReducer.id);
+    const user = useSelector(state => state.userReducer);
+    const yourId = user.id;
+    const isLoading = user.isLoading;
 
     // Reviews of the login user
     const reviews = useSelector(state => state.reviewReducer.reviews);
 
     // State of component
     const [isEditing, setIsEditing] = useState(false);
-    const [isLoading, setIsLoading] = useState(false);
     const dispatch = useDispatch();
 
     // --- Event handlers
@@ -52,8 +50,8 @@ const MyPage = props => {
             ...user,
             [controlName]: newValue,
         };
-        // Update local state
-        setUser(updatedUser);
+
+        dispatch(actions.getUserSuccess(updatedUser));
         // Update Reudux state to pass info to SaveButton
         dispatch(actions.getUserSuccess(user));
     };
@@ -66,42 +64,12 @@ const MyPage = props => {
         dispatch(actions.getUser(userId));
         setIsEditing(!isEditing);
     };
-    // Event Handlers ---
-
-    const fetchUser = useCallback(() => {
-        setIsLoading(true);
-        const url = `http://localhost:3001/users/${userId}`;
-        axios
-            .get(url)
-            .then(response => {
-                setUser({
-                    id: response.data.id,
-                    first_name: response.data.first_name,
-                    last_name: response.data.last_name,
-                    image: response.data.image,
-                    introduction: response.data.introduction,
-                    error: null,
-                });
-                setIsLoading(false);
-            })
-            .catch(error => {
-                setUser({
-                    id: null,
-                    first_name: null,
-                    last_name: null,
-                    image: null,
-                    introduction: null,
-                    error: error,
-                });
-                setIsLoading(false);
-            });
-    }, []);
 
     useEffect(() => {
-        fetchUser(userId);
+        dispatch(actions.getUser(userId));
         dispatch(actions.getUserReviews(userId));
         // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, []);
+    }, [props]);
 
     let editButton = null;
     if (userId == yourId) {
@@ -113,6 +81,7 @@ const MyPage = props => {
     }
 
     // --- UI of the left hand side of the page
+    console.log('user is ', user);
     let bio = (
         <Aux>
             <div className={classes.BioWrapper}>

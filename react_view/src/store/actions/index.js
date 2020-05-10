@@ -29,7 +29,7 @@ export {
     toggleAuthSnackbar,
 } from './auth';
 
-export { setImage, getUserSuccess, getUser, updateUser } from './user';
+export { setImage, getUserSuccess, getUser, updateUser, updateUserImage } from './user';
 
 export { signup, setSignupRedirectPath } from './signup';
 

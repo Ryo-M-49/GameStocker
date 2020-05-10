@@ -7,7 +7,14 @@ const initialState = {
     last_name: null,
     image: null,
     introduction: null,
+    isLoading: false,
     error: null,
+};
+
+const setIsLoading = (state, action) => {
+    return updateObject(state, {
+        isLoading: action.isLoading,
+    });
 };
 
 const controlUserFail = (state, action) => {
@@ -46,6 +53,8 @@ const deleteUserSuccess = (state, action) => {
 
 const reducer = (state = initialState, action) => {
     switch (action.type) {
+        case actionTypes.SET_ISLOADING:
+            return setIsLoading(state, action);
         case actionTypes.CONTROL_USER_FAIL:
             return controlUserFail(state, action);
         case actionTypes.SET_IMAGE:

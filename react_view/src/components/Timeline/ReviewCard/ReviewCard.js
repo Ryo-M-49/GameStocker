@@ -53,7 +53,7 @@ const ReviewCard = props => {
 
     const firstName = props.user.first_name;
     const lastName = props.user.last_name;
-    const userImage = props.user.image;
+    const userImage = props.user.image_url;
 
     const yourId = localStorage.getItem('userId');
 

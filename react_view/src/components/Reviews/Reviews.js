@@ -1,25 +1,43 @@
-import React, { useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import classes from './Reviews.module.css';
 import ReviewCard from '../Timeline/ReviewCard/ReviewCard';
 import CircularProgress from '@material-ui/core/CircularProgress';
 import * as actions from '../../store/actions/index';
+import axios from 'axios';
 
 const Reviews = props => {
     const reviews = useSelector(state => state.reviewReducer.reviews);
-    const user = useSelector(state => state.userReducer);
-    const isLoading = useSelector(state => state.reviewReducer.isLoading);
-    const userId = localStorage.getItem('userId');
+    const userId = useSelector(state => state.authReducer.userId);
+
+    const [user, setUser] = useState(null);
+    const [isLoading, setIsLoading] = useState(false);
+
     const dispatch = useDispatch();
 
+    const fetchUser = useCallback(() => {
+        setIsLoading(true);
+        const url = `http://localhost:3001/users/${userId}`;
+        const promise = Promise.resolve(axios.get(url));
+        promise
+            .then(response => {
+                setUser(response.data);
+                setIsLoading(false);
+            })
+            .catch(error => {
+                console.error(error);
+                setIsLoading(false);
+            });
+    }, []);
+
     useEffect(() => {
-        dispatch(actions.getUser(userId));
+        fetchUser();
         dispatch(actions.getUserReviews(userId));
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [props]);
 
     let reviewCard = <p>No review to show for now. Write a review!</p>;
-    if (reviews.length > 0) {
+    if (reviews.length > 0 && user) {
         reviewCard = reviews.map((review, index) => (
             <li key={index}>
                 <ReviewCard review={review} user={user} />

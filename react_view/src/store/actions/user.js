@@ -8,14 +8,25 @@ export const controlUserFail = error => {
     };
 };
 
-export const getUserSuccess = userData => {
+export const getUserSuccess = response => {
     return {
         type: actionTypes.GET_USER_SUCCESS,
-        id: userData.id,
-        first_name: userData.first_name,
-        last_name: userData.last_name,
-        image: userData.image_url,
-        introduction: userData.introduction,
+        id: response.id,
+        first_name: response.first_name,
+        last_name: response.last_name,
+        image: response.image_url,
+        introduction: response.introduction,
+    };
+};
+
+export const setUser = user => {
+    return {
+        type: actionTypes.GET_USER_SUCCESS,
+        id: user.id,
+        first_name: user.first_name,
+        last_name: user.last_name,
+        image: user.image,
+        introduction: user.introduction,
     };
 };
 
@@ -40,6 +51,7 @@ export const getUser = userId => {
         axios
             .get(url)
             .then(response => {
+                //ここで渡すresponse.dataはapiから帰ってきた@userの情報
                 dispatch(getUserSuccess(response.data));
                 dispatch(setIsLoading(false));
             })
@@ -84,7 +96,7 @@ export const updateUserImage = (image, userId) => {
         axios
             .patch(url, image)
             .then(response => {
-                const imageUrl = response.data.image_url;
+                const imageUrl = response.data;
                 console.log('imageUrl is', imageUrl);
                 dispatch(setImage(imageUrl));
             })

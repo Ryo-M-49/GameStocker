@@ -29,6 +29,17 @@ const setImage = (state, action) => {
     });
 };
 
+const setUser = (state, action) => {
+    return updateObject(state, {
+        id: action.id,
+        first_name: action.first_name,
+        last_name: action.last_name,
+        image: action.image,
+        introduction: action.introduction,
+        error: action.error,
+    });
+};
+
 const getUserSuccess = (state, action) => {
     return updateObject(state, {
         id: action.id,
@@ -58,7 +69,9 @@ const reducer = (state = initialState, action) => {
         case actionTypes.CONTROL_USER_FAIL:
             return controlUserFail(state, action);
         case actionTypes.SET_IMAGE:
-            return setImage(state, action);
+            return setUser(state, action);
+        case actionTypes.SET_USER:
+            return setUser(state, action);
         case actionTypes.GET_USER_SUCCESS:
             return getUserSuccess(state, action);
         case actionTypes.DELETE_USER_SUCCESS:

@@ -22,9 +22,10 @@ class UsersController < ApplicationController
 
   def update_user_image
     @user = User.find(params[:id])
+    @user.update(image: params[:image])
     image_url = @user.get_image_url()
-    @user.update(image: params[:image], image_url: image_url)
-    render json: @user
+    @user.update(image_url: image_url)
+    render :json => image_url
   end
 
   def destroy

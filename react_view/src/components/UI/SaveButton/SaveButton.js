@@ -35,7 +35,6 @@ const SaveButton = props => {
                     first_name: user.first_name,
                     last_name: user.last_name,
                     introduction: user.introduction,
-                    image: user.image,
                 },
             };
             dispatch(actions.updateUser(updatedUser, userId));

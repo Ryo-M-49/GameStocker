@@ -1,7 +1,7 @@
-# frozen_string_literal: true
-
 class User < ApplicationRecord
-  mount_uploader :image, UserImageUploader
+  include Rails.application.routes.url_helpers
+  has_one_attached :image
+
   has_many :reviews, dependent: :destroy
   has_many :likes, dependent: :destroy
   
@@ -18,4 +18,9 @@ class User < ApplicationRecord
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable
   include DeviseTokenAuth::Concerns::User
+
+  def get_image_url
+    self.image.attachment.service.send(:object_for, self.image.key).public_url if self.image.attached?
+  end
+
 end

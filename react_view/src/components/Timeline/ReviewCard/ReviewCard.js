@@ -71,7 +71,12 @@ const ReviewCard = props => {
     // Switch the router link to YourReview component based on the current page
     let readmorePath = `users/${user_id}/reviews/${gameId}`;
     const location = useLocation();
+    //If current page is your reviews list, then 
     if (location.pathname == `/users/${yourId}/reviews`) {
+        readmorePath = `reviews/${gameId}`;
+    }
+
+    if (location.pathname == `/users/${user_id}/reviews`) {
         readmorePath = `reviews/${gameId}`;
     }
 

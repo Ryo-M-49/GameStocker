@@ -8,12 +8,19 @@ export const authStart = () => {
     };
 };
 
-export const authSuccess = (userId, accessToken, email) => {
+export const authSuccess = (
+    userId, 
+    firstName, 
+    lastName, 
+    accessToken, email, image) => {
     return {
         type: actionTypes.AUTH_SUCCESS,
+        firstName: firstName,
+        lastName: lastName,
         userId: userId,
         token: accessToken,
         uid: email,
+        image: image,
     };
 };
 
@@ -25,8 +32,12 @@ export const authFail = error => {
 };
 
 export const logout = () => {
-    localStorage.removeItem('token');
     localStorage.removeItem('userId');
+    localStorage.removeItem('firstName');
+    localStorage.removeItem('lastName');
+    localStorage.removeItem('token');
+    localStorage.removeItem('email');
+    localStorage.removeItem('image');
     return {
         type: actionTypes.AUTH_LOGOUT,
     };
@@ -45,14 +56,21 @@ export const auth = (email, password) => {
             .post(url, authData)
             .then(response => {
                 const data = response.data.data;
+                console.log('data is ', data);
                 localStorage.setItem('userId', data.id);
+                localStorage.setItem('firstName', data.first_name);
+                localStorage.setItem('lastName', data.last_name);
                 localStorage.setItem('token', response.headers['access-token']);
                 localStorage.setItem('email', response.headers['uid']);
+                localStorage.setItem('image', data.image_url);
                 dispatch(
                     authSuccess(
                         data.id,
+                        data.first_name,
+                        data.last_name,
                         response.headers['access-token'],
-                        response.headers['uid']
+                        response.headers['uid'],
+                        data.image_url
                     )
                 );
                 dispatch(actions.getUser(data.id));
@@ -87,8 +105,18 @@ export const authCheckState = () => {
             dispatch(logout());
         } else {
             const userId = localStorage.getItem('userId');
+            const firstName = localStorage.getItem('firstName');
+            const lastName = localStorage.getItem('lastName');
             const email = localStorage.getItem('email');
-            dispatch(authSuccess(userId, token, email));
+            const image = localStorage.getItem('image');
+            dispatch(authSuccess(
+                userId, 
+                firstName, 
+                lastName, 
+                token, 
+                email, 
+                image
+                ));
         }
     };
 };

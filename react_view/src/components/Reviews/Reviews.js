@@ -8,7 +8,7 @@ import axios from 'axios';
 
 const Reviews = props => {
     const reviews = useSelector(state => state.reviewReducer.reviews);
-    const userId = useSelector(state => state.authReducer.userId);
+    const userId = useSelector(state => state.userReducer.id);
 
     const [user, setUser] = useState(null);
     const [isLoading, setIsLoading] = useState(false);

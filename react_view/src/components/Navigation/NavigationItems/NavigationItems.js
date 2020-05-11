@@ -14,10 +14,10 @@ import { cutString } from '../../../shared/utility';
 const NavigationItems = props => {
     const auth = useSelector(state => state.authReducer);
     const user = useSelector(state => state.userReducer);
-    const profileImage = user.image;
+    const profileImage = auth.image;
     const MAX_LENGTH_NAME = 5;
 
-    let userName = user.first_name + ' ' + user.last_name;
+    let userName = auth.firstName + ' ' + auth.lastLame;
     if (userName.length > MAX_LENGTH_NAME) {
         userName = cutString(userName, MAX_LENGTH_NAME);
     }
@@ -36,6 +36,7 @@ const NavigationItems = props => {
     // Items to render if authenticated
     const authItems = (
         <Aux>
+
             <NavigationItem
                 className={classes.NavigationItem}
                 link={`/users/${auth.userId}`}

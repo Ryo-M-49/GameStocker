@@ -37,14 +37,20 @@ export const signup = userData => {
             .then(response => {
                 const data = response.data.data;
                 localStorage.setItem('userId', data.id);
+                localStorage.setItem('firstName', data.first_name);
+                localStorage.setItem('lastName', data.last_name);
                 localStorage.setItem('token', response.headers['access-token']);
                 localStorage.setItem('email', response.headers['uid']);
+                localStorage.setItem('image', data.image_url);
                 dispatch(signupSuccess(userData));
                 dispatch(
                     actions.authSuccess(
                         data.id,
+                        data.first_name,
+                        data.last_name,
                         response.headers['access-token'],
-                        response.headers['uid']
+                        response.headers['uid'],
+                        data.image_url
                     )
                 );
             })

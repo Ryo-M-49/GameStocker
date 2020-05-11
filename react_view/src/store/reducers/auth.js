@@ -3,8 +3,11 @@ import { updateObject } from './utility';
 
 const initialState = {
     userId: null,
+    firstName: null,
+    lastName: null,
     token: null,
     email: null,
+    image: null,
     error: null,
     loading: false,
     authRedirectPath: '/',
@@ -21,8 +24,11 @@ const authStart = (state, action) => {
 const authSuccess = (state, action) => {
     return updateObject(state, {
         userId: action.userId,
+        firstName: action.firstName,
+        lastName: action.lastName,
         token: action.token,
         email: action.uid,
+        image: action.image,
         error: null,
         loading: false,
     });
@@ -36,7 +42,11 @@ const authFail = (state, action) => {
 };
 
 const authLogout = (state, action) => {
-    return updateObject(state, { userId: null, token: null, email: null });
+    return updateObject(state, { 
+        userId: null, 
+        firstName: null, 
+        lastName: null, 
+        token: null, email: null, image: null });
 };
 
 const setAuthRedirectPath = (state, action) => {

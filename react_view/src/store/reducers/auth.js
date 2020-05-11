@@ -42,11 +42,14 @@ const authFail = (state, action) => {
 };
 
 const authLogout = (state, action) => {
-    return updateObject(state, { 
-        userId: null, 
-        firstName: null, 
-        lastName: null, 
-        token: null, email: null, image: null });
+    return updateObject(state, {
+        userId: null,
+        firstName: null,
+        lastName: null,
+        token: null,
+        email: null,
+        image: null,
+    });
 };
 
 const setAuthRedirectPath = (state, action) => {

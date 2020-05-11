@@ -63,7 +63,6 @@ export const updateGamesByTitle = (title, currentPage) => {
         dispatch(setSearch(true, title));
         dispatch(setLoading(true));
         const url = `https://app.rakuten.co.jp/services/api/BooksGame/Search/20170404?format=json&hardware=PS&title=${title}&hits=30&booksGenreId=006&page=${currentPage}&applicationId=1009084489441242376`;
-        console.log('url is ', url);
         axios
             .get(url)
             .then(response => {

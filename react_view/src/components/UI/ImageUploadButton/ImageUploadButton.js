@@ -8,30 +8,27 @@ const ImageUploadButton = props => {
 
     const submitImage = event => {
         event.preventDefault();
-        let imageInput = document.getElementById('profile-photo-input');
+        const imageInput = document.getElementById('profile-photo-input');
         if (imageInput.files[0]) {
-          const formData = new FormData();
-          const uploadedImage = imageInput.files[0]
-          formData.append('image', uploadedImage);
-          dispatch(actions.updateUserImage(formData, userId));
+            const formData = new FormData();
+            const uploadedImage = imageInput.files[0];
+            formData.append('image', uploadedImage);
+            dispatch(actions.updateUserImage(formData, userId));
         }
     };
     return (
         <React.Fragment>
             <form onSubmit={submitImage}>
-                <input type="file"
-                    id="profile-photo-input" 
+                <input
+                    type="file"
+                    id="profile-photo-input"
                     name="profile_picture"
                     accept="image/png, image/jpeg"
                 />
-                <input
-                    className="submit-input"
-                    type="submit"
-                    value="Upload"
-                />
+                <input className="submit-input" type="submit" value="Upload" />
             </form>
         </React.Fragment>
     );
-}
+};
 
 export default ImageUploadButton;

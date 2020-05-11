@@ -18,7 +18,7 @@ export const fetchLike = (likes, userId, reviewId) => {
                 dispatch(setLike(likes));
             })
             .catch(error => {
-                console.log(error);
+                console.error(error);
             });
     };
 };
@@ -33,7 +33,7 @@ export const like = (likes, userId, reviewId) => {
                 dispatch(setLike(likes));
             })
             .catch(error => {
-                console.log(error);
+                console.error(error);
             });
     };
 };

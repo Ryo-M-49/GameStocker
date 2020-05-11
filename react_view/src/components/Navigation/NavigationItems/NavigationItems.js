@@ -36,7 +36,6 @@ const NavigationItems = props => {
     // Items to render if authenticated
     const authItems = (
         <Aux>
-
             <NavigationItem
                 className={classes.NavigationItem}
                 link={`/users/${auth.userId}`}

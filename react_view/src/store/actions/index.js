@@ -31,7 +31,14 @@ export {
     getYourInformation,
 } from './auth';
 
-export { setUser, getUserSuccess, getUser, updateUser, updateUserImage, setIsLoading } from './user';
+export {
+    setUser,
+    getUserSuccess,
+    getUser,
+    updateUser,
+    updateUserImage,
+    setIsLoading,
+} from './user';
 
 export { signup, setSignupRedirectPath } from './signup';
 

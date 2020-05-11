@@ -120,7 +120,8 @@ const mapStateToProps = state => {
 const mapDispatchToProps = dispatch => {
     return {
         onTryAutoSignup: () => dispatch(actions.authCheckState()),
-        onGetYourInformation: userId => dispatch(actions.getYourInformation(userId)),
+        onGetYourInformation: userId =>
+            dispatch(actions.getYourInformation(userId)),
     };
 };
 

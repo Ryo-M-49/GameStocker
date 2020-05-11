@@ -9,10 +9,13 @@ export const authStart = () => {
 };
 
 export const authSuccess = (
-    userId, 
-    firstName, 
-    lastName, 
-    accessToken, email, image) => {
+    userId,
+    firstName,
+    lastName,
+    accessToken,
+    email,
+    image
+) => {
     return {
         type: actionTypes.AUTH_SUCCESS,
         firstName: firstName,
@@ -56,7 +59,6 @@ export const auth = (email, password) => {
             .post(url, authData)
             .then(response => {
                 const data = response.data.data;
-                console.log('data is ', data);
                 localStorage.setItem('userId', data.id);
                 localStorage.setItem('firstName', data.first_name);
                 localStorage.setItem('lastName', data.last_name);
@@ -109,16 +111,9 @@ export const authCheckState = () => {
             const lastName = localStorage.getItem('lastName');
             const email = localStorage.getItem('email');
             const image = localStorage.getItem('image');
-            dispatch(authSuccess
-                        (
-                            userId, 
-                            firstName, 
-                            lastName, 
-                            token, 
-                            email, 
-                            image
-                        )
-                    );
+            dispatch(
+                authSuccess(userId, firstName, lastName, token, email, image)
+            );
         }
     };
 };
@@ -129,7 +124,6 @@ export const toggleAuthSnackbar = isSnackbarOpen => {
         isSnackbarOpen: isSnackbarOpen,
     };
 };
-
 
 export const setImage = image => {
     return {
@@ -148,7 +142,6 @@ export const setYourInformation = response => {
         introduction: response.introduction,
     };
 };
-
 
 export const getYourInformation = yourId => {
     return dispatch => {

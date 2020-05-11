@@ -15,6 +15,7 @@ export const AUTH_FAIL = 'AUTH_FAIL';
 export const AUTH_LOGOUT = 'AUTH_LOGOUT';
 export const SET_AUTH_REDIRECT_PATH = 'SET_AUTH_REDIRECT_PATH';
 export const TOGGLE_AUTH_SNACKBAR = 'TOGGLE_AUTH_SNACKBAR';
+export const SET_YOUR_INFORMATION = 'SET_YOUR_INFORMATION';
 
 // for ./signup.js
 export const SIGNUP_START = 'SIGNUP_START';

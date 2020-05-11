@@ -109,14 +109,16 @@ export const authCheckState = () => {
             const lastName = localStorage.getItem('lastName');
             const email = localStorage.getItem('email');
             const image = localStorage.getItem('image');
-            dispatch(authSuccess(
-                userId, 
-                firstName, 
-                lastName, 
-                token, 
-                email, 
-                image
-                ));
+            dispatch(authSuccess
+                        (
+                            userId, 
+                            firstName, 
+                            lastName, 
+                            token, 
+                            email, 
+                            image
+                        )
+                    );
         }
     };
 };
@@ -125,5 +127,43 @@ export const toggleAuthSnackbar = isSnackbarOpen => {
     return {
         type: actionTypes.TOGGLE_AUTH_SNACKBAR,
         isSnackbarOpen: isSnackbarOpen,
+    };
+};
+
+
+export const setImage = image => {
+    return {
+        type: actionTypes.SET_IMAGE,
+        image: image,
+    };
+};
+
+export const setYourInformation = response => {
+    return {
+        type: actionTypes.SET_YOUR_INFORMATION,
+        id: response.id,
+        first_name: response.first_name,
+        last_name: response.last_name,
+        image: response.image_url,
+        introduction: response.introduction,
+    };
+};
+
+
+export const getYourInformation = yourId => {
+    return dispatch => {
+        dispatch(actions.setIsLoading(true));
+        const url = `http://localhost:3001/users/${yourId}`;
+        axios
+            .get(url)
+            .then(response => {
+                // Set global state for MyPage
+                dispatch(setYourInformation(response.data));
+                dispatch(actions.setIsLoading(false));
+            })
+            .catch(error => {
+                dispatch(authFail(error));
+                dispatch(actions.setIsLoading(false));
+            });
     };
 };

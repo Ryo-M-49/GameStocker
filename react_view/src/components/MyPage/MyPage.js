@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useCallback } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { makeStyles } from '@material-ui/core/styles';
 import classes from './MyPage.module.css';
@@ -29,12 +29,15 @@ const useStyles = makeStyles(theme => ({
 const MyPage = props => {
     const classStyles = useStyles();
     const userId = props.match.params.userId;
+    const auth = useSelector(state => state.authReducer);
 
     // Information of the login user
     const user = useSelector(state => state.userReducer);
-    const yourId = user.id;
+    const yourId = auth.userId;
     const isLoading = user.isLoading;
 
+    // If the user is you, use the image from auth state, if not, that from user state
+    const userImage = user.id == auth.userId ? auth.image : user.image;
     // Reviews of the login user
     const reviews = useSelector(state => state.reviewReducer.reviews);
 
@@ -46,13 +49,12 @@ const MyPage = props => {
 
     // Handler in the input form when editing. It updates the user information based on the input
     const inputChangedHandler = (newValue, controlName) => {
-        console.log('In inputChangedHandler, user is now', user);
         const updatedUser = {
             ...user,
             [controlName]: newValue,
         };
         // Update Reudux state to pass info to SaveButton
-        //ここで渡すupdatedUserはuserReducerのstate
+        // ここで渡すupdatedUserはuserReducerのstate
         dispatch(actions.setUser(updatedUser));
     };
 
@@ -81,12 +83,15 @@ const MyPage = props => {
     }
 
     // --- UI of the left hand side of the page
-    console.log('user is ', user);
     let bio = (
         <Aux>
             <div className={classes.BioWrapper}>
                 <div className={classes.Picture}>
-                    <Avatar image={user.image ? user.image : DefaultImage} />
+                    <Avatar
+                        image={
+                            user.image || auth.image ? userImage : DefaultImage
+                        }
+                    />
                     <p>{user.first_name + ' ' + user.last_name}</p>
                 </div>
                 <div className={classes.Introduction}>
@@ -116,9 +121,13 @@ const MyPage = props => {
                 <div className={classes.BioWrapper}>
                     <div className={classes.Picture}>
                         <Avatar
-                            image={user.image ? user.image : DefaultImage}
+                            image={
+                                user.image || auth.image
+                                    ? userImage
+                                    : DefaultImage
+                            }
                         />
-                        <ImageUploadButton/>
+                        <ImageUploadButton />
                         <div className={classes.Name}>
                             <TextField
                                 className={classStyles.name}

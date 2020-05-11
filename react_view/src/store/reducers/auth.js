@@ -42,11 +42,14 @@ const authFail = (state, action) => {
 };
 
 const authLogout = (state, action) => {
-    return updateObject(state, { 
-        userId: null, 
-        firstName: null, 
-        lastName: null, 
-        token: null, email: null, image: null });
+    return updateObject(state, {
+        userId: null,
+        firstName: null,
+        lastName: null,
+        token: null,
+        email: null,
+        image: null,
+    });
 };
 
 const setAuthRedirectPath = (state, action) => {
@@ -56,6 +59,23 @@ const setAuthRedirectPath = (state, action) => {
 const toggleAuthSnackbar = (state, action) => {
     return updateObject(state, {
         isSnackbarOpen: action.isSnackbarOpen,
+    });
+};
+
+const setImage = (state, action) => {
+    return updateObject(state, {
+        image: action.image,
+    });
+};
+
+const setYourInformation = (state, action) => {
+    return updateObject(state, {
+        id: action.id,
+        first_name: action.first_name,
+        last_name: action.last_name,
+        image: action.image,
+        introduction: action.introduction,
+        error: action.error,
     });
 };
 
@@ -73,6 +93,10 @@ const reducer = (state = initialState, action) => {
             return setAuthRedirectPath(state, action);
         case actionTypes.TOGGLE_AUTH_SNACKBAR:
             return toggleAuthSnackbar(state, action);
+        case actionTypes.SET_IMAGE:
+            return setImage(state, action);
+        case actionTypes.SET_YOUR_INFORMATION:
+            return setYourInformation(state, action);
         default:
             return state;
     }

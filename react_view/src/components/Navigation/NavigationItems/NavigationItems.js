@@ -1,4 +1,4 @@
-import React, { userEffect, useEffect } from 'react';
+import React from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import classes from './NavigationItems.module.css';
 import Aux from '../../../hoc/Aux/Aux';
@@ -17,7 +17,7 @@ const NavigationItems = props => {
     const profileImage = auth.image;
     const MAX_LENGTH_NAME = 5;
 
-    let userName = auth.firstName + ' ' + auth.lastLame;
+    let userName = auth.firstName + ' ' + auth.lastName;
     if (userName.length > MAX_LENGTH_NAME) {
         userName = cutString(userName, MAX_LENGTH_NAME);
     }
@@ -36,7 +36,6 @@ const NavigationItems = props => {
     // Items to render if authenticated
     const authItems = (
         <Aux>
-
             <NavigationItem
                 className={classes.NavigationItem}
                 link={`/users/${auth.userId}`}

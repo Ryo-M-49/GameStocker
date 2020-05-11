@@ -11,7 +11,6 @@ import CircularProgress from '@material-ui/core/CircularProgress';
 import * as actions from '../../store/actions/index';
 
 class GameList extends Component {
-
     componentDidMount() {
         const currentPage = this.props.games ? this.props.games.page : 1;
         if (!this.props.search.isSearched) {
@@ -93,7 +92,7 @@ class GameList extends Component {
                         ))}
                     </ul>
                     <div className={classes.Pagination}>{pagination}</div>
-                </Aux> 
+                </Aux>
             );
         }
 

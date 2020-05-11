@@ -1,4 +1,5 @@
 import axios from 'axios';
+import * as actions from './index';
 import * as actionTypes from './actionTypes';
 
 export const controlUserFail = error => {
@@ -37,13 +38,6 @@ export const setIsLoading = isLoading => {
     };
 };
 
-export const setImage = image => {
-    return {
-        type: actionTypes.SET_IMAGE,
-        image: image,
-    };
-};
-
 export const getUser = userId => {
     return dispatch => {
         dispatch(setIsLoading(true));
@@ -51,7 +45,7 @@ export const getUser = userId => {
         axios
             .get(url)
             .then(response => {
-                //ここで渡すresponse.dataはapiから帰ってきた@userの情報
+                // Set global state for MyPage
                 dispatch(getUserSuccess(response.data));
                 dispatch(setIsLoading(false));
             })
@@ -76,20 +70,6 @@ export const updateUser = (userData, userId) => {
     };
 };
 
-export const getUserImage = userId => {
-    return dispatch => {
-        const url = `http://localhost:3001/users/${userId}/show_user_image`;
-        axios
-            .get(url)
-            .then(response => {
-                dispatch(setImage(response.data));
-            })
-            .catch(error => {
-                dispatch(controlUserFail(error));
-            });
-    };
-};
-
 export const updateUserImage = (image, userId) => {
     return dispatch => {
         const url = `http://localhost:3001/users/${userId}/update_user_image`;
@@ -98,7 +78,7 @@ export const updateUserImage = (image, userId) => {
             .then(response => {
                 const imageUrl = response.data;
                 console.log('imageUrl is', imageUrl);
-                dispatch(setImage(imageUrl));
+                dispatch(actions.setImage(imageUrl));
             })
             .catch(error => {
                 dispatch(controlUserFail(error));

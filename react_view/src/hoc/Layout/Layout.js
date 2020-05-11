@@ -23,7 +23,7 @@ class Layout extends Component {
         this.props.onTryAutoSignup();
         const timer = setTimeout(() => {
             if (this.props.userId) {
-                this.props.onGetUser(this.props.userId);
+                this.props.onGetYourInformation(this.props.userId);
             }
         }, 200);
         return () => clearTimeout(timer);
@@ -120,7 +120,8 @@ const mapStateToProps = state => {
 const mapDispatchToProps = dispatch => {
     return {
         onTryAutoSignup: () => dispatch(actions.authCheckState()),
-        onGetUser: userId => dispatch(actions.getUser(userId)),
+        onGetYourInformation: userId =>
+            dispatch(actions.getYourInformation(userId)),
     };
 };
 

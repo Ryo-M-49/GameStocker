@@ -23,11 +23,11 @@ const controlUserFail = (state, action) => {
     });
 };
 
-const setImage = (state, action) => {
-    return updateObject(state, {
-        image: action.image,
-    });
-};
+// const setImage = (state, action) => {
+//     return updateObject(state, {
+//         image: action.image,
+//     });
+// };
 
 const setUser = (state, action) => {
     return updateObject(state, {
@@ -68,8 +68,6 @@ const reducer = (state = initialState, action) => {
             return setIsLoading(state, action);
         case actionTypes.CONTROL_USER_FAIL:
             return controlUserFail(state, action);
-        case actionTypes.SET_IMAGE:
-            return setUser(state, action);
         case actionTypes.SET_USER:
             return setUser(state, action);
         case actionTypes.GET_USER_SUCCESS:

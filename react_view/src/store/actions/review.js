@@ -32,7 +32,7 @@ export const setGame = game => {
 export const getReview = (userId, gameId) => {
     return dispatch => {
         dispatch(setLoading(true));
-        const url = `http://localhost:3001/users/${userId}/reviews/${gameId}`;
+        const url = `${process.env.REACT_APP_API_ENDPOINT_URI}/users/${userId}/reviews/${gameId}`;
         axios
             .get(url)
             .then(response => {
@@ -69,7 +69,7 @@ export const getReview = (userId, gameId) => {
 export const getAllReviews = userId => {
     return dispatch => {
         dispatch(setLoading(true));
-        const url = `http://localhost:3001/users/${userId}/reviews`;
+        const url = `${process.env.REACT_APP_API_ENDPOINT_URI}/users/${userId}/reviews`;
         axios
             .get(url)
             .then(response => {
@@ -90,7 +90,7 @@ export const getAllReviews = userId => {
 export const getUserReviews = userId => {
     return dispatch => {
         dispatch(setLoading(true));
-        const url = `http://localhost:3001/users/${userId}/reviews/show_by_user`;
+        const url = `${process.env.REACT_APP_API_ENDPOINT_URI}/users/${userId}/reviews/show_by_user`;
         axios
             .get(url)
             .then(response => {
@@ -111,7 +111,7 @@ export const getUserReviews = userId => {
 export const getUserReviewsByRecent = userId => {
     return dispatch => {
         dispatch(setLoading(true));
-        const url = `http://localhost:3001/users/${userId}/reviews/show_by_recent`;
+        const url = `${process.env.REACT_APP_API_ENDPOINT_URI}/users/${userId}/reviews/show_by_recent`;
         axios
             .get(url)
             .then(response => {
@@ -132,7 +132,7 @@ export const getUserReviewsByRecent = userId => {
 export const getUserReviewsByLike = userId => {
     return dispatch => {
         dispatch(setLoading(true));
-        const url = `http://localhost:3001/users/${userId}/reviews/show_by_like`;
+        const url = `${process.env.REACT_APP_API_ENDPOINT_URI}/users/${userId}/reviews/show_by_like`;
         axios
             .get(url)
             .then(response => {
@@ -153,7 +153,7 @@ export const getUserReviewsByLike = userId => {
 export const createReview = (reviewDetail, userId) => {
     return dispatch => {
         dispatch(setLoading(true));
-        const url = `http://localhost:3001/users/${userId}/reviews`;
+        const url = `${process.env.REACT_APP_API_ENDPOINT_URI}/users/${userId}/reviews`;
         axios
             .post(url, reviewDetail)
             .then(response => {
@@ -172,7 +172,7 @@ export const createReview = (reviewDetail, userId) => {
 export const updateReview = (reviewDetail, userId, reviewId) => {
     return dispatch => {
         dispatch(setLoading(true));
-        const url = `http://localhost:3001/users/${userId}/reviews/${reviewId}`;
+        const url = `${process.env.REACT_APP_API_ENDPOINT_URI}/users/${userId}/reviews/${reviewId}`;
         axios
             .patch(url, reviewDetail)
             .then(response => {
@@ -189,7 +189,7 @@ export const updateReview = (reviewDetail, userId, reviewId) => {
 export const deleteReview = (userId, reviewId) => {
     return dispatch => {
         dispatch(setLoading(true));
-        const url = `http://localhost:3001/users/${userId}/reviews/${reviewId}`;
+        const url = `${process.env.REACT_APP_API_ENDPOINT_URI}/users/${userId}/reviews/${reviewId}`;
         axios
             .delete(url)
             .then(response => {

@@ -17,7 +17,7 @@ const Reviews = props => {
 
     const fetchUser = useCallback(() => {
         setIsLoading(true);
-        const url = `http://localhost:3001/users/${userId}`;
+        const url = `${process.env.REACT_APP_API_ENDPOINT_URI}/users/${userId}`;
         const promise = Promise.resolve(axios.get(url));
         promise
             .then(response => {

@@ -54,7 +54,7 @@ export const auth = (email, password) => {
             password: password,
             password_confirmation: password,
         };
-        const url = 'http://localhost:3001/api/auth/sign_in';
+        const url = `${process.env.REACT_APP_API_ENDPOINT_URI}/api/auth/sign_in`;
         axios
             .post(url, authData)
             .then(response => {
@@ -146,7 +146,7 @@ export const setYourInformation = response => {
 export const getYourInformation = yourId => {
     return dispatch => {
         dispatch(actions.setIsLoading(true));
-        const url = `http://localhost:3001/users/${yourId}`;
+        const url = `${process.env.REACT_APP_API_ENDPOINT_URI}/users/${yourId}`;
         axios
             .get(url)
             .then(response => {

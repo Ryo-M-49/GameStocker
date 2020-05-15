@@ -41,7 +41,7 @@ export const setIsLoading = isLoading => {
 export const getUser = userId => {
     return dispatch => {
         dispatch(setIsLoading(true));
-        const url = `http://localhost:3001/users/${userId}`;
+        const url = `${process.env.REACT_APP_API_ENDPOINT_URI}/users/${userId}`;
         axios
             .get(url)
             .then(response => {
@@ -58,7 +58,7 @@ export const getUser = userId => {
 
 export const updateUser = (userData, userId) => {
     return dispatch => {
-        const url = `http://localhost:3001/users/${userId}`;
+        const url = `${process.env.REACT_APP_API_ENDPOINT_URI}/users/${userId}`;
         axios
             .patch(url, userData)
             .then(response => {
@@ -72,7 +72,7 @@ export const updateUser = (userData, userId) => {
 
 export const updateUserImage = (image, userId) => {
     return dispatch => {
-        const url = `http://localhost:3001/users/${userId}/update_user_image`;
+        const url = `${process.env.REACT_APP_API_ENDPOINT_URI}/users/${userId}/update_user_image`;
         axios
             .patch(url, image)
             .then(response => {
@@ -94,7 +94,7 @@ export const deleteUserSuccess = () => {
 
 export const deleteUser = userId => {
     return dispatch => {
-        const url = `http://localhost:3001/users/${userId}`;
+        const url = `${process.env.REACT_APP_API_ENDPOINT_URI}/users/${userId}`;
         axios
             .delete(url)
             .then(response => {

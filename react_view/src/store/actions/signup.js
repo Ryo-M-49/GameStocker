@@ -31,7 +31,7 @@ export const signup = userData => {
             email: userData.email.value,
             password: userData.password.value,
         };
-        const url = 'http://localhost:3001/api/auth';
+        const url = '${process.env.REACT_APP_API_ENDPOINT_URI}/api/auth';
         axios
             .post(url, signupData)
             .then(response => {

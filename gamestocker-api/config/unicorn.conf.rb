@@ -2,7 +2,11 @@
  # set lets
  $worker  = 2
  $timeout = 30
+<<<<<<< HEAD
  $app_dir = "/var/www/GameStocker/gamestocker-api"
+=======
+ $app_dir = "/var/www/gamestocker/app/GameStocker/gamestocker-api" #railsアプリの場所
+>>>>>>> 10c21bbbd915aa8c7f32ab0cec92c9541f6c1ac1
  $listen  = File.expand_path 'tmp/sockets/.unicorn.sock', $app_dir
  $pid     = File.expand_path 'tmp/pids/unicorn.pid', $app_dir
  $std_log = File.expand_path 'log/unicorn.log', $app_dir

@@ -233,7 +233,7 @@ GEM
     tzinfo (1.2.6)
       thread_safe (~> 0.1)
     unicode-display_width (1.6.1)
-    unicorn (5.5.5)
+    unicorn (5.4.1)
       kgio (~> 2.6)
       raindrops (~> 0.7)
     warden (1.2.8)
@@ -270,7 +270,7 @@ DEPENDENCIES
   spring
   spring-watcher-listen (~> 2.0.0)
   tzinfo-data
-  unicorn
+  unicorn (= 5.4.1)
 
 RUBY VERSION
    ruby 2.6.5p114

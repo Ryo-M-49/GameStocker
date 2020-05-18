@@ -1,4 +1,4 @@
-import React, { userEffect, useEffect } from 'react';
+import React from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import classes from './NavigationItems.module.css';
 import Aux from '../../../hoc/Aux/Aux';
@@ -14,10 +14,10 @@ import { cutString } from '../../../shared/utility';
 const NavigationItems = props => {
     const auth = useSelector(state => state.authReducer);
     const user = useSelector(state => state.userReducer);
-    const profileImage = user.image;
+    const profileImage = auth.image;
     const MAX_LENGTH_NAME = 5;
 
-    let userName = user.first_name + ' ' + user.last_name;
+    let userName = auth.firstName + ' ' + auth.lastName;
     if (userName.length > MAX_LENGTH_NAME) {
         userName = cutString(userName, MAX_LENGTH_NAME);
     }

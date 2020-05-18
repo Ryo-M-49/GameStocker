@@ -9,6 +9,10 @@ Rails.application.routes.draw do
     }
   end
   resources :users do 
+    member do
+      get :show_user_image
+      patch :update_user_image
+    end
     resources :reviews do 
       collection do
         get :show_by_user

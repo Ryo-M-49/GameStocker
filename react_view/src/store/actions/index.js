@@ -27,9 +27,18 @@ export {
     setAuthRedirectPath,
     authCheckState,
     toggleAuthSnackbar,
+    setImage,
+    getYourInformation,
 } from './auth';
 
-export { setImage, getUserSuccess, getUser, updateUser } from './user';
+export {
+    setUser,
+    getUserSuccess,
+    getUser,
+    updateUser,
+    updateUserImage,
+    setIsLoading,
+} from './user';
 
 export { signup, setSignupRedirectPath } from './signup';
 

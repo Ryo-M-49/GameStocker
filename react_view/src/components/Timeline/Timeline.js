@@ -23,7 +23,7 @@ const Timeline = props => {
         try {
             // Fetching all reviews
             setIsLoading(true);
-            const url = `http://localhost:3001/users/1/reviews`;
+            const url = `${process.env.REACT_APP_API_ENDPOINT_URI}/users/1/reviews`;
             const promise = Promise.resolve(axios.get(url));
             promise
                 .then(response => {
@@ -31,7 +31,7 @@ const Timeline = props => {
                     setReviews(reviews);
                     const listOfRequests = reviews.map(review =>
                         axios.get(
-                            `http://localhost:3001/users/${review.user_id}`
+                            `${process.env.REACT_APP_API_ENDPOINT_URI}/users/${review.user_id}`
                         )
                     );
                     return listOfRequests;

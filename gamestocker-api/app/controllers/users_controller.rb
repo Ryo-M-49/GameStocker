@@ -15,6 +15,19 @@ class UsersController < ApplicationController
     render json: @user
   end
 
+  def show_user_image
+    @user = User.find(params[:id])
+    render :json => @user.image_url
+  end
+
+  def update_user_image
+    @user = User.find(params[:id])
+    @user.update(image: params[:image])
+    image_url = @user.get_image_url()
+    @user.update(image_url: image_url)
+    render :json => image_url
+  end
+
   def destroy
     User.find(params[:id]).destroy
   end
@@ -22,14 +35,8 @@ class UsersController < ApplicationController
   private
 
   def user_params
-    params.require(:user).permit(:first_name, :last_name, :introduction, {
-      image: [
-        :url, 
-        thumb: [
-          :url
-        ]
-      ]
-    })
+    params.require(:user).permit(:first_name, :last_name, :introduction)
   end
+
 end
 

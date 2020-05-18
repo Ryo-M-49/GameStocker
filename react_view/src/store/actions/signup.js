@@ -31,20 +31,26 @@ export const signup = userData => {
             email: userData.email.value,
             password: userData.password.value,
         };
-        const url = 'http://localhost:3001/api/auth';
+        const url = '${process.env.REACT_APP_API_ENDPOINT_URI}/api/auth';
         axios
             .post(url, signupData)
             .then(response => {
                 const data = response.data.data;
                 localStorage.setItem('userId', data.id);
+                localStorage.setItem('firstName', data.first_name);
+                localStorage.setItem('lastName', data.last_name);
                 localStorage.setItem('token', response.headers['access-token']);
                 localStorage.setItem('email', response.headers['uid']);
+                localStorage.setItem('image', data.image_url);
                 dispatch(signupSuccess(userData));
                 dispatch(
                     actions.authSuccess(
                         data.id,
+                        data.first_name,
+                        data.last_name,
                         response.headers['access-token'],
-                        response.headers['uid']
+                        response.headers['uid'],
+                        data.image_url
                     )
                 );
             })

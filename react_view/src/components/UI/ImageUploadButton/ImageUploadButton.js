@@ -1,44 +1,34 @@
 import React from 'react';
-import { useDispatch } from 'react-redux';
-import { useDropzone } from 'react-dropzone'; 
-import Button from '@material-ui/core/Button';
-import ImageIcon from '@material-ui/icons/Image';
+import { useSelector, useDispatch } from 'react-redux';
 import * as actions from '../../../store/actions/index';
 
 const ImageUploadButton = props => {
     const dispatch = useDispatch();
-    const onDrop = acceptedFiles => {
-        if (acceptedFiles && acceptedFiles[0]) {
-            console.log('acceptedFiles are ', acceptedFiles);
-            const formDataImage = new FormData();
-            formDataImage.append('uploaded_image', acceptedFiles[0]);
-            console.log('formDataImage is ', formDataImage);
-            dispatch(actions.setImage(formDataImage));
+    const userId = useSelector(state => state.userReducer.id);
+
+    const submitImage = event => {
+        event.preventDefault();
+        const imageInput = document.getElementById('profile-photo-input');
+        if (imageInput.files[0]) {
+            const formData = new FormData();
+            const uploadedImage = imageInput.files[0];
+            formData.append('image', uploadedImage);
+            dispatch(actions.updateUserImage(formData, userId));
         }
     };
-
-    const { getRootProps, getInputProps, isDragActive } = useDropzone({
-        onDrop,
-        accept: 'image/png, image/gif, image/jpeg',
-    });
-
     return (
-        <div {...getRootProps()}>
-            <input {...getInputProps()} />
-            {isDragActive ? (
-                <p>
-                    DROP IMAGE HERE
-                </p>
-            ) : (
-                <Button
-                    startIcon={<ImageIcon />}
-                    variant="contained"
-                >
-                    UPLOAD
-                </Button>
-            )}
-        </div>
+        <React.Fragment>
+            <form onSubmit={submitImage}>
+                <input
+                    type="file"
+                    id="profile-photo-input"
+                    name="profile_picture"
+                    accept="image/png, image/jpeg"
+                />
+                <input className="submit-input" type="submit" value="Upload" />
+            </form>
+        </React.Fragment>
     );
-}
+};
 
 export default ImageUploadButton;

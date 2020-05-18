@@ -14,7 +14,7 @@ default: &default
   encoding: utf8mb4
   pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
   username: root
-  password:
+  password: 
   host: localhost
 
 development:
@@ -49,6 +49,7 @@ test:
 #
 production:
   <<: *default
-  database: gamestocker_api_production
-  username: gamestocker_api
+  database: gamestocker-database
+  username: admin
   password: <%= ENV['GAMESTOCKER_API_DATABASE_PASSWORD'] %>
+  host: gamestocker-database.cm5gbwqwzjef.ap-northeast-1.rds.amazonaws.com

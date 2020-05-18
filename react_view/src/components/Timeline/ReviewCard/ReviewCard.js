@@ -53,7 +53,7 @@ const ReviewCard = props => {
 
     const firstName = props.user.first_name;
     const lastName = props.user.last_name;
-    const userImage = props.user.image;
+    const userImage = props.user.image_url;
 
     const yourId = localStorage.getItem('userId');
 
@@ -71,7 +71,12 @@ const ReviewCard = props => {
     // Switch the router link to YourReview component based on the current page
     let readmorePath = `users/${user_id}/reviews/${gameId}`;
     const location = useLocation();
+    // If current page is your reviews list, then
     if (location.pathname == `/users/${yourId}/reviews`) {
+        readmorePath = `reviews/${gameId}`;
+    }
+
+    if (location.pathname == `/users/${user_id}/reviews`) {
         readmorePath = `reviews/${gameId}`;
     }
 

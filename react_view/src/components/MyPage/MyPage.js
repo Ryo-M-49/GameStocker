@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useCallback } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { makeStyles } from '@material-ui/core/styles';
 import classes from './MyPage.module.css';
@@ -16,7 +16,6 @@ import Avatar from '../UI/Avatar/Avatar';
 import TextField from '@material-ui/core/TextField';
 import CircularProgress from '@material-ui/core/CircularProgress';
 import * as actions from '../../store/actions/index';
-import axios from 'axios';
 
 const useStyles = makeStyles(theme => ({
     root: {
@@ -29,19 +28,21 @@ const useStyles = makeStyles(theme => ({
 
 const MyPage = props => {
     const classStyles = useStyles();
-
     const userId = props.match.params.userId;
-    const [user, setUser] = useState({});
+    const auth = useSelector(state => state.authReducer);
 
     // Information of the login user
-    const yourId = useSelector(state => state.userReducer.id);
+    const user = useSelector(state => state.userReducer);
+    const yourId = auth.userId;
+    const isLoading = user.isLoading;
 
+    // If the user is you, use the image from auth state, if not, that from user state
+    const userImage = user.id == auth.userId ? auth.image : user.image;
     // Reviews of the login user
     const reviews = useSelector(state => state.reviewReducer.reviews);
 
     // State of component
     const [isEditing, setIsEditing] = useState(false);
-    const [isLoading, setIsLoading] = useState(false);
     const dispatch = useDispatch();
 
     // --- Event handlers
@@ -52,10 +53,9 @@ const MyPage = props => {
             ...user,
             [controlName]: newValue,
         };
-        // Update local state
-        setUser(updatedUser);
         // Update Reudux state to pass info to SaveButton
-        dispatch(actions.getUserSuccess(user));
+        // ここで渡すupdatedUserはuserReducerのstate
+        dispatch(actions.setUser(updatedUser));
     };
 
     const buttonClickedHandler = () => {
@@ -66,42 +66,12 @@ const MyPage = props => {
         dispatch(actions.getUser(userId));
         setIsEditing(!isEditing);
     };
-    // Event Handlers ---
-
-    const fetchUser = useCallback(() => {
-        setIsLoading(true);
-        const url = `http://localhost:3001/users/${userId}`;
-        axios
-            .get(url)
-            .then(response => {
-                setUser({
-                    id: response.data.id,
-                    first_name: response.data.first_name,
-                    last_name: response.data.last_name,
-                    image: response.data.image,
-                    introduction: response.data.introduction,
-                    error: null,
-                });
-                setIsLoading(false);
-            })
-            .catch(error => {
-                setUser({
-                    id: null,
-                    first_name: null,
-                    last_name: null,
-                    image: null,
-                    introduction: null,
-                    error: error,
-                });
-                setIsLoading(false);
-            });
-    }, []);
 
     useEffect(() => {
-        fetchUser(userId);
+        dispatch(actions.getUser(userId));
         dispatch(actions.getUserReviews(userId));
         // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, []);
+    }, [props]);
 
     let editButton = null;
     if (userId == yourId) {
@@ -117,7 +87,11 @@ const MyPage = props => {
         <Aux>
             <div className={classes.BioWrapper}>
                 <div className={classes.Picture}>
-                    <Avatar image={user.image ? user.image : DefaultImage} />
+                    <Avatar
+                        image={
+                            user.image || auth.image ? userImage : DefaultImage
+                        }
+                    />
                     <p>{user.first_name + ' ' + user.last_name}</p>
                 </div>
                 <div className={classes.Introduction}>
@@ -147,9 +121,13 @@ const MyPage = props => {
                 <div className={classes.BioWrapper}>
                     <div className={classes.Picture}>
                         <Avatar
-                            image={user.image ? user.image : DefaultImage}
+                            image={
+                                user.image || auth.image
+                                    ? userImage
+                                    : DefaultImage
+                            }
                         />
-                        <ImageUploadButton/>
+                        <ImageUploadButton />
                         <div className={classes.Name}>
                             <TextField
                                 className={classStyles.name}

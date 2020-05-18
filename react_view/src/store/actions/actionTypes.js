@@ -15,6 +15,7 @@ export const AUTH_FAIL = 'AUTH_FAIL';
 export const AUTH_LOGOUT = 'AUTH_LOGOUT';
 export const SET_AUTH_REDIRECT_PATH = 'SET_AUTH_REDIRECT_PATH';
 export const TOGGLE_AUTH_SNACKBAR = 'TOGGLE_AUTH_SNACKBAR';
+export const SET_YOUR_INFORMATION = 'SET_YOUR_INFORMATION';
 
 // for ./signup.js
 export const SIGNUP_START = 'SIGNUP_START';
@@ -23,8 +24,10 @@ export const SIGNUP_FAIL = 'SIGNUP_FAIL';
 export const SET_SIGNUP_REDIRECT_PATH = 'SET_SIGNUP_REDIRECT_PATH';
 
 // for ./user.js
+export const SET_ISLOADING = 'SET_ISLOADING';
 export const CONTROL_USER_FAIL = 'GET_USER_FAIL';
 export const SET_IMAGE = 'SET_IMAGE';
+export const SET_USER = 'SET_USER';
 export const GET_USER_SUCCESS = 'GET_USER_SUCCESS';
 export const GET_USER = 'GET_USER';
 export const EDIT_USER = 'EDIT_USER';

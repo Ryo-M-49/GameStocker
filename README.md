@@ -10,7 +10,7 @@ GameStocker is a single page application developed with React.js + Rails API. In
 	- like a review post
 - Advanced
 	- external API for fetching game data (Rakuten-API)
-	- proifile image upload (S3/Active Record)
+	- proifile image upload (S3/Active Storage)
 	- authentication (Devise Token Auth)
 	- modern design (Material-UI)
 	- use of REST API

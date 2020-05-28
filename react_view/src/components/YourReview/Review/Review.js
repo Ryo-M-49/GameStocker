@@ -10,10 +10,9 @@ import Bad from './Bad/Bad';
 
 const Review = props => {
     const review = useSelector(state => state.reviewReducer.review);
-    const user = useSelector(state => state.userReducer);
     const auth = useSelector(state => state.authReducer);
     let { userId, firstName, lastName, userImage } = props.user;
-    if (firstName == undefined) {
+    if (props.user == null || props.user == undefined) {
         firstName = auth.first_name;
         lastName = auth.last_name;
         userImage = auth.image;

@@ -14,9 +14,9 @@ const Review = props => {
     const auth = useSelector(state => state.authReducer);
     let { userId, firstName, lastName, userImage } = props.user;
     if (firstName == undefined) {
-        firstName = user.first_name;
-        lastName = user.last_name;
-        userImage = user.image;
+        firstName = auth.first_name;
+        lastName = auth.last_name;
+        userImage = auth.image;
     }
 
     // Display your image and name if the review is yours.

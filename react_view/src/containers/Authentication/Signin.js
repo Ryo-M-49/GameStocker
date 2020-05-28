@@ -110,10 +110,21 @@ class SignIn extends Component {
      */
     signinHandler = event => {
         event.preventDefault();
-        this.props.onAuth(
-            this.state.controls.email.value,
-            this.state.controls.password.value
-        );
+        console.log(event.currentTarget);
+        if (event.currentTarget.id === "signin-button") {
+            this.props.onAuth(
+                this.state.controls.email.value,
+                this.state.controls.password.value
+            );
+        }
+
+        if (event.currentTarget.id === "signin-as-guest-button") {
+            console.log("in");
+            this.props.onAuth(
+                "guest@example.com",
+                "password",
+            );
+        }
     };
 
     snackbarClosedHandler = () => {
@@ -129,29 +140,48 @@ class SignIn extends Component {
 
         let signinButton = (
             <Button
+                id="signin-button"
                 type="submit"
                 fullWidth
                 variant="contained"
                 color="primary"
                 disabled
                 className={classes.submit}
+                onClick={this.signinHandler}
             >
                 Sign In
             </Button>
         );
+
         if (this.state.errorMessages.length === 0) {
             signinButton = (
                 <Button
+                    id="signin-button"
                     type="submit"
                     fullWidth
                     variant="contained"
                     color="primary"
                     className={classes.submit}
+                    onClick={this.signinHandler}
                 >
                     Sign In
                 </Button>
             );
         }
+
+        const signinAsGuestButton = (
+            <Button
+                id="signin-as-guest-button"
+                type="submit"
+                fullWidth
+                variant="contained"
+                color="secondary"
+                className={classes.submit}
+                onClick={this.signinHandler}
+            >
+                Sign In As a Guest
+            </Button>
+        );
 
         let signinErrorMessage = null;
         if (this.props.error) {
@@ -207,7 +237,7 @@ class SignIn extends Component {
                     <form
                         className={classes.form}
                         noValidate
-                        onSubmit={this.signinHandler}
+                        // onSubmit={this.signinHandler}
                     >
                         <TextField
                             variant="outlined"
@@ -238,6 +268,7 @@ class SignIn extends Component {
                             }
                         />
                         {signinButton}
+                        {signinAsGuestButton}
                         <Grid container>
                             <Grid item xs>
                                 <Link href="#" variant="body2">

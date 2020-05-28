@@ -1,21 +1,34 @@
 import React from 'react';
+import { makeStyles } from '@material-ui/core/styles';
 import PropTypes from 'prop-types';
 import Pagination from '@material-ui/lab/Pagination';
 
-const pagination = props => (
-    <div>
-        <Pagination
-            count={props.pageCount}
-            onChange={props.pageChangedHandler}
-            page={props.pageNumber}
-            color="primary"
-        />
-    </div>
-);
+const useStyles = makeStyles(theme => ({
+    root: {
+        display: 'flex',
+        'justify-content': 'center',
+        'align-items': 'center',
+    },
+}));
 
-pagination.propTypes = {
+const GamelistPagination = props => {
+    const classes = useStyles();
+    return (
+        <div>
+            <Pagination
+                className={classes.root}
+                count={props.pageCount}
+                onChange={props.pageChangedHandler}
+                page={props.pageNumber}
+                color="primary"
+            />
+        </div>
+    );
+};
+
+GamelistPagination.propTypes = {
     pageCount: PropTypes.number.isRequired,
     pageChangedHandler: PropTypes.func.isRequired,
 };
 
-export default pagination;
+export default GamelistPagination;

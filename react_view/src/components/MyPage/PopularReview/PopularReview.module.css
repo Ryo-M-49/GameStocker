@@ -3,8 +3,10 @@
     padding: 0;
 
     display: flex;
+    justify-content: space-between;
 }
 
-.ReviewList li:not(:last-child) {
-    margin-right: 20px;
+.ReviewCard {
+    margin-right: 1.5rem;
+    width: 33%;
 }

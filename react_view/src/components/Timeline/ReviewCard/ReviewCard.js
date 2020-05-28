@@ -1,18 +1,17 @@
 import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
+import { Link, useLocation } from 'react-router-dom';
+import LikeButton from '../../UI/LikeButton/LikeButton';
 import Card from '@material-ui/core/Card';
 import CardHeader from '@material-ui/core/CardHeader';
 import CardMedia from '@material-ui/core/CardMedia';
 import CardContent from '@material-ui/core/CardContent';
 import CardActions from '@material-ui/core/CardActions';
 import Avatar from '@material-ui/core/Avatar';
-import IconButton from '@material-ui/core/IconButton';
 import Typography from '@material-ui/core/Typography';
-import { red } from '@material-ui/core/colors';
-import FavoriteIcon from '@material-ui/icons/Favorite';
-import ShareIcon from '@material-ui/icons/Share';
-import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
-import MoreVertIcon from '@material-ui/icons/MoreVert';
+import Button from '@material-ui/core/Button';
+import Rating from '@material-ui/lab/Rating';
+import { cutString } from '../../../shared/utility';
 
 const useStyles = makeStyles(theme => ({
     root: {
@@ -22,50 +21,124 @@ const useStyles = makeStyles(theme => ({
     media: {
         height: 0,
         paddingTop: '56.25%', // 16:9
+        backgroundSize: 'contain',
     },
     avatar: {
-        backgroundColor: red[500],
+        cursor: 'pointer',
+    },
+    button: {
+        marginLeft: 'auto',
+        marginRight: '0',
+    },
+    title: {
+        textAlign: 'center',
+    },
+    rating: {
+        margin: '.7rem 0',
     },
 }));
 
 const ReviewCard = props => {
+    let {
+        id,
+        user_id,
+        title,
+        image,
+        rate,
+        good,
+        likes_count,
+        gameId,
+        createdAt,
+    } = props.review;
+
+    const firstName = props.user.first_name;
+    const lastName = props.user.last_name;
+    const userImage = props.user.image_url;
+
+    const yourId = localStorage.getItem('userId');
+
     const classes = useStyles();
+
+    const MAX_TEXT_LENGTH = 200;
+    if (good.length > MAX_TEXT_LENGTH) {
+        good = cutString(good, MAX_TEXT_LENGTH);
+    }
+
+    const favorite = (
+        <LikeButton likesCount={likes_count} userId={yourId} reviewId={id} />
+    );
+
+    // Switch the router link to YourReview component based on the current page
+    let readmorePath = `users/${user_id}/reviews/${gameId}`;
+    const location = useLocation();
+    // If current page is your reviews list, then
+    if (location.pathname == `/users/${yourId}/reviews`) {
+        readmorePath = `reviews/${gameId}`;
+    }
+
+    if (location.pathname == `/users/${user_id}/reviews`) {
+        readmorePath = `reviews/${gameId}`;
+    }
+
     return (
         <Card className={classes.root}>
             <CardHeader
                 avatar={
-                    <Avatar aria-label="recipe" className={classes.avatar}>
-                        R
-                    </Avatar>
+                    <Link to={`users/${user_id}`}>
+                        <Avatar
+                            aria-label="recipe"
+                            className={classes.avatar}
+                            src={userImage}
+                        />
+                    </Link>
                 }
-                action={
-                    <IconButton aria-label="settings">
-                        <MoreVertIcon />
-                    </IconButton>
-                }
-                title="Game title here"
-                subheader="September 14, 2016"
+                action={favorite}
+                title={firstName + ' ' + lastName}
+                subheader={createdAt}
             />
-            <CardMedia
-                className={classes.media}
-                image={props.image}
-                title="Game Image"
-            />
+            <CardMedia className={classes.media} image={image} title={title} />
             <CardContent>
+                <div className={classes.title}>
+                    <Typography
+                        variant="subtitle1"
+                        color="textPrimary"
+                        component="p"
+                    >
+                        {title}
+                    </Typography>
+                </div>
+                <div className={classes.rating}>
+                    <Rating
+                        name="rating"
+                        defaultValue={rate}
+                        precision={0.5}
+                        readOnly
+                    />
+                </div>
                 <Typography variant="body2" color="textSecondary" component="p">
-                    Good point here
+                    {good}
                 </Typography>
             </CardContent>
             <CardActions disableSpacing>
-                <IconButton aria-label="add to favorites">
-                    <FavoriteIcon />
-                </IconButton>
-                <IconButton aria-label="share">
-                    <ShareIcon />
-                </IconButton>
-                <IconButton aria-label="show more">
-                    <ExpandMoreIcon />
-                </IconButton>
+                <Link
+                    to={{
+                        pathname: readmorePath,
+                        state: {
+                            game: props.review,
+                            user: {
+                                userId: user_id,
+                                firstName: firstName,
+                                lastName: lastName,
+                                userImage: userImage,
+                            },
+                        },
+                    }}
+                    className={classes.button}
+                >
+                    <Button size="small" color="primary">
+                        Read More
+                    </Button>
+                </Link>
             </CardActions>
         </Card>
     );

@@ -8,5 +8,6 @@ module.exports = {
       'order/properties-alphabetical-order': true, //ABC順に並べる
       'at-rule-no-unknown': null, //scss関係のやつ
       'scss/at-rule-no-unknown': true, //scss関係のやつ
+      "react-hooks/exhaustive-deps": 'disabled'
     }
   };

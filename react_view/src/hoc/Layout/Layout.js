@@ -4,11 +4,11 @@ import { Route, Switch, withRouter, Redirect } from 'react-router-dom';
 
 import Aux from '../Aux/Aux';
 import Toolbar from '../../components/Navigation/Toolbar/Toolbar';
-import YourReviews from '../../components/YourReviews/YourReviews';
+import Reviews from '../../components/Reviews/Reviews';
 import Signin from '../../containers/Authentication/Signin';
 import Signup from '../../containers/Authentication/Signup';
 import GameList from '../../containers/GameList/GameList';
-import YourReview from '../../components/YourReviews/YourReview/YourReview';
+import YourReview from '../../components/YourReview/YourReview';
 import MyPage from '../../components/MyPage/MyPage';
 import Timeline from '../../components/Timeline/Timeline';
 
@@ -21,6 +21,12 @@ class Layout extends Component {
 
     componentDidMount() {
         this.props.onTryAutoSignup();
+        const timer = setTimeout(() => {
+            if (this.props.userId) {
+                this.props.onGetYourInformation(this.props.userId);
+            }
+        }, 200);
+        return () => clearTimeout(timer);
     }
 
     sideDrawerClosedHandler = () => {
@@ -38,28 +44,54 @@ class Layout extends Component {
     };
 
     render() {
+        let gameListRedirect = null;
+        if (this.props.search.isSearched) {
+            gameListRedirect = (
+                <Redirect
+                    to={{
+                        pathname: '/gamelist',
+                        // state: { keyword: this.props.search.keyword }
+                    }}
+                />
+            );
+        }
         let routes = (
-            <Switch>
-                <Route path="/yourreviews/:id" component={YourReview} />
-                <Route path="/yourreviews" component={YourReviews} />
-                <Route path="/signin" component={Signin} />
-                <Route path="/signup" component={Signup} />
-                <Route path="/gamelist" component={GameList} />
-                <Route path="/" exact component={Timeline} />
-                <Redirect to="/" />
-            </Switch>
+            <Aux>
+                {gameListRedirect}
+                <Switch>
+                    <Route
+                        path="/users/:userId/reviews/:reviewId"
+                        component={YourReview}
+                    />
+                    <Route path="/users/:userId/reviews" component={Reviews} />
+                    <Route path="/signin" component={Signin} />
+                    <Route path="/signup" component={Signup} />
+                    <Route path="/gamelist" component={GameList} />
+                    <Route path="/" exact component={Timeline} />
+                    <Redirect to="/" />
+                </Switch>
+            </Aux>
         );
 
         if (this.props.isAuthenticated) {
             routes = (
-                <Switch>
-                    <Route path="/yourreviews/:id" component={YourReview} />
-                    <Route path="/yourreviews" component={YourReviews} />
-                    <Route path="/gamelist" component={GameList} />
-                    <Route path="/mypage" component={MyPage} />
-                    <Route path="/" exact component={Timeline} />
-                    <Redirect to="/" />
-                </Switch>
+                <Aux>
+                    {gameListRedirect}
+                    <Switch>
+                        <Route
+                            path="/users/:userId/reviews/:reviewId"
+                            component={YourReview}
+                        />
+                        <Route
+                            path="/users/:userId/reviews"
+                            component={Reviews}
+                        />
+                        <Route path="/users/:userId" component={MyPage} />
+                        <Route path="/gamelist" component={GameList} />
+                        <Route path="/" exact component={Timeline} />
+                        <Redirect to="/" />
+                    </Switch>
+                </Aux>
             );
         }
 
@@ -69,7 +101,6 @@ class Layout extends Component {
                     drawerToggleClicked={() => this.toggleDrawerHandler(true)}
                     drawerToggleClosed={() => this.toggleDrawerHandler(false)}
                     isOpen={this.state.showSideDrawer}
-                    logoutHandler={this.props.onLogout}
                     isAuthenticated={this.props.isAuthenticated}
                 />
                 <main>{routes}</main>
@@ -80,14 +111,17 @@ class Layout extends Component {
 
 const mapStateToProps = state => {
     return {
+        userId: state.authReducer.userId,
         isAuthenticated: state.authReducer.token !== null,
+        search: state.gameListReducer.search,
     };
 };
 
 const mapDispatchToProps = dispatch => {
     return {
-        onLogout: () => dispatch(actions.logout()),
         onTryAutoSignup: () => dispatch(actions.authCheckState()),
+        onGetYourInformation: userId =>
+            dispatch(actions.getYourInformation(userId)),
     };
 };
 

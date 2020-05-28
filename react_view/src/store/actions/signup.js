@@ -17,7 +17,7 @@ export const signupSuccess = userData => {
 
 export const signupFail = error => {
     return {
-        type: actionTypes.SIGNUP_SUCCESS,
+        type: actionTypes.SIGNUP_FAIL,
         error: error,
     };
 };
@@ -26,26 +26,41 @@ export const signup = userData => {
     return dispatch => {
         dispatch(signupStart());
         const signupData = {
-            first_name: userData.firstName,
-            last_name: userData.lastName,
-            email: userData.email,
-            password: userData.password,
+            first_name: userData.firstName.value,
+            last_name: userData.lastName.value,
+            email: userData.email.value,
+            password: userData.password.value,
         };
-        const url = 'http://localhost:3001/api/auth';
+        const url = `${process.env.REACT_APP_API_ENDPOINT_URI}/api/auth`;
         axios
             .post(url, signupData)
             .then(response => {
+                const data = response.data.data;
+                localStorage.setItem('userId', data.id);
+                localStorage.setItem('firstName', data.first_name);
+                localStorage.setItem('lastName', data.last_name);
                 localStorage.setItem('token', response.headers['access-token']);
-                localStorage.setItem('userId', response.headers['uid']);
+                localStorage.setItem('email', response.headers['uid']);
+                localStorage.setItem('image', data.image_url);
                 dispatch(signupSuccess(userData));
                 dispatch(
                     actions.authSuccess(
+                        data.id,
+                        data.first_name,
+                        data.last_name,
                         response.headers['access-token'],
-                        response.headers['uid']
+                        response.headers['uid'],
+                        data.image_url
                     )
                 );
             })
             .catch(error => {
+                const snackbar = {
+                    isOpen: true,
+                    type: 'signup-fail',
+                };
+                console.log('Catched error', error);
+                dispatch(actions.toggleAuthSnackbar(snackbar));
                 dispatch(signupFail(error));
             });
     };

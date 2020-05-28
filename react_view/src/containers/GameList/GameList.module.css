@@ -17,6 +17,20 @@
     margin: 30px auto;
 }
 
+.Error {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.Progress {
+    padding: 10rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
 h2 {
     font-weight: normal;
 }

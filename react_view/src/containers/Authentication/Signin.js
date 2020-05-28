@@ -1,8 +1,10 @@
 import React, { Component } from 'react';
 import { Link as RouterLink, Redirect } from 'react-router-dom';
 import { connect } from 'react-redux';
-
+import { withStyles } from '@material-ui/core/styles';
 import Copyright from '../../components/UI/Copyright/Copyright';
+import Snackbar from '@material-ui/core/Snackbar';
+import Alert from '@material-ui/lab/Alert';
 import Avatar from '@material-ui/core/Avatar';
 import Button from '@material-ui/core/Button';
 import CssBaseline from '@material-ui/core/CssBaseline';
@@ -12,11 +14,9 @@ import Grid from '@material-ui/core/Grid';
 import Box from '@material-ui/core/Box';
 import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
 import Typography from '@material-ui/core/Typography';
-import { withStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
-
 import * as actions from '../../store/actions/index';
-import { addErrorMessage, checkValidity } from '../../shared/utility';
+import { updateErrorMessages, checkValidity } from '../../shared/utility';
 
 const styles = theme => ({
     paper: {
@@ -38,8 +38,6 @@ const styles = theme => ({
     },
 });
 
-//もしサインインをトライ時にDBに存在しなければ、isSignupをfalseにしてそれをもとにエラーメッセージを出力
-
 class SignIn extends Component {
     state = {
         controls: {
@@ -47,68 +45,129 @@ class SignIn extends Component {
                 value: '',
                 validation: {
                     required: true,
-                    isEmail: true
+                    isEmail: true,
                 },
                 validity: {
                     isValid: false,
-                    errorMessage: null
-                }
+                    errorMessage: null,
+                },
             },
             password: {
                 value: '',
                 validation: {
                     required: true,
-                    minLength: 6
+                    minLength: 6,
                 },
                 validity: {
                     isValid: false,
-                    errorMessage: null
-                }     
-            }
+                    errorMessage: null,
+                },
+            },
         },
         isSignup: true,
-        errorMessages: []
+        // errorMessages holds all the error messages for each input(email/password).
+        errorMessages: [],
     };
 
     /**
      * Handler to update the local state based on the input value typed in input forms (email/password).
      * @param {object} event -  the target event selected by an user.
      * @param {string} controlName - the property name of the local state you want to change.
-     * @returns {object} - the updated local state.
      */
     inputChangedHandler = (event, controlName) => {
-        const copiedErrorMessages = [...this.state.errorMessages];
-        const currentErrorMessage = this.state.controls[controlName].validity.errorMessage;
-        const updatedValidity = checkValidity(event.target.value, this.state.controls[controlName].validation);
-
+        // Update the inside of "controlName" state based on the latest user's input.
+        const updatedValidity = checkValidity(
+            event.target.value,
+            this.state.controls[controlName].validation
+        );
         const updatedControls = {
             ...this.state.controls,
             [controlName]: {
                 ...this.state.controls[controlName],
                 value: event.target.value,
-                validity: updatedValidity
-            }
+                validity: updatedValidity,
+            },
         };
-
         this.setState({ controls: updatedControls });
-        this.setState({ errorMessages: addErrorMessage(copiedErrorMessages, currentErrorMessage, updatedValidity.errorMessage)});
+
+        // Update "errorMessages" state based on the latest user's input.
+        const copiedErrorMessages = [...this.state.errorMessages];
+        const currentErrorMessage = this.state.controls[controlName].validity
+            .errorMessage;
+        const nextErrorMessage = updatedValidity.errorMessage;
+        this.setState({
+            errorMessages: updateErrorMessages(
+                copiedErrorMessages,
+                currentErrorMessage,
+                nextErrorMessage
+            ),
+        });
     };
 
     /**
-     * Handler to trigger the handler to dispatch the auth action along with the local state (email/password).
-     * @param {object} event - the target event selected by an user.
-     * @returns {null} - dispatches the auth action.
+     * Handler to trigger the dispatch for "auth" action along with the payload (email/password).
+     * @param {object} event - the target event(input) selected by an user.
      */
-    submitHandler = event => {
+    signinHandler = event => {
         event.preventDefault();
         this.props.onAuth(
-            this.state.controls.email,
-            this.state.controls.password
+            this.state.controls.email.value,
+            this.state.controls.password.value
         );
+    };
+
+    snackbarClosedHandler = () => {
+        const snackbar = {
+            isOpen: false,
+            type: null,
+        };
+        this.props.onToggleAuthSnackbar(snackbar);
     };
 
     render() {
         const { classes } = this.props;
+
+        let signinButton = (
+            <Button
+                type="submit"
+                fullWidth
+                variant="contained"
+                color="primary"
+                disabled
+                className={classes.submit}
+            >
+                Sign In
+            </Button>
+        );
+        if (this.state.errorMessages.length === 0) {
+            signinButton = (
+                <Button
+                    type="submit"
+                    fullWidth
+                    variant="contained"
+                    color="primary"
+                    className={classes.submit}
+                >
+                    Sign In
+                </Button>
+            );
+        }
+
+        let signinErrorMessage = null;
+        if (this.props.error) {
+            signinErrorMessage = (
+                <Snackbar
+                    anchorOrigin={{
+                        vertical: 'top',
+                        horizontal: 'center',
+                    }}
+                    open={this.props.isSnackbarOpen}
+                    onClose={this.snackbarClosedHandler}
+                >
+                    <Alert severity="error">{this.props.error.message}</Alert>
+                </Snackbar>
+            );
+        }
 
         let authRedirect = null;
         if (this.props.isAuthenticated) {
@@ -118,9 +177,25 @@ class SignIn extends Component {
         return (
             <Container component="main" maxWidth="xs">
                 {authRedirect}
-                {this.state.errorMessages.length > 0 ? this.state.errorMessages.map((errorMessage, index) => (
-                    <p key={index}>{errorMessage}</p>
-                )): null }
+                {signinErrorMessage}
+                {this.state.errorMessages.length > 0
+                    ? this.state.errorMessages.map((errorMessage, index) => {
+                          return (
+                              <Snackbar
+                                  anchorOrigin={{
+                                      vertical: 'top',
+                                      horizontal: 'center',
+                                  }}
+                                  key={index}
+                                  open={errorMessage.isSnackbarOpen}
+                              >
+                                  <Alert severity="error">
+                                      {errorMessage.message}
+                                  </Alert>
+                              </Snackbar>
+                          );
+                      })
+                    : null}
                 <CssBaseline />
                 <div className={classes.paper}>
                     <Avatar className={classes.avatar}>
@@ -132,7 +207,7 @@ class SignIn extends Component {
                     <form
                         className={classes.form}
                         noValidate
-                        onSubmit={this.submitHandler}
+                        onSubmit={this.signinHandler}
                     >
                         <TextField
                             variant="outlined"
@@ -162,15 +237,7 @@ class SignIn extends Component {
                                 this.inputChangedHandler(event, 'password')
                             }
                         />
-                        <Button
-                            type="submit"
-                            fullWidth
-                            variant="contained"
-                            color="primary"
-                            className={classes.submit}
-                        >
-                            Sign In
-                        </Button>
+                        {signinButton}
                         <Grid container>
                             <Grid item xs>
                                 <Link href="#" variant="body2">
@@ -202,6 +269,8 @@ const mapStateToProps = state => {
         loading: state.authReducer.loading,
         isAuthenticated: state.authReducer.token !== null,
         authRedirectPath: state.authReducer.authRedirectPath,
+        error: state.authReducer.error,
+        isSnackbarOpen: state.authReducer.isSnackbarOpen.isOpen,
     };
 };
 
@@ -209,6 +278,8 @@ const mapDispatchToProps = dispatch => {
     return {
         onAuth: (email, password) => dispatch(actions.auth(email, password)),
         onSetAuthRedirectPath: () => dispatch(actions.setAuthRedirectPath('/')),
+        onToggleAuthSnackbar: snackbar =>
+            dispatch(actions.toggleAuthSnackbar(snackbar)),
     };
 };
 

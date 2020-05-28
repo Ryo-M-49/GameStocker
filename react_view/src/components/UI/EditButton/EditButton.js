@@ -2,18 +2,19 @@ import React from 'react';
 import Button from '@material-ui/core/Button';
 import EditIcon from '@material-ui/icons/Edit';
 
-const editButton = prosp => {
+const UpdateButton = props => {
     return (
         <div>
             <Button
                 variant="contained"
                 color="primary"
                 startIcon={<EditIcon />}
+                onClick={props.clickedHandler}
             >
-                Edit
+                EDIT
             </Button>
         </div>
     );
 };
 
-export default editButton;
+export default UpdateButton;

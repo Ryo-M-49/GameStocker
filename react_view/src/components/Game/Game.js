@@ -1,20 +1,30 @@
 import React from 'react';
+import { useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
 import classes from './Game.module.css';
 
 import PropTypes from 'prop-types';
 
-const game = props => {
-    const title = props.game.title;
-
+const Game = props => {
+    const { jan, title, itemCaption, largeImageUrl, itemUrl } = props.game;
+    const auth = useSelector(state => state.authReducer);
     return (
         <li className={classes.Game}>
             <Link
                 to={{
-                    pathname: 'yourreviews/' + props.game.jan,
+                    pathname: `users/${auth.userId}/reviews/${props.game.jan}`,
                     exact: props.exact,
                     state: {
-                        game: props.game,
+                        game: {
+                            gameId: jan,
+                            title: title,
+                            caption: itemCaption,
+                            image: largeImageUrl,
+                            url: itemUrl,
+                        },
+                        user: {
+                            userId: auth.userId,
+                        },
                     },
                 }}
             >
@@ -29,8 +39,8 @@ const game = props => {
     );
 };
 
-game.propTypes = {
+Game.propTypes = {
     game: PropTypes.object.isRequired,
 };
 
-export default game;
+export default Game;

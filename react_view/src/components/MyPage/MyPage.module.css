@@ -58,6 +58,11 @@
     text-align: center;
 }
 
+.PictureEditing {
+    /* width: 20%; */
+    margin: 20px 20px;
+    text-align: center;
+}
 .ProfilePicture {
     width: 200px;
     height: auto;

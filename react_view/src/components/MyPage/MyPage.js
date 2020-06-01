@@ -38,6 +38,8 @@ const MyPage = props => {
 
     // If the user is you, use the image from auth state, if not, that from user state
     const userImage = user.id == auth.userId ? auth.image : user.image;
+    const firstName = user.first_name;
+    const lastName = user.last_name;
     // Reviews of the login user
     const reviews = useSelector(state => state.reviewReducer.reviews);
 
@@ -92,7 +94,7 @@ const MyPage = props => {
                             user.image || auth.image ? userImage : DefaultImage
                         }
                     />
-                    <p>{user.first_name + ' ' + user.last_name}</p>
+                    <p>{firstName + ' ' + lastName}</p>
                 </div>
                 <div className={classes.Introduction}>
                     <h2>INTRODUCTION</h2>
@@ -119,7 +121,7 @@ const MyPage = props => {
         bio = (
             <Aux>
                 <div className={classes.BioWrapper}>
-                    <div className={classes.Picture}>
+                    <div className={classes.PictureEditing}>
                         <Avatar
                             image={
                                 user.image || auth.image
@@ -133,7 +135,7 @@ const MyPage = props => {
                                 className={classStyles.name}
                                 id="first-name"
                                 label="First Name"
-                                value={user.first_name ? user.first_name : ''}
+                                value={firstName ? firstName : ''}
                                 onChange={event =>
                                     inputChangedHandler(
                                         event.target.value,
@@ -145,7 +147,7 @@ const MyPage = props => {
                                 className={classStyles.name}
                                 id="last-name"
                                 label="Last Name"
-                                value={user.last_name ? user.last_name : ''}
+                                value={lastName ? lastName : ''}
                                 onChange={event =>
                                     inputChangedHandler(
                                         event.target.value,
@@ -190,7 +192,9 @@ const MyPage = props => {
         <Aux>
             <div className={classes.MyPageLeft}>
                 {bio}
-                <PopularReview reviews={reviews} />
+                <PopularReview 
+                    reviews={reviews}
+                />
                 <div className={classes.ToAllReviewsButtonWrapper}>
                     <Link to={`/users/${user.id}/reviews`}>
                         <ToAllReviewsButton />
@@ -198,7 +202,9 @@ const MyPage = props => {
                 </div>
             </div>
             <div className={classes.MyPageRight}>
-                <RecentActivity reviews={reviews} />
+                <RecentActivity
+                    reviews={reviews}
+                />
             </div>
         </Aux>
     );

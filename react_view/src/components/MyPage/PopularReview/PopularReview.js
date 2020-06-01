@@ -1,8 +1,8 @@
 import React from 'react';
 import classes from './PopularReview.module.css';
-import SmallReviewCard from './SmallReviewCard/SmallReviewCard';
+import SmallReviewCard from '../SmallReviewCard/SmallReviewCard';
 
-const popularReview = props => {
+const PopularReview = props => {
     const { reviews } = props;
 
     let reviewCard = <p>No review to show for now. Write a review!</p>;
@@ -35,4 +35,4 @@ const popularReview = props => {
     );
 };
 
-export default popularReview;
+export default PopularReview;

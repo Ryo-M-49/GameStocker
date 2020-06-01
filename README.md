@@ -1,3 +1,5 @@
+http://ec2-18-181-59-231.ap-northeast-1.compute.amazonaws.com
+
 # Overview
 GameStocker is a single page application developed with React.js + Rails API. Interactive platform for gamers who want to find and share gaming experiences.
 

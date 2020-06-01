@@ -1,4 +1,5 @@
 import React from 'react';
+import { useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
 import Card from '@material-ui/core/Card';
 import CardActionArea from '@material-ui/core/CardActionArea';
@@ -7,9 +8,11 @@ import CardContent from '@material-ui/core/CardContent';
 import CardMedia from '@material-ui/core/CardMedia';
 import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
-import { cutString } from '../../../../shared/utility';
+import { cutString } from '../../../shared/utility';
 
-const smallReviewCard = props => {
+const SmallReviewCard = props => {
+    const user = useSelector(state => state.userReducer);
+
     let component = null;
     if (props.review) {
         let { user_id, image, title, good, gameId } = props.review;
@@ -55,6 +58,9 @@ const smallReviewCard = props => {
                                 game: props.review,
                                 user: {
                                     userId: user_id,
+                                    firstName: user.first_name,
+                                    lastName: user.last_name,
+                                    userImage: user.image
                                 },
                             },
                         }}
@@ -70,4 +76,4 @@ const smallReviewCard = props => {
     return <div>{component}</div>;
 };
 
-export default smallReviewCard;
+export default SmallReviewCard;

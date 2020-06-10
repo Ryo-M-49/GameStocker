@@ -1,4 +1,4 @@
-http://ec2-18-181-59-231.ap-northeast-1.compute.amazonaws.com
+Deplyo URL: http://gamestocker.net
 
 ![demo](https://user-images.githubusercontent.com/57619070/83413460-d1aadd00-a456-11ea-8fa4-414519d8f982.gif)
 

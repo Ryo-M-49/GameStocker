@@ -3,7 +3,7 @@
 ![](https://img.shields.io/badge/Rails-v6.0.3.1-b82054.svg)
 ![](https://img.shields.io/badge/React-v16.12.0-blue.svg)
 <br>
-http://gamestocker.net
+https://gamestocker.net
 
 # Overview
 __Stock Game, Explore New!__<br>

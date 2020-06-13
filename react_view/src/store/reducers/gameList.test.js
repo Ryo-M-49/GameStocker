@@ -4,7 +4,7 @@ import thunk from 'redux-thunk';
 import configureStore from 'redux-mock-store';
 import moxios from 'moxios';
 
-import { RAKUTEN_API_BASE_URL, RAKUTEN_API_OPTIONAL_URL } from './testUtil';
+import { RAKUTEN_API_BASE_URL, RAKUTEN_API_OPTIONAL_URL } from '../../../test/testUtil';
 
 const middlewares = [thunk];
 const mockStore = configureStore(middlewares);

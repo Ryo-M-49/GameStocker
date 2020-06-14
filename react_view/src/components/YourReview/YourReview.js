@@ -1,7 +1,6 @@
 import React, { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { withRouter } from 'react-router';
-import { Redirect } from 'react-router-dom';
 import classes from './YourReview.module.css';
 import Snackbar from '@material-ui/core/Snackbar';
 import MuiAlert from '@material-ui/lab/Alert';
@@ -38,7 +37,9 @@ const YourReview = props => {
 
     useEffect(() => {
         dispatch(actions.setGame(updatedGame));
-        dispatch(actions.getReview(reviewerId, game.gameId));
+        if (auth.token) {
+            dispatch(actions.getReview(reviewerId, game.gameId));
+        }
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [props]);
 
@@ -92,16 +93,8 @@ const YourReview = props => {
         );
     }
 
-    // Redirect if not authenticated
-    const isAuthenticated = auth.token !== null;
-    let authRedirect = null;
-    if (!isAuthenticated) {
-        authRedirect = <Redirect to="/signin" />;
-    }
-
     return (
         <div className={classes.YourReview}>
-            {authRedirect}
             {notification}
             <QuitButton />
             <div className={classes.ReviewWrapper}>

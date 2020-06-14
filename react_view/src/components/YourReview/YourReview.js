@@ -12,7 +12,7 @@ import UpdateButton from '../UI/UpdateButton/UpdateButton';
 import * as actions from '../../store/actions/index';
 
 const YourReview = props => {
-    const review = useSelector(state => state.reviewReducer);
+    let review = useSelector(state => state.reviewReducer);
     const auth = useSelector(state => state.authReducer);
     const dispatch = useDispatch();
     const isReviewExisted = review.review.isExisted;
@@ -37,7 +37,7 @@ const YourReview = props => {
 
     useEffect(() => {
         dispatch(actions.setGame(updatedGame));
-        if (auth.token) {
+        if (auth.token || user.userId) {
             dispatch(actions.getReview(reviewerId, game.gameId));
         }
         // eslint-disable-next-line react-hooks/exhaustive-deps

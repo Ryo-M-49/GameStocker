@@ -1,6 +1,6 @@
 import React from 'react';
 import { useSelector } from 'react-redux';
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 import classes from './Review.module.css';
 import Avatar from '@material-ui/core/Avatar';
 import Typography from '@material-ui/core/Typography';
@@ -19,10 +19,44 @@ const Review = props => {
     }
 
     // Display your image and name if the review is yours.
-    if (userId == auth.userId) {
-        firstName = auth.firstName;
-        lastName = auth.lastName;
-        userImage = auth.image;
+    let autherInfo;
+    if (auth.token && userId == auth.userId) {
+        autherInfo = (
+            <div className={classes.User}>
+                <Link to={`/users/${userId}`}>
+                    <Avatar
+                        aria-label="recipe"
+                        className={classes.Avatar}
+                        src={auth.image}
+                    />
+                </Link>
+                <Typography variant="h5" color="textPrimary">
+                    {auth.firstName + ' ' + auth.lastName}
+                </Typography>
+            </div>
+        );
+    } else {
+        // Display user image and name if the review is ohter's.
+        autherInfo = (
+            <div className={classes.User}>
+            <Link to={`/users/${userId}`}>
+                <Avatar
+                    aria-label="recipe"
+                    className={classes.Avatar}
+                    src={userImage}
+                />
+            </Link>
+            <Typography variant="h5" color="textPrimary">
+                {firstName + ' ' + lastName}
+            </Typography>
+        </div>
+
+        )
+    }
+
+    if (!auth.token) {
+        // Hide autherInfo if user is not authenticated
+        autherInfo = null;
     }
 
     const title = props.game.title;
@@ -43,18 +77,7 @@ const Review = props => {
                 </a>
                 <p>{description}</p>
             </div>
-            <div className={classes.User}>
-                <Link to={`/users/${userId}`}>
-                    <Avatar
-                        aria-label="recipe"
-                        className={classes.Avatar}
-                        src={userImage}
-                    />
-                </Link>
-                <Typography variant="h5" color="textPrimary">
-                    {firstName + ' ' + lastName}
-                </Typography>
-            </div>
+            { autherInfo }
             <form>
                 <Rating value={review.rate} isYourReview={props.isYourReview} />
                 <Good value={review.good} isYourReview={props.isYourReview} />

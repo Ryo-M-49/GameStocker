@@ -1,5 +1,6 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
+import { Redirect } from 'react-router-dom';
 import { withStyles } from '@material-ui/core/styles';
 import Button from '@material-ui/core/Button';
 import * as actions from '../../../store/actions/index';
@@ -16,10 +17,17 @@ const StyledButton = withStyles({
 const SaveButton = props => {
     const review = useSelector(state => state.reviewReducer);
     const user = useSelector(state => state.userReducer);
+    const auth = useSelector(state => state.authReducer);
     const userId = user.id;
     const dispatch = useDispatch();
+    const [authRedirect, setAuthRedirect] = useState(null);
 
     const saveButtonClickedHandler = () => {
+        if (!auth.token) {
+            setAuthRedirect(<Redirect to="/signin" />);
+            return;
+        }
+
         if (props.type === 'review') {
             const updatedReview = {
                 ...review.game,
@@ -40,10 +48,12 @@ const SaveButton = props => {
             dispatch(actions.updateUser(updatedUser, userId));
             props.clicked();
         }
+
     };
 
     return (
         <div>
+            {authRedirect}
             <StyledButton
                 variant="contained"
                 color="secondary"

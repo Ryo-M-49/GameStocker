@@ -16,7 +16,7 @@ const YourReview = props => {
     const auth = useSelector(state => state.authReducer);
     const dispatch = useDispatch();
     const isReviewExisted = review.review.isExisted;
-
+    
     const yourId = localStorage.getItem('userId')
         ? localStorage.getItem('userId')
         : auth.userId;

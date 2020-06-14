@@ -54,7 +54,7 @@ const Review = props => {
         )
     }
 
-    if (!auth.token) {
+    if (!auth.token && userId == auth.userId) {
         // Hide autherInfo if user is not authenticated
         autherInfo = null;
     }

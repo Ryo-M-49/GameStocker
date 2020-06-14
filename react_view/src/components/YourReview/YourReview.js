@@ -37,7 +37,9 @@ const YourReview = props => {
 
     useEffect(() => {
         dispatch(actions.setGame(updatedGame));
-        dispatch(actions.getReview(reviewerId, game.gameId));
+        if (auth.token) {
+            dispatch(actions.getReview(reviewerId, game.gameId));
+        }
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [props]);
 

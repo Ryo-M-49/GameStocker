@@ -1,5 +1,5 @@
-import * as actionTypes from '../actions/actionTypes';
-import * as actions from '../actions/gameList';
+import * as actionTypes from './actionTypes';
+import * as actions from './gameList';
 import thunk from 'redux-thunk';
 import configureStore from 'redux-mock-store';
 import moxios from 'moxios';

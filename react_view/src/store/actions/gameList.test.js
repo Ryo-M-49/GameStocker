@@ -1,13 +1,8 @@
 import * as actionTypes from './actionTypes';
 import * as actions from './gameList';
-import thunk from 'redux-thunk';
-import configureStore from 'redux-mock-store';
 import moxios from 'moxios';
 
-import { RAKUTEN_API_BASE_URL, RAKUTEN_API_OPTIONAL_URL } from '../../../test/testUtil';
-
-const middlewares = [thunk];
-const mockStore = configureStore(middlewares);
+import { RAKUTEN_API_BASE_URL, RAKUTEN_API_OPTIONAL_URL, createTestStore } from '../../../test/testUtil';
 
 describe('action creators', () => {
     it('should create an action to set a keyword for search', () => {
@@ -74,7 +69,7 @@ describe('async actions', () => {
 
     it('creates SET_GAMES and SET_LOADING when fetching games has been done', () => {
         const currentPage = 1;
-        const store = mockStore();
+        const store = createTestStore();
         const expectedActions = [
             { type: actionTypes.SET_LOADING, isLoading: true },
             { type: actionTypes.SET_GAMES, games: { data: { games: 'games'} } },
@@ -94,7 +89,6 @@ describe('async actions', () => {
 
         return store.dispatch(actions.updateGamesByPage(currentPage))
         .then(() => {
-            console.log(JSON.stringify(store.getActions()));
             expect(store.getActions()).toEqual(expectedActions);
         }) 
     });
@@ -102,7 +96,7 @@ describe('async actions', () => {
     it('creates SET_SEARCH/SET_LOADING/SET_GAMES when updating games has been done', () => {
         const title = 'title';
         const currentPage = 1;
-        const store = mockStore();
+        const store = createTestStore();
         const expectedActions = [
             { type: actionTypes.SET_SEARCH, isSearched: true, keyword: title },
             { type: actionTypes.SET_LOADING, isLoading: true },
@@ -124,7 +118,6 @@ describe('async actions', () => {
 
         return store.dispatch(actions.updateGamesByTitle(title, currentPage))
         .then(() => {
-            console.log(JSON.stringify(store.getActions()));
             expect(store.getActions()).toEqual(expectedActions);
         }) 
     });

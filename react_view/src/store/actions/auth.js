@@ -18,9 +18,9 @@ export const authSuccess = (
 ) => {
     return {
         type: actionTypes.AUTH_SUCCESS,
+        userId: userId,
         firstName: firstName,
         lastName: lastName,
-        userId: userId,
         token: accessToken,
         uid: email,
         image: image,
@@ -46,6 +46,38 @@ export const logout = () => {
     };
 };
 
+export const toggleAuthSnackbar = isSnackbarOpen => {
+    return {
+        type: actionTypes.TOGGLE_AUTH_SNACKBAR,
+        isSnackbarOpen: isSnackbarOpen,
+    };
+};
+
+export const setImage = image => {
+    return {
+        type: actionTypes.SET_IMAGE,
+        image: image,
+    };
+};
+
+export const setYourInformation = response => {
+    return {
+        type: actionTypes.SET_YOUR_INFORMATION,
+        id: response.id,
+        first_name: response.first_name,
+        last_name: response.last_name,
+        image: response.image_url,
+        introduction: response.introduction,
+    };
+};
+
+export const setAuthRedirectPath = path => {
+    return {
+        type: actionTypes.SET_AUTH_REDIRECT_PATH,
+        path: path,
+    };
+};
+
 export const auth = (email, password) => {
     return dispatch => {
         dispatch(authStart());
@@ -55,9 +87,10 @@ export const auth = (email, password) => {
             password_confirmation: password,
         };
         const url = `${process.env.REACT_APP_API_ENDPOINT_URI}/api/auth/sign_in`;
-        axios
+        return axios
             .post(url, authData)
             .then(response => {
+                // console.log(response);
                 const data = response.data.data;
                 localStorage.setItem('userId', data.id);
                 localStorage.setItem('firstName', data.first_name);
@@ -93,13 +126,6 @@ export const auth = (email, password) => {
     };
 };
 
-export const setAuthRedirectPath = path => {
-    return {
-        type: actionTypes.SET_AUTH_REDIRECT_PATH,
-        path: path,
-    };
-};
-
 export const authCheckState = () => {
     return dispatch => {
         const token = localStorage.getItem('token');
@@ -115,31 +141,6 @@ export const authCheckState = () => {
                 authSuccess(userId, firstName, lastName, token, email, image)
             );
         }
-    };
-};
-
-export const toggleAuthSnackbar = isSnackbarOpen => {
-    return {
-        type: actionTypes.TOGGLE_AUTH_SNACKBAR,
-        isSnackbarOpen: isSnackbarOpen,
-    };
-};
-
-export const setImage = image => {
-    return {
-        type: actionTypes.SET_IMAGE,
-        image: image,
-    };
-};
-
-export const setYourInformation = response => {
-    return {
-        type: actionTypes.SET_YOUR_INFORMATION,
-        id: response.id,
-        first_name: response.first_name,
-        last_name: response.last_name,
-        image: response.image_url,
-        introduction: response.introduction,
     };
 };
 

@@ -31,3 +31,17 @@ export const createTestStore = ( state = {} ) => {
         ...state,
     });
 };
+
+const mockResponse = {
+    response: {
+        token: 'abcdefg',
+        uid: 1
+    }
+}
+
+const mockHeaders = {
+    headers: {
+        'access-token': 'abcdefg',
+        uid: 1
+    }
+}

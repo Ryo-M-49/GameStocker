@@ -50,12 +50,12 @@ describe('action creators', () => {
         expect(actions.toggleAuthSnackbar(true)).toEqual(expectedAction);
     });
 
-    it('should create an action to toggle isSnackbarOpen', () => {
+    it('should create an action to set image', () => {
         const expectedAction = {
-            type: actionTypes.TOGGLE_AUTH_SNACKBAR,
-            isSnackbarOpen: true,
+            type: actionTypes.SET_IMAGE,
+            image: 'image',
         };
-        expect(actions.toggleAuthSnackbar(true)).toEqual(expectedAction);
+        expect(actions.setImage('image')).toEqual(expectedAction);
     });
 
     it('should create an action to set an image', () => {
@@ -97,7 +97,7 @@ describe('action creators', () => {
 describe('async actions', () => {
     const axiosMock = new axiosMockAdapter(axios);
 
-    it('creates AUTH_START/AUTH_SUCCESS/GET_USER/TOGGLE_AUTH_SNACKBAR', () => {
+    it('creates AUTH_SUCCESS if authentication succeeds', () => {
         const store = utils.createTestStore();
         const expectedActions = [
             { type: actionTypes.AUTH_START },
